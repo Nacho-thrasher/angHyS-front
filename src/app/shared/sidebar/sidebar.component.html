@@ -16,16 +16,15 @@
           <!-- class="w-25" -->
             <img [src]="usuario.imagenUrl" class="avatarSidebar" alt="user" />
             <!-- cambiar tamanio de img a cuadrada -->
-            <div class="mt-2">
-              <span class="hide-menu ">
-                {{usuario.email | slice:0:18}}{{(usuario.email.length > 18) ? '...' : '' }}
-              </span>
-            </div>
+            <span class="hide-menu ">
+              {{usuario.email | slice:0:16}}{{(usuario.email.length > 16) ? '..' : '' }}
+            </span>
+
           </a>
           <ul aria-expanded="false" class="collapse">
             <li><a routerLinkActive="active" routerLink="perfil" >Perfil </a></li>
             <li><a routerLink="account-settings">Configuracion</a></li>
-            <li><a class="cursor" (click)="cerrarSesion()" >Cerrar Sesion</a></li>
+            <li><a class="cursor hov" (click)="cerrarSesion()" >Cerrar Sesion</a></li>
           </ul>
         </li>
         <li class="nav-devider"></li>
