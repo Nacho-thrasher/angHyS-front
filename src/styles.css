@@ -1,1 +1,51 @@
-/* You can add global styles to this file, and also import other style files */
+.fast {
+  -webkit-animation-duration: 0.3s;
+  animation-duration: 0.3s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+#themecolors .selector, .cursor{
+  cursor: pointer;
+}
+#google-btn{
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  text-align: center;
+}
+/* .img-avatar{
+  height:200px;
+  width:200px;
+} */
+.w100{
+  width: 100px;
+}
+.avatar{
+  border-radius:100%;
+  width:75px;
+  height:73px;
+}
+.avatar2{
+  border-radius:100%;
+  width:50px;
+  height: 48px;
+}
+/* .avatarSidebar{
+  border-radius:100%;
+  width:50px !important;
+} */
+.w140{
+  width: 140px;
+}
+.fondo-modal-image{
+  background-color: rgba(0,0,0,0.4);
+  position:fixed;
+  top: 0%;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  z-index:9999;
+}
+.oculto{
+  display:none
+}

@@ -1,0 +1,68 @@
+<!-- ============================================================== -->
+<!-- Left Sidebar - style you can find in sidebar.scss  -->
+<!-- ============================================================== -->
+<aside class="left-sidebar">
+  <!-- Sidebar scroll-->
+  <div class="scroll-sidebar">
+    <!-- Sidebar navigation-->
+    <nav class="sidebar-nav">
+      <ul id="sidebarnav">
+        <li class="user-profile">
+          <a
+            class="has-arrow waves-effect waves-dark"
+            href="#"
+            aria-expanded="false"
+          >
+          <!-- class="w-25" -->
+            <img [src]="usuario.imagenUrl" class="avatarSidebar" alt="user" />
+            <!-- cambiar tamanio de img a cuadrada -->
+            <div class="mt-2">
+              <span class="hide-menu ">
+                {{usuario.email | slice:0:18}}{{(usuario.email.length > 18) ? '...' : '' }}
+              </span>
+            </div>
+          </a>
+          <ul aria-expanded="false" class="collapse">
+            <li><a routerLinkActive="active" routerLink="perfil" >Perfil </a></li>
+            <li><a routerLink="account-settings">Configuracion</a></li>
+            <li><a class="cursor" (click)="cerrarSesion()" >Cerrar Sesion</a></li>
+          </ul>
+        </li>
+        <li class="nav-devider"></li>
+        <li class="nav-small-cap">PERSONAL</li>
+        <li *ngFor="let item of sidebarService.menu">
+          <a
+            class="has-arrow waves-effect waves-dark"
+            href="#"
+            aria-expanded="false"
+          >
+            <i [class]="item.icono"></i>
+            <span class="hide-menu">
+              {{ item.titulo }}
+              <span class="label label-rouded label-themecolor pull-right"
+                >{{ item.subMenu.length }}
+              </span>
+            </span>
+          </a>
+          <ul aria-expanded="false" class="collapse">
+            <li *ngFor="let subMenuItem of item.subMenu">
+              <a
+                [routerLink]="subMenuItem.url"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact:true}"
+              >
+                {{ subMenuItem.titulo }}
+              </a>
+            </li>
+            <!-- <li><a href="index4.html">Modern</a></li> -->
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <!-- End Sidebar navigation -->
+  </div>
+  <!-- End Sidebar scroll-->
+</aside>
+<!-- ============================================================== -->
+<!-- End Left Sidebar - style you can find in sidebar.scss  -->
+<!-- ============================================================== -->

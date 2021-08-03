@@ -1,0 +1,83 @@
+<div class="row">
+
+  <div class="col-md-6">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Sample Form with the Icons</h4>
+            <h6 class="card-subtitle">made with bootstrap elements</h6>
+            <form class="form p-t-20"
+              [formGroup]="perfilForm"
+              (submit)="actualizarPerfil()"
+            >
+                <div class="form-group">
+                    <label for="exampleInputuname">Nombre</label>
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="ti-user"></i></div>
+                        <input type="text"
+                              class="form-control"
+                              id="exampleInputuname"
+                              placeholder="Nombre del usuario"
+                              formControlName="nombre"
+                        >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email</label>
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="ti-email"></i></div>
+                        <input
+                          type="email"
+                          class="form-control"
+                          id="exampleInputEmail1"
+                          placeholder="ingrese email valido"
+                          formControlName="email"
+                          [readonly] = "usuario.google"
+                        >
+                    </div>
+                </div>
+
+                <button type="submit" [disabled]="perfilForm.invalid" class="btn btn-block btn-success waves-effect waves-light m-r-10">Guardar datos</button>
+            </form>
+        </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Imagen</h4>
+            <h6 class="card-subtitle">usuario ejemplo</h6>
+
+            <div class="row mt-4">
+              <div class="col-md-12">
+                <input
+                  type="file"
+                  (change)="cambiarImagen($event)"
+                >
+              </div>
+            </div>
+            <div class="row mt-4 mb-4">
+              <div class="col-md-12">
+                <div class="col-md-12">
+                  <div class="text-center">
+                    <img *ngIf="!imgTemp" [src]="usuario.imagenUrl" class="img-avatar w-50">
+                    <img *ngIf="imgTemp" [src]="imgTemp" class="img-avatar w-50">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button
+              type="button"
+              class="btn btn-block btn-success waves-effect waves-light m-r-10"
+              [disabled]="!imagenSubir"
+              (click)="subirImagen()"
+            >
+              Cambiar Img
+            </button>
+
+        </div>
+    </div>
+  </div>
+
+</div>
+

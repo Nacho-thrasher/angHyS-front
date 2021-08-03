@@ -1,0 +1,106 @@
+<div class="row animated fadeIn fast">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Buscar extintor.."
+          #txtTermino
+          (keyup)="buscar(txtTermino.value)"
+        >
+        <!-- avisar q si pongo espacios vacios mensaje de q no se encontro -->
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row animated fadeIn fast"
+  *ngIf="cargando"
+>
+  <div class="col-12">
+
+    <div role="alert" class="alert alert-info text-center">
+      <h4 class="alert-heading">Cargando</h4>
+      <i class="fa fa-spin fa-refresh fa-2x"></i>
+      <p class="mb-0">Por favor espere</p>
+    </div>
+
+  </div>
+</div>
+
+<div *ngIf="!cargando" class="row animated fadeIn">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+
+        <div class="row mb-4">
+          <div class="col-8">
+            <h4 class="card-title">Extintores ({{extintores.length}})</h4>
+            <h6 class="card-subtitle"></h6>
+          </div>
+          <div class="col">
+            <div class="text-right">
+              <a routerLink="/dashboard/extintor/nuevo"
+                class="btn btn-primary">
+                <i class="fa fa-hospital-0">
+                  Crear extintor
+                </i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <hr>
+
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="w100" >Foto</th>
+                    <th>Numero Serie</th>
+                    <th>Marca</th>
+                    <th>Agente extintor</th>
+                    <th>capacidad</th>
+                    <th>empresa</th>
+                    <th class="text-nowrap">Accion</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let extintor of extintores">
+                    <td class="text-center">
+                      <img [src]="extintor.img! | imagen:'extintores'"
+                        alt="" class="avatar cursor"
+                        (click)="abrirModal(extintor)"
+                      >
+                    </td>
+                    <td>{{extintor.numeroSerie}}</td>
+                    <td>{{extintor.marca}}</td>
+                    <td>{{extintor.agenteExtintor}}</td>
+                    <td>{{extintor.capacidad}}</td>
+                    <td>{{extintor.empresa!.nombre}}</td>
+                    <td class="text-nowrap">
+                        <a [routerLink]="['/dashboard/extintor', extintor._id]"
+                            class="cursor" data-toggle="tooltip" data-original-title="Editar">
+                            <i class="fa fa-pencil text-inverse m-r-10"></i>
+                        </a>
+                        <a class="cursor"
+                          data-toggle="tooltip"
+                          data-original-title="Borrar"
+                          (click)="borrarExtintor(extintor)"
+                        >
+                            <i class="fa fa-close text-danger"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+
+        <button class="btn btn-secondary">Anterior</button>
+        &nbsp;
+        <button class="btn btn-secondary">Siguiente</button>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,112 @@
+<div class="row animated fadeIn fast">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Buscar Empresa.."
+          #txtTermino
+          (keyup)="buscar(txtTermino.value)"
+        >
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row animated fadeIn fast"
+    *ngIf="cargando"
+>
+  <div class="col-12">
+
+    <div role="alert" class="alert alert-info text-center">
+      <h4 class="alert-heading">Cargando</h4>
+      <i class="fa fa-spin fa-refresh fa-2x"></i>
+      <p class="mb-0">Por favor espere</p>
+    </div>
+
+  </div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="!cargando">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+
+        <div class="row mb-4">
+          <div class="col-8">
+            <h4 class="card-title">Empresas ({{empresas!.length}})</h4>
+            <h6 class="card-subtitle"></h6>
+          </div>
+          <div class="col">
+            <div class="text-right">
+              <button (click)="abrirSweetAlert()"
+                class="btn btn-primary">
+                <i class="fa fa-hospital-0">
+                  Crear empresa
+                </i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <hr>
+
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="w100">Foto</th>
+                    <th>Nombre</th>
+                    <th>Direccion</th>
+                    <th>Localidad</th>
+                    <th class="w100 text-nowrap">Accion</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let empresa of empresas">
+                    <td class="text-center">
+                      <img [src]="empresa.img! | imagen:'empresas'"
+                        alt="" class="avatar cursor"
+                        (click)="abrirModal(empresa)"
+                      >
+                    </td>
+                    <td>
+                      <input class="form-control"
+                          type="text"
+                          id=""
+                          [(ngModel)]="empresa.nombre"
+                      >
+                    </td>
+                    <td>{{empresa.direccion}}</td>
+                    <td>{{empresa.localidad}}</td>
+                    <td class="text-nowrap text-center">
+                        <a (click)="guardarCambios(empresa)"
+                          data-toggle="tooltip"
+                          class="cursor"
+                          data-original-title="Guardar Cambios"
+                        >
+                          <i class="fa fa-pencil text-inverse m-r-10"></i>
+                        </a>
+
+                        <a (click)="eliminarEmpresa(empresa)"
+                          data-toggle="tooltip"
+                          class="cursor"
+                          data-original-title="Borrar"
+                        >
+                          <i class="fa fa-close text-danger"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+
+        <button class="btn btn-secondary">Anterior</button>
+        &nbsp;
+        <button class="btn btn-secondary">Siguiente</button>
+
+      </div>
+    </div>
+  </div>
+</div>

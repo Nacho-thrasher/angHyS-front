@@ -1,0 +1,128 @@
+<div class="row animated fadeIn fast">
+  <div class="col-4">
+    <div class="card">
+      <div class="card-body">
+        <h3>Usuarios</h3>
+
+        <div class="alert alert-info"
+          *ngIf="usuarios.length === 0"
+        >
+          <p class="mb-0">
+            No hay usuarios que coincidan
+          </p>
+        </div>
+
+        <div class="table-responsive"
+          *ngIf="usuarios.length != 0"
+        >
+          <table class="table">
+              <thead>
+                  <tr>
+                      <th>Imagen</th>
+                      <th>Nombre</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let usuario of usuarios"
+                  class="animated fadeIn fast"
+                  >
+                      <td>
+                        <img [src]="usuario.img! | imagen:'usuarios'"
+                        alt="" class="avatar2 cursor"
+                        >
+                      </td>
+                      <td class="align-middle">{{usuario.nombre}}</td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-4">
+    <div class="card">
+      <div class="card-body">
+        <h3>Empresas</h3>
+
+        <div class="alert alert-info"
+          *ngIf="empresas.length === 0"
+        >
+          <p class="mb-0">
+            No hay empresas que coincidan
+          </p>
+        </div>
+
+        <div class="table-responsive"
+          *ngIf="empresas.length != 0"
+        >
+          <table class="table">
+              <thead>
+                  <tr>
+                      <th>Imagen</th>
+                      <th>Nombre</th>
+                  </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let empresa of empresas"
+                class="animated fadeIn fast"
+                >
+                  <td>
+                    <img [src]="empresa.img! | imagen:'empresas'"
+                    alt="" class="avatar2 cursor"
+                    >
+                  </td>
+                  <td class="align-middle">{{empresa.nombre}}</td>
+              </tr>
+              </tbody>
+          </table>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-4">
+    <div class="card">
+      <div class="card-body">
+        <h3>Extintores</h3>
+
+        <div class="alert alert-info"
+          *ngIf="extintores.length === 0"
+        >
+          <p class="mb-0">
+            No hay extintores que coincidan
+          </p>
+        </div>
+
+        <div class="table-responsive"
+          *ngIf="extintores.length != 0"
+        >
+          <table class="table">
+              <thead>
+                  <tr>
+                      <th>Foto</th>
+                      <th>Numero de serie</th>
+                  </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let extintor of extintores"
+                  class="animated fadeIn fast"
+                >
+                  <td>
+                    <img [src]="extintor.img! | imagen:'extintores'"
+                    alt="" class="avatar2 cursor"
+                    >
+                  </td>
+                  <td class="align-middle">
+                    <a [routerLink]="['/dashboard/extintor', extintor._id]" >
+                      {{extintor.numeroSerie}}
+                    </a>
+                  </td>
+              </tr>
+              </tbody>
+          </table>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>

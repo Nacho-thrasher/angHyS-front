@@ -1,0 +1,99 @@
+<div class="row">
+  <div class="col-lg-6" >
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Nuevo Extintor</h4>
+            <h6 class="card-subtitle"></h6>
+            <form [formGroup]="extintorForm"
+                  (submit)="guardarExtintor()"
+              class="form-horizontal p-t-20">
+
+                <div *ngIf="extintorSeleccionados" class="form-group row">
+                    <label for="exampleInputuname3" class="col-sm-3 control-label">Foto</label>
+                    <div class="col-sm-9">
+                        <div class="input-group">
+                          <img [src]="extintorSeleccionados?.img! | imagen:'extintores'"
+                              class="img-responsive w140" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="exampleInputuname3" class="col-sm-3 control-label">Numero de Serie</label>
+                    <div class="col-sm-9">
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="ti-user"></i></div>
+                            <input formControlName="numeroSerie"
+                                type="text"
+                                class="form-control" id="exampleInputuname3" placeholder="ej:12312">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="exampleInputEmail3" class="col-sm-3 control-label">Marca</label>
+                    <div class="col-sm-9">
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="ti-email"></i></div>
+                            <input formControlName="marca"
+                              type="text" class="form-control" id="exampleInputEmail3" placeholder="seleccionar marca proximamente">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword4" class="col-sm-3 control-label">Agente Extintor</label>
+                    <div class="col-sm-9">
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="ti-lock"></i></div>
+                            <input formControlName="agenteExtintor"
+                              type="text" class="form-control" id="exampleInputpwd4" placeholder="Enter pwd">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword5" class="col-sm-3 control-label">Capacidad</label>
+                    <div class="col-sm-9">
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="ti-lock"></i></div>
+                            <input formControlName="capacidad"
+                            type="text" class="form-control" id="exampleInputpwd5" placeholder="">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                  <label for="inputPassword5" class="col-sm-3 control-label">Empresa</label>
+                  <div class="col-sm-9">
+                      <div class="input-group">
+                        <select formControlName="empresa" class="form-control custom-select" data-placeholder="Selecciona una" tabindex="1">
+                          <option value="">Seleccione una</option>
+                          <option
+                            *ngFor="let empresa of empresas"
+                            [value]="empresa._id"
+                          >
+                            {{empresa.nombre}}
+                          </option>
+                        </select>
+                      </div>
+                  </div>
+              </div>
+
+                <div class="form-group row text-center m-b-0">
+                  <div class="offset-sm-3 col-sm-9">
+                      <button [disabled]="extintorForm.invalid"
+                          type="submit" class="btn btn-success waves-effect waves-light">Guardar Cambios</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
+  <div *ngIf="empresaSeleccionados" class="animated fadeIn col-lg-6">
+
+    <div class="card">
+      <div class="card-body">
+          <h4 class="card-title">Empresa : {{empresaSeleccionados!.nombre}}</h4>
+          <img [src]="empresaSeleccionados?.img! | imagen:'empresas'"
+          class="img-responsive img-thumbnail" alt="">
+      </div>
+    </div>
+
+  </div>
+</div>
