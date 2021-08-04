@@ -164,7 +164,6 @@ export class UsuarioService {
             user.google,
             user.role,
             user.uid
-
           )
         )
 
@@ -175,6 +174,15 @@ export class UsuarioService {
       })
     )
     //delay() , va con pipe antes de map para demorar la carga
+  }
+
+  cargarUsuarioById(id:string){
+
+    const url = `${base_url}/usuario/${id}`;
+    return this.http.get<{ ok: boolean, usuarios: Usuario }>(url, this.headers)
+    .pipe(
+      map((resp: { ok: boolean, usuarios: Usuario }) => resp.usuarios )
+    )
   }
 
   eliminarUsuarios(usuario: Usuario){

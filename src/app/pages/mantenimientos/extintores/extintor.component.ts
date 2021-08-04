@@ -46,7 +46,6 @@ export class ExtintorComponent implements OnInit {
     .subscribe(empresaId =>{
       this.empresaSeleccionados = this.empresas
       .find( h => h._id === empresaId);
-
     })
   }
 
@@ -98,6 +97,7 @@ export class ExtintorComponent implements OnInit {
         this.extintorService.actualizarExtintor(data)
         .subscribe(resp =>{
           Swal.fire('Actualizado', `Extintor: ${numeroSerie} - Marca: ${marca}.`, 'success')
+          this.router.navigateByUrl(`/dashboard/extintores`)
         })
     }
     else{
@@ -109,8 +109,6 @@ export class ExtintorComponent implements OnInit {
           this.router.navigateByUrl(`/dashboard/extintor/${ resp.extintor._id }`)
         })
     }
-
-
   }
 
 

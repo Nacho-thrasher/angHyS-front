@@ -17,10 +17,12 @@ import { RxjsComponent } from './rxjs/rxjs.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
 import { EmpresasComponent } from './mantenimientos/empresas/empresas.component';
-import { ExtintoresComponent } from './mantenimientos/extintores/extintores.component';
 import { PipesModule } from '../pipes/pipes.module';
+import { ExtintoresComponent } from './mantenimientos/extintores/extintores.component';
 import { ExtintorComponent } from './mantenimientos/extintores/extintor.component';
 import { BusquedasComponent } from './busquedas/busquedas.component';
+import { UsuarioComponent } from './mantenimientos/usuarios/usuario.component';
+import { EmpresaComponent } from './mantenimientos/empresas/empresa.component';
 
 
 
@@ -38,7 +40,9 @@ import { BusquedasComponent } from './busquedas/busquedas.component';
     EmpresasComponent,
     ExtintoresComponent,
     ExtintorComponent,
-    BusquedasComponent
+    BusquedasComponent,
+    UsuarioComponent,
+    EmpresaComponent
   ],
   exports:[
     DashboardComponent,

@@ -35,18 +35,28 @@ export class EmpresaService {
     //delay() , va con pipe antes de map para demorar la carga
   }
 
-  crearEmpresa(nombre:string){
+  cargarEmpresaById(id:string){
+
+    const url = `${base_url}/empresa/${id}`;
+    return this.http.get<{ ok: boolean, empresas: Empresa }>(url, this.headers)
+    .pipe(
+      map((resp: { ok: boolean, empresas: Empresa }) => resp.empresas )
+    )
+  }
+
+  crearEmpresa(empresa: {nombre:string, localidad:string, direccion:string}){
 
     const url = `${base_url}/empresas`;
-    return this.http.post(url, {nombre}, this.headers)
+    return this.http.post(url, empresa, this.headers)
     //delay() , va con pipe antes de map para demorar la carga
   }
 
-  actualizarEmpresa(_id:string, nombre:string){
+  actualizarEmpresa(empresa:Empresa){
 
-    const url = `${base_url}/empresas/${_id}`;
-    return this.http.put(url, {nombre}, this.headers)
+    const url = `${base_url}/empresas/${empresa._id}`;
+    return this.http.put(url, empresa, this.headers)
     //delay() , va con pipe antes de map para demorar la carga
+
   }
 
   borrarEmpresa(_id:string){

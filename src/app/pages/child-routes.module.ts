@@ -15,6 +15,8 @@ import { ExtintoresComponent } from "./mantenimientos/extintores/extintores.comp
 import { ExtintorComponent } from "./mantenimientos/extintores/extintor.component";
 import { BusquedasComponent } from "./busquedas/busquedas.component";
 import { AdminGuard } from "../guard/admin.guard";
+import { UsuarioComponent } from './mantenimientos/usuarios/usuario.component';
+import { EmpresaComponent } from './mantenimientos/empresas/empresa.component';
 
 const childRoutes: Routes = [
 
@@ -29,7 +31,9 @@ const childRoutes: Routes = [
   //mantenimiento
   { path: 'empresas', component: EmpresasComponent, data: {titulo: 'Empresas'}},
   { path: 'extintores', component: ExtintoresComponent, data: {titulo: 'Extintores'}},
-  { path: 'extintor/:id', component: ExtintorComponent, data: {titulo: 'Extintores'}},
+  { path: 'extintor/:id', component: ExtintorComponent, data: {titulo: 'Extintor'}},
+  { path: 'usuario/:id', component: UsuarioComponent, data: {titulo: 'Usuario'}},
+  { path: 'empresa/:id', component: EmpresaComponent, data: {titulo: 'Empresa'}},
 
   //busqueda tot
   { path: 'buscar/:termino', component: BusquedasComponent, data: {titulo: 'Busquedas'}},

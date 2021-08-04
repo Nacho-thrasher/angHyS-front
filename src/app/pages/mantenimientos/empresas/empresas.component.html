@@ -34,23 +34,20 @@
     <div class="card">
       <div class="card-body">
 
-        <div class="row mb-4">
+        <div class="row">
           <div class="col-8">
             <h4 class="card-title">Empresas ({{empresas!.length}})</h4>
             <h6 class="card-subtitle"></h6>
           </div>
           <div class="col">
             <div class="text-right">
-              <button (click)="abrirSweetAlert()"
-                class="btn btn-primary">
-                <i class="fa fa-hospital-0">
-                  Crear empresa
-                </i>
-              </button>
+              <a routerLink="/dashboard/empresa/nuevo"
+                class="btn btn-dark">
+                <i class="">Crear Empresa</i>
+              </a>
             </div>
           </div>
         </div>
-        <hr>
 
         <div class="table-responsive">
           <table class="table table-striped">
@@ -67,27 +64,20 @@
                 <tr *ngFor="let empresa of empresas">
                     <td class="text-center">
                       <img [src]="empresa.img! | imagen:'empresas'"
-                        alt="" class="avatar cursor"
+                        alt="" class="avatar2 cursor"
                         (click)="abrirModal(empresa)"
                       >
                     </td>
                     <td>
-                      <input class="form-control"
-                          type="text"
-                          id=""
-                          [(ngModel)]="empresa.nombre"
-                      >
+                      {{empresa.nombre}}
                     </td>
                     <td>{{empresa.direccion}}</td>
                     <td>{{empresa.localidad}}</td>
                     <td class="text-nowrap text-center">
-                        <a (click)="guardarCambios(empresa)"
-                          data-toggle="tooltip"
-                          class="cursor"
-                          data-original-title="Guardar Cambios"
-                        >
+                      <a [routerLink]="['/dashboard/empresa', empresa._id]"
+                          class="cursor" data-toggle="tooltip" data-original-title="Editar">
                           <i class="fa fa-pencil text-inverse m-r-10"></i>
-                        </a>
+                      </a>
 
                         <a (click)="eliminarEmpresa(empresa)"
                           data-toggle="tooltip"

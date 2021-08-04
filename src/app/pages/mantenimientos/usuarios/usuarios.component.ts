@@ -39,7 +39,7 @@ export class UsuariosComponent implements OnInit, OnDestroy {
     this.cargarUsuarios();
     this.imgSubs = this.modalImgService.nuevaImagen
     .pipe(
-      delay(400)
+      delay(200)
     ).subscribe(img => {
       this.cargarUsuarios()
     });
@@ -95,16 +95,15 @@ export class UsuariosComponent implements OnInit, OnDestroy {
       confirmButtonText: 'Si, Borrar!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.usuarioService.eliminarUsuarios(usuario)
-        .subscribe(resp =>{
-
+        this.usuarioService.eliminarUsuarios(usuario).pipe(
+          delay(200)
+        ).subscribe(resp =>{
+          this.cargarUsuarios(),
           Swal.fire(
             'Borrado!',
             `El usuario ${usuario.nombre} fue eliminado.`,
             'success'
-          ),
-          this.cargarUsuarios()
-
+          )
         })
       }
     })

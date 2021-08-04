@@ -60,38 +60,12 @@ export class EmpresasComponent implements OnInit, OnDestroy {
     })
   }
 
-  guardarCambios(empresa: Empresa){
-    this.empresaService.actualizarEmpresa(empresa._id!, empresa.nombre)
-    .subscribe(resp => {
-      this.cargarEmpresas();
-      Swal.fire('Guardado', empresa.nombre, 'success')
-    })
-  }
-
   eliminarEmpresa(empresa: Empresa){
     this.empresaService.borrarEmpresa(empresa._id!)
     .subscribe(resp => {
       this.cargarEmpresas();
       Swal.fire('Guardado', empresa.nombre, 'success')
     })
-  }
-
-  async abrirSweetAlert(){
-    const {value = ''} = await Swal.fire<string>({
-      title: 'Crear Empresa',
-      text: 'ingrese nombre de nuevo empresa',
-      input: 'text',
-      //inputLabel: 'URL address',
-      inputPlaceholder: 'Nombre de empresa',
-      showCancelButton: true,
-    })
-    if (value?.trim().length! > 0) {
-      this.empresaService.crearEmpresa(value!)
-      .subscribe((resp:any) => {
-        this.empresas?.push(resp.empresas)
-      })
-    }
-    console.log(value)
   }
 
   abrirModal(empresa:Empresa) {

@@ -47,7 +47,7 @@ export class ExtintoresComponent implements OnInit, OnDestroy {
   }
 
   abrirModal(extintor: Extintor){
-    console.log(extintor)
+    //console.log(extintor)
     this.modalImgService.abrirModal('extintores', extintor._id , extintor.img);
   }
 

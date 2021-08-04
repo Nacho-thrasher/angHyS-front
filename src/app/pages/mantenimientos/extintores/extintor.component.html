@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-lg-6" >
+  <div class="col-lg-7" >
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">Nuevo Extintor</h4>
@@ -9,8 +9,8 @@
               class="form-horizontal p-t-20">
 
                 <div *ngIf="extintorSeleccionados" class="form-group row">
-                    <label for="exampleInputuname3" class="col-sm-3 control-label">Foto</label>
-                    <div class="col-sm-9">
+                    <label for="exampleInputuname3" class="col-sm-4 control-label">Foto</label>
+                    <div class="col-sm-8">
                         <div class="input-group">
                           <img [src]="extintorSeleccionados?.img! | imagen:'extintores'"
                               class="img-responsive w140" alt="">
@@ -18,8 +18,8 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="exampleInputuname3" class="col-sm-3 control-label">Numero de Serie</label>
-                    <div class="col-sm-9">
+                    <label for="exampleInputuname3" class="col-sm-4 control-label">Numero de Serie</label>
+                    <div class="col-sm-8">
                         <div class="input-group">
                             <div class="input-group-addon"><i class="ti-user"></i></div>
                             <input formControlName="numeroSerie"
@@ -29,8 +29,8 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="exampleInputEmail3" class="col-sm-3 control-label">Marca</label>
-                    <div class="col-sm-9">
+                    <label for="exampleInputEmail3" class="col-sm-4 control-label">Marca</label>
+                    <div class="col-sm-8">
                         <div class="input-group">
                             <div class="input-group-addon"><i class="ti-email"></i></div>
                             <input formControlName="marca"
@@ -39,8 +39,8 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="inputPassword4" class="col-sm-3 control-label">Agente Extintor</label>
-                    <div class="col-sm-9">
+                    <label for="inputPassword4" class="col-sm-4 control-label">Agente Extintor</label>
+                    <div class="col-sm-8">
                         <div class="input-group">
                             <div class="input-group-addon"><i class="ti-lock"></i></div>
                             <input formControlName="agenteExtintor"
@@ -49,8 +49,8 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="inputPassword5" class="col-sm-3 control-label">Capacidad</label>
-                    <div class="col-sm-9">
+                    <label for="inputPassword5" class="col-sm-4 control-label">Capacidad</label>
+                    <div class="col-sm-8">
                         <div class="input-group">
                             <div class="input-group-addon"><i class="ti-lock"></i></div>
                             <input formControlName="capacidad"
@@ -59,8 +59,8 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                  <label for="inputPassword5" class="col-sm-3 control-label">Empresa</label>
-                  <div class="col-sm-9">
+                  <label for="inputPassword5" class="col-sm-4 control-label">Empresa</label>
+                  <div class="col-sm-8">
                       <div class="input-group">
                         <select formControlName="empresa" class="form-control custom-select" data-placeholder="Selecciona una" tabindex="1">
                           <option value="">Seleccione una</option>
@@ -76,7 +76,7 @@
               </div>
 
                 <div class="form-group row text-center m-b-0">
-                  <div class="offset-sm-3 col-sm-9">
+                  <div class="offset-sm-3 col-sm-8">
                       <button [disabled]="extintorForm.invalid"
                           type="submit" class="btn btn-success waves-effect waves-light">Guardar Cambios</button>
                     </div>
@@ -85,7 +85,7 @@
         </div>
     </div>
   </div>
-  <div *ngIf="empresaSeleccionados" class="animated fadeIn col-lg-6">
+  <div *ngIf="empresaSeleccionados" class="animated fadeIn col-lg-5">
 
     <div class="card">
       <div class="card-body">
