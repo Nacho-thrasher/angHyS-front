@@ -51,6 +51,7 @@ export class ExtintorComponent implements OnInit {
 
   cargarExtintor(id:string){
     if (id === 'nuevo') {  return; }
+
     this.extintorService.cargarExtintorById(id)
     .pipe(
       delay(100)
@@ -66,7 +67,7 @@ export class ExtintorComponent implements OnInit {
               marca,
               empresa:{_id}
             } = extintor;
-      //console.log(extintor)
+      console.log(extintor)
       this.extintorSeleccionados = extintor;
       this.extintorForm.setValue({
           numeroSerie,

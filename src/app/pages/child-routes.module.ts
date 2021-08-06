@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
 import { DashboardComponent } from "./dashboard/dashboard.component";
-import { Grafica1Component } from "./grafica1/grafica1.component";
 import { ProgressComponent } from "./progress/progress.component";
 import { AccountSettingsComponent } from "./account-settings/account-settings.component";
 import { PromesasComponent } from "./promesas/promesas.component";
@@ -17,12 +16,12 @@ import { BusquedasComponent } from "./busquedas/busquedas.component";
 import { AdminGuard } from "../guard/admin.guard";
 import { UsuarioComponent } from './mantenimientos/usuarios/usuario.component';
 import { EmpresaComponent } from './mantenimientos/empresas/empresa.component';
+import { ExtintoresExcelComponent } from './mantenimientos/extintores/extintores-excel.component';
 
 const childRoutes: Routes = [
 
   { path: '', component: DashboardComponent, data: {titulo: 'Dashboard'}},
   { path: 'progress', component: ProgressComponent, data: {titulo: 'Progress'}},
-  { path: 'grafica1', component: Grafica1Component, data: {titulo: 'Grafica1'}},
   { path: 'account-settings', component: AccountSettingsComponent, data: {titulo: 'Configuracion'}},
   { path: 'promesas', component: PromesasComponent, data: {titulo: 'Promesas'}},
   { path: 'rxjs', component: RxjsComponent, data: {titulo: 'Rxjs'}},
@@ -30,10 +29,13 @@ const childRoutes: Routes = [
 
   //mantenimiento
   { path: 'empresas', component: EmpresasComponent, data: {titulo: 'Empresas'}},
+  { path: 'empresa/:id', component: EmpresaComponent, data: {titulo: 'Empresa'}},
+
   { path: 'extintores', component: ExtintoresComponent, data: {titulo: 'Extintores'}},
   { path: 'extintor/:id', component: ExtintorComponent, data: {titulo: 'Extintor'}},
+  { path: 'extintores_excel', component: ExtintoresExcelComponent, data: {titulo: 'Extintores-Excel'}},
+
   { path: 'usuario/:id', component: UsuarioComponent, data: {titulo: 'Usuario'}},
-  { path: 'empresa/:id', component: EmpresaComponent, data: {titulo: 'Empresa'}},
 
   //busqueda tot
   { path: 'buscar/:termino', component: BusquedasComponent, data: {titulo: 'Busquedas'}},

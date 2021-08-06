@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
-import { Grafica1Component } from './grafica1/grafica1.component';
 import { PagesComponent } from './pages.component';
 
 
@@ -23,6 +22,7 @@ import { ExtintorComponent } from './mantenimientos/extintores/extintor.componen
 import { BusquedasComponent } from './busquedas/busquedas.component';
 import { UsuarioComponent } from './mantenimientos/usuarios/usuario.component';
 import { EmpresaComponent } from './mantenimientos/empresas/empresa.component';
+import { ExtintoresExcelComponent } from './mantenimientos/extintores/extintores-excel.component';
 
 
 
@@ -30,7 +30,6 @@ import { EmpresaComponent } from './mantenimientos/empresas/empresa.component';
   declarations: [
     DashboardComponent,
     ProgressComponent,
-    Grafica1Component,
     PagesComponent,
     AccountSettingsComponent,
     PromesasComponent,
@@ -42,12 +41,12 @@ import { EmpresaComponent } from './mantenimientos/empresas/empresa.component';
     ExtintorComponent,
     BusquedasComponent,
     UsuarioComponent,
-    EmpresaComponent
+    EmpresaComponent,
+    ExtintoresExcelComponent
   ],
   exports:[
     DashboardComponent,
     ProgressComponent,
-    Grafica1Component,
     PagesComponent,
     AccountSettingsComponent,
     PromesasComponent,

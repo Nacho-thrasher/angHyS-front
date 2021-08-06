@@ -44,7 +44,43 @@ export class ExtintorService {
     )
   }
 
-  crearExtintor(extintor: {numeroSerie: string, marca: string, agenteExtintor:string,capacidad:string,empresa:string}){
+  crearExtintor(extintor:
+    {
+      numeroSerie: string,
+      agenteExtintor:string,
+      capacidad:string,
+      marca: string,
+      fechaFabricacion: string,
+      proxRecarga: string,
+      vtoPh: string,
+      reposiciones: string,
+      cambio: string,
+      cantidadKg: string,
+      discoSeg: string,
+      manija: string,
+      calco: string,
+      ruedas: string,
+      manguera: string,
+      tobera: string,
+      trabaS: string,
+      oring: string,
+      valvula: string,
+      vastago: string,
+      manometro: string,
+      canioP: string,
+      pintura: string,
+      soporte: string,
+      ph: string,
+      estampilla: string,
+      empresa:string,
+    }){
+
+    const url = `${base_url}/extintores`;
+    return this.http.post(url, extintor, this.headers)
+    //delay() , va con pipe antes de map para demorar la carga
+  }
+
+  crearExtintorXlsx(extintor: Extintor){
 
     const url = `${base_url}/extintores`;
     return this.http.post(url, extintor, this.headers)
