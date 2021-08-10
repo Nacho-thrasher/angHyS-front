@@ -41,8 +41,6 @@ export class BusquedasComponent implements OnInit {
     })
   }
 
-  abrirExtintor(extintor: Extintor){
-    
-  }
+  
 
 }

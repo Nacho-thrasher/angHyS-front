@@ -23,6 +23,8 @@ import { BusquedasComponent } from './busquedas/busquedas.component';
 import { UsuarioComponent } from './mantenimientos/usuarios/usuario.component';
 import { EmpresaComponent } from './mantenimientos/empresas/empresa.component';
 import { ExtintoresExcelComponent } from './mantenimientos/extintores/extintores-excel.component';
+import { ViewEmpresasComponent } from './editor-viste/view-empresas.component';
+import { ViewExtintoresComponent } from './editor-viste/view-extintores/view-extintores.component';
 
 
 
@@ -42,7 +44,9 @@ import { ExtintoresExcelComponent } from './mantenimientos/extintores/extintores
     BusquedasComponent,
     UsuarioComponent,
     EmpresaComponent,
-    ExtintoresExcelComponent
+    ExtintoresExcelComponent,
+    ViewEmpresasComponent,
+    ViewExtintoresComponent
   ],
   exports:[
     DashboardComponent,

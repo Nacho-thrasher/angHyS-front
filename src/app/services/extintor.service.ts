@@ -44,6 +44,11 @@ export class ExtintorService {
     )
   }
 
+  cargarExtintoresByEmpresa(id: string){
+    const url = `${base_url}/vista-empresas/${id}`;
+    return this.http.get(url, this.headers)
+  }
+
   crearExtintor(extintor:
     {
       numeroSerie: string,
@@ -86,6 +91,8 @@ export class ExtintorService {
     return this.http.post(url, extintor, this.headers)
     //delay() , va con pipe antes de map para demorar la carga
   }
+
+
 
   actualizarExtintor(extintor:Extintor){
 

@@ -38,5 +38,6 @@ export class BreadcrumbsComponent implements OnDestroy {
         map((event: ActivationEnd) => event.snapshot.data)
       )
 
+
   }
 }

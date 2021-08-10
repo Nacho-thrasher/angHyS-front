@@ -60,7 +60,6 @@ export class BusquedasService {
     tipo:'usuarios'|'empresas'|'extintores',
     termino: string
   ){
-
     const url = `${base_url}/todo/coleccion/${tipo}/${termino}`;
     return this.http.get<any[]>(url, this.headers)
     .pipe(

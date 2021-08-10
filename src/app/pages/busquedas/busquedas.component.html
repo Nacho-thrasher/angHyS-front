@@ -72,7 +72,11 @@
                     alt="" class="avatar2 cursor"
                     >
                   </td>
-                  <td class="align-middle">{{empresa.nombre}}</td>
+                  <td class="align-middle">
+                    <a [routerLink]="['/dashboard/vista-empresas', empresa.nombre]" >
+                      {{empresa.nombre}}
+                    </a>
+                  </td>
               </tr>
               </tbody>
           </table>

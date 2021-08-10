@@ -17,6 +17,8 @@ import { AdminGuard } from "../guard/admin.guard";
 import { UsuarioComponent } from './mantenimientos/usuarios/usuario.component';
 import { EmpresaComponent } from './mantenimientos/empresas/empresa.component';
 import { ExtintoresExcelComponent } from './mantenimientos/extintores/extintores-excel.component';
+import { ViewEmpresasComponent } from './editor-viste/view-empresas.component';
+import { ViewExtintoresComponent } from './editor-viste/view-extintores/view-extintores.component';
 
 const childRoutes: Routes = [
 
@@ -35,13 +37,17 @@ const childRoutes: Routes = [
   { path: 'extintor/:id', component: ExtintorComponent, data: {titulo: 'Extintor'}},
   { path: 'extintores_excel', component: ExtintoresExcelComponent, data: {titulo: 'Extintores-Excel'}},
 
+  //rutas admin
+  { path: 'usuarios', canActivate: [AdminGuard], component: UsuariosComponent, data: {titulo: 'Usuarios'}},
   { path: 'usuario/:id', component: UsuarioComponent, data: {titulo: 'Usuario'}},
+
+  { path: 'vista-empresas/:id', component: ViewExtintoresComponent, data: {titulo: 'Extintores'}},
 
   //busqueda tot
   { path: 'buscar/:termino', component: BusquedasComponent, data: {titulo: 'Busquedas'}},
 
-  //rutas admin
-  { path: 'usuarios', canActivate: [AdminGuard], component: UsuariosComponent, data: {titulo: 'Usuarios'}}
+  //principal any users
+  { path: 'vista-empresas', component: ViewEmpresasComponent, data: {titulo: 'Empresas'}}
 
 ]
 

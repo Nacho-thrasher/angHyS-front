@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">{{extintores.length}} extintores en {{nomEmpr}}</h4>
+        <h6 class="card-subtitle"></h6>
+        <div class="row animated fadeIn fast"
+          *ngIf="extintores.length === 0"
+        >
+          <div class="col-12">
+
+            <div role="alert" class="alert alert-info text-center">
+              <h4 class="alert-heading">Cargando</h4>
+              <i class="fa fa-spin fa-refresh fa-2x"></i>
+              <p class="mb-0">Por favor espere</p>
+            </div>
+
+          </div>
+        </div>
+        <div *ngIf="extintores.length != 0" class="table-responsive">
+          <table class="table table-hover" >
+            <thead>
+              <tr>
+                <!-- <th>#</th> -->
+                <th class="text-center w100">Foto</th>
+                <th class="text-center">Numero Serie</th>
+                <th class="text-center">Marca</th>
+                <th class="text-center">Agente extintor</th>
+                <th class="text-center">capacidad</th>
+                <th class="text-center">empresa</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let extintor of extintores"
+              class="animated fadeIn fast">
+                <!-- <td>1</td> -->
+                <td>
+                  <img [src]="extintor.img! | imagen:'extintores'"
+                    alt="" class="avatar2 cursor"
+                  >
+                </td>
+                <td class="align-middle text-center">
+                  <a [routerLink]="['/dashboard/extintor', extintor._id]" >
+                    {{extintor.numeroSerie}}
+                  </a>
+                </td>
+                <td class="align-middle text-center">{{extintor.marca}}</td>
+                <td class="align-middle text-center">{{extintor.agenteExtintor}}</td>
+                <td class="align-middle text-center">{{extintor.capacidad}}</td>
+                <td class="align-middle text-center">{{extintor.empresa!.nombre}}</td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

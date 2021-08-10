@@ -60,6 +60,7 @@ export class ExtintoresComponent implements OnInit, OnDestroy {
     .subscribe( (extintores: any) => {
       //console.log(resp);
       this.extintores = extintores;
+      console.log(extintores);
     })
 
   }
