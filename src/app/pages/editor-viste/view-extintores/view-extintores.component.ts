@@ -9,23 +9,32 @@ import { ExtintorService } from 'src/app/services/extintor.service';
   styles: [
   ]
 })
+
 export class ViewExtintoresComponent implements OnInit {
+
+  public nomEmpr:String = '';
+  public extintores: Extintor[] = [];
+  public dtOptions: DataTables.Settings = {};
 
   constructor(private extintorService: ExtintorService,
     private activatedRoute: ActivatedRoute,
-    private router: Router) { }
+    private router: Router)
+  { }
 
+  //todo oninit
   ngOnInit(): void {
-
+    //datatable options
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      language: { url: '//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json' }
+    };
+    //carga
     this.activatedRoute.params
     .subscribe( ({id}) => {
       this.cargarExtintoresByEmpresa(id);
     })
-
   }
-  public nomEmpr:String = '';
-  public extintores: Extintor[] = [];
-
+  //* function cargar
   cargarExtintoresByEmpresa(id: string){
     this.extintorService.cargarExtintoresByEmpresa(id)
     .subscribe( (resp:any) => {
@@ -34,7 +43,7 @@ export class ViewExtintoresComponent implements OnInit {
         this.router.navigateByUrl(`/dashboard/vista-empresas`);
         return;
       }
-      //console.log(resp);
+      //console.log(resp.nom);
       this.nomEmpr = resp.nom;
       this.extintores = resp.extintores;
 

@@ -1,19 +1,3 @@
-<div class="row animated fadeIn fast">
-  <div class="col-12">
-    <div class="card">
-      <div class="card-body">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Buscar Empresa.."
-          #txtTermino
-          (keyup)="buscar(txtTermino.value)"
-        />
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="row animated fadeIn fast" *ngIf="cargando">
   <div class="col-12">
     <div role="alert" class="alert alert-info text-center">
@@ -28,35 +12,73 @@
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-        <div class="row">
-          <div class="col-8">
-            <h4 class="card-title">Empresas ({{ empresas!.length }})</h4>
+
+        <div class="row animated fadeIn">
+          <div class="col-md-6">
+            <h4 class="card-title">Todas las empresas</h4>
             <h6 class="card-subtitle"></h6>
           </div>
-          <div class="col">
+          <div class="col-md-6">
             <div class="text-right">
-              <a routerLink="/dashboard/empresa/nuevo" class="btn btn-dark">
+              <a routerLink="/dashboard/empresa/nuevo"
+              class="text-white btn waves-effect waves-light btn-info">
                 <i class="">Crear Empresa</i>
               </a>
             </div>
           </div>
         </div>
-        
+
+        <hr>
         <!-- tabla 1 -->
-        <div class="table-responsive">
-          <table class="table table-striped">
+
+        <div class="table-responsive m-t-20 dataTables_wrapper">
+          <table
+            datatable
+            [dtOptions]="dtOptions"
+            class="display nowrap table table-hover"
+            cellspacing="0"
+            width="100%"
+            role="grid"
+            style="width: 100%"
+          >
             <thead>
               <tr>
-                <th class="w100">Foto</th>
-                <th>Nombre</th>
-                <th>Direccion</th>
-                <th>Localidad</th>
-                <th class="w100 text-nowrap">Accion</th>
+                <th class="sorting text-center w5">#Nro</th>
+                <th class="w100 text-center">Foto</th>
+                <th class="sorting text-center">Nombre</th>
+                <th class="sorting text-center">Direccion</th>
+                <th class="sorting text-center">Localidad</th>
+                <th class="w100 sorting text-center text-nowrap">Accion</th>
               </tr>
             </thead>
+            <tfoot>
+              <tr>
+                <th class="sorting text-center" rowspan="1" colspan="1">
+                  #Nro
+                </th>
+                <th class="sorting text-center" rowspan="1" colspan="1">
+                  Foto
+                </th>
+                <th class="sorting text-center" rowspan="1" colspan="1">
+                  Nombre
+                </th>
+                <th class="sorting text-center" rowspan="1" colspan="1">
+                  Direccion
+                </th>
+                <th class="sorting text-center" rowspan="1" colspan="1">
+                  Localidad
+                </th>
+                <th class="sorting text-center" rowspan="1" colspan="1">
+                  Accion
+                </th>
+              </tr>
+            </tfoot>
             <tbody>
-              <tr *ngFor="let empresa of empresas">
-                <td class="text-center">
+              <tr *ngFor="let empresa of empresas; let i = index">
+                <td class="align-middle text-center">
+                  {{i+1}}
+                </td>
+                <td class="align-middle text-center">
                   <img
                     [src]="empresa.img! | imagen: 'empresas'"
                     alt=""
@@ -64,12 +86,12 @@
                     (click)="abrirModal(empresa)"
                   />
                 </td>
-                <td>
+                <td class="align-middle text-center">
                   {{ empresa.nombre }}
                 </td>
-                <td>{{ empresa.direccion }}</td>
-                <td>{{ empresa.localidad }}</td>
-                <td class="text-nowrap text-center">
+                <td class="align-middle text-center">{{ empresa.direccion }}</td>
+                <td class="align-middle text-center">{{ empresa.localidad }}</td>
+                <td class="text-nowrap align-middle text-center">
                   <a
                     [routerLink]="['/dashboard/empresa', empresa._id]"
                     class="cursor"
@@ -92,12 +114,11 @@
             </tbody>
           </table>
         </div>
-        <!-- table 2 -->
 
         <!-- end table 2 -->
-        <button class="btn btn-secondary">Anterior</button>
+        <!-- <button class="btn btn-secondary">Anterior</button>
         &nbsp;
-        <button class="btn btn-secondary">Siguiente</button>
+        <button class="btn btn-secondary">Siguiente</button> -->
       </div>
     </div>
   </div>

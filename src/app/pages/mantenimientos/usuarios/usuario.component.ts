@@ -28,7 +28,6 @@ export class UsuarioComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRouter.params.subscribe(({id}) =>{
       this.cargarUsuario(id);
-
     })
     this.usuarioForm = this.fb.group({
       nombre: ['', Validators.required],

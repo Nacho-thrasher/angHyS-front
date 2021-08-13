@@ -3,6 +3,9 @@ import { SidebarService } from '../../services/sidebar.service';
 import { UsuarioService } from '../../services/usuario.service';
 import { Usuario } from "../../models/usuario.model";
 
+declare var $: any;
+declare var Jquery: any;
+
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',

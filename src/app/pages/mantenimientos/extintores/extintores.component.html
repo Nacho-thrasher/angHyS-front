@@ -1,109 +1,142 @@
-<div class="row animated fadeIn fast">
+<div class="row animated fadeIn fast" *ngIf="cargando">
   <div class="col-12">
-    <div class="card">
-      <div class="card-body">
-
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Buscar por Numero de serie"
-          #txtTermino
-          (keyup)="buscar(txtTermino.value)"
-        >
-        <!-- avisar q si pongo espacios vacios mensaje de q no se encontro -->
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row animated fadeIn fast"
-  *ngIf="cargando"
->
-  <div class="col-12">
-
     <div role="alert" class="alert alert-info text-center">
       <h4 class="alert-heading">Cargando</h4>
       <i class="fa fa-spin fa-refresh fa-2x"></i>
       <p class="mb-0">Por favor espere</p>
     </div>
-
   </div>
 </div>
-
 <div *ngIf="!cargando" class="row animated fadeIn">
   <div class="col-12">
     <div class="card">
       <div class="card-body">
 
-        <div class="row mb-2">
-          <div class="col-8">
-            <h4 class="card-title">Extintores ({{extintores.length}})</h4>
+        <div class="row animated fadeIn">
+          <div class="col-md-6">
+            <h4 class="card-title">Todos los extintores</h4>
             <h6 class="card-subtitle"></h6>
           </div>
-          <div class="col">
-            <a class="" routerLink="/dashboard/extintor/nuevo"
-              class="btn btn-sm btn-dark">
-              <i class="">
-                Crear extintor
-              </i>
-            </a>
-            <span class="mr-2"></span>
-            <a class="" routerLink="/dashboard/extintores_excel"
-              class="btn btn-sm btn-info">
-              <i class="">
-                Crear con excell
-              </i>
-            </a>
-
+          <div class="col-md-6">
+              <a routerLink="/dashboard/extintores_excel"
+                class="text-white float-right btn waves-effect waves-light btn-info"
+              >
+                Crear con Excel
+              </a>
+              &nbsp;
+              <a routerLink="/dashboard/extintor/nuevo"
+                class="text-white mr-2 float-right btn waves-effect waves-light btn-info"
+              >
+                Crear Extintor
+              </a>
           </div>
         </div>
+
+        <hr>
         <!-- tablas aqui -->
-        <div class="table-responsive">
-          <table class="table table-striped">
+
+        <div class="table-responsive m-t-20 dataTables_wrapper">
+          <table
+            datatable
+            [dtOptions]="dtOptions"
+            class="display nowrap table table-hover"
+            cellspacing="0"
+            width="100%"
+            role="grid"
+            style="width: 100%"
+          >
             <thead>
-                <tr>
-                    <th class="text-center w100" >Foto</th>
-                    <th class="text-center">Numero Serie</th>
-                    <th class="text-center">Marca</th>
-                    <th class="text-center">Agente extintor</th>
-                    <th class="text-center">capacidad</th>
-                    <th class="text-center">empresa</th>
-                    <th class="text-nowrap text-center">Accion</th>
-                </tr>
+              <tr>
+                <th class="sorting text-center w5">#Nro</th>
+                <th class="sorting text-center w100">Foto</th>
+                <th class="sorting text-center">Numero Serie</th>
+                <th class="sorting text-center">Marca</th>
+                <th class="sorting text-center">Agente extintor</th>
+                <th class="sorting text-center">capacidad</th>
+                <th class="sorting text-center">empresa</th>
+                <th class="sorting text-nowrap text-center">Accion</th>
+              </tr>
             </thead>
+            <tfoot>
+              <tr>
+                <th class="sorting text-center" rowspan="1" colspan="1">
+                  #Nro
+                </th>
+                <th class="sorting text-center" rowspan="1" colspan="1">
+                  Foto
+                </th>
+                <th class="sorting text-center" rowspan="1" colspan="1">
+                  Numero Serie
+                </th>
+                <th class="sorting text-center" rowspan="1" colspan="1">
+                  Marca
+                </th>
+                <th class="sorting text-center" rowspan="1" colspan="1">
+                  Agente extintor
+                </th>
+                <th class="sorting text-center" rowspan="1" colspan="1">
+                  capacidad
+                </th>
+                <th class="sorting text-center" rowspan="1" colspan="1">
+                  empresa
+                </th>
+                <th class="sorting text-center" rowspan="1" colspan="1">
+                  Accion
+                </th>
+              </tr>
+            </tfoot>
             <tbody>
-                <tr *ngFor="let extintor of extintores">
-                    <td class="text-center">
-                      <img [src]="extintor.img! | imagen:'extintores'"
-                        alt="" class="avatar2 cursor"
-                        (click)="abrirModal(extintor)"
-                      >
-                    </td>
-                    <td class="align-middle text-center">{{extintor.numeroSerie}}</td>
-                    <td class="align-middle text-center">{{extintor.marca}}</td>
-                    <td class="align-middle text-center">{{extintor.agenteExtintor}}</td>
-                    <td class="align-middle text-center">{{extintor.capacidad}}</td>
-                    <td class="align-middle text-center">{{extintor.empresa!.nombre}}</td>
-                    <td class="text-nowrap text-center align-middle">
-                        <a [routerLink]="['/dashboard/extintor', extintor._id]"
-                            class="cursor" data-toggle="tooltip" data-original-title="Editar">
-                            <i class="fa fa-pencil text-inverse m-r-10"></i>
-                        </a>
-                        <a class="cursor"
-                          data-toggle="tooltip"
-                          data-original-title="Borrar"
-                          (click)="borrarExtintor(extintor)"
-                        >
-                            <i class="fa fa-close text-danger"></i>
-                        </a>
-                    </td>
-                </tr>
+              <tr *ngFor="let extintor of extintores; let i = index">
+                <td class="text-center">
+                  {{i+1}}
+                </td>
+                <td class="text-center">
+                  <img
+                    [src]="extintor.img! | imagen: 'extintores'"
+                    alt=""
+                    class="avatar2 cursor"
+                    (click)="abrirModal(extintor)"
+                  />
+                </td>
+                <td class="align-middle text-center">
+                  {{ extintor.numeroSerie }}
+                </td>
+                <td class="align-middle text-center">{{ extintor.marca }}</td>
+                <td class="align-middle text-center">
+                  {{ extintor.agenteExtintor }}
+                </td>
+                <td class="align-middle text-center">
+                  {{ extintor.capacidad }}
+                </td>
+                <td class="align-middle text-center">
+                  {{ extintor.empresa!.nombre }}
+                </td>
+                <td class="text-nowrap text-center align-middle">
+                  <a
+                    [routerLink]="['/dashboard/extintor', extintor._id]"
+                    class="cursor"
+                    data-toggle="tooltip"
+                    data-original-title="Editar"
+                  >
+                    <i class="fa fa-pencil text-inverse m-r-10"></i>
+                  </a>
+                  <a
+                    class="cursor"
+                    data-toggle="tooltip"
+                    data-original-title="Borrar"
+                    (click)="borrarExtintor(extintor)"
+                  >
+                    <i class="fa fa-close text-danger"></i>
+                  </a>
+                </td>
+              </tr>
             </tbody>
-        </table>
+          </table>
         </div>
 
-        <button class="btn btn-secondary">Anterior</button>
+        <!-- <button class="btn btn-secondary">Anterior</button>
         &nbsp;
-        <button class="btn btn-secondary">Siguiente</button>
+        <button class="btn btn-secondary">Siguiente</button> -->
 
       </div>
     </div>

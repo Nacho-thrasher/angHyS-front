@@ -1,11 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, Subject } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { Extintor } from 'src/app/models/extintor.model';
 import { BusquedasService } from 'src/app/services/busquedas.service';
 import { ExtintorService } from 'src/app/services/extintor.service';
 import { ModalImgService } from 'src/app/services/modal-img.service';
 import Swal from 'sweetalert2';
+
+declare const $: any;
+declare const jQuery: any;
 
 @Component({
   selector: 'app-extintores',
@@ -15,6 +18,7 @@ import Swal from 'sweetalert2';
 })
 export class ExtintoresComponent implements OnInit, OnDestroy {
 
+  public dtOptions: DataTables.Settings = {};
   public extintores: Extintor[] = [];
   public cargando: boolean = true;
   public imgSubs!: Subscription;
@@ -22,11 +26,18 @@ export class ExtintoresComponent implements OnInit, OnDestroy {
   constructor(private extintorService: ExtintorService,
             private modalImgService: ModalImgService,
             private busquedasService: BusquedasService) { }
+  //destroy
   ngOnDestroy(): void {
     this.imgSubs.unsubscribe();
   }
-
+  //oninit
   ngOnInit(): void {
+    //datatable options
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      language: { url: '//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json' }
+    };
+    //cargas
     this.cargarExtintores();
     this.imgSubs = this.modalImgService.nuevaImagen
     .pipe(
@@ -35,7 +46,7 @@ export class ExtintoresComponent implements OnInit, OnDestroy {
       this.cargarExtintores()
     });
   }
-
+  //funcion
   cargarExtintores(){
     this.cargando = true;
     this.extintorService.cargarExtintores()
@@ -45,12 +56,11 @@ export class ExtintoresComponent implements OnInit, OnDestroy {
       //console.log(extintor)
     })
   }
-
+  //abrirModal
   abrirModal(extintor: Extintor){
     //console.log(extintor)
     this.modalImgService.abrirModal('extintores', extintor._id , extintor.img);
   }
-
   buscar(termino: string):any{
     if (termino.length === 0) {
       return this.cargarExtintores();
@@ -60,11 +70,10 @@ export class ExtintoresComponent implements OnInit, OnDestroy {
     .subscribe( (extintores: any) => {
       //console.log(resp);
       this.extintores = extintores;
-      console.log(extintores);
+      //console.log(extintores);
     })
-
   }
-
+  //delete
   borrarExtintor(extintor:Extintor){
     //console.log(usuario)
     Swal.fire({
@@ -77,14 +86,12 @@ export class ExtintoresComponent implements OnInit, OnDestroy {
       if (result.isConfirmed) {
         this.extintorService.borrarExtintor(extintor._id!)
         .subscribe(resp =>{
-
           Swal.fire(
             'Borrado!',
             `Extintor: ${extintor.numeroSerie} Marca: ${extintor.marca} fue eliminado.`,
             'success'
           ),
           this.cargarExtintores()
-
         })
       }
     })

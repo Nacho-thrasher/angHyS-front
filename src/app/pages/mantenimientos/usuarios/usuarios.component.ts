@@ -16,6 +16,7 @@ import Swal from 'sweetalert2';
 })
 export class UsuariosComponent implements OnInit, OnDestroy {
 
+  public dtOptions: DataTables.Settings = {};
   public imgSubs!: Subscription;
   public totalUsuarios: number = 0;
   public usuarios: Usuario[] = [];
@@ -23,19 +24,22 @@ export class UsuariosComponent implements OnInit, OnDestroy {
   public desde: number = 0;
   public cargando: boolean = true;
 
-
-
   constructor(private usuarioService: UsuarioService,
             private busquedasService: BusquedasService,
             private modalImgService: ModalImgService
   ) { }
-
+  //todo destroy
   ngOnDestroy(): void {
     this.imgSubs.unsubscribe();
   }
-
+  //todo oninit
   ngOnInit(): void {
-
+    //datatable options
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      language: { url: '//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json' }
+    };
+    //cargas
     this.cargarUsuarios();
     this.imgSubs = this.modalImgService.nuevaImagen
     .pipe(
@@ -44,19 +48,20 @@ export class UsuariosComponent implements OnInit, OnDestroy {
       this.cargarUsuarios()
     });
   }
-
+  //todo funcion
   cargarUsuarios(){
     this.cargando = true;
-    this.usuarioService.cargarUsuarios(this.desde)
-    .subscribe( ({total, usuarios}) =>{
+    this.usuarioService.cargarAllUsuarios()
+    .subscribe( usuarios =>{
       //console.log(resp);
-      this.totalUsuarios = total;
+      //this.totalUsuarios = total;
       this.usuarios = usuarios;
-      this.usuariosTemp = usuarios;
+      //this.usuariosTemp = usuarios;
+
       this.cargando = false;
     })
   }
-
+  //? pagination manual
   cambiarPagina(valor:number){
     this.desde += valor;
     if (this.desde < 0) {
@@ -67,7 +72,7 @@ export class UsuariosComponent implements OnInit, OnDestroy {
     }
     this.cargarUsuarios();
   }
-
+  //? busqueda manual
   buscar(termino: string):any{
     if (termino.length === 0) {
       return this.usuarios = this.usuariosTemp;
@@ -80,7 +85,7 @@ export class UsuariosComponent implements OnInit, OnDestroy {
     })
 
   }
-
+  //? delete arreglar
   eliminarUsuarios(usuario: Usuario):any{
 
     if (usuario.uid === this.usuarioService.uid) {
@@ -108,14 +113,14 @@ export class UsuariosComponent implements OnInit, OnDestroy {
       }
     })
   }
-
+  //* cambio de rol
   cambiarRole(usuario: Usuario){
     this.usuarioService.guardarUsuario(usuario)
     .subscribe(resp =>{
       console.log(resp)
     })
   }
-
+  //* abrir modal
   abrirModal(usuario: Usuario){
     console.log(usuario)
     this.modalImgService.abrirModal('usuarios', usuario.uid , usuario.img);

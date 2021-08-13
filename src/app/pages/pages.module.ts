@@ -26,6 +26,9 @@ import { ExtintoresExcelComponent } from './mantenimientos/extintores/extintores
 import { ViewEmpresasComponent } from './editor-viste/view-empresas.component';
 import { ViewExtintoresComponent } from './editor-viste/view-extintores/view-extintores.component';
 
+import { DataTablesModule } from 'angular-datatables';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
+import { ViewExtintorComponent } from './editor-viste/extintor-numSerie/view-extintor.component';
 
 
 @NgModule({
@@ -46,7 +49,8 @@ import { ViewExtintoresComponent } from './editor-viste/view-extintores/view-ext
     EmpresaComponent,
     ExtintoresExcelComponent,
     ViewEmpresasComponent,
-    ViewExtintoresComponent
+    ViewExtintoresComponent,
+    ViewExtintorComponent
   ],
   exports:[
     DashboardComponent,
@@ -64,7 +68,9 @@ import { ViewExtintoresComponent } from './editor-viste/view-extintores/view-ext
     AppRoutingModule,
     FormsModule,
     ComponentsModule,
-    PipesModule
+    PipesModule,
+    DataTablesModule,
+    NgxQRCodeModule
   ]
 
 })

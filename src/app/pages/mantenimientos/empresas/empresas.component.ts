@@ -7,27 +7,42 @@ import { Subscription } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { BusquedasService } from 'src/app/services/busquedas.service';
 
+import { Subject } from 'rxjs';
+
+declare const $: any;
+declare const jQuery: any;
+
 @Component({
   selector: 'app-empresas',
   templateUrl: './empresas.component.html',
   styles: [
   ]
 })
+
 export class EmpresasComponent implements OnInit, OnDestroy {
 
-  constructor(private empresaService: EmpresaService,
-            private modalImgService: ModalImgService,
-            private busquedasService: BusquedasService) { }
-  ngOnDestroy(): void {
-    this.imgSubs.unsubscribe();
-  }
-
+  public dtOptions: DataTables.Settings = {};
   public empresas?: Empresa[];
   public cargando?: boolean = true;
   public imgSubs!: Subscription;
 
-  ngOnInit(): void {
+  constructor(private empresaService: EmpresaService,
+            private modalImgService: ModalImgService,
+            private busquedasService: BusquedasService) { }
 
+  //destroy
+  ngOnDestroy(): void {
+    this.imgSubs.unsubscribe();
+  }
+  //oninit
+  ngOnInit(): void {
+    //datatables options
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      processing: true,
+      language: { url: '//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json' }
+    }
+    //cargas
     this.cargarEmpresas();
     this.imgSubs = this.modalImgService.nuevaImagen
     .pipe(
@@ -35,6 +50,7 @@ export class EmpresasComponent implements OnInit, OnDestroy {
     ).subscribe(img => {
       this.cargarEmpresas()
     });
+    //
   }
 
   buscar(termino: string):any{
@@ -49,17 +65,18 @@ export class EmpresasComponent implements OnInit, OnDestroy {
     })
 
   }
-
+  //funcion
   cargarEmpresas(){
+    //preload
     this.cargando = true;
-
+    //funcion
     this.empresaService.cargarEmpresas()
     .subscribe(empresas=>{
       this.cargando = false;
       this.empresas = empresas;
     })
   }
-
+  //delete
   eliminarEmpresa(empresa: Empresa){
     this.empresaService.borrarEmpresa(empresa._id!)
     .subscribe(resp => {
@@ -67,7 +84,7 @@ export class EmpresasComponent implements OnInit, OnDestroy {
       Swal.fire('Guardado', empresa.nombre, 'success')
     })
   }
-
+  //modal cambiarImagen
   abrirModal(empresa:Empresa) {
     console.log(empresa)
     this.modalImgService.abrirModal('empresas', empresa._id , empresa.img);

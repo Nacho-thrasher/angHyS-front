@@ -4,6 +4,9 @@ import { UsuarioService } from '../../services/usuario.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 
+declare var $: any;
+declare var Jquery: any;
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',

@@ -8,6 +8,9 @@ import { AuthModule } from './auth/auth.module';
 import { AppComponent } from './app.component';
 import { NoPageFoundComponent } from './no-page-found/no-page-found.component';
 
+import { DataTablesModule } from 'angular-datatables';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,7 +20,8 @@ import { NoPageFoundComponent } from './no-page-found/no-page-found.component';
     BrowserModule,
     AppRoutingModule,
     PagesModule,
-    AuthModule
+    AuthModule,
+    DataTablesModule
   ],
   exports:[
   ],

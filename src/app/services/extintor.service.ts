@@ -49,6 +49,11 @@ export class ExtintorService {
     return this.http.get(url, this.headers)
   }
 
+  cargarExtintoresByNumSerie(numSerie: string){
+    const url = `${base_url}/vista-extintor/${numSerie}`;
+    return this.http.get(url, this.headers)
+  }
+
   crearExtintor(extintor:
     {
       numeroSerie: string,

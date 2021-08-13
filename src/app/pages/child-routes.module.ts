@@ -19,6 +19,7 @@ import { EmpresaComponent } from './mantenimientos/empresas/empresa.component';
 import { ExtintoresExcelComponent } from './mantenimientos/extintores/extintores-excel.component';
 import { ViewEmpresasComponent } from './editor-viste/view-empresas.component';
 import { ViewExtintoresComponent } from './editor-viste/view-extintores/view-extintores.component';
+import { ViewExtintorComponent } from './editor-viste/extintor-numSerie/view-extintor.component';
 
 const childRoutes: Routes = [
 
@@ -30,24 +31,23 @@ const childRoutes: Routes = [
   { path: 'perfil', component: PerfilComponent, data: {titulo: 'Perfil'}},
 
   //mantenimiento
-  { path: 'empresas', component: EmpresasComponent, data: {titulo: 'Empresas'}},
-  { path: 'empresa/:id', component: EmpresaComponent, data: {titulo: 'Empresa'}},
-
-  { path: 'extintores', component: ExtintoresComponent, data: {titulo: 'Extintores'}},
-  { path: 'extintor/:id', component: ExtintorComponent, data: {titulo: 'Extintor'}},
-  { path: 'extintores_excel', component: ExtintoresExcelComponent, data: {titulo: 'Extintores-Excel'}},
+  { path: 'empresas', canActivate: [AdminGuard], component: EmpresasComponent, data: {titulo: 'Empresas'}},
+  { path: 'empresa/:id', canActivate: [AdminGuard], component: EmpresaComponent, data: {titulo: 'Empresa'}},
+  { path: 'extintores', canActivate: [AdminGuard], component: ExtintoresComponent, data: {titulo: 'Extintores'}},
+  { path: 'extintor/:id', canActivate: [AdminGuard], component: ExtintorComponent, data: {titulo: 'Extintor'}},
+  { path: 'extintores_excel', canActivate: [AdminGuard], component: ExtintoresExcelComponent, data: {titulo: 'Extintores-Excel'}},
 
   //rutas admin
   { path: 'usuarios', canActivate: [AdminGuard], component: UsuariosComponent, data: {titulo: 'Usuarios'}},
-  { path: 'usuario/:id', component: UsuarioComponent, data: {titulo: 'Usuario'}},
+  { path: 'usuario/:id', canActivate: [AdminGuard], component: UsuarioComponent, data: {titulo: 'Usuario'}},
 
-  { path: 'vista-empresas/:id', component: ViewExtintoresComponent, data: {titulo: 'Extintores'}},
-
-  //busqueda tot
+  //busqueda tot Mejorar buscadoR
   { path: 'buscar/:termino', component: BusquedasComponent, data: {titulo: 'Busquedas'}},
 
   //principal any users
-  { path: 'vista-empresas', component: ViewEmpresasComponent, data: {titulo: 'Empresas'}}
+  { path: 'vista-empresas', component: ViewEmpresasComponent, data: {titulo: 'Empresas'}},
+  { path: 'vista-empresas/:id', component: ViewExtintoresComponent, data: {titulo: 'Extintores'}},
+  { path: 'vista-extintor/:numSerie', component: ViewExtintorComponent, data: {titulo: 'Extintor'}}
 
 ]
 

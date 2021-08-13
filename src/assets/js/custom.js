@@ -31,6 +31,7 @@ const customInitFunctions = () => {
           }
 
       };
+
       $(window).ready(set);
       $(window).on("resize", set);
 
@@ -114,7 +115,9 @@ const customInitFunctions = () => {
       // ==============================================================
       // Perfact scrollbar
       // ==============================================================
-      $('.scroll-sidebar, .right-side-panel, .message-center, .right-sidebar').perfectScrollbar();
+      
+      $('.scroll-sidebar, .right-side-panel, .message-center, .right-sidebar')
+      .perfectScrollbar();
 
       // ==============================================================
       // Resize all elements

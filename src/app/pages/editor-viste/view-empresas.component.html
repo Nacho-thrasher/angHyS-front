@@ -1,43 +1,52 @@
+<hr>
 <div class="row">
   <div class="col-12 m-t-30">
-      <!-- <h4 class="m-b-0">Card columns</h4> -->
-      <!-- <p class="text-muted m-t-0 font-12">Cards can be organized into Masonry-like columns with just CSS by wrapping them in <code>card-columns</code></p> -->
-      <div class="row animated fadeIn fast" *ngIf="cargando">
-        <div class="col-12">
-          <div role="alert" class="alert alert-info text-center">
-            <h4 class="alert-heading">Cargando</h4>
-            <i class="fa fa-spin fa-refresh fa-2x"></i>
-            <p class="mb-0">Por favor espere</p>
+    <!-- <h4 class="m-b-0">Card columns</h4> -->
+    <!-- <p class="text-muted m-t-0 font-12">Cards can be organized into Masonry-like columns with just CSS by wrapping them in <code>card-columns</code></p> -->
+    <div class="row animated fadeIn fast" *ngIf="cargando">
+      <div class="col-12">
+        <div role="alert" class="alert alert-info text-center">
+          <h4 class="alert-heading">Cargando</h4>
+          <i class="fa fa-spin fa-refresh fa-2x"></i>
+          <p class="mb-0">Por favor espere</p>
+        </div>
+      </div>
+    </div>
+    <!--  -->
+    <div class="row row-cols-1 justify-content-center row-cols-md-3 g-4">
+      <div
+        *ngFor="let empresa of empresas"
+        class="col"
+      >
+        <div
+          (click)="navigate(empresa.nombre)"
+          class="card h-100 card-shadow"
+        >
+          <img
+            class="card-img-top img-fluid"
+            [src]="empresa.img! | imagen: 'empresas'"
+            alt="Card image cap"
+          />
+          <div class="card-body">
+            <h4 class="card-title">
+              {{ empresa.nombre }}
+            </h4>
+            <p class="card-text">
+              {{ empresa.localidad }}
+            </p>
+            <p class="card-text">
+              {{ empresa.direccion }}
+            </p>
+            <p class="card-text">
+              <small class="text-muted">
+                averiguar como setear numero de extintores
+              </small>
+            </p>
           </div>
         </div>
       </div>
 
-      <div class="card-deck" *ngIf="!cargando">
+    </div>
 
-
-          <div (click)="navigate(empresa.nombre)"  *ngFor="let empresa of empresas"  class="card card-shadow">
-              <img class="card-img-top img-fluid"
-                  [src]="empresa.img! | imagen: 'empresas'"
-                  alt="Card image cap"
-              >
-              <div class="card-body">
-                  <h4 class="card-title">
-                    {{ empresa.nombre }}
-                  </h4>
-                  <p class="card-text">
-                    {{empresa.localidad}}
-                  </p>
-                  <p class="card-text">
-                    {{empresa.direccion}}
-                  </p>
-                  <p class="card-text">
-                    <small class="text-muted" >
-                      averiguar como setear numero de extintores
-                    </small>
-                  </p>
-              </div>
-          </div>
-
-      </div>
   </div>
 </div>

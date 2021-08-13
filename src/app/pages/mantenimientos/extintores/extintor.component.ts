@@ -8,6 +8,11 @@ import { EmpresaService } from 'src/app/services/empresa.service';
 import { ExtintorService } from 'src/app/services/extintor.service';
 import Swal from 'sweetalert2';
 
+import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels, NgxQRCodeModule } from 'ngx-qrcode2';
+import { environment } from 'src/environments/environment';
+
+const base_url = environment.base_url;
+
 @Component({
   selector: 'app-extintor',
   templateUrl: './extintor.component.html',
@@ -21,18 +26,28 @@ export class ExtintorComponent implements OnInit {
   public empresaSeleccionados?: Empresa;
   public extintorSeleccionados?: Extintor;
 
+
   constructor(private fb: FormBuilder,
-              private empresaService: EmpresaService,
-              private extintorService: ExtintorService,
-              private router: Router,
-              private activatedRouter: ActivatedRoute) { }
+    private empresaService: EmpresaService,
+    private extintorService: ExtintorService,
+    private router: Router,
+    private activatedRouter: ActivatedRoute) { }
 
-  ngOnInit(): void {
-
+    //? qr vars -
+    public title!: string;
+    public url!:string;
+    public profile!:string;
+    public elementType = NgxQrcodeElementTypes.URL;
+    public errorCorrectionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
+    public value!:string;
+    public numerSer!:string;
+    //todo oninit
+    ngOnInit(): void {
+    //todo Obtener ID
     this.activatedRouter.params.subscribe(({id}) =>{
       this.cargarExtintor(id);
     })
-
+    //todo Validators form
     this.extintorForm = this.fb.group({
       numeroSerie: ['', Validators.required],
       marca: ['', Validators.required],
@@ -40,7 +55,7 @@ export class ExtintorComponent implements OnInit {
       capacidad: ['', Validators.required],
       empresa: ['', Validators.required],
     })
-
+    //todo Cargar empresas y seleccionar si muestro
     this.cargarEmpresas();
     this.extintorForm.get('empresa')?.valueChanges
     .subscribe(empresaId =>{
@@ -48,7 +63,17 @@ export class ExtintorComponent implements OnInit {
       .find( h => h._id === empresaId);
     })
   }
-
+  //todo QR
+  cargarQr(numeroSerie:string){
+    this.title = 'app';
+    this.url = 'http://localhost:4400/dashboard/vista-extintor/';
+    this.profile = `${numeroSerie}`;
+    //console.log(this.profile);
+    this.elementType = NgxQrcodeElementTypes.URL;
+    this.errorCorrectionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
+    this.value = this.url + this.profile;
+  }
+  //* Cargar Extintor
   cargarExtintor(id:string){
     if (id === 'nuevo') {  return; }
 
@@ -66,8 +91,11 @@ export class ExtintorComponent implements OnInit {
               capacidad,
               marca,
               empresa:{_id}
-            } = extintor;
-      console.log(extintor)
+      } = extintor;
+      //* Asignando numero a qr
+      this.numerSer = extintor.numeroSerie!;
+      this.cargarQr(this.numerSer);
+      //* Cargando inputs de form
       this.extintorSeleccionados = extintor;
       this.extintorForm.setValue({
           numeroSerie,
@@ -78,7 +106,7 @@ export class ExtintorComponent implements OnInit {
       })
     });
   }
-
+  //* Cargar Empresas
   cargarEmpresas(){
     this.empresaService.cargarEmpresas()
     .subscribe((empresas: Empresa[]) => {
@@ -86,11 +114,11 @@ export class ExtintorComponent implements OnInit {
       this.empresas = empresas;
     })
   }
-
+  //* Guardar
   guardarExtintor(){
     const { numeroSerie, marca } = this.extintorForm.value;
     if (this.extintorSeleccionados) {
-        //update
+        //todo update
         const data = {
           ...this.extintorForm.value,
           _id: this.extintorSeleccionados._id
@@ -102,7 +130,7 @@ export class ExtintorComponent implements OnInit {
         })
     }
     else{
-        //crear
+        //todo crear
         const { numeroSerie, marca } = this.extintorForm.value;
         this.extintorService.crearExtintor(this.extintorForm.value)
         .subscribe( (resp:any) => {

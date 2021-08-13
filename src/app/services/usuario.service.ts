@@ -156,7 +156,6 @@ export class UsuarioService {
       map(resp=>{
         const usuarios = resp.usuarios.map(
           user =>new Usuario(
-
             user.nombre,
             user.email,
             '',
@@ -166,12 +165,20 @@ export class UsuarioService {
             user.uid
           )
         )
-
         return {
           total: resp.total,
           usuarios
         };
       })
+    )
+    //delay() , va con pipe antes de map para demorar la carga
+  }
+  cargarAllUsuarios(){
+
+    const url = `${base_url}/usuarios`;
+    return this.http.get<{ ok: boolean, usuarios: Usuario[] }>(url, this.headers)
+    .pipe(
+      map((resp: { ok: boolean, usuarios: Usuario[] } ) => resp.usuarios)
     )
     //delay() , va con pipe antes de map para demorar la carga
   }

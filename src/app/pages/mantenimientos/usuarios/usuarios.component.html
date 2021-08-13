@@ -1,20 +1,3 @@
-<div class="row animated fadeIn fast">
-  <div class="col-12">
-    <div class="card">
-      <div class="card-body">
-
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Buscar usuario.."
-          (keyup)="buscar(txtTermino.value)"
-          #txtTermino
-        />
-
-      </div>
-    </div>
-  </div>
-</div>
 <div *ngIf="cargando"
   class="row animated fadeIn fast">
   <div class="col-12">
@@ -32,85 +15,124 @@
     <div class="card">
       <div class="card-body">
         <div class="row">
-          <div class="col-8">
-            <h4 class="card-title">Usuarios ({{totalUsuarios}})</h4>
-            <h6 class="card-subtitle">Usuarios registrados</h6>
+
+          <div class="col-md-6">
+            <h4 class="card-title">Todos los usuarios registrados</h4>
+            <h6 class="card-subtitle"></h6>
           </div>
-          <div class="col">
+          <div class="col-md-6">
             <div class="text-right">
               <a routerLink="/dashboard/usuario/nuevo"
-                class="btn btn-dark">
+                class="text-white mr-2 btn waves-effect waves-light btn-info">
                 <i class="">Crear Usuario</i>
               </a>
             </div>
           </div>
         </div>
 
-        <div class="table-responsive">
-          <table class="table table-striped">
+        <hr>
+        <!-- tablas aqui -->
+
+        <div class="table-responsive m-t-20 dataTables_wrapper">
+          <table
+            datatable
+            [dtOptions]="dtOptions"
+            class="display nowrap table table-hover"
+            cellspacing="0"
+            width="100%"
+            role="grid"
+            style="width: 100%"
+          >
             <thead>
                 <tr>
-                    <th class="w100">Imagen</th>
-                    <th>Correo</th>
-                    <th>Nombre</th>
-                    <th class="w140">Role</th>
-                    <th class="w100">Auth</th>
-                    <th class="w100 text-nowrap">Accion</th>
+                  <th class="sorting text-center w5">#Nro</th>
+                  <th class="sorting text-center w100">Imagen</th>
+                  <th class="sorting text-center">Correo</th>
+                  <th class="sorting text-center"> Nombre</th>
+                  <th class="sorting text-center">Role</th>
+                  <th class="sorting text-center w100">Auth</th>
+                  <th class="sorting text-center w100 text-nowrap">Accion</th>
                 </tr>
             </thead>
+            <tfoot>
+              <tr>
+                <th class="sorting text-center" rowspan="1" colspan="1">
+                  #Nro
+                </th>
+                <th class="sorting text-center" rowspan="1" colspan="1">
+                  Imagen
+                </th>
+                <th class="sorting text-center" rowspan="1" colspan="1">
+                  Correo
+                </th>
+                <th class="sorting text-center" rowspan="1" colspan="1">
+                  Nombre
+                </th>
+                <th class="sorting text-center" rowspan="1" colspan="1">
+                  Role
+                </th>
+                <th class="sorting text-center" rowspan="1" colspan="1">
+                  Registrado por
+                </th>
+                <th class="sorting text-center" rowspan="1" colspan="1">
+                  Accion
+                </th>
+              </tr>
+            </tfoot>
             <tbody>
-                <tr *ngFor="let usuario of usuarios">
-                    <td class="text-center">
-                      <img [src]="usuario.imagenUrl"
-                          class="avatar2 cursor"
-                          alt=""
-                          (click)="abrirModal(usuario)"
+                <tr *ngFor="let usuario of usuarios; let i = index">
+                  <td class="align-middle text-center">
+                    {{i+1}}
+                  </td>
+                  <td class="align-middle text-center">
+                    <img
+                        [src]="usuario.img! | imagen: 'usuarios'"
+                        alt=""
+                        class="avatar2 cursor"
+                        (click)="abrirModal(usuario)"
+                    >
+                  </td>
+                  <td class="align-middle text-center">{{usuario.email}}</td>
+                  <td class="align-middle text-center">{{usuario.nombre}}</td>
+                  <td class="align-middle text-center">
+                    <select class="w100 text-center custom-select form-control"
+                      [(ngModel)]="usuario.role"
+                      (change)="cambiarRole(usuario)"
+                    >
+                      <option class="text-center" value="ADMIN_ROLE">Admin</option>
+                      <option class="text-center" value="USER_ROLE">User</option>
+                    </select>
+                  </td>
+                  <td class="align-middle text-center">
+                    <span *ngIf="usuario.google" class="label label-danger">
+                      Google
+                    </span>
+                    <span *ngIf="!usuario.google" class="label label-info">
+                      Email
+                    </span>
+                  </td>
+                  <td class="text-nowrap align-middle text-center">
+                      <a [routerLink]="['/dashboard/usuario', usuario.uid]"
+                          class="cursor" data-toggle="tooltip" data-original-title="Editar">
+                          <i class="fa fa-pencil text-inverse m-r-10"></i>
+                      </a>
+                      <a data-toggle="tooltip"
+                        data-original-title="Borrar"
+                        (click)="eliminarUsuarios(usuario)"
+                        class="cursor"
                       >
-                    </td>
-                    <td>{{usuario.email}}</td>
-                    <td>{{usuario.nombre}}</td>
-                    <td>
-                      <select class="form-control"
-                       [(ngModel)]="usuario.role"
-                       (change)="cambiarRole(usuario)"
-                      >
-                        <option value="ADMIN_ROLE">Admin</option>
-                        <option value="USER_ROLE">User</option>
-                      </select>
-                    </td>
-                    <td>
-                      <span *ngIf="usuario.google" class="label label-danger">
-                        Google
-                      </span>
-                      <span *ngIf="!usuario.google" class="label label-info">
-                        Email
-                      </span>
-                    </td>
-                    <td class="text-nowrap text-center">
-                        <a [routerLink]="['/dashboard/usuario', usuario.uid]"
-                            class="cursor" data-toggle="tooltip" data-original-title="Editar">
-                            <i class="fa fa-pencil text-inverse m-r-10"></i>
-                        </a>
-                        <a data-toggle="tooltip"
-                          data-original-title="Borrar"
-                          (click)="eliminarUsuarios(usuario)"
-                          class="cursor"
-                        >
-                          <i class="fa fa-close text-danger"></i>
-                        </a>
-
-                    </td>
+                        <i class="fa fa-close text-danger"></i>
+                      </a>
+                  </td>
                 </tr>
             </tbody>
         </table>
         </div>
-
         <!-- <div *ngIf="txtTermino.value.length === 0"> -->
-          <button (click)="cambiarPagina(-5)" class="btn btn-secondary">Anterior</button>
+          <!-- <button (click)="cambiarPagina(-5)" class="btn btn-secondary">Anterior</button>
           &nbsp;
-          <button (click)="cambiarPagina(5)" class="btn btn-secondary">Siguiente</button>
+          <button (click)="cambiarPagina(5)" class="btn btn-secondary">Siguiente</button> -->
         <!-- </div> -->
-
       </div>
     </div>
   </div>

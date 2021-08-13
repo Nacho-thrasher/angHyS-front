@@ -5,6 +5,8 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
 
 declare const gapi:any;
+declare var $: any;
+declare var Jquery: any;
 
 @Component({
   selector: 'app-login',

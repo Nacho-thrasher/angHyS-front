@@ -2,8 +2,9 @@
   <div class="col-lg-7" >
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Nuevo Extintor</h4>
-            <h6 class="card-subtitle"></h6>
+            <h4 *ngIf="!extintorSeleccionados" class="card-title">Nuevo Extintor</h4>
+            <h4 *ngIf="extintorSeleccionados" class="card-title">Editando Extintor: {{extintorSeleccionados?.numeroSerie!}}</h4>
+            <hr>
             <form [formGroup]="extintorForm"
                   (submit)="guardarExtintor()"
               class="form-horizontal p-t-20">
@@ -92,6 +93,23 @@
           <h4 class="card-title">Empresa : {{empresaSeleccionados!.nombre}}</h4>
           <img [src]="empresaSeleccionados?.img! | imagen:'empresas'"
           class="img-responsive img-thumbnail" alt="">
+      </div>
+    </div>
+
+  </div>
+  <div *ngIf="empresaSeleccionados" class="animated fadeIn col-lg-5">
+
+    <div class="card">
+      <div class="card-body">
+          <h4 class="card-title">Qr</h4>
+
+          <ngx-qrcode
+            [elementType]="elementType"
+            [value]="value"
+            qrc-class="aclass"
+            [errorCorrectionLevel]="errorCorrectionLevel" >
+          </ngx-qrcode>
+
       </div>
     </div>
 

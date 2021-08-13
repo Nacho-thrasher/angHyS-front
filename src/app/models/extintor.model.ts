@@ -39,7 +39,21 @@ export class Extintor {
 
     public empresa: Empresa,
     public _id?: string,
-    public img?: string
+    public img?: string,
+
+    public zona?: string,
+    public numInterno?: string,
+    public acceso?: string,
+    public demarcado?: string,
+    public estadoManometro?: string,
+    public estadoPintura?: string,
+    public estadoChapaBaliza?: string,
+    public estadoManija?: string,
+    public retiroPorMant?: string,
+    public sustituto?: string,
+    public numeroSustituto?: string,
+    public observacion?: string,
+
 
   ){
 
