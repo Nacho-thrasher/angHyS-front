@@ -27,7 +27,7 @@
             [src]="empresa.img! | imagen: 'empresas'"
             alt="Card image cap"
           />
-          <div class="card-body">
+          <div class="card-body h-100">
             <h4 class="card-title">
               {{ empresa.nombre }}
             </h4>
@@ -37,11 +37,11 @@
             <p class="card-text">
               {{ empresa.direccion }}
             </p>
-            <p class="card-text">
-              <small class="text-muted">
-                averiguar como setear numero de extintores
-              </small>
-            </p>
+          </div>
+          <div class="card-footer bg-white">
+            <small class="text-muted">
+              Cantidad de extintores: &nbsp; {{empresa.nroExtintores}}
+            </small>
           </div>
         </div>
       </div>

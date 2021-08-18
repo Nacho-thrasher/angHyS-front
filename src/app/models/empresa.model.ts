@@ -12,8 +12,8 @@ export class Empresa {
     public direccion: string,
     public _id?: string,
     public img?: string,
-    public usuario?: _empresaUser
-
+    public usuario?: _empresaUser,
+    public nroExtintores?: string
   ){
 
   }

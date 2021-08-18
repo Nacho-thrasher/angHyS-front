@@ -8,10 +8,10 @@
   <div class="col-md-7 align-self-center">
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
-        <a href="javascript:void(0)">Home</a>
+        <a routerLink="/">Inicio</a>
       </li>
-      <li class="breadcrumb-item">pages</li>
-      <li class="breadcrumb-item active">{{titulo}}</li>
+      <li *ngIf="content" class="breadcrumb-item">{{content}}</li>
+      <li class="breadcrumb-item text-dark active">{{titulo}}</li>
     </ol>
   </div>
 

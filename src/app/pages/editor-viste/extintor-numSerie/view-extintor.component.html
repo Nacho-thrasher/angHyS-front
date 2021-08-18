@@ -185,133 +185,177 @@
                         class="form-horizontal form-material"
                         (submit)="guardarExtintor()"
                       >
+                        <div class="form-body pt-2 px-2">
+                          <h3 class="box-title">
+                            Num de Extintor: {{extintor?.numeroSerie}}
+                          </h3>
+                          <input type="hidden" formControlName="_id">
+                          <input type="hidden" formControlName="numeroSerie">
+                          <hr>
+                          <div class="row px-2">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Zona:</label>
+                                    <input formControlName="zona" type="text" placeholder="Ej: Subsuelo" class="form-control form-control-line">
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group has-danger">
+                                    <label class="control-label">Num Interno:</label>
+                                    <input formControlName="numInterno" type="number" placeholder="Ej: 1" min="0" class="form-control form-control-line">
+                                </div>
+                            </div>
+                            <!--/span-->
+                          </div>
+                          <div class="row px-2">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Acceso:</label>
+                                    <input formControlName="acceso" type="text" placeholder="Ej: Bueno" class="form-control form-control-line">
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group has-danger">
+                                    <label class="control-label">Demarcado:</label>
+                                    <div class="pt-1">
+                                      <label class="custom-control custom-radio">
+                                          <input formControlName="demarcado" value="si" type="radio" id="dem-si" class="custom-control-input">
+                                          <span class="custom-control-indicator"></span>
+                                          <span class="text-dark custom-control-description">Si</span>
+                                      </label>
+                                      <label class="custom-control custom-radio">
+                                          <input formControlName="demarcado" value="no" type="radio" id="dem-no" class="custom-control-input">
+                                          <span class="custom-control-indicator"></span>
+                                          <span class="text-dark custom-control-description">No</span>
+                                      </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                          </div>
+                          <h3 class="box-title m-t-10">Estado del Extintor:</h3>
+                          <hr>
+                          <div class="row px-2">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Estado Manometro:</label>
+                                    <select formControlName="estadoManometro" class="form-control custom-select form-control-line">
+                                      <option selected >Seleccione una</option>
+                                      <option value="Malo">Malo</option>
+                                      <option value="Bueno">Bueno</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group has-danger">
+                                    <label class="control-label">Pintura:</label>
+                                    <select formControlName="estadoPintura" class="form-control form-control-line">
+                                      <option selected >Seleccione una</option>
+                                      <option value="Malo">Malo</option>
+                                      <option value="Bueno">Bueno</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--/span-->
+                          </div>
+                          <div class="row px-2">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Chapa Baliza:</label>
+                                    <select formControlName="estadoChapaBaliza" class="form-control form-control-line">
+                                      <option selected >Seleccione una</option>
+                                      <option value="Malo">Malo</option>
+                                      <option value="Bueno">Bueno</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group has-danger">
+                                    <label class="control-label">Manija:</label>
+                                    <select formControlName="estadoManija" class="form-control form-control-line">
+                                      <option selected >Seleccione una</option>
+                                      <option value="Malo">Malo</option>
+                                      <option value="Bueno">Bueno</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--/span-->
+                          </div>
+                          <div class="row px-2">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Retiro por Mantenimiento:</label>
+                                    <div class="pt-1">
+                                      <label class="custom-control custom-radio">
+                                          <input formControlName="retiroPorMant" value="si" type="radio" id="rtpm-si" class="custom-control-input">
+                                          <span class="custom-control-indicator"></span>
+                                          <span class="text-dark custom-control-description">Si</span>
+                                      </label>
+                                      <label class="custom-control custom-radio">
+                                          <input formControlName="retiroPorMant" value="no" type="radio" id="rtpm-no" class="custom-control-input">
+                                          <span class="custom-control-indicator"></span>
+                                          <span class="text-dark custom-control-description">No</span>
+                                      </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Se coloco un sustituto:</label>
+                                    <div class="pt-1">
+                                      <label class="custom-control custom-radio">
+                                          <input formControlName="sustituto" value="si" type="radio" id="sust-si" class="custom-control-input">
+                                          <span class="custom-control-indicator"></span>
+                                          <span class="text-dark custom-control-description">Si</span>
+                                      </label>
+                                      <label class="custom-control custom-radio">
+                                          <input formControlName="sustituto" value="no" type="radio" id="sust-no" class="custom-control-input">
+                                          <span class="custom-control-indicator"></span>
+                                          <span class="text-dark custom-control-description">No</span>
+                                      </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                          </div>
+                          <div class="row px-2">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Numero de sustituto:</label>
+                                    <input formControlName="numeroSustituto"
+                                    type="text" placeholder="Numero de serie del sustituto" class="form-control form-control-line" id="example-email">
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group has-danger">
+                                    <label class="control-label">Observacion:</label>
+                                    <textarea formControlName="observacion" rows="3" class="form-control form-control-line"></textarea>
+                                </div>
+                            </div>
+                            <!--/span-->
+                          </div>
+                          <h3 class="box-title">Imagenes:</h3>
+                          <hr>
+                          <div class="card-body">
+                            <h4 class="card-title">File Upload1</h4>
+                            <label for="input-file-now">Your so fresh input file — Default version</label>
+                            <div class="dropify-wrapper"><div class="dropify-message"><span class="file-icon"></span> <p>Drag and drop a file here or click</p><p class="dropify-error">Ooops, something wrong appended.</p></div><div class="dropify-loader"></div><div class="dropify-errors-container"><ul></ul></div><input type="file" id="input-file-now" class="dropify"><button type="button" class="dropify-clear">Remove</button><div class="dropify-preview"><span class="dropify-render"></span><div class="dropify-infos"><div class="dropify-infos-inner"><p class="dropify-filename"><span class="file-icon"></span> <span class="dropify-filename-inner"></span></p><p class="dropify-infos-message">Drag and drop or click to replace</p></div></div></div></div>
+                          </div>
+                        </div>
                       <!-- ** Realizar un container row con establecidas para ver solamente  -->
-                          <!-- TODO NUMSERIE -->
-                          <div class="form-group">
-                              <label for="example-email"
-                              class="font-medium col-md-12">
-                                Num de Extintor:
-                              </label>
-                              <div class="col-md-12">
-                                 {{extintor?.numeroSerie}}
-                              </div>
-                              <input type="hidden" formControlName="_id">
-                              <input type="hidden" formControlName="numeroSerie">
-                          </div>
-                          <div class="form-group">
-                              <label class="col-md-12">Zona:</label>
-                              <div class="col-md-12">
-                                  <input formControlName="zona" type="text" placeholder="Ej: Subsuelo" class="form-control form-control-line">
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-md-12">Num Interno:</label>
-                              <div class="col-md-12">
-                                  <input formControlName="numInterno" type="number" placeholder="Ej: 1" min="0" class="form-control form-control-line">
-                              </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-md-12">Acceso:</label>
-                            <div class="col-md-12">
-                                <input formControlName="acceso" type="text" placeholder="Ej: Bueno" class="form-control form-control-line">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-md-12">Demarcado:</label>
-                            <div class="col-md-12">
-                              <input formControlName="demarcado" value="si" type="radio" id="dem-si" >
-                              <label for="dem-si">Si</label>
-                              &nbsp;
-                              <input formControlName="demarcado" value="no" type="radio" id="dem-no">
-                              <label for="dem-no">No</label>
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="font-medium col-md-12">Estado de extintor:</label>
-                          </div>
-                          <div class="form-group">
-                              <label class="col-md-12">Manometro:</label>
-                              <div class="col-sm-12">
-                                <select formControlName="estadoManometro" class="form-control form-control-line">
-                                    <option selected >Seleccione una</option>
-                                    <option value="Malo">Malo</option>
-                                    <option value="Bueno">Bueno</option>
-                                </select>
-                              </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-md-12">Pintura:</label>
+                      <!-- TODO NUMSERIE -->
+                        <div *ngIf="!isUFunc()" class="form-group">
                             <div class="col-sm-12">
-                              <select formControlName="estadoPintura" class="form-control form-control-line">
-                                  <option selected >Seleccione una</option>
-                                  <option value="Malo">Malo</option>
-                                  <option value="Bueno">Bueno</option>
-                              </select>
+                              <button type="submit" [disabled]="extintorForm.invalid"  class="btn btn-success">Guardar Cambios</button>
+                              <!-- <button (click)="testFunction(extintor?.empresa?._id)" class="btn btn-info">test</button> -->
                             </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-md-12">Chapa Baliza:</label>
-                            <div class="col-sm-12">
-                              <select formControlName="estadoChapaBaliza" class="form-control form-control-line">
-                                  <option selected >Seleccione una</option>
-                                  <option value="Malo">Malo</option>
-                                  <option value="Bueno">Bueno</option>
-                              </select>
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-md-12">Manija Estado:</label>
-                            <div class="col-sm-12">
-                              <select formControlName="estadoManija" class="form-control form-control-line">
-                                  <option selected >Seleccione una</option>
-                                  <option value="Malo">Malo</option>
-                                  <option value="Bueno">Bueno</option>
-                              </select>
-                            </div>
-                          </div>
-
-                          <div class="form-group">
-                            <label class="col-md-12">Retiro por Mantenimiento:</label>
-                            <div class="col-sm-12 mt-2">
-                              <input formControlName="retiroPorMant" value="si" type="radio" id="rtpm-si" >
-                              <label for="rtpm-si">Si</label>
-                              &nbsp;
-                              <input formControlName="retiroPorMant" value="no" type="radio" id="rtpm-no" >
-                              <label for="rtpm-no">No</label>
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-md-12">Se coloco un sustituto:</label>
-                            <div class="col-sm-12 mt-2">
-                              <input formControlName="sustituto" value="si" type="radio" id="sust-si" >
-                              <label for="sust-si">Si</label>
-                              &nbsp;
-                              <input formControlName="sustituto" value="no" type="radio" id="sust-no">
-                              <label for="sust-no">No</label>
-                            </div>
-                          </div>
-
-                          <div class="form-group">
-                            <label for="example-email" class="col-md-12">Num de sustituto:</label>
-                            <div class="col-md-12">
-                                <input formControlName="numeroSustituto"
-                                type="text" placeholder="Numero de serie del sustituto" class="form-control form-control-line" id="example-email">
-                            </div>
-                          </div>
-
-                          <div class="form-group">
-                              <label class="col-md-12">Message</label>
-                              <div class="col-md-12">
-                                  <textarea formControlName="observacion" rows="3" class="form-control form-control-line"></textarea>
-                              </div>
-                          </div>
-
-                          <div *ngIf="!isUFunc()" class="form-group">
-                              <div class="col-sm-12">
-                                <button type="submit" [disabled]="extintorForm.invalid"  class="btn btn-success">Guardar Cambios</button>
-                                <!-- <button (click)="testFunction(extintor?.empresa?._id)" class="btn btn-info">test</button> -->
-                              </div>
-                          </div>
+                        </div>
                       </form>
                   </div>
               </div>

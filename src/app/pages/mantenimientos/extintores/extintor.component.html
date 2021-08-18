@@ -7,10 +7,12 @@
             <hr>
             <form [formGroup]="extintorForm"
                   (submit)="guardarExtintor()"
-              class="form-horizontal p-t-20">
+              class="form-horizontal form-material p-t-20">
 
                 <div *ngIf="extintorSeleccionados" class="form-group row">
-                    <label for="exampleInputuname3" class="col-sm-4 control-label">Foto</label>
+                    <label for="exampleInputuname3" class="col-sm-4 control-label">
+                      Foto:
+                    </label>
                     <div class="col-sm-8">
                         <div class="input-group">
                           <img [src]="extintorSeleccionados?.img! | imagen:'extintores'"
@@ -19,10 +21,10 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="exampleInputuname3" class="col-sm-4 control-label">Numero de Serie</label>
+                    <label for="exampleInputuname3" class="col-sm-4 control-label">Numero de Serie:</label>
                     <div class="col-sm-8">
                         <div class="input-group">
-                            <div class="input-group-addon"><i class="ti-user"></i></div>
+                            <div class="input-group"></div>
                             <input formControlName="numeroSerie"
                                 type="text"
                                 class="form-control" id="exampleInputuname3" placeholder="ej:12312">
@@ -30,37 +32,37 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="exampleInputEmail3" class="col-sm-4 control-label">Marca</label>
+                    <label for="exampleInputEmail3" class="col-sm-4 control-label">Marca:</label>
                     <div class="col-sm-8">
                         <div class="input-group">
-                            <div class="input-group-addon"><i class="ti-email"></i></div>
+                            <div class="input-group"></div>
                             <input formControlName="marca"
                               type="text" class="form-control" id="exampleInputEmail3" placeholder="seleccionar marca proximamente">
                         </div>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="inputPassword4" class="col-sm-4 control-label">Agente Extintor</label>
+                    <label for="inputPassword4" class="col-sm-4 control-label">Agente Extintor:</label>
                     <div class="col-sm-8">
                         <div class="input-group">
-                            <div class="input-group-addon"><i class="ti-lock"></i></div>
+                            <div class="input-group"></div>
                             <input formControlName="agenteExtintor"
                               type="text" class="form-control" id="exampleInputpwd4" placeholder="Enter pwd">
                         </div>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="inputPassword5" class="col-sm-4 control-label">Capacidad</label>
+                    <label for="inputPassword5" class="col-sm-4 control-label">Capacidad:</label>
                     <div class="col-sm-8">
                         <div class="input-group">
-                            <div class="input-group-addon"><i class="ti-lock"></i></div>
+                            <div class="input-group"></div>
                             <input formControlName="capacidad"
                             type="text" class="form-control" id="exampleInputpwd5" placeholder="">
                         </div>
                     </div>
                 </div>
                 <div class="form-group row">
-                  <label for="inputPassword5" class="col-sm-4 control-label">Empresa</label>
+                  <label for="inputPassword5" class="col-sm-4 control-label">Empresa:</label>
                   <div class="col-sm-8">
                       <div class="input-group">
                         <select formControlName="empresa" class="form-control custom-select" data-placeholder="Selecciona una" tabindex="1">
@@ -88,30 +90,36 @@
   </div>
   <div *ngIf="empresaSeleccionados" class="animated fadeIn col-lg-5">
 
-    <div class="card">
-      <div class="card-body">
-          <h4 class="card-title">Empresa : {{empresaSeleccionados!.nombre}}</h4>
-          <img [src]="empresaSeleccionados?.img! | imagen:'empresas'"
-          class="img-responsive img-thumbnail" alt="">
+    <div class="row">
+      <div class="col-12">
+        <!-- img empresa -->
+        <div class="card">
+          <div class="card-body justify-content-center">
+              <h4 class="card-title">Empresa : {{empresaSeleccionados!.nombre}}</h4>
+              <hr>
+              <img [src]="empresaSeleccionados?.img! | imagen:'empresas'"
+              class="img-responsive img-thumbnail" alt="">
+          </div>
+        </div>
+      </div>
+      <div *ngIf="this.extintorSeleccionados" class="col-12">
+        <!-- qr -->
+        <div class="card">
+          <div class="card-body">
+              <h4 class="card-title">Qr del extintor seleccionado:</h4>
+              <div class="text-center">
+                <ngx-qrcode
+                  [elementType]="elementType"
+                  [value]="value"
+                  qrc-class="aclass"
+                  [errorCorrectionLevel]="errorCorrectionLevel" >
+                </ngx-qrcode>
+              </div>
+
+          </div>
+        </div>
       </div>
     </div>
-
   </div>
-  <div *ngIf="empresaSeleccionados" class="animated fadeIn col-lg-5">
 
-    <div class="card">
-      <div class="card-body">
-          <h4 class="card-title">Qr</h4>
-
-          <ngx-qrcode
-            [elementType]="elementType"
-            [value]="value"
-            qrc-class="aclass"
-            [errorCorrectionLevel]="errorCorrectionLevel" >
-          </ngx-qrcode>
-
-      </div>
-    </div>
-
-  </div>
 </div>

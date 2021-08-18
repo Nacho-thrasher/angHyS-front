@@ -42,6 +42,7 @@
                     <span class="fileinput-new text-dark">Seleccionar</span>
                     <span class="fileinput-exists text-primary">Cambiar</span>
                     <input type="hidden" value="" name="...">
+                    <!-- click abrira sweet alert pidiendo q llenes la empresa -->
                     <input type="file" [disabled]="extintorForm.invalid" (change)="upload($event)"
                     #inputFile
                     accept=".xls, .xlsx"

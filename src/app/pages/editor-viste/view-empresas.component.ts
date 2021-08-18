@@ -33,7 +33,7 @@ export class ViewEmpresasComponent implements OnInit {
       this.cargando = false;
       this.empresas = empresas;
 
-      //console.log(nombre, localidad);
+      console.log(empresas);
       //this.empresas.nombre
     })
   }

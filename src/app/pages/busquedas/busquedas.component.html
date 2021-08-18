@@ -1,9 +1,19 @@
-<div class="row animated fadeIn fast">
-  <div class="col-4">
-    <div class="card">
+<div class="row animated fadeIn fast" *ngIf="cargando">
+  <div class="col-12">
+    <div role="alert" class="alert alert-info text-center">
+      <h4 class="alert-heading">Cargando</h4>
+      <i class="fa fa-spin fa-refresh fa-2x"></i>
+      <p class="mb-0">Por favor espere</p>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!cargando" class="row animated fadeIn fast">
+  <!--  -->
+  <div *ngIf="usuarios.length != 0" class="col">
+    <div *ngIf="!isUFunc()" class="card">
       <div class="card-body">
         <h3>Usuarios</h3>
-
         <div class="alert alert-info"
           *ngIf="usuarios.length === 0"
         >
@@ -11,8 +21,7 @@
             No hay usuarios que coincidan
           </p>
         </div>
-
-        <div class="table-responsive"
+        <div class="table-responsive table-hover"
           *ngIf="usuarios.length != 0"
         >
           <table class="table">
@@ -24,7 +33,8 @@
               </thead>
               <tbody>
                   <tr *ngFor="let usuario of usuarios"
-                  class="animated fadeIn fast"
+                  class="animated cursor fadeIn fast"
+                  [routerLink]="['/dashboard/usuario', usuario.uid]"
                   >
                       <td>
                         <img [src]="usuario.img! | imagen:'usuarios'"
@@ -39,8 +49,8 @@
       </div>
     </div>
   </div>
-
-  <div class="col-4">
+  <!--  -->
+  <div *ngIf="empresas.length != 0" class="col">
     <div class="card">
       <div class="card-body">
         <h3>Empresas</h3>
@@ -53,7 +63,7 @@
           </p>
         </div>
 
-        <div class="table-responsive"
+        <div class="table-responsive table-hover"
           *ngIf="empresas.length != 0"
         >
           <table class="table">
@@ -65,7 +75,8 @@
               </thead>
               <tbody>
                 <tr *ngFor="let empresa of empresas"
-                class="animated fadeIn fast"
+                class="cursor animated fadeIn fast"
+                (click)="navigate(empresa.nombre)"
                 >
                   <td>
                     <img [src]="empresa.img! | imagen:'empresas'"
@@ -73,7 +84,7 @@
                     >
                   </td>
                   <td class="align-middle">
-                    <a [routerLink]="['/dashboard/vista-empresas', empresa.nombre]" >
+                    <a>
                       {{empresa.nombre}}
                     </a>
                   </td>
@@ -84,8 +95,8 @@
       </div>
     </div>
   </div>
-
-  <div class="col-4">
+  <!--  -->
+  <div *ngIf="extintores.length != 0" class="col">
     <div class="card">
       <div class="card-body">
         <h3>Extintores</h3>
@@ -97,8 +108,7 @@
             No hay extintores que coincidan
           </p>
         </div>
-
-        <div class="table-responsive"
+        <div class="table-responsive table-hover"
           *ngIf="extintores.length != 0"
         >
           <table class="table">
@@ -110,7 +120,8 @@
               </thead>
               <tbody>
                 <tr *ngFor="let extintor of extintores"
-                  class="animated fadeIn fast"
+                  class="cursor animated fadeIn fast"
+                  [routerLink]="['/dashboard/vista-extintor', extintor.numeroSerie]"
                 >
                   <td>
                     <img [src]="extintor.img! | imagen:'extintores'"
@@ -118,7 +129,7 @@
                     >
                   </td>
                   <td class="align-middle">
-                    <a [routerLink]="['/dashboard/extintor', extintor._id]" >
+                    <a>
                       {{extintor.numeroSerie}}
                     </a>
                   </td>
@@ -127,6 +138,18 @@
           </table>
       </div>
       </div>
+    </div>
+  </div>
+  <div *ngIf="usuarios.length == 0 && empresas.length == 0 && extintores.length == 0" class="col">
+    <div class="">
+      <div class="alert alert-info">
+          <p *ngIf="!isUFunc()" class="mb-0">
+            No hay coincidencia con Extintores | Usuarios | Empresas
+          </p>
+          <p *ngIf="isUFunc()" class="mb-0">
+            No hay coincidencia con Extintores | Empresas
+          </p>
+        </div>
     </div>
   </div>
 </div>

@@ -14,21 +14,21 @@
             aria-expanded="false"
           >
           <!-- class="w-25" -->
-            <img [src]="usuario.imagenUrl" class="avatarSidebar" alt="user" />
+            <img [src]="usuario.imagenUrl" class="pb-1 avatarSidebar" alt="user" />
             <!-- cambiar tamanio de img a cuadrada -->
-            <span class="hide-menu ">
-              {{usuario.email | slice:0:16}}{{(usuario.email.length > 16) ? '..' : '' }}
+            <span class="hide-menu font-medium">
+              {{usuario.nombre | slice:0:18}}{{(usuario.nombre.length > 18) ? '..' : '' }}
             </span>
 
           </a>
           <ul aria-expanded="false" class="collapse">
-            <li><a routerLinkActive="active" routerLink="perfil" >Perfil </a></li>
+            <li><a routerLinkActive="active" routerLink="perfil" >Perfil</a></li>
             <li><a routerLink="account-settings">Configuracion</a></li>
             <li><a class="cursor hov" (click)="cerrarSesion()" >Cerrar Sesion</a></li>
           </ul>
         </li>
         <li class="nav-devider"></li>
-        <li class="nav-small-cap">PERSONAL</li>
+        <li class="nav-small-cap">Pagina Principal</li>
         <li *ngFor="let item of sidebarService.menu">
           <a
             class="has-arrow waves-effect waves-dark"

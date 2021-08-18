@@ -41,6 +41,7 @@ export class ExtintorComponent implements OnInit {
     public errorCorrectionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
     public value!:string;
     public numerSer!:string;
+    public cantExt!: number;
     //todo oninit
     ngOnInit(): void {
     //todo Obtener ID
@@ -110,7 +111,6 @@ export class ExtintorComponent implements OnInit {
   cargarEmpresas(){
     this.empresaService.cargarEmpresas()
     .subscribe((empresas: Empresa[]) => {
-      //console.log(empresas);
       this.empresas = empresas;
     })
   }
@@ -137,6 +137,10 @@ export class ExtintorComponent implements OnInit {
           Swal.fire('Creado', `Extintor: ${numeroSerie} - Marca: ${marca}.`, 'success')
           this.router.navigateByUrl(`/dashboard/extintor/${ resp.extintor._id }`)
         })
+        //? aqui actualizar nro extintor
+        this.cantExt = +this.empresaSeleccionados?.nroExtintores! + 1
+        console.log(this.cantExt.toString())
+        
     }
   }
 

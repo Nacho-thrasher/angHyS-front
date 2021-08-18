@@ -31,23 +31,34 @@ const childRoutes: Routes = [
   { path: 'perfil', component: PerfilComponent, data: {titulo: 'Perfil'}},
 
   //mantenimiento
-  { path: 'empresas', canActivate: [AdminGuard], component: EmpresasComponent, data: {titulo: 'Empresas'}},
-  { path: 'empresa/:id', canActivate: [AdminGuard], component: EmpresaComponent, data: {titulo: 'Empresa'}},
-  { path: 'extintores', canActivate: [AdminGuard], component: ExtintoresComponent, data: {titulo: 'Extintores'}},
-  { path: 'extintor/:id', canActivate: [AdminGuard], component: ExtintorComponent, data: {titulo: 'Extintor'}},
-  { path: 'extintores_excel', canActivate: [AdminGuard], component: ExtintoresExcelComponent, data: {titulo: 'Extintores-Excel'}},
+  { path: 'empresas', canActivate: [AdminGuard], component: EmpresasComponent,
+    data: {titulo: 'Empresas', content:'Mantenimiento'}},
+  { path: 'empresa/:id', canActivate: [AdminGuard], component: EmpresaComponent,
+    data: {titulo: 'Empresa', content:'Mantenimiento'}},
+  { path: 'extintores', canActivate: [AdminGuard], component: ExtintoresComponent,
+    data: {titulo: 'Extintores', content:'Mantenimiento'}},
+  { path: 'extintor/:id', canActivate: [AdminGuard], component: ExtintorComponent,
+    data: {titulo: 'Extintor', content:'Mantenimiento'}},
+  { path: 'extintores_excel', canActivate: [AdminGuard], component: ExtintoresExcelComponent,
+    data: {titulo: 'Extintores-Excel', content:'Mantenimiento'}},
 
   //rutas admin
-  { path: 'usuarios', canActivate: [AdminGuard], component: UsuariosComponent, data: {titulo: 'Usuarios'}},
-  { path: 'usuario/:id', canActivate: [AdminGuard], component: UsuarioComponent, data: {titulo: 'Usuario'}},
+  { path: 'usuarios', canActivate: [AdminGuard], component: UsuariosComponent,
+    data: {titulo: 'Usuarios', content:'Mantenimiento'}},
+  { path: 'usuario/:id', canActivate: [AdminGuard], component: UsuarioComponent,
+    data: {titulo: 'Usuario', content:'Mantenimiento'}},
 
   //busqueda tot Mejorar buscadoR
-  { path: 'buscar/:termino', component: BusquedasComponent, data: {titulo: 'Busquedas'}},
+  { path: 'buscar/:termino', component: BusquedasComponent,
+    data: {titulo: 'Busquedas', content:'Principal'}},
 
   //principal any users
-  { path: 'vista-empresas', component: ViewEmpresasComponent, data: {titulo: 'Empresas'}},
-  { path: 'vista-empresas/:id', component: ViewExtintoresComponent, data: {titulo: 'Extintores'}},
-  { path: 'vista-extintor/:numSerie', component: ViewExtintorComponent, data: {titulo: 'Extintor'}}
+  { path: 'vista-empresas', component: ViewEmpresasComponent,
+    data: {titulo: 'Vista Empresas', content:'Principal'}},
+  { path: 'vista-empresas/:id', component: ViewExtintoresComponent,
+    data: {titulo: 'Extintores', content:'Principal'}},
+  { path: 'vista-extintor/:numSerie', component: ViewExtintorComponent,
+    data: {titulo: 'Vista Extintor', content:'Principal'}}
 
 ]
 

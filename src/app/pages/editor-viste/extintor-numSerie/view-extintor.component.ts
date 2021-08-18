@@ -151,21 +151,11 @@ export class ViewExtintorComponent implements OnInit {
         numeroSerie
       })
       //? set divs
-      
+
     })
   }
   //? end cargar forms, y extintor
   //? Si es usuario o admin
-  isUserFunc(isUser:boolean):any {
-    if (this.usuarioService.role === 'USER_ROLE') {
-      isUser = true;
-      return true;
-    }
-    else{
-      isUser = false;
-      return false;
-    }
-  }
   isUFunc(){
     if (this.usuarioService.role === 'USER_ROLE') {
       return true;

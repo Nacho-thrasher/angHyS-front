@@ -13,14 +13,17 @@ import { filter, map } from 'rxjs/operators';
 export class BreadcrumbsComponent implements OnDestroy {
 
   public titulo: string | undefined;
+  public content: string | undefined;
   public tituloSub$: Subscription;
 
   constructor(private router:Router) {
 
     this.tituloSub$ = this.getDataRuta().subscribe(
-      ({titulo}) =>{
+      ({titulo, content}) =>{
         this.titulo = titulo;
         document.title = `HyS - ${titulo}`;
+        // instance
+        this.content = content;
       }
     )
 

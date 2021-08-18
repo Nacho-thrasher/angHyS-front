@@ -102,7 +102,7 @@ export class ExtintoresExcelComponent implements OnInit {
 
   guardarExtintor(){
     //*Crear
-    
+
     try {
       const { empresa } = this.extintorForm.value;
       for(let index = 0; index < this.str.length; index++){
@@ -114,6 +114,7 @@ export class ExtintoresExcelComponent implements OnInit {
           //preload aqui?
         })
       }
+      //todo aqui insertar en empresas numero + sumar extintores creados
       Swal.fire('Creado', `(${this.str.length}) Extintores creados`, 'success')
       this.router.navigateByUrl(`/dashboard/extintores`)
 

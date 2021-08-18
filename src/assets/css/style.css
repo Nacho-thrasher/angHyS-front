@@ -770,7 +770,7 @@ Main sidebar
 use profile section
 ******************/
 .sidebar-nav .user-profile > a img {
-  width: 30px;
+  width: 40px;
   border-radius: 100%;
   margin-right: 10px; }
 
@@ -922,7 +922,7 @@ When click on sidebar toggler and also for tablet
   .mini-sidebar .left-sidebar {
     width: 70px; }
   .mini-sidebar .sidebar-nav #sidebarnav .user-profile > a {
-    padding: 12px 20px; }
+    padding: 10px 15px; }
   .mini-sidebar .scroll-sidebar {
     padding-bottom: 0px;
     position: absolute; }
