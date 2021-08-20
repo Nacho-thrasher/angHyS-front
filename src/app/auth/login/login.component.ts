@@ -70,8 +70,9 @@ export class LoginComponent implements OnInit {
     this.auth2 = this.usuarioService.auth2;
     this.attachSignin(document.getElementById('my-signin2'));
   };
+
   attachSignin(element: HTMLElement | null) {
-    console.log(element?.id);
+    //console.log(element?.id);
     this.auth2.attachClickHandler(element, {},
         (googleUser: { getAuthResponse: () => { (): any; new(): any; id_token: any; }; })=> {
 

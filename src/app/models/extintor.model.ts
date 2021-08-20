@@ -40,6 +40,7 @@ export class Extintor {
     public empresa: Empresa,
     public _id?: string,
     public img?: string,
+    public img2?: string,
 
     public zona?: string,
     public numInterno?: string,

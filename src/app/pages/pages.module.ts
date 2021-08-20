@@ -25,10 +25,10 @@ import { EmpresaComponent } from './mantenimientos/empresas/empresa.component';
 import { ExtintoresExcelComponent } from './mantenimientos/extintores/extintores-excel.component';
 import { ViewEmpresasComponent } from './editor-viste/view-empresas.component';
 import { ViewExtintoresComponent } from './editor-viste/view-extintores/view-extintores.component';
+import { ViewExtintorComponent } from './editor-viste/extintor-numSerie/view-extintor.component';
 
 import { DataTablesModule } from 'angular-datatables';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
-import { ViewExtintorComponent } from './editor-viste/extintor-numSerie/view-extintor.component';
 
 
 @NgModule({
@@ -70,7 +70,7 @@ import { ViewExtintorComponent } from './editor-viste/extintor-numSerie/view-ext
     ComponentsModule,
     PipesModule,
     DataTablesModule,
-    NgxQRCodeModule
+    NgxQRCodeModule,
   ]
 
 })

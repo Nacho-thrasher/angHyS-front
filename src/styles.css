@@ -68,7 +68,7 @@
 .font2{
   /* color: rgb(46, 46, 46); */
   /* color:rgb(80, 80, 80); */
-  text-decoration: underline;
+  /* text-decoration: underline; */
   font-family: "Tenor Sans", sans-serif;
   font-weight: bold;
   text-align: center;
@@ -94,10 +94,12 @@
   box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
 }
 
-/*
-select.form-control:not([size]):not([multiple]) {
-  height: calc(1.5rem + 1.5px);
-} */
 a:link, a:visited, a:active {
   text-decoration:none;
+}
+
+@media screen and (max-width: 767px){
+  .login-box {
+      width: 90% !important;
+  }
 }

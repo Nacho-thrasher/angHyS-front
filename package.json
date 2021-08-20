@@ -21,6 +21,7 @@
     "angular-datatables": "^12.0.0",
     "datatables.net": "^1.10.25",
     "datatables.net-dt": "^1.1.0",
+    "dropify": "^0.2.2",
     "jquery": "^3.6.0",
     "ngx-qrcode2": "^9.0.0",
     "rxjs": "~6.6.0",

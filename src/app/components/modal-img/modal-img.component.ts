@@ -41,6 +41,7 @@ export class ModalImgComponent implements OnInit {
       }
       reader.readAsDataURL(file);
 
+      console.log(this.modalImgService.tipo);
     }
 
   }

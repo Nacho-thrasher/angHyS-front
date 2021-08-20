@@ -10,358 +10,588 @@
 <!-- OTHER DESIGNS -->
 <div *ngIf="!cargando" class="row">
   <!-- Column -->
-  <div class="col-lg-12 col-xlg-9 col-md-7">
-      <div class="card">
-          <!-- Nav tabs -->
-          <ul class="nav nav-tabs profile-tab" role="tablist">
-              <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab" aria-expanded="true">Extintor</a> </li>
-              <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab" aria-expanded="false">Empresa</a> </li>
-              <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#settings" role="tab" aria-expanded="false">Planilla Chequeo </a> </li>
-          </ul>
-          <!-- Tab panes -->
-          <div class="tab-content">
-              <!--todo extintor -->
-              <div class="tab-pane active" id="home" role="tabpanel" aria-expanded="true">
-                  <div class="card-body">
-                      <div class="">
-                          <div class="sl-item">
-                              <div class="sl-right">
-                                  <div>
-                                      <p>Fotos del extintor</p>
-                                      <div class="row">
-                                          <div class="col-lg-3 h-100 col-md-6 m-b-10">
-                                            <img [src]="extintor?.img! | imagen:'extintores'"
-                                            class="img-responsive radius"
-                                            >
-                                          </div>
-                                          <div class="col-lg-3 h-100 col-md-6 m-b-10">
-                                            <img src="../assets/images/big/img2.jpg"
-                                            class="img-responsive radius">
-                                          </div>
-                                          <div class="col-lg-3 h-100 col-md-6 m-b-10">
-                                            <img src="../assets/images/big/img3.jpg"
-                                            class="img-responsive radius">
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                          <hr>
-                          <div class="sl-item">
-                              <div class="sl-right">
-                                  <div>
-                                      <!-- <a href="#" class="link">John Doe</a> <span class="sl-date">5 minutes ago</span> -->
-                                      <div class="m-t-20 row">
-                                          <div class="col-md-12 col-xs-12">
-                                            <div class="table-responsive">
-                                              <table class="table">
-                                                <thead>
-                                                  <tr>
-                                                    <th class="text-center">Numero Serie</th>
-                                                    <th class="text-center">Marca</th>
-                                                    <th class="text-center">Agente extintor</th>
-                                                    <th class="text-center">capacidad</th>
-                                                    <th class="text-center">empresa</th>
-                                                  </tr>
-                                                </thead>
-                                                <tbody>
-                                                  <tr >
-                                                    <td class="align-middle text-center">{{extintor?.numeroSerie}}</td>
-                                                    <td class="align-middle text-center">{{extintor?.marca}}</td>
-                                                    <td class="align-middle text-center">{{extintor?.agenteExtintor}}</td>
-                                                    <td class="align-middle text-center">{{extintor?.capacidad}}</td>
-                                                    <td class="align-middle text-center">{{extintor?.empresa?.nombre!}}</td>
-                                                  </tr>
-                                                </tbody>
-                                              </table>
-                                            </div>
-                                      </div>
-                                  </div>
-                                  <div class="text-center">
-                                    <a href="#" class="mt-2 btn btn-success">Descargar pdf </a></div>
-                                  </div>
-                              </div>
-                          </div>
+  <div class="col-lg-12 col-xlg-12 col-md-12">
+    <div class="card">
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs profile-tab" role="tablist">
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            data-toggle="tab"
+            href="#home"
+            role="tab"
+            aria-expanded="true"
+            >Extintor</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            data-toggle="tab"
+            href="#profile"
+            role="tab"
+            aria-expanded="false"
+            >Empresa</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            data-toggle="tab"
+            href="#settings"
+            role="tab"
+            aria-expanded="false"
+            >Planilla Chequeo
+          </a>
+        </li>
+      </ul>
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <!--todo extintor -->
+        <div
+          class="tab-pane active"
+          id="home"
+          role="tabpanel"
+          aria-expanded="true"
+        >
+          <div class="card-body">
+            <div class="">
+              <div class="sl-item">
+                <div class="sl-right">
+                  <div>
+                    <p>Fotos del extintor</p>
+                    <div class="row">
+                      <div class=" col-lg-3 h-100 col-md-6 m-b-10">
+                        <div class="avatar-vista">
+                          <a class="image-popup-no-margins" [href]="extintor?.img! | imagen: 'extintores'">
+                            <img
+                              [src]="extintor?.img! | imagen: 'extintores'"
+                              class="avatar-vista-preview img-responsive"
+                            />
+                          </a>
+                        </div>
                       </div>
-                  </div>
-              </div>
-              <!--todo second tab empresa-->
-              <div class="tab-pane" id="profile" role="tabpanel" aria-expanded="false">
-                  <div class="card-body">
-                      <div class="row">
-                          <div class="col-md-3 col-xs-6 b-r"> <strong>Full Name</strong>
-                              <br>
-                              <p class="text-muted">Johnathan Deo</p>
-                          </div>
-                          <div class="col-md-3 col-xs-6 b-r"> <strong>Mobile</strong>
-                              <br>
-                              <p class="text-muted">(123) 456 7890</p>
-                          </div>
-                          <div class="col-md-3 col-xs-6 b-r"> <strong>Email</strong>
-                              <br>
-                              <p class="text-muted">johnathan@admin.com</p>
-                          </div>
-                          <div class="col-md-3 col-xs-6"> <strong>Location</strong>
-                              <br>
-                              <p class="text-muted">London</p>
-                          </div>
+                      <div class="col-lg-3 h-100 col-md-6 m-b-10">
+                        <div class="avatar-vista">
+                          <a class="image-popup-no-margins" [href]="extintor?.img2! | imagen: 'extintores'">
+                            <img
+                              [src]="extintor?.img2! | imagen: 'extintores'"
+                              class="avatar-vista-preview img-responsive"
+                            />
+                          </a>
+                        </div>
                       </div>
-                      <hr>
-                      <p class="m-t-30">Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</p>
-                      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries </p>
-                      <p>It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                      <h4 class="font-medium m-t-30">Skill Set</h4>
-                      <hr>
-                  </div>
-              </div>
-              <!--todo forms  planila chequeo -->
-              <div class="tab-pane" id="settings" role="tabpanel" aria-expanded="false">
-                <!-- todo just user -->
-                <div *ngIf="isUFunc()" class="card-body">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <h3>Numero de serie:</h3>
-                      <p>{{extintor?.numeroSerie}}</p>
-                    </div>
-                    <hr>
-                    <div class="col-md-6">
-                      <h3>zona</h3>
-                      <p [innerHtml]="extintorForm.value.zona"></p>
-                    </div>
-                    <div class="col-md-6">
-                      <h3>Num Interno</h3>
-                      <p [innerHtml]="extintorForm.value.numInterno"></p>
-                    </div>
-                    <div class="col-md-6">
-                      <h3>Acceso</h3>
-                      <p [innerHtml]="extintorForm.value.acceso"></p>
-                    </div>
-                    <div class="col-md-6">
-                      <h3>Demarcado</h3>
-                      <p [innerHtml]="extintorForm.value.demarcado"></p>
-                    </div>
-                    <div class="col-md-12">
-                      <h3>Estado de extintor</h3>
-                    </div>
-                    <hr>
-                    <div class="col-md-6">
-                      <h3>Manometro</h3>
-                      <p [innerHtml]="extintorForm.value.estadoManometro"></p>
-                    </div>
-                    <div class="col-md-6">
-                      <h3>Pintura</h3>
-                      <p [innerHtml]="extintorForm.value.estadoPintura"></p>
-                    </div>
-                    <div class="col-md-6">
-                      <h3>Chapa baliza</h3>
-                      <p [innerHtml]="extintorForm.value.estadoChapaBaliza"></p>
-                    </div>
-                    <div class="col-md-6">
-                      <h3>Manija</h3>
-                      <p [innerHtml]="extintorForm.value.estadoManija"></p>
-                    </div>
-                    <div class="col-md-6">
-                      <h3>Retiro por Mantenimiento</h3>
-                      <p [innerHtml]="extintorForm.value.retiroPorMant"></p>
-                    </div>
-                    <div class="col-md-6">
-                      <h3>Sustituto</h3>
-                      <p [innerHtml]="extintorForm.value.sustituto"></p>
-                    </div>
-                    <div class="col-md-6">
-                      <h3>Numero de sustituto</h3>
-                      <p [innerHtml]="extintorForm.value.numeroSustituto"></p>
-                    </div>
-                    <div class="col-md-6">
-                      <h3>Observacion</h3>
-                      <p [innerHtml]="extintorForm.value.observacion.length > 1 ? extintorForm.value.observacion : 'n/a'"></p>
                     </div>
                   </div>
                 </div>
-                <!-- todo admin or editor -->
-                  <div *ngIf="!isUFunc()" class="card-body">
-                      <form
-                        [formGroup]="extintorForm"
-                        class="form-horizontal form-material"
-                        (submit)="guardarExtintor()"
-                      >
-                        <div class="form-body pt-2 px-2">
-                          <h3 class="box-title">
-                            Num de Extintor: {{extintor?.numeroSerie}}
-                          </h3>
-                          <input type="hidden" formControlName="_id">
-                          <input type="hidden" formControlName="numeroSerie">
-                          <hr>
-                          <div class="row px-2">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">Zona:</label>
-                                    <input formControlName="zona" type="text" placeholder="Ej: Subsuelo" class="form-control form-control-line">
-                                </div>
-                            </div>
-                            <!--/span-->
-                            <div class="col-md-6">
-                                <div class="form-group has-danger">
-                                    <label class="control-label">Num Interno:</label>
-                                    <input formControlName="numInterno" type="number" placeholder="Ej: 1" min="0" class="form-control form-control-line">
-                                </div>
-                            </div>
-                            <!--/span-->
-                          </div>
-                          <div class="row px-2">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">Acceso:</label>
-                                    <input formControlName="acceso" type="text" placeholder="Ej: Bueno" class="form-control form-control-line">
-                                </div>
-                            </div>
-                            <!--/span-->
-                            <div class="col-md-6">
-                                <div class="form-group has-danger">
-                                    <label class="control-label">Demarcado:</label>
-                                    <div class="pt-1">
-                                      <label class="custom-control custom-radio">
-                                          <input formControlName="demarcado" value="si" type="radio" id="dem-si" class="custom-control-input">
-                                          <span class="custom-control-indicator"></span>
-                                          <span class="text-dark custom-control-description">Si</span>
-                                      </label>
-                                      <label class="custom-control custom-radio">
-                                          <input formControlName="demarcado" value="no" type="radio" id="dem-no" class="custom-control-input">
-                                          <span class="custom-control-indicator"></span>
-                                          <span class="text-dark custom-control-description">No</span>
-                                      </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--/span-->
-                          </div>
-                          <h3 class="box-title m-t-10">Estado del Extintor:</h3>
-                          <hr>
-                          <div class="row px-2">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">Estado Manometro:</label>
-                                    <select formControlName="estadoManometro" class="form-control custom-select form-control-line">
-                                      <option selected >Seleccione una</option>
-                                      <option value="Malo">Malo</option>
-                                      <option value="Bueno">Bueno</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <!--/span-->
-                            <div class="col-md-6">
-                                <div class="form-group has-danger">
-                                    <label class="control-label">Pintura:</label>
-                                    <select formControlName="estadoPintura" class="form-control form-control-line">
-                                      <option selected >Seleccione una</option>
-                                      <option value="Malo">Malo</option>
-                                      <option value="Bueno">Bueno</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <!--/span-->
-                          </div>
-                          <div class="row px-2">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">Chapa Baliza:</label>
-                                    <select formControlName="estadoChapaBaliza" class="form-control form-control-line">
-                                      <option selected >Seleccione una</option>
-                                      <option value="Malo">Malo</option>
-                                      <option value="Bueno">Bueno</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <!--/span-->
-                            <div class="col-md-6">
-                                <div class="form-group has-danger">
-                                    <label class="control-label">Manija:</label>
-                                    <select formControlName="estadoManija" class="form-control form-control-line">
-                                      <option selected >Seleccione una</option>
-                                      <option value="Malo">Malo</option>
-                                      <option value="Bueno">Bueno</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <!--/span-->
-                          </div>
-                          <div class="row px-2">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">Retiro por Mantenimiento:</label>
-                                    <div class="pt-1">
-                                      <label class="custom-control custom-radio">
-                                          <input formControlName="retiroPorMant" value="si" type="radio" id="rtpm-si" class="custom-control-input">
-                                          <span class="custom-control-indicator"></span>
-                                          <span class="text-dark custom-control-description">Si</span>
-                                      </label>
-                                      <label class="custom-control custom-radio">
-                                          <input formControlName="retiroPorMant" value="no" type="radio" id="rtpm-no" class="custom-control-input">
-                                          <span class="custom-control-indicator"></span>
-                                          <span class="text-dark custom-control-description">No</span>
-                                      </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--/span-->
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">Se coloco un sustituto:</label>
-                                    <div class="pt-1">
-                                      <label class="custom-control custom-radio">
-                                          <input formControlName="sustituto" value="si" type="radio" id="sust-si" class="custom-control-input">
-                                          <span class="custom-control-indicator"></span>
-                                          <span class="text-dark custom-control-description">Si</span>
-                                      </label>
-                                      <label class="custom-control custom-radio">
-                                          <input formControlName="sustituto" value="no" type="radio" id="sust-no" class="custom-control-input">
-                                          <span class="custom-control-indicator"></span>
-                                          <span class="text-dark custom-control-description">No</span>
-                                      </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--/span-->
-                          </div>
-                          <div class="row px-2">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">Numero de sustituto:</label>
-                                    <input formControlName="numeroSustituto"
-                                    type="text" placeholder="Numero de serie del sustituto" class="form-control form-control-line" id="example-email">
-                                </div>
-                            </div>
-                            <!--/span-->
-                            <div class="col-md-6">
-                                <div class="form-group has-danger">
-                                    <label class="control-label">Observacion:</label>
-                                    <textarea formControlName="observacion" rows="3" class="form-control form-control-line"></textarea>
-                                </div>
-                            </div>
-                            <!--/span-->
-                          </div>
-                          <h3 class="box-title">Imagenes:</h3>
-                          <hr>
-                          <div class="card-body">
-                            <h4 class="card-title">File Upload1</h4>
-                            <label for="input-file-now">Your so fresh input file — Default version</label>
-                            <div class="dropify-wrapper"><div class="dropify-message"><span class="file-icon"></span> <p>Drag and drop a file here or click</p><p class="dropify-error">Ooops, something wrong appended.</p></div><div class="dropify-loader"></div><div class="dropify-errors-container"><ul></ul></div><input type="file" id="input-file-now" class="dropify"><button type="button" class="dropify-clear">Remove</button><div class="dropify-preview"><span class="dropify-render"></span><div class="dropify-infos"><div class="dropify-infos-inner"><p class="dropify-filename"><span class="file-icon"></span> <span class="dropify-filename-inner"></span></p><p class="dropify-infos-message">Drag and drop or click to replace</p></div></div></div></div>
-                          </div>
-                        </div>
-                      <!-- ** Realizar un container row con establecidas para ver solamente  -->
-                      <!-- TODO NUMSERIE -->
-                        <div *ngIf="!isUFunc()" class="form-group">
-                            <div class="col-sm-12">
-                              <button type="submit" [disabled]="extintorForm.invalid"  class="btn btn-success">Guardar Cambios</button>
-                              <!-- <button (click)="testFunction(extintor?.empresa?._id)" class="btn btn-info">test</button> -->
-                            </div>
-                        </div>
-                      </form>
-                  </div>
               </div>
+              <hr />
+              <div class="sl-item">
+                <div class="sl-right">
+                  <div>
+                    <!-- <a href="#" class="link">John Doe</a> <span class="sl-date">5 minutes ago</span> -->
+                    <div class="m-t-20 row">
+                      <div class="col-md-12 col-xs-12">
+                        <div class="table-responsive">
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th class="text-center">Numero Serie</th>
+                                <th class="text-center">Marca</th>
+                                <th class="text-center">Agente extintor</th>
+                                <th class="text-center">capacidad</th>
+                                <th class="text-center">empresa</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td class="align-middle text-center">
+                                  {{ extintor?.numeroSerie }}
+                                </td>
+                                <td class="align-middle text-center">
+                                  {{ extintor?.marca }}
+                                </td>
+                                <td class="align-middle text-center">
+                                  {{ extintor?.agenteExtintor }}
+                                </td>
+                                <td class="align-middle text-center">
+                                  {{ extintor?.capacidad }}
+                                </td>
+                                <td class="align-middle text-center">
+                                  {{ extintor?.empresa?.nombre! }}
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="text-center">
+                      <a href="#" class="mt-2 btn btn-success"
+                        >Descargar pdf
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+        </div>
+        <!--todo second tab empresa-->
+        <div
+          class="tab-pane"
+          id="profile"
+          role="tabpanel"
+          aria-expanded="false"
+        >
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-3 col-xs-6 b-r">
+                <strong>Full Name</strong>
+                <br />
+                <p class="text-muted">Johnathan Deo</p>
+              </div>
+              <div class="col-md-3 col-xs-6 b-r">
+                <strong>Mobile</strong>
+                <br />
+                <p class="text-muted">(123) 456 7890</p>
+              </div>
+              <div class="col-md-3 col-xs-6 b-r">
+                <strong>Email</strong>
+                <br />
+                <p class="text-muted">johnathan@admin.com</p>
+              </div>
+              <div class="col-md-3 col-xs-6">
+                <strong>Location</strong>
+                <br />
+                <p class="text-muted">London</p>
+              </div>
+            </div>
+            <hr />
+            <p class="m-t-30">
+              Donec pede justo, fringilla vel, aliquet nec, vulputate eget,
+              arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae,
+              justo. Nullam dictum felis eu pede mollis pretium. Integer
+              tincidunt.Cras dapibus. Vivamus elementum semper nisi. Aenean
+              vulputate eleifend tellus. Aenean leo ligula, porttitor eu,
+              consequat vitae, eleifend ac, enim.
+            </p>
+            <p>
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s, when an unknown printer took a galley of
+              type and scrambled it to make a type specimen book. It has
+              survived not only five centuries
+            </p>
+            <p>
+              It was popularised in the 1960s with the release of Letraset
+              sheets containing Lorem Ipsum passages, and more recently with
+              desktop publishing software like Aldus PageMaker including
+              versions of Lorem Ipsum.
+            </p>
+            <h4 class="font-medium m-t-30">Skill Set</h4>
+            <hr />
+          </div>
+        </div>
+        <!--todo forms  planila chequeo -->
+        <div
+          class="tab-pane"
+          id="settings"
+          role="tabpanel"
+          aria-expanded="false"
+        >
+          <!-- todo just user -->
+          <div *ngIf="isUFunc()" class="card-body">
+            <div class="row">
+              <div class="col-md-12">
+                <h3>Numero de serie:</h3>
+                <p>{{ extintor?.numeroSerie }}</p>
+              </div>
+              <hr />
+              <div class="col-md-6">
+                <h3>zona</h3>
+                <p [innerHtml]="extintorForm.value.zona"></p>
+              </div>
+              <div class="col-md-6">
+                <h3>Num Interno</h3>
+                <p [innerHtml]="extintorForm.value.numInterno"></p>
+              </div>
+              <div class="col-md-6">
+                <h3>Acceso</h3>
+                <p [innerHtml]="extintorForm.value.acceso"></p>
+              </div>
+              <div class="col-md-6">
+                <h3>Demarcado</h3>
+                <p [innerHtml]="extintorForm.value.demarcado"></p>
+              </div>
+              <div class="col-md-12">
+                <h3>Estado de extintor</h3>
+              </div>
+              <hr />
+              <div class="col-md-6">
+                <h3>Manometro</h3>
+                <p [innerHtml]="extintorForm.value.estadoManometro"></p>
+              </div>
+              <div class="col-md-6">
+                <h3>Pintura</h3>
+                <p [innerHtml]="extintorForm.value.estadoPintura"></p>
+              </div>
+              <div class="col-md-6">
+                <h3>Chapa baliza</h3>
+                <p [innerHtml]="extintorForm.value.estadoChapaBaliza"></p>
+              </div>
+              <div class="col-md-6">
+                <h3>Manija</h3>
+                <p [innerHtml]="extintorForm.value.estadoManija"></p>
+              </div>
+              <div class="col-md-6">
+                <h3>Retiro por Mantenimiento</h3>
+                <p [innerHtml]="extintorForm.value.retiroPorMant"></p>
+              </div>
+              <div class="col-md-6">
+                <h3>Sustituto</h3>
+                <p [innerHtml]="extintorForm.value.sustituto"></p>
+              </div>
+              <div class="col-md-6">
+                <h3>Numero de sustituto</h3>
+                <p [innerHtml]="extintorForm.value.numeroSustituto"></p>
+              </div>
+              <div class="col-md-6">
+                <h3>Observacion</h3>
+                <p
+                  [innerHtml]="
+                    extintorForm.value.observacion.length > 1
+                      ? extintorForm.value.observacion
+                      : 'n/a'
+                  "
+                ></p>
+              </div>
+            </div>
+          </div>
+          <!-- todo admin or editor -->
+          <div *ngIf="!isUFunc()" class="card-body">
+            <form
+              [formGroup]="extintorForm"
+              class="form-horizontal form-material"
+              (submit)="guardarExtintor()"
+            >
+              <div class="form-body pt-2 px-2">
+                <h3 class="box-title">
+                  Num de Extintor: {{ extintor?.numeroSerie }}
+                </h3>
+                <input type="hidden" formControlName="_id" />
+                <input type="hidden" formControlName="numeroSerie" />
+                <hr />
+                <div class="row px-2">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="control-label">Zona:</label>
+                      <input
+                        formControlName="zona"
+                        type="text"
+                        placeholder="Ej: Subsuelo"
+                        class="form-control form-control-line"
+                      />
+                    </div>
+                  </div>
+                  <!--/span-->
+                  <div class="col-md-6">
+                    <div class="form-group has-danger">
+                      <label class="control-label">Num Interno:</label>
+                      <input
+                        formControlName="numInterno"
+                        type="number"
+                        placeholder="Ej: 1"
+                        min="0"
+                        class="form-control form-control-line"
+                      />
+                    </div>
+                  </div>
+                  <!--/span-->
+                </div>
+                <div class="row px-2">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="control-label">Acceso:</label>
+                      <input
+                        formControlName="acceso"
+                        type="text"
+                        placeholder="Ej: Bueno"
+                        class="form-control form-control-line"
+                      />
+                    </div>
+                  </div>
+                  <!--/span-->
+                  <div class="col-md-6">
+                    <div class="form-group has-danger">
+                      <label class="control-label">Demarcado:</label>
+                      <div class="pt-1">
+                        <label class="custom-control custom-radio">
+                          <input
+                            formControlName="demarcado"
+                            value="si"
+                            type="radio"
+                            id="dem-si"
+                            class="custom-control-input"
+                          />
+                          <span class="custom-control-indicator"></span>
+                          <span class="text-dark custom-control-description"
+                            >Si</span
+                          >
+                        </label>
+                        <label class="custom-control custom-radio">
+                          <input
+                            formControlName="demarcado"
+                            value="no"
+                            type="radio"
+                            id="dem-no"
+                            class="custom-control-input"
+                          />
+                          <span class="custom-control-indicator"></span>
+                          <span class="text-dark custom-control-description"
+                            >No</span
+                          >
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <!--/span-->
+                </div>
+                <h3 class="box-title m-t-10">Estado del Extintor:</h3>
+                <hr />
+                <div class="row px-2">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="control-label">Estado Manometro:</label>
+                      <select
+                        formControlName="estadoManometro"
+                        class="form-control custom-select form-control-line"
+                      >
+                        <option selected>Seleccione una</option>
+                        <option value="Malo">Malo</option>
+                        <option value="Bueno">Bueno</option>
+                      </select>
+                    </div>
+                  </div>
+                  <!--/span-->
+                  <div class="col-md-6">
+                    <div class="form-group has-danger">
+                      <label class="control-label">Pintura:</label>
+                      <select
+                        formControlName="estadoPintura"
+                        class="form-control form-control-line"
+                      >
+                        <option selected>Seleccione una</option>
+                        <option value="Malo">Malo</option>
+                        <option value="Bueno">Bueno</option>
+                      </select>
+                    </div>
+                  </div>
+                  <!--/span-->
+                </div>
+                <div class="row px-2">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="control-label">Chapa Baliza:</label>
+                      <select
+                        formControlName="estadoChapaBaliza"
+                        class="form-control form-control-line"
+                      >
+                        <option selected>Seleccione una</option>
+                        <option value="Malo">Malo</option>
+                        <option value="Bueno">Bueno</option>
+                      </select>
+                    </div>
+                  </div>
+                  <!--/span-->
+                  <div class="col-md-6">
+                    <div class="form-group has-danger">
+                      <label class="control-label">Manija:</label>
+                      <select
+                        formControlName="estadoManija"
+                        class="form-control form-control-line"
+                      >
+                        <option selected>Seleccione una</option>
+                        <option value="Malo">Malo</option>
+                        <option value="Bueno">Bueno</option>
+                      </select>
+                    </div>
+                  </div>
+                  <!--/span-->
+                </div>
+                <div class="row px-2">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="control-label"
+                        >Retiro por Mantenimiento:</label
+                      >
+                      <div class="pt-1">
+                        <label class="custom-control custom-radio">
+                          <input
+                            formControlName="retiroPorMant"
+                            value="si"
+                            type="radio"
+                            id="rtpm-si"
+                            class="custom-control-input"
+                          />
+                          <span class="custom-control-indicator"></span>
+                          <span class="text-dark custom-control-description"
+                            >Si</span
+                          >
+                        </label>
+                        <label class="custom-control custom-radio">
+                          <input
+                            formControlName="retiroPorMant"
+                            value="no"
+                            type="radio"
+                            id="rtpm-no"
+                            class="custom-control-input"
+                          />
+                          <span class="custom-control-indicator"></span>
+                          <span class="text-dark custom-control-description"
+                            >No</span
+                          >
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <!--/span-->
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="control-label"
+                        >Se coloco un sustituto:</label
+                      >
+                      <div class="pt-1">
+                        <label class="custom-control custom-radio">
+                          <input
+                            formControlName="sustituto"
+                            value="si"
+                            type="radio"
+                            id="sust-si"
+                            class="custom-control-input"
+                          />
+                          <span class="custom-control-indicator"></span>
+                          <span class="text-dark custom-control-description"
+                            >Si</span
+                          >
+                        </label>
+                        <label class="custom-control custom-radio">
+                          <input
+                            formControlName="sustituto"
+                            value="no"
+                            type="radio"
+                            id="sust-no"
+                            class="custom-control-input"
+                          />
+                          <span class="custom-control-indicator"></span>
+                          <span class="text-dark custom-control-description"
+                            >No</span
+                          >
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <!--/span-->
+                </div>
+                <div class="row px-2">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="control-label">Numero de sustituto:</label>
+                      <input
+                        formControlName="numeroSustituto"
+                        type="text"
+                        placeholder="Numero de serie del sustituto"
+                        class="form-control form-control-line"
+                        id="example-email"
+                      />
+                    </div>
+                  </div>
+                  <!--/span-->
+                  <div class="col-md-6">
+                    <div class="form-group has-danger">
+                      <label class="control-label">Observacion:</label>
+                      <textarea
+                        formControlName="observacion"
+                        rows="3"
+                        class="form-control form-control-line"
+                      ></textarea>
+                    </div>
+                  </div>
+                  <!--/span-->
+                </div>
+                <h3 class="box-title">Imagenes: </h3>
+                <hr />
+                <!--  -->
+                <div class="row pb-5 px-2">
+                  <div class="col-md-6">
+                    <small class="small-img">- Foto 1 -</small>
+                    <div class="avatar-upload">
+                      <div class="avatar-edit">
+                          <input (change)="cambiarImagen($event)"
+                          class="input-img" type='file' id="imageUpload"
+                          accept=".png, .jpg, .jpeg" #img1 />
+                          <label class="label-img" for="imageUpload"></label>
+                          <a *ngIf="imagenSubir != undefined " (click)="removeDataImg1()" class="lbl-remove" ></a>
+                      </div>
+                      <div *ngIf="!cargandoImg" class="avatar-preview">
+                          <div id="imagePreview"
+                            style="background-image: url(http://localhost:4200/api/upload/extintores/{{imgViene}});"
+                          >
+                          </div>
+                      </div>
+                      <div *ngIf="cargandoImg" class="bg-light animated fadeIn fast avatar-preview">
+                        <div class="text-center justify-content-center">
+                          <div role="alert" class="alert text-center">
+                            <i class="fa fa-spin fa-refresh fa-2x"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--/span-->
+                  <div class="col-md-6">
+                    <small class="small-img">- Foto 2 -</small>
+                    <div class="avatar-upload">
+                      <div class="avatar-edit">
+                          <input (change)="cambiarImagen2($event)" class="input-img" type='file' id="imageUpload2" accept=".png, .jpg, .jpeg" />
+                          <label class="label-img" for="imageUpload2"></label>
+                          <a *ngIf="imagenSubir2 != undefined " (click)="removeDataImg2()" class="lbl-remove" ></a>
+                      </div>
+                      <div class="avatar-preview">
+                          <div id="imagePreview2"
+                            style="background-image: url(http://localhost:4200/api/upload/extintores/{{imgViene2}});">
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--/span-->
+                </div>
+
+
+                <!--  -->
+              </div>
+              <!-- ** Realizar un container row con establecidas para ver solamente  -->
+              <!-- TODO NUMSERIE -->
+              <div *ngIf="!isUFunc()" class="form-group">
+                <div class="col-sm-12 centeredMobile">
+                  <button
+                    type="submit"
+                    [disabled]="extintorForm.invalid"
+                    class="btn btn-success"
+                  >
+                    Guardar Cambios
+                  </button>
+                  <!-- <button (click)="testFunction(extintor?.empresa?._id)" class="btn btn-info">test</button> -->
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
+    </div>
   </div>
   <!-- Column -->
 </div>
+<script>
 
+</script>
