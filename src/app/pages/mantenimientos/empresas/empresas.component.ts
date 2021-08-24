@@ -38,10 +38,11 @@ export class EmpresasComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     //datatables options
     this.dtOptions = {
-      pagingType: 'full_numbers',
-      processing: true,
+      pagingType: 'simple_numbers',
+      responsive: true,
+      info: false,
       language: { url: '//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json' }
-    }
+    };
     //cargas
     this.cargarEmpresas();
     this.imgSubs = this.modalImgService.nuevaImagen
@@ -86,7 +87,7 @@ export class EmpresasComponent implements OnInit, OnDestroy {
   }
   //modal cambiarImagen
   abrirModal(empresa:Empresa) {
-    console.log(empresa)
+    //console.log(empresa)
     this.modalImgService.abrirModal('empresas', empresa._id , empresa.img);
   }
 

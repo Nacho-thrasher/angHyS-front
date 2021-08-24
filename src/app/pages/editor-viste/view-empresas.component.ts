@@ -9,6 +9,9 @@ import { ExtintorService } from 'src/app/services/extintor.service';
   selector: 'app-view-empresas',
   templateUrl: './view-empresas.component.html',
   styles: [
+  ],
+  styleUrls: [
+    './view-empresas.component.css'
   ]
 })
 export class ViewEmpresasComponent implements OnInit {
@@ -20,6 +23,7 @@ export class ViewEmpresasComponent implements OnInit {
   public empresas?: Empresa[];
   public cargando?: boolean = true;
   public extintores: Extintor[] = [];
+  public cantidad!:number;
 
   ngOnInit(): void {
     this.cargarEmpresas()
@@ -32,9 +36,7 @@ export class ViewEmpresasComponent implements OnInit {
     .subscribe(empresas=>{
       this.cargando = false;
       this.empresas = empresas;
-
-      console.log(empresas);
-      //this.empresas.nombre
+      this.cantidad = empresas.length;
     })
   }
   navigate(nombre:any){

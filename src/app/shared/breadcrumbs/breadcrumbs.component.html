@@ -8,10 +8,28 @@
   <div class="col-md-7 align-self-center">
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
-        <a routerLink="/">Inicio</a>
+        <a routerLink="/">&nbsp;Inicio</a>
       </li>
-      <li *ngIf="content" class="breadcrumb-item">{{content}}</li>
-      <li class="breadcrumb-item text-dark active">{{titulo}}</li>
+      <li *ngIf="content" class="breadcrumb-item">
+        <span *ngIf="numS === undefined">
+          &nbsp;{{content}}
+        </span>
+        <span *ngIf="numS !== undefined">
+          &nbsp;<a routerLink="vista-empresas">Empresas</a>
+        </span>
+      </li>
+      <!-- nombreEmpr -->
+      <li *ngIf="numS !== undefined" class="breadcrumb-item text-capitalize">
+        <a routerLink="vista-empresas/{{nombreEmprNoSpace}}">
+          &nbsp;{{nombreEmpr}}
+        </a>
+      </li>
+      <li *ngIf="numS !== undefined" class="breadcrumb-item active">
+        &nbsp;{{numS}}
+      </li>
+      <li *ngIf="numS === undefined" class="breadcrumb-item active">
+        &nbsp;{{titulo}}
+      </li>
     </ol>
   </div>
 

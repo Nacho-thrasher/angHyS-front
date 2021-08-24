@@ -95,10 +95,27 @@
         <!-- img empresa -->
         <div class="card">
           <div class="card-body justify-content-center">
-              <h4 class="card-title">Empresa : {{empresaSeleccionados!.nombre}}</h4>
+              <h4 class="card-title text-capitalize">Empresa : {{empresaSeleccionados!.nombre}}</h4>
               <hr>
-              <img [src]="empresaSeleccionados?.img! | imagen:'empresas'"
-              class="img-responsive img-thumbnail" alt="">
+              <div class="row">
+                <div class="col-md-6">
+                  <img [src]="empresaSeleccionados?.img! | imagen:'empresas'"
+                  class="img-responsive img-thumbnail" alt="">
+                </div>
+                <div class="col-md-6">
+                  <span class="text-capitalize">
+                    Locaidad: {{empresaSeleccionados!.localidad}}
+                  </span>
+                  <br>
+                  <span class="text-capitalize">
+                    Direccion: {{empresaSeleccionados!.direccion}}
+                  </span>
+                  <br>
+                  <span class="text-capitalize">
+                    Extintores: {{empresaSeleccionados!.nroExtintores}}
+                  </span>
+                </div>
+              </div>
           </div>
         </div>
       </div>

@@ -17,7 +17,7 @@
         <div class="row">
 
           <div class="col-md-6">
-            <h4 class="card-title">Todos los usuarios registrados</h4>
+            <h4 class="card-title">Todos los usuarios registrados ({{usuarios.length}})</h4>
             <h6 class="card-subtitle"></h6>
           </div>
           <div class="col-md-6">
@@ -33,22 +33,21 @@
         <hr>
         <!-- tablas aqui -->
 
-        <div class="table-responsive m-t-20 dataTables_wrapper">
+        <div class="">
           <table
             datatable
             [dtOptions]="dtOptions"
-            class="display nowrap table table-hover"
+            class="display nowrap table animated fadeIn table-hover"
             cellspacing="0"
             width="100%"
             role="grid"
-            style="width: 100%"
           >
             <thead>
                 <tr>
                   <th class="sorting text-center w5">#Nro</th>
                   <th class="sorting text-center w100">Imagen</th>
+                  <th class="sorting text-center">Nombre</th>
                   <th class="sorting text-center">Correo</th>
-                  <th class="sorting text-center"> Nombre</th>
                   <th class="sorting text-center">Role</th>
                   <th class="sorting text-center w100">Auth</th>
                   <th class="sorting text-center w100 text-nowrap">Accion</th>
@@ -80,7 +79,9 @@
               </tr>
             </tfoot>
             <tbody>
-                <tr *ngFor="let usuario of usuarios; let i = index">
+                <tr *ngFor="let usuario of usuarios; let i = index"
+                  class="cursor"
+                >
                   <td class="align-middle text-center">
                     {{i+1}}
                   </td>
@@ -92,8 +93,8 @@
                         (click)="abrirModal(usuario)"
                     >
                   </td>
-                  <td class="align-middle text-center">{{usuario.email}}</td>
-                  <td class="align-middle text-center">{{usuario.nombre}}</td>
+                  <td class="align-middle text-center" [routerLink]="['/dashboard/usuario', usuario.uid]">{{usuario.nombre}}</td>
+                  <td class="align-middle text-center" [routerLink]="['/dashboard/usuario', usuario.uid]">{{usuario.email}}</td>
                   <td class="align-middle text-center">
                     <select class="w100 text-center custom-select form-control"
                       [(ngModel)]="usuario.role"
@@ -103,7 +104,7 @@
                       <option class="text-center" value="USER_ROLE">User</option>
                     </select>
                   </td>
-                  <td class="align-middle text-center">
+                  <td class="align-middle text-center" [routerLink]="['/dashboard/usuario', usuario.uid]">
                     <span *ngIf="usuario.google" class="label label-danger">
                       Google
                     </span>

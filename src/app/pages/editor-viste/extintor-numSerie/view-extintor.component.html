@@ -16,7 +16,7 @@
       <ul class="nav nav-tabs profile-tab" role="tablist">
         <li class="nav-item">
           <a
-            class="nav-link active"
+            class="nav-link font-medium active"
             data-toggle="tab"
             href="#home"
             role="tab"
@@ -26,7 +26,7 @@
         </li>
         <li class="nav-item">
           <a
-            class="nav-link"
+            class="nav-link font-medium"
             data-toggle="tab"
             href="#profile"
             role="tab"
@@ -36,7 +36,7 @@
         </li>
         <li class="nav-item">
           <a
-            class="nav-link"
+            class="nav-link font-medium"
             data-toggle="tab"
             href="#settings"
             role="tab"
@@ -55,86 +55,445 @@
           aria-expanded="true"
         >
           <div class="card-body">
-            <div class="">
-              <div class="sl-item">
-                <div class="sl-right">
-                  <div>
-                    <p>Fotos del extintor</p>
-                    <div class="row">
-                      <div class=" col-lg-3 h-100 col-md-6 m-b-10">
-                        <div class="avatar-vista">
-                          <a class="image-popup-no-margins" [href]="extintor?.img! | imagen: 'extintores'">
-                            <img
-                              [src]="extintor?.img! | imagen: 'extintores'"
-                              class="avatar-vista-preview img-responsive"
-                            />
-                          </a>
-                        </div>
-                      </div>
-                      <div class="col-lg-3 h-100 col-md-6 m-b-10">
-                        <div class="avatar-vista">
-                          <a class="image-popup-no-margins" [href]="extintor?.img2! | imagen: 'extintores'">
-                            <img
-                              [src]="extintor?.img2! | imagen: 'extintores'"
-                              class="avatar-vista-preview img-responsive"
-                            />
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+            <div class="row">
+              <div class="col-md-4 col-xs-6 b-r">
+                <strong>Fotos</strong>
+                <br />
+                <div class="avatar-vista">
+                  <a
+                    class="image-popup-no-margins"
+                    [href]="extintor?.img! | imagen: 'extintores'"
+                  >
+                    <img
+                      [src]="extintor?.img! | imagen: 'extintores'"
+                      class="rounded avatar-vista-preview img-responsive"
+                    />
+                  </a>
+                  <hr>
+                </div>
+                <div class="avatar-vista">
+                  <a
+                    class="image-popup-no-margins"
+                    [href]="extintor?.img2! | imagen: 'extintores'"
+                  >
+                    <img
+                      [src]="extintor?.img2! | imagen: 'extintores'"
+                      class="avatar-vista-preview img-responsive"
+                    />
+                  </a>
+                  <hr>
                 </div>
               </div>
-              <hr />
-              <div class="sl-item">
-                <div class="sl-right">
-                  <div>
-                    <!-- <a href="#" class="link">John Doe</a> <span class="sl-date">5 minutes ago</span> -->
-                    <div class="m-t-20 row">
-                      <div class="col-md-12 col-xs-12">
-                        <div class="table-responsive">
-                          <table class="table">
-                            <thead>
-                              <tr>
-                                <th class="text-center">Numero Serie</th>
-                                <th class="text-center">Marca</th>
-                                <th class="text-center">Agente extintor</th>
-                                <th class="text-center">capacidad</th>
-                                <th class="text-center">empresa</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td class="align-middle text-center">
-                                  {{ extintor?.numeroSerie }}
-                                </td>
-                                <td class="align-middle text-center">
-                                  {{ extintor?.marca }}
-                                </td>
-                                <td class="align-middle text-center">
-                                  {{ extintor?.agenteExtintor }}
-                                </td>
-                                <td class="align-middle text-center">
-                                  {{ extintor?.capacidad }}
-                                </td>
-                                <td class="align-middle text-center">
-                                  {{ extintor?.empresa?.nombre! }}
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
+              <div class="col-md-8 col-xs-6">
+                <!--? end content -->
+                <div class="accordion" id="accordionExample">
+                  <!-- ?Init acordion item -->
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Identificacion
+                      </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        <!--? -->
+                        <div class="row">
+                          <div class="col-md-4">
+                            <span>
+                              <strong>
+                                Nro Serie:
+                              </strong>
+                              <div class="spaceB"
+                                [innerHtml]="extintor?.numeroSerie === undefined ?
+                                'N/A' : extintor?.numeroSerie"
+                              >
+                              </div>
+                            </span>
+                          </div>
+                          <div class="col-md-4">
+                            <span>
+                              <strong>
+                                Tipo:
+                              </strong>
+                              <div
+                                [innerHtml]="extintor?.agenteExtintor === undefined ?
+                                'N/A' : extintor?.agenteExtintor"
+                              >
+                              </div>
+                            </span>
+                          </div>
+                          <div class="col-md-4">
+                            <span>
+                              <strong>
+                                Capacidad:
+                              </strong>
+                              <div
+                                [innerHtml]="extintor?.capacidad === undefined ?
+                                'N/A' : extintor?.capacidad"
+                              >
+                              </div>
+                            </span>
+                          </div>
+                          <!-- ?end row -->
+                        </div>
+                        <div class="row my-2">
+                          <div class="col-md-4">
+                            <span>
+                              <strong>
+                                Marca:
+                              </strong>
+                              <div
+                                [innerHtml]="extintor?.marca === undefined ?
+                                'N/A' : extintor?.marca"
+                                >
+                              </div>
+                            </span>
+                          </div>
+                          <div class="col-md-4">
+                            <span>
+                              <strong>
+                                Año Fab:
+                              </strong>
+                              <div
+                                [innerHtml]="extintor?.fechaFabricacion === undefined ?
+                                'N/A' : extintor?.fechaFabricacion"
+                                >
+                              </div>
+                            </span>
+                          </div>
+                          <div class="col-md-4">
+                            <span>
+                              <strong>
+                                Vto. Carga:
+                              </strong>
+                              <div
+                                [innerHtml]="extintor?.proxRecarga === undefined ?
+                                'N/A' : extintor?.proxRecarga"
+                                >
+                              </div>
+                            </span>
+                          </div>
+                          <!-- ?end row -->
+                        </div>
+                        <div class="row">
+                          <div class="col">
+                            <span>
+                              <strong>
+                                Vto Ph:
+                              </strong>
+                              <div
+                                [innerHtml]="extintor?.vtoPh === undefined ?
+                                'N/A' : extintor?.vtoPh"
+                                >
+                              </div>
+                            </span>
+                          </div>
+                          <!-- ?end row -->
+                        </div>
+                        <!-- ? -->
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Agente Extintor
+                      </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        <!-- ? -->
+                        <div class="row my-2">
+                          <div class="col-md-4">
+                            <span>
+                              <strong>
+                                Reposicion:
+                              </strong>
+                              <div
+                                [innerHtml]="extintor?.reposiciones === undefined ?
+                                'N/A' : 'Si'"
+                                >
+                              </div>
+                            </span>
+                          </div>
+                          <div class="col-md-4">
+                            <span>
+                              <strong>
+                                Cambio:
+                              </strong>
+                              <div
+                                [innerHtml]="extintor?.cambio === undefined ?
+                                'N/A' : 'Si'"
+                                >
+                              </div>
+                            </span>
+                          </div>
+                          <div class="col-md-4">
+                            <span>
+                              <strong>
+                                Cantidad (Kg):
+                              </strong>
+                              <div
+                                [innerHtml]="extintor?.cantidadKg === undefined ?
+                                'N/A' : 'Si'"
+                                >
+                              </div>
+                            </span>
+                          </div>
+                          <!-- ?end row -->
+                        </div>
+                        <!-- ? -->
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Tareas y Accesorios
+                      </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        <!-- ? -->
+                        <div class="row my-2">
+                          <div class="col-md-3">
+                            <span>
+                              <strong>
+                                Disco Seg:
+                              </strong>
+                              <div
+                                [innerHtml]="extintor?.discoSeg === undefined ?
+                                'no' : 'Si'"
+                                >
+                              </div>
+                            </span>
+                          </div>
+                          <div class="col-md-2">
+                            <span>
+                              <strong>
+                                Manija:
+                              </strong>
+                              <div
+                                [innerHtml]="extintor?.manija === undefined ?
+                                'no' : 'Si'"
+                                >
+                              </div>
+                            </span>
+                          </div>
+                          <div class="col-md-2">
+                            <span>
+                              <strong>
+                                Calco:
+                              </strong>
+                              <div
+                                [innerHtml]="extintor?.calco === undefined ?
+                                'no' : 'Si'"
+                                >
+                              </div>
+                            </span>
+                          </div>
+                          <div class="col-md-2">
+                            <span>
+                              <strong>
+                                Ruedas:
+                              </strong>
+                              <div
+                                [innerHtml]="extintor?.ruedas === undefined ?
+                                'no' : 'Si'"
+                                >
+                              </div>
+                            </span>
+                          </div>
+                          <div class="col-md-3">
+                            <span>
+                              <strong>
+                                Manguera:
+                              </strong>
+                              <div
+                                [innerHtml]="extintor?.manguera === undefined ?
+                                'no' : 'Si'"
+                                >
+                              </div>
+                            </span>
+                          </div>
+                          <!-- ?end row -->
+                        </div>
+                        <div class="row my-2">
+                          <div class="col-md-3">
+                            <span>
+                              <strong>
+                                Tobera:
+                              </strong>
+                              <div
+                                [innerHtml]="extintor?.tobera === undefined ?
+                                'no' : 'Si'"
+                                >
+                              </div>
+                            </span>
+                          </div>
+                          <div class="col-md-2">
+                            <span>
+                              <strong>
+                                Traba S:
+                              </strong>
+                              <div
+                                [innerHtml]="extintor?.trabaS === undefined ?
+                                'no' : 'Si'"
+                                >
+                              </div>
+                            </span>
+                          </div>
+                          <div class="col-md-2">
+                            <span>
+                              <strong>
+                                Oring:
+                              </strong>
+                              <div
+                                [innerHtml]="extintor?.oring === undefined ?
+                                'no' : 'Si'"
+                                >
+                              </div>
+                            </span>
+                          </div>
+                          <div class="col-md-2">
+                            <span>
+                              <strong>
+                                Valvula:
+                              </strong>
+                              <div
+                                [innerHtml]="extintor?.valvula === undefined ?
+                                'no' : 'Si'"
+                                >
+                              </div>
+                            </span>
+                          </div>
+                          <div class="col-md-3">
+                            <span>
+                              <strong>
+                                Vastago:
+                              </strong>
+                              <div
+                                [innerHtml]="extintor?.vastago === undefined ?
+                                'no' : 'Si'"
+                                >
+                              </div>
+                            </span>
+                          </div>
+                          <!-- ?end row -->
+                        </div>
+                        <div class="row my-2">
+                          <div class="col-md-3">
+                            <span>
+                              <strong>
+                                Manometro:
+                              </strong>
+                              <div
+                                [innerHtml]="extintor?.manometro === undefined ?
+                                'no' : 'Si'"
+                                >
+                              </div>
+                            </span>
+                          </div>
+                          <div class="col-md-2">
+                            <span>
+                              <strong>
+                                Caño p:
+                              </strong>
+                              <div
+                                [innerHtml]="extintor?.canioP === undefined ?
+                                'no' : 'Si'"
+                                >
+                              </div>
+                            </span>
+                          </div>
+                          <div class="col-md-2">
+                            <span>
+                              <strong>
+                                Pintura:
+                              </strong>
+                              <div
+                                [innerHtml]="extintor?.pintura === undefined ?
+                                'no' : 'Si'"
+                                >
+                              </div>
+                            </span>
+                          </div>
+                          <div class="col-md-2">
+                            <span>
+                              <strong>
+                                Soporte:
+                              </strong>
+                              <div
+                                [innerHtml]="extintor?.soporte === undefined ?
+                                'no' : 'Si'"
+                                >
+                              </div>
+                            </span>
+                          </div>
+                          <!-- ?end row -->
+                        </div>
+                        <!-- ? -->
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingFour">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        Ph
+                      </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        <div class="row my-2">
+                          <div class="col">
+                            <span>
+                              <strong>
+                                Ph:
+                              </strong>
+                              <div
+                                [innerHtml]="extintor?.ph === undefined ?
+                                'F' : extintor?.ph"
+                                >
+                              </div>
+                            </span>
+                          </div>
+                          <!-- ?end row -->
                         </div>
                       </div>
                     </div>
-                    <div class="text-center">
-                      <a href="#" class="mt-2 btn btn-success"
-                        >Descargar pdf
-                      </a>
+                  </div>
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingFive">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                        Nro Estampilla
+                      </button>
+                    </h2>
+                    <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        <div class="row my-2">
+                          <div class="col">
+                            <span>
+                              <strong>
+                                Estampilla:
+                              </strong>
+                              <div
+                                [innerHtml]="extintor?.estampilla === undefined ?
+                                'N/A' : extintor?.estampilla"
+                                >
+                              </div>
+                            </span>
+                          </div>
+                          <!-- ?end row -->
+                        </div>
+                      </div>
                     </div>
                   </div>
+                  <!-- ?End acordion item -->
                 </div>
+                <!--? end  -->
               </div>
             </div>
+            <hr/>
           </div>
         </div>
         <!--todo second tab empresa-->
@@ -200,7 +559,7 @@
           role="tabpanel"
           aria-expanded="false"
         >
-          <!-- todo just user -->
+          <!-- todo si es user comun -->
           <div *ngIf="isUFunc()" class="card-body">
             <div class="row">
               <div class="col-md-12">
@@ -519,7 +878,7 @@
                   </div>
                   <!--/span-->
                 </div>
-                <h3 class="box-title">Imagenes: </h3>
+                <h3 class="box-title">Imagenes:</h3>
                 <hr />
                 <!--  -->
                 <div class="row pb-5 px-2">
@@ -527,19 +886,31 @@
                     <small class="small-img">- Foto 1 -</small>
                     <div class="avatar-upload">
                       <div class="avatar-edit">
-                          <input (change)="cambiarImagen($event)"
-                          class="input-img" type='file' id="imageUpload"
-                          accept=".png, .jpg, .jpeg" #img1 />
-                          <label class="label-img" for="imageUpload"></label>
-                          <a *ngIf="imagenSubir != undefined " (click)="removeDataImg1()" class="lbl-remove" ></a>
+                        <input
+                          (change)="cambiarImagen($event)"
+                          class="input-img"
+                          type="file"
+                          id="imageUpload"
+                          accept=".png, .jpg, .jpeg"
+                          #img1
+                        />
+                        <label class="label-img" for="imageUpload"></label>
+                        <a
+                          *ngIf="imagenSubir != undefined"
+                          (click)="removeDataImg1()"
+                          class="lbl-remove"
+                        ></a>
                       </div>
                       <div *ngIf="!cargandoImg" class="avatar-preview">
-                          <div id="imagePreview"
-                            style="background-image: url(http://localhost:4200/api/upload/extintores/{{imgViene}});"
-                          >
-                          </div>
+                        <div
+                          id="imagePreview"
+                          style="background-image: url(http://localhost:4200/api/upload/extintores/{{imgViene}});"
+                        ></div>
                       </div>
-                      <div *ngIf="cargandoImg" class="bg-light animated fadeIn fast avatar-preview">
+                      <div
+                        *ngIf="cargandoImg"
+                        class="bg-light animated fadeIn fast avatar-preview"
+                      >
                         <div class="text-center justify-content-center">
                           <div role="alert" class="alert text-center">
                             <i class="fa fa-spin fa-refresh fa-2x"></i>
@@ -553,20 +924,30 @@
                     <small class="small-img">- Foto 2 -</small>
                     <div class="avatar-upload">
                       <div class="avatar-edit">
-                          <input (change)="cambiarImagen2($event)" class="input-img" type='file' id="imageUpload2" accept=".png, .jpg, .jpeg" />
-                          <label class="label-img" for="imageUpload2"></label>
-                          <a *ngIf="imagenSubir2 != undefined " (click)="removeDataImg2()" class="lbl-remove" ></a>
+                        <input
+                          (change)="cambiarImagen2($event)"
+                          class="input-img"
+                          type="file"
+                          id="imageUpload2"
+                          accept=".png, .jpg, .jpeg"
+                        />
+                        <label class="label-img" for="imageUpload2"></label>
+                        <a
+                          *ngIf="imagenSubir2 != undefined"
+                          (click)="removeDataImg2()"
+                          class="lbl-remove"
+                        ></a>
                       </div>
                       <div class="avatar-preview">
-                          <div id="imagePreview2"
-                            style="background-image: url(http://localhost:4200/api/upload/extintores/{{imgViene2}});">
-                          </div>
+                        <div
+                          id="imagePreview2"
+                          style="background-image: url(http://localhost:4200/api/upload/extintores/{{imgViene2}});"
+                        ></div>
                       </div>
                     </div>
                   </div>
                   <!--/span-->
                 </div>
-
 
                 <!--  -->
               </div>
@@ -592,6 +973,4 @@
   </div>
   <!-- Column -->
 </div>
-<script>
-
-</script>
+<script></script>

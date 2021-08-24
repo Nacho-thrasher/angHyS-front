@@ -1,0 +1,132 @@
+.avatar-vista {
+  position: relative;
+  /* max-width: 205px; */
+  min-height: 150px !important;
+  /* margin: 10px auto; */
+}
+.avatar-vista .avatar-vista-preview {
+  /* width: 320px; */
+  height: 200px;
+  position: relative;
+  /* border: 6px solid #f8f8f8; */
+}
+/* 155 */
+.avatar-vista .cardRespBody{
+  height: 130px;
+  position: relative;
+}
+
+/* mob */
+@media screen and (max-width: 630px) {
+  .avatar-vista {
+    position: relative;
+    min-height: 90px !important;
+  }
+  .avatar-vista .avatar-vista-preview {
+    height: 150;
+    position: relative;
+  }
+  /* 155 */
+  .avatar-vista .cardRespBody{
+    height: 100px;
+    position: relative;
+    font-size: .80em;
+  }
+  .avatar-vista .cardRespFoot{
+    margin-top: 4px !important;
+    font-size: .80em;
+  }
+}
+
+/* mob */
+@media screen and (max-width: 600px) {
+  .avatar-vista {
+    position: relative;
+    min-height: 80px !important;
+  }
+  .avatar-vista .avatar-vista-preview {
+    height: 140px !important;
+    position: relative;
+  }
+  /* 155 */
+  .avatar-vista .cardRespBody{
+    height: 100px;
+    position: relative;
+    margin-bottom: 6px !important;
+  }
+  .avatar-vista .pbMob{
+    margin-top: -12px !important;
+  }
+  div .col {
+    padding: 0px 4px !important;
+  }
+}
+/* mob */
+@media screen and (max-width: 510px) {
+  .avatar-vista {
+    position: relative;
+    min-height: 60px !important;
+  }
+  .avatar-vista .avatar-vista-preview {
+    height: 120px !important;
+    position: relative;
+  }
+  /* 155 */
+  .avatar-vista .cardRespBody{
+    height: 80px;
+    position: relative;
+    margin-bottom: 10px !important;
+  }
+  .avatar-vista .pbMob{
+    margin-top: -12px !important;
+  }
+  .avatar-vista .cardRespFoot{
+    margin-top: 12px !important;
+    font-size: .80em;
+  }
+  div .col {
+    padding: 0px 4px !important;
+  }
+}
+/* mob */
+@media screen and (max-width: 450px) {
+  .avatar-vista .titleResp{
+    font-size: 1.2em !important;
+    font-style: italic;
+    margin-top: -8px !important;
+    margin-bottom: 0px !important;
+  }
+}
+/* mob */
+@media screen and (max-width: 400px) {
+  .avatar-vista {
+    position: relative;
+    min-height: 60px !important;
+  }
+  .avatar-vista .avatar-vista-preview {
+    height: 120px !important;
+    position: relative;
+  }
+  /* 155 */
+  .avatar-vista .cardRespBody{
+    height: 80px;
+    position: relative;
+    margin-bottom: 10px !important;
+  }
+  .avatar-vista .pbMob{
+    margin-top: -14px !important;
+  }
+  .avatar-vista .cardRespFoot{
+    margin-top: 12px !important;
+    font-size: .80em;
+  }
+  div .col {
+    padding: 0px 2px;
+  }
+  .avatar-vista .titleResp{
+    font-size: 1.1em !important;
+    font-style: italic;
+    margin-top: -8px !important;
+    margin-bottom: 0px !important;
+  }
+}

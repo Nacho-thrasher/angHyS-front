@@ -15,7 +15,7 @@
 
         <div class="row animated fadeIn">
           <div class="col-md-6">
-            <h4 class="card-title">Todas las empresas</h4>
+            <h4 class="card-title">Todas las empresas ({{empresas?.length}})</h4>
             <h6 class="card-subtitle"></h6>
           </div>
           <div class="col-md-6">
@@ -31,15 +31,14 @@
         <hr>
         <!-- tabla 1 -->
 
-        <div class="table-responsive m-t-20 dataTables_wrapper">
+        <div class="">
           <table
             datatable
             [dtOptions]="dtOptions"
-            class="display nowrap table table-hover"
+            class="display nowrap table animated fadeIn table-hover"
             cellspacing="0"
             width="100%"
             role="grid"
-            style="width: 100%"
           >
             <thead>
               <tr>
@@ -74,7 +73,9 @@
               </tr>
             </tfoot>
             <tbody>
-              <tr *ngFor="let empresa of empresas; let i = index">
+              <tr *ngFor="let empresa of empresas; let i = index"
+                class="cursor"
+              >
                 <td class="align-middle text-center">
                   {{i+1}}
                 </td>
@@ -86,11 +87,13 @@
                     (click)="abrirModal(empresa)"
                   />
                 </td>
-                <td class="align-middle text-center">
+                <td class="align-middle text-center" [routerLink]="['/dashboard/empresa', empresa._id]">
                   {{ empresa.nombre }}
                 </td>
-                <td class="align-middle text-center">{{ empresa.direccion }}</td>
-                <td class="align-middle text-center">{{ empresa.localidad }}</td>
+                <td class="align-middle text-center" [routerLink]="['/dashboard/empresa', empresa._id]">
+                  {{ empresa.direccion }}</td>
+                <td class="align-middle text-center" [routerLink]="['/dashboard/empresa', empresa._id]">
+                  {{ empresa.localidad }}</td>
                 <td class="text-nowrap align-middle text-center">
                   <a
                     [routerLink]="['/dashboard/empresa', empresa._id]"

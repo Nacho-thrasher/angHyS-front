@@ -7,6 +7,9 @@ import { ExtintorService } from 'src/app/services/extintor.service';
   selector: 'app-view-extintores',
   templateUrl: './view-extintores.component.html',
   styles: [
+  ],
+  styleUrls: [
+    './view-extintores.component.css'
   ]
 })
 
@@ -25,7 +28,9 @@ export class ViewExtintoresComponent implements OnInit {
   ngOnInit(): void {
     //datatable options
     this.dtOptions = {
-      pagingType: 'full_numbers',
+      pagingType: 'simple_numbers',
+      responsive: true,
+      info: false,
       language: { url: '//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json' }
     };
     //carga

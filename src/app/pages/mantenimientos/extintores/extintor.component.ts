@@ -10,8 +10,9 @@ import Swal from 'sweetalert2';
 
 import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels, NgxQRCodeModule } from 'ngx-qrcode2';
 import { environment } from 'src/environments/environment';
+import { environmentQr } from '../../../../environments/enviromentQr';
 
-const base_url = environment.base_url;
+const base_url = environmentQr.base_url;
 
 @Component({
   selector: 'app-extintor',
@@ -62,12 +63,14 @@ export class ExtintorComponent implements OnInit {
     .subscribe(empresaId =>{
       this.empresaSeleccionados = this.empresas
       .find( h => h._id === empresaId);
+      // console.log(this.empresaSeleccionados?.nroExtintores)
     })
   }
   //todo QR
   cargarQr(numeroSerie:string){
     this.title = 'app';
-    this.url = 'http://localhost:4400/dashboard/vista-extintor/';
+    //console.log(base_url)
+    this.url = `${base_url}/dashboard/vista-extintor/`;
     this.profile = `${numeroSerie}`;
     //console.log(this.profile);
     this.elementType = NgxQrcodeElementTypes.URL;
@@ -138,9 +141,23 @@ export class ExtintorComponent implements OnInit {
           this.router.navigateByUrl(`/dashboard/extintor/${ resp.extintor._id }`)
         })
         //? aqui actualizar nro extintor
-        this.cantExt = +this.empresaSeleccionados?.nroExtintores! + 1
-        console.log(this.cantExt.toString())
-        
+        if (this.empresaSeleccionados?.nroExtintores === undefined) {
+          this.cantExt = 1;
+        }
+        else {
+          this.cantExt = +this.empresaSeleccionados?.nroExtintores! + 1
+        }
+        //console.log(this.cantExt.toString())
+        const data = {
+          nombre: this.empresaSeleccionados?.nombre,
+          nroExtintores: this.cantExt.toString(),
+          _id: this.empresaSeleccionados?._id
+        }
+        this.empresaService.actualizarNroExtEmpresa(data)
+        .subscribe(resp =>{
+
+        })
+
     }
   }
 

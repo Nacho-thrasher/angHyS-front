@@ -7,12 +7,16 @@ import Swal from 'sweetalert2';
   selector: 'app-modal-img',
   templateUrl: './modal-img.component.html',
   styles: [
+  ],
+  styleUrls: [
+    './modal-img.component.css'
   ]
 })
 export class ModalImgComponent implements OnInit {
 
   public imagenSubir!: File;
   public imgTemp: any = null;
+  public imagenRem!: File;
 
   constructor(public modalImgService: ModalImgService,
             public fileUploadService: FileUploadService) { }
@@ -37,15 +41,24 @@ export class ModalImgComponent implements OnInit {
       }
       const reader = new FileReader();
       reader.onloadend = () =>{
+        $('#imagePreview')
+        .css('background-image', 'url('+reader.result +')');
+        $('#imagePreview').hide();
+        $('#imagePreview').fadeIn(650);
         this.imgTemp = reader.result;
       }
       reader.readAsDataURL(file);
-
-      console.log(this.modalImgService.tipo);
+      //console.log(this.modalImgService.tipo);
     }
 
   }
-
+  removeDataImg1() {
+    this.imagenSubir = this.imagenRem;
+    $('#imagePreview')
+    .css('background-image', `url(${this.modalImgService.img})`);
+    $('#imagePreview').hide();
+    $('#imagePreview').fadeIn(650);
+  }
   subirImagen() {
 
     const id = this.modalImgService.id;

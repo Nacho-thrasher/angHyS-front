@@ -14,7 +14,7 @@
 
         <div class="row animated fadeIn">
           <div class="col-md-6">
-            <h4 class="card-title">Todos los extintores</h4>
+            <h4 class="card-title">Todos los extintores ({{extintores.length}})</h4>
             <h6 class="card-subtitle"></h6>
           </div>
           <div class="col-md-6">
@@ -35,25 +35,24 @@
         <hr>
         <!-- tablas aqui -->
 
-        <div class="table-responsive m-t-20 dataTables_wrapper">
+        <div class="">
           <table
             datatable
             [dtOptions]="dtOptions"
-            class="display nowrap table table-hover"
+            class="display nowrap table animated fadeIn table-hover"
             cellspacing="0"
             width="100%"
             role="grid"
-            style="width: 100%"
           >
             <thead>
               <tr>
                 <th class="sorting text-center w5">#Nro</th>
                 <th class="sorting text-center w100">Foto</th>
-                <th class="sorting text-center">Numero Serie</th>
+                <th class="sorting text-center w100">Nro Serie</th>
                 <th class="sorting text-center">Marca</th>
-                <th class="sorting text-center">Agente extintor</th>
-                <th class="sorting text-center">capacidad</th>
-                <th class="sorting text-center">empresa</th>
+                <th class="sorting text-center w100">Agente extintor</th>
+                <th class="sorting text-center">Capacidad</th>
+                <th class="sorting text-center">Empresa</th>
                 <th class="sorting text-nowrap text-center">Accion</th>
               </tr>
             </thead>
@@ -86,8 +85,10 @@
               </tr>
             </tfoot>
             <tbody>
-              <tr *ngFor="let extintor of extintores; let i = index">
-                <td class="text-center">
+              <tr *ngFor="let extintor of extintores; let i = index"
+                class="animated cursor fadeIn fast"
+              >
+                <td class="align-middle text-center">
                   {{i+1}}
                 </td>
                 <td class="text-center">
@@ -98,17 +99,19 @@
                     (click)="abrirModal(extintor)"
                   />
                 </td>
-                <td class="align-middle text-center">
+                <td class="align-middle text-center" [routerLink]="['/dashboard/extintor', extintor._id]">
                   {{ extintor.numeroSerie }}
                 </td>
-                <td class="align-middle text-center">{{ extintor.marca }}</td>
-                <td class="align-middle text-center">
+                <td class="align-middle text-center" [routerLink]="['/dashboard/extintor', extintor._id]">
+                  {{ extintor.marca }}
+                </td>
+                <td class="align-middle text-center" [routerLink]="['/dashboard/extintor', extintor._id]">
                   {{ extintor.agenteExtintor }}
                 </td>
-                <td class="align-middle text-center">
+                <td class="align-middle text-center" [routerLink]="['/dashboard/extintor', extintor._id]">
                   {{ extintor.capacidad }}
                 </td>
-                <td class="align-middle text-center">
+                <td class="align-middle text-center" [routerLink]="['/dashboard/extintor', extintor._id]">
                   {{ extintor.empresa!.nombre }}
                 </td>
                 <td class="text-nowrap text-center align-middle">

@@ -59,6 +59,11 @@ export class EmpresaService {
 
   }
 
+  actualizarNroExtEmpresa(data: any){
+    const url = `${base_url}/empresas/${data._id}`;
+    return this.http.put(url, data, this.headers)
+  }
+
   borrarEmpresa(_id:string){
 
     const url = `${base_url}/empresas/${_id}`;

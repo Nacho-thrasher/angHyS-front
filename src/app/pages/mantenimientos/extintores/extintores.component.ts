@@ -34,7 +34,9 @@ export class ExtintoresComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     //datatable options
     this.dtOptions = {
-      pagingType: 'full_numbers',
+      pagingType: 'simple_numbers',
+      responsive: true,
+      info: false,
       language: { url: '//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json' }
     };
     //cargas

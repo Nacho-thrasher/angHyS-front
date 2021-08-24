@@ -25,6 +25,7 @@ export class ExtintoresExcelComponent implements OnInit {
   public extintorForm!: FormGroup;
   public extintorSeleccionados?: Extintor;
   public empresaSel!: string;
+  public cantExt!: number;
   // for tables
   public arrayBuffer: any;
   public file!: File;
@@ -102,7 +103,6 @@ export class ExtintoresExcelComponent implements OnInit {
 
   guardarExtintor(){
     //*Crear
-
     try {
       const { empresa } = this.extintorForm.value;
       for(let index = 0; index < this.str.length; index++){
@@ -114,9 +114,25 @@ export class ExtintoresExcelComponent implements OnInit {
           //preload aqui?
         })
       }
+      if (this.empresaSeleccionados?.nroExtintores === undefined) {
+        this.cantExt = +this.str.length;
+      }
+      else {
+        this.cantExt = +this.empresaSeleccionados?.nroExtintores! + this.str.length
+      }
+      const data = {
+        nombre: this.empresaSeleccionados?.nombre,
+        nroExtintores: this.cantExt.toString(),
+        _id: this.empresaSeleccionados?._id
+      }
+      this.empresaService.actualizarNroExtEmpresa(data)
+      .subscribe(resp =>{
+
+      })
       //todo aqui insertar en empresas numero + sumar extintores creados
       Swal.fire('Creado', `(${this.str.length}) Extintores creados`, 'success')
       this.router.navigateByUrl(`/dashboard/extintores`)
+      //? aqui actualizar nro extintor
 
     } catch (error) {
       console.log(error)

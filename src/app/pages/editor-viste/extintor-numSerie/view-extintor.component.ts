@@ -34,7 +34,7 @@ export class ViewExtintorComponent implements OnInit {
   public imagenSubir2!: File; //img2
   public imgTemp2: any = null;
   public imgViene2!: string;
-  // otras vars
+  //? otras vars
   public extintorForm!: FormGroup;
   public empresas: Empresa[] = [];
   public empresaSeleccionados?: Empresa;
@@ -42,6 +42,7 @@ export class ViewExtintorComponent implements OnInit {
   public cargando?: boolean = true;
   public cargandoImg?: boolean = false;
   public extintorSeleccionados?: Extintor;
+  public dtOptions: DataTables.Settings = {};
   //? variables par aguardar al cargar
   public isUser!:boolean;
 
@@ -56,10 +57,16 @@ export class ViewExtintorComponent implements OnInit {
 
   //todo OnInit
   ngOnInit(): void {
-
+    //datatable options
+    this.dtOptions = {
+      responsive: true,
+      info: false,
+      language: { url: '//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json' }
+    };
     //todo obtener parametro url
     this.activatedRouter.params
     .subscribe( ({numSerie}) => {
+      // console.log(numSerie);
       this.cargarExtintor(numSerie);
     })
     //todo Validators form
@@ -125,7 +132,7 @@ export class ViewExtintorComponent implements OnInit {
         empresa: {_id, nombre},
         numeroSerie
       } = resp.extintor;
-      // console.log(resp.extintor);
+      //console.log(nombre);
       //? si es la primera ves pregunto
       if (zona === undefined) {
         zona = ''

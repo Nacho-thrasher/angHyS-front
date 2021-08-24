@@ -16,31 +16,30 @@
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">{{extintores.length}} extintores en {{nomEmpr}}</h4>
+        <h4 class="card-title">Extintores en: <span class="text-capitalize">{{nomEmpr}} ({{extintores.length}})</span></h4>
         <h6 class="card-subtitle"></h6>
         <hr>
 
         <div *ngIf="extintores.length != 0"
-          class="table-responsive m-t-20 dataTables_wrapper"
+          class="m-t-20 dataTables_wrapper"
         >
           <table
             datatable
             [dtOptions]="dtOptions"
-            class="display nowrap table table-hover"
+            class="display nowrap table animated fadeIn table-hover"
             cellspacing="0"
             width="100%"
             role="grid"
-            style="width: 100%"
           >
             <thead>
               <tr>
                 <th class="sorting text-center w5">#Nro</th>
                 <th class="sorting text-center w100">Foto</th>
-                <th class="sorting text-center w">Numero Serie</th>
+                <th class="sorting text-center w100">Nro Serie</th>
                 <th class="sorting text-center">Marca</th>
-                <th class="sorting text-center">Agente extintor</th>
-                <th class="sorting text-center">capacidad</th>
-                <th class="sorting text-center">empresa</th>
+                <th class="sorting text-center w100">Agente extintor</th>
+                <th class="sorting text-center">Capacidad</th>
+                <th class="sorting text-center">Empresa</th>
               </tr>
             </thead>
             <tfoot>
@@ -70,24 +69,30 @@
             </tfoot>
             <tbody>
               <tr *ngFor="let extintor of extintores; let i = index"
-              class="animated fadeIn fast">
-                <td class="text-center">
+              class="animated cursor fadeIn fast">
+                <td class="align-middle text-center">
                   {{i+1}}
                 </td>
-                <td class="align-middle text-center">
+                <td class="align-middle text-center" [routerLink]="['/dashboard/vista-extintor', extintor.numeroSerie]">
                   <img [src]="extintor.img! | imagen:'extintores'"
                     alt="" class="avatar2 cursor"
                   >
                 </td>
-                <td class="align-middle text-center">
-                  <a [routerLink]="['/dashboard/vista-extintor', extintor.numeroSerie]" >
-                    {{extintor.numeroSerie}}
-                  </a>
+                <td class="align-middle text-center" [routerLink]="['/dashboard/vista-extintor', extintor.numeroSerie]">
+                  {{extintor.numeroSerie}}
                 </td>
-                <td class="align-middle text-center">{{extintor.marca}}</td>
-                <td class="align-middle text-center">{{extintor.agenteExtintor}}</td>
-                <td class="align-middle text-center">{{extintor.capacidad}}</td>
-                <td class="align-middle text-center">{{extintor.empresa!.nombre}}</td>
+                <td class="align-middle text-center" [routerLink]="['/dashboard/vista-extintor', extintor.numeroSerie]">
+                  {{extintor.marca}}
+                </td>
+                <td class="align-middle text-center" [routerLink]="['/dashboard/vista-extintor', extintor.numeroSerie]">
+                  {{extintor.agenteExtintor}}
+                </td>
+                <td class="align-middle text-center" [routerLink]="['/dashboard/vista-extintor', extintor.numeroSerie]">
+                  {{extintor.capacidad}}
+                </td>
+                <td class="align-middle text-center" [routerLink]="['/dashboard/vista-extintor', extintor.numeroSerie]">
+                  {{extintor.empresa!.nombre}}
+                </td>
               </tr>
             </tbody>
           </table>
