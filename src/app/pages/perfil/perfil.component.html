@@ -35,6 +35,18 @@
                         >
                     </div>
                 </div>
+                <div class="form-group">
+                  <label for="exampleInputPass1">Contraseña</label>
+                  <div class="input-group">
+                      <input
+                        type="password"
+                        class="form-control"
+                        id="exampleInputPass1"
+                        placeholder="Password"
+                        formControlName="password"
+                      >
+                  </div>
+              </div>
 
                 <button type="submit" [disabled]="perfilForm.invalid" class="btn btn-block btn-success waves-effect waves-light m-r-10">Guardar datos</button>
             </form>
@@ -48,24 +60,49 @@
             <h4 class="card-title">Imagen</h4>
             <h6 class="card-subtitle">usuario ejemplo</h6>
 
-            <div class="row mt-4">
-              <div class="col-md-12">
+            <!--todo other img design -->
+            <div class="avatar-upload">
+              <div class="avatar-edit">
                 <input
-                  type="file"
                   (change)="cambiarImagen($event)"
-                >
+                  class="input-img"
+                  type="file"
+                  id="imageUpload"
+                  accept=".png, .jpg, .jpeg"
+                  #img1
+                />
+                <label class="label-img" for="imageUpload"></label>
+                <a
+                  *ngIf="imagenSubir != undefined"
+                  (click)="removeDataImg1()"
+                  class="lbl-remove"
+                ></a>
               </div>
-            </div>
-            <div class="row mt-4 mb-4">
-              <div class="col-md-12">
-                <div class="col-md-12">
-                  <div class="text-center">
-                    <img *ngIf="!imgTemp" [src]="usuario.imagenUrl" class="img-avatar w-50">
-                    <img *ngIf="imgTemp" [src]="imgTemp" class="img-avatar w-50">
+              <div *ngIf="!cargandoImg" class="avatar-preview">
+                <div
+                  *ngIf="!usuario.google"
+                  id="imagePreview"
+                  style="background-image: url({{rutaStart}}/upload/usuarios/{{imgPreCargada}});"
+                ></div>
+                <!-- usuario.google -->
+                <div
+                  *ngIf="usuario.google"
+                  id="imagePreview"
+                  style="background-image: url({{imgPreCargada}});"
+                ></div>
+              </div>
+              <div
+                *ngIf="cargandoImg"
+                class="bg-light animated fadeIn fast avatar-preview"
+              >
+                <div class="text-center justify-content-center">
+                  <div role="alert" class="alert text-center">
+                    <i class="fa fa-spin fa-refresh fa-2x"></i>
                   </div>
                 </div>
               </div>
             </div>
+            <!-- todo -->
             <button
               type="button"
               class="btn btn-block btn-success waves-effect waves-light m-r-10"

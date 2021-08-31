@@ -1,0 +1,10 @@
+
+a .roundSide{
+  width: 40px;
+  height: 41px;
+  position: relative;
+  border-radius: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}

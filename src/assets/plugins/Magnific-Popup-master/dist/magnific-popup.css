@@ -350,7 +350,7 @@ img.mfp-img {
     padding-left: 6px;
     padding-right: 6px; } }
 
-/* 
+/*
 
 ====== Zoom effect ======
 
@@ -383,7 +383,7 @@ img.mfp-img {
 .mfp-zoom-in.mfp-removing.mfp-bg {
   opacity: 0;
 }
-/* 
+/*
 
 ====== Newspaper effect ======
 
@@ -417,7 +417,7 @@ img.mfp-img {
 .mfp-newspaper.mfp-removing.mfp-bg {
   opacity: 0;
 }
-/* 
+/*
 
 ====== Move-horizontal effect ======
 
@@ -450,7 +450,7 @@ img.mfp-img {
 .mfp-move-horizontal.mfp-removing.mfp-bg {
   opacity: 0;
 }
-/* 
+/*
 
 ====== Move-from-top effect ======
 
@@ -486,7 +486,7 @@ img.mfp-img {
 .mfp-move-from-top.mfp-removing.mfp-bg {
   opacity: 0;
 }
-/* 
+/*
 
 ====== 3d unfold ======
 
@@ -523,7 +523,7 @@ img.mfp-img {
 .mfp-3d-unfold.mfp-removing.mfp-bg {
   opacity: 0;
 }
-/* 
+/*
 
 ====== Zoom-out effect ======
 
@@ -556,7 +556,7 @@ img.mfp-img {
 .mfp-zoom-out.mfp-removing.mfp-bg {
   opacity: 0;
 }
-/* 
+/*
 
 ====== "Hinge" close effect ======
 
@@ -618,8 +618,8 @@ img.mfp-img {
 
 .mfp-fade.mfp-bg {
   opacity: 0;
-  -webkit-transition: all 0.15s ease-out; 
-  -moz-transition: all 0.15s ease-out; 
+  -webkit-transition: all 0.15s ease-out;
+  -moz-transition: all 0.15s ease-out;
   transition: all 0.15s ease-out;
 }
 .mfp-fade.mfp-bg.mfp-ready {
@@ -631,8 +631,8 @@ img.mfp-img {
 
 .mfp-fade.mfp-wrap .mfp-content {
   opacity: 0;
-  -webkit-transition: all 0.15s ease-out; 
-  -moz-transition: all 0.15s ease-out; 
+  -webkit-transition: all 0.15s ease-out;
+  -moz-transition: all 0.15s ease-out;
   transition: all 0.15s ease-out;
 }
 .mfp-fade.mfp-wrap.mfp-ready .mfp-content {
@@ -640,4 +640,5 @@ img.mfp-img {
 }
 .mfp-fade.mfp-wrap.mfp-removing .mfp-content {
   opacity: 0;
-    
+
+}

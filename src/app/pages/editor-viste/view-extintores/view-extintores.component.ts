@@ -7,9 +7,6 @@ import { ExtintorService } from 'src/app/services/extintor.service';
   selector: 'app-view-extintores',
   templateUrl: './view-extintores.component.html',
   styles: [
-  ],
-  styleUrls: [
-    './view-extintores.component.css'
   ]
 })
 
@@ -31,7 +28,10 @@ export class ViewExtintoresComponent implements OnInit {
       pagingType: 'simple_numbers',
       responsive: true,
       info: false,
-      language: { url: '//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json' }
+      language: { url: '//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json' },
+      columnDefs: [
+        { orderable: false, targets: 1 }
+      ]
     };
     //carga
     this.activatedRoute.params
@@ -48,7 +48,6 @@ export class ViewExtintoresComponent implements OnInit {
         this.router.navigateByUrl(`/dashboard/vista-empresas`);
         return;
       }
-      //console.log(resp.nom);
       this.nomEmpr = resp.nom;
       this.extintores = resp.extintores;
 

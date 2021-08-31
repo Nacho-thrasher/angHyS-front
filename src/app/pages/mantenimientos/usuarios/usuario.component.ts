@@ -51,7 +51,7 @@ export class UsuarioComponent implements OnInit {
             email,
             role
             } = usuario;
-      console.log(usuario);
+      //console.log(usuario);
       this.usuarioSeleccionados = usuario;
       this.usuarioForm.setValue({
         nombre,

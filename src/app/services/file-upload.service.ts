@@ -34,14 +34,15 @@ export class FileUploadService {
       const data = await resp.json();
 
       if ( data.ok ) {
-        return data.nombreArchivo;
+        //console.log(data)
+        return data.nombreAr;
       } else {
-        console.log(data.msg);
+        //console.log(data.msg);
         return false;
       }
     }
     catch (error) {
-      console.log(error);
+      //console.log(error);
       return false;
     }
   }
@@ -69,14 +70,14 @@ export class FileUploadService {
       const data = await resp.json();
 
       if ( data.ok ) {
-        return data.nombreArchivo;
+        return data.nombreAr;
       } else {
-        console.log(data.msg);
+        //console.log(data.msg);
         return false;
       }
     }
     catch (error) {
-      console.log(error);
+      //console.log(error);
       return false;
     }
 

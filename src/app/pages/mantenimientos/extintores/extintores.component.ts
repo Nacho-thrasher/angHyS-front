@@ -3,6 +3,7 @@ import { Subscription, Subject } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { Extintor } from 'src/app/models/extintor.model';
 import { BusquedasService } from 'src/app/services/busquedas.service';
+import { EmpresaService } from 'src/app/services/empresa.service';
 import { ExtintorService } from 'src/app/services/extintor.service';
 import { ModalImgService } from 'src/app/services/modal-img.service';
 import Swal from 'sweetalert2';
@@ -25,20 +26,28 @@ export class ExtintoresComponent implements OnInit, OnDestroy {
 
   constructor(private extintorService: ExtintorService,
             private modalImgService: ModalImgService,
-            private busquedasService: BusquedasService) { }
+            private busquedasService: BusquedasService,
+            private empresaService: EmpresaService) { }
   //destroy
   ngOnDestroy(): void {
     this.imgSubs.unsubscribe();
   }
+
   //oninit
   ngOnInit(): void {
+
     //datatable options
     this.dtOptions = {
       pagingType: 'simple_numbers',
       responsive: true,
       info: false,
-      language: { url: '//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json' }
+      language: { url: '//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json' },
+      columnDefs: [
+        { orderable: false, targets: 1 },
+        { orderable: false, targets: 2 }
+      ]
     };
+
     //cargas
     this.cargarExtintores();
     this.imgSubs = this.modalImgService.nuevaImagen
@@ -48,6 +57,7 @@ export class ExtintoresComponent implements OnInit, OnDestroy {
       this.cargarExtintores()
     });
   }
+
   //funcion
   cargarExtintores(){
     this.cargando = true;
@@ -55,7 +65,7 @@ export class ExtintoresComponent implements OnInit, OnDestroy {
     .subscribe(extintor => {
       this.cargando = false;
       this.extintores = extintor;
-      //console.log(extintor)
+      //console.log(this.extintores)
     })
   }
   //abrirModal
@@ -88,6 +98,17 @@ export class ExtintoresComponent implements OnInit, OnDestroy {
       if (result.isConfirmed) {
         this.extintorService.borrarExtintor(extintor._id!)
         .subscribe(resp =>{
+          //todo
+        })
+        let numberExtintor: number = +extintor.empresa.nroExtintores!
+        let resta:number = numberExtintor - 1
+        const data = {
+          nombre: extintor.empresa.nombre,
+          nroExtintores: resta.toString(),
+          _id: extintor.empresa._id
+        }
+        this.empresaService.actualizarNroExtEmpresa(data)
+        .subscribe(resp =>{
           Swal.fire(
             'Borrado!',
             `Extintor: ${extintor.numeroSerie} Marca: ${extintor.marca} fue eliminado.`,
@@ -100,3 +121,5 @@ export class ExtintoresComponent implements OnInit, OnDestroy {
   }
 
 }
+
+

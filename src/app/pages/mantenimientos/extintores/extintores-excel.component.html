@@ -16,19 +16,18 @@
                 <select formControlName="empresa"
                 class="form-control custom-select"
                 data-placeholder="Selecciona una" tabindex="1">
-                <option value="">Seleccione una</option>
-                <option
+                  <option value="">Seleccione una</option>
+                  <option
                     *ngFor="let empresa of empresas"
                     [value]="empresa._id"
-                    >
-                    {{empresa.nombre}}
+                  >
+                      {{empresa.nombre}}
                   </option>
                 </select>
               </div>
             </div>
           </div>
         </div>
-
         <div class="row justify-content-center">
           <!-- excel import -->
           <div class="col-10">
@@ -83,19 +82,28 @@
           </div>
         </div>
 
-
         <!-- 2 tabla -->
-        <div class="table-responsive">
-          <table class="table table-bordered">
+        <div *ngIf="cargandoTable" class="table-responsive">
+          <p class="text-center">
+            Los extintores marcados en rojo ya existen solo se crearan los que no existan.</p>
+          <table
+            class="table-bordered onMobile text-capitalize display nowrap table animated fadeIn table-hover"
+            cellspacing="0"
+            width="100%"
+            role="grid"
+          >
             <thead>
               <th class="w70" *ngFor="let key of keys">
                 {{key}}
               </th>
             </thead>
             <tbody>
-              <tr *ngFor="let item of dataSheet | async">
+              <tr *ngFor="let item of dataSheet | async;">
                 <td *ngFor="let key of keys">
-                  {{item[key]}}
+                  <div [ngClass]="{'text-danger': item['existe'] === 'si'}">
+                    {{item[key]}}
+                  </div>
+
                 </td>
               </tr>
             </tbody>

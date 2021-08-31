@@ -14,9 +14,9 @@
             aria-expanded="false"
           >
           <!-- class="w-25" -->
-            <img [src]="usuario.imagenUrl" class="pb-1 avatarSidebar" alt="user" />
+            <img [src]="usuario.img! | imagen: 'usuarios'" class="pb-1 roundSide img-circle" alt="user" />
             <!-- cambiar tamanio de img a cuadrada -->
-            <span class="hide-menu font-medium">
+            <span class="inlineB hide-menu font-medium">
               {{usuario.nombre | slice:0:18}}{{(usuario.nombre.length > 18) ? '..' : '' }}
             </span>
 

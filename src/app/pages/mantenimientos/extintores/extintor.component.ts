@@ -119,6 +119,7 @@ export class ExtintorComponent implements OnInit {
   }
   //* Guardar
   guardarExtintor(){
+    let validacion:boolean = true;
     const { numeroSerie, marca } = this.extintorForm.value;
     if (this.extintorSeleccionados) {
         //todo update
@@ -137,25 +138,32 @@ export class ExtintorComponent implements OnInit {
         const { numeroSerie, marca } = this.extintorForm.value;
         this.extintorService.crearExtintor(this.extintorForm.value)
         .subscribe( (resp:any) => {
-          Swal.fire('Creado', `Extintor: ${numeroSerie} - Marca: ${marca}.`, 'success')
-          this.router.navigateByUrl(`/dashboard/extintor/${ resp.extintor._id }`)
-        })
-        //? aqui actualizar nro extintor
-        if (this.empresaSeleccionados?.nroExtintores === undefined) {
-          this.cantExt = 1;
-        }
-        else {
-          this.cantExt = +this.empresaSeleccionados?.nroExtintores! + 1
-        }
-        //console.log(this.cantExt.toString())
-        const data = {
-          nombre: this.empresaSeleccionados?.nombre,
-          nroExtintores: this.cantExt.toString(),
-          _id: this.empresaSeleccionados?._id
-        }
-        this.empresaService.actualizarNroExtEmpresa(data)
-        .subscribe(resp =>{
+          if (resp.ok === false) {
+            validacion = false;
+            Swal.fire('Error', `Extintor: ${numeroSerie} ya existe.`, 'error')
+          }
+          else{
+            Swal.fire('Creado', `Extintor: ${numeroSerie} - Marca: ${marca}.`, 'success')
+            this.router.navigateByUrl(`/dashboard/extintor/${ resp.extintor._id }`)
+          }
+          if (validacion === true) {
+            //? aqui actualizar nro extintor
+            if (this.empresaSeleccionados?.nroExtintores === undefined) {
+              this.cantExt = 1;
+            }
+            else {
+              this.cantExt = +this.empresaSeleccionados?.nroExtintores! + 1
+            }
+            const data = {
+              nombre: this.empresaSeleccionados?.nombre,
+              nroExtintores: this.cantExt.toString(),
+              _id: this.empresaSeleccionados?._id
+            }
+            this.empresaService.actualizarNroExtEmpresa(data)
+            .subscribe(resp =>{
 
+            })
+          }
         })
 
     }

@@ -23,7 +23,6 @@ export class UsuariosComponent implements OnInit, OnDestroy {
   public usuariosTemp: Usuario[] = [];
   public desde: number = 0;
   public cargando: boolean = true;
-
   constructor(private usuarioService: UsuarioService,
             private busquedasService: BusquedasService,
             private modalImgService: ModalImgService
@@ -39,13 +38,17 @@ export class UsuariosComponent implements OnInit, OnDestroy {
       pagingType: 'simple_numbers',
       responsive: true,
       info: false,
-      language: { url: '//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json' }
+      language: { url: '//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json' },
+      columnDefs: [
+        { orderable: false, targets: 1 },
+        { orderable: false, targets: 2 }
+      ]
     };
     //cargas
     this.cargarUsuarios();
     this.imgSubs = this.modalImgService.nuevaImagen
     .pipe(
-      delay(200)
+      delay(400)
     ).subscribe(img => {
       this.cargarUsuarios()
     });
@@ -54,13 +57,10 @@ export class UsuariosComponent implements OnInit, OnDestroy {
   cargarUsuarios(){
     this.cargando = true;
     this.usuarioService.cargarAllUsuarios()
-    .subscribe( usuarios =>{
+    .subscribe( usuario =>{
       //console.log(resp);
-      //this.totalUsuarios = total;
-      this.usuarios = usuarios;
-      //this.usuariosTemp = usuarios;
-
       this.cargando = false;
+      this.usuarios = usuario;
     })
   }
   //? pagination manual
@@ -88,43 +88,44 @@ export class UsuariosComponent implements OnInit, OnDestroy {
 
   }
   //? delete arreglar
-  eliminarUsuarios(usuario: Usuario):any{
+  eliminarUsuarios(usuario: Usuario){
 
     if (usuario.uid === this.usuarioService.uid) {
-      return Swal.fire('error', 'no puede borrarse a si mismo', 'error');
+      Swal.fire('error', 'no puede borrarse a si mismo', 'error');
+    }
+    else{
+      Swal.fire({
+        title: 'Estas seguro?',
+        text: `Esta a punto de borrar a ${usuario.nombre}`,
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Si, Borrar!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.usuarioService.eliminarUsuarios(usuario).
+          subscribe(resp =>{
+            Swal.fire(
+              'Borrado!',
+              `El usuario ${usuario.nombre} fue eliminado.`,
+              'success'
+            )
+            this.cargarUsuarios()
+          })
+        }
+      })
     }
     //console.log(usuario)
-    Swal.fire({
-      title: 'Estas seguro?',
-      text: `Esta a punto de borrar a ${usuario.nombre}`,
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonText: 'Si, Borrar!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.usuarioService.eliminarUsuarios(usuario).pipe(
-          delay(200)
-        ).subscribe(resp =>{
-          this.cargarUsuarios(),
-          Swal.fire(
-            'Borrado!',
-            `El usuario ${usuario.nombre} fue eliminado.`,
-            'success'
-          )
-        })
-      }
-    })
   }
   //* cambio de rol
   cambiarRole(usuario: Usuario){
     this.usuarioService.guardarUsuario(usuario)
     .subscribe(resp =>{
-      console.log(resp)
+      //console.log(resp)
     })
   }
   //* abrir modal
   abrirModal(usuario: Usuario){
-    console.log(usuario)
+    //console.log(usuario)
     this.modalImgService.abrirModal('usuarios', usuario.uid , usuario.img);
   }
 }

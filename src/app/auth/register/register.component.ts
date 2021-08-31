@@ -35,10 +35,10 @@ export class RegisterComponent implements OnInit {
 
   crearUsuario(){
     this.formSubmitted = true;
-    console.log(this.registerForm.value);
+    //console.log(this.registerForm.value);
 
     if(this.registerForm.invalid){
-      console.log('form no correcto');
+      //console.log('form no correcto');
       return;
     }
     // realizar el posteo

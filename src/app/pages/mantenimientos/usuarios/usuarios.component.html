@@ -17,7 +17,7 @@
         <div class="row">
 
           <div class="col-md-6">
-            <h4 class="card-title">Todos los usuarios registrados ({{usuarios.length}})</h4>
+            <h4 class="card-title">Usuarios registrados ({{usuarios.length}})</h4>
             <h6 class="card-subtitle"></h6>
           </div>
           <div class="col-md-6">
@@ -30,14 +30,14 @@
           </div>
         </div>
 
-        <hr>
+        <br>
         <!-- tablas aqui -->
 
         <div class="">
           <table
             datatable
             [dtOptions]="dtOptions"
-            class="display nowrap table animated fadeIn table-hover"
+            class="onMobile text-capitalize display nowrap table animated fadeIn table-hover"
             cellspacing="0"
             width="100%"
             role="grid"
@@ -45,15 +45,18 @@
             <thead>
                 <tr>
                   <th class="sorting text-center w5">#Nro</th>
-                  <th class="sorting text-center w100">Imagen</th>
+                  <th class="text-center no-sort borrar2">
+                    Borrar
+                  </th>
+                  <th class="text-center no-sort fotoPadding2">Foto</th>
                   <th class="sorting text-center">Nombre</th>
                   <th class="sorting text-center">Correo</th>
                   <th class="sorting text-center">Role</th>
                   <th class="sorting text-center w100">Auth</th>
-                  <th class="sorting text-center w100 text-nowrap">Accion</th>
+                  <th class="sorting text-center text-nowrap">Accion</th>
                 </tr>
             </thead>
-            <tfoot>
+            <!-- <tfoot>
               <tr>
                 <th class="sorting text-center" rowspan="1" colspan="1">
                   #Nro
@@ -77,7 +80,7 @@
                   Accion
                 </th>
               </tr>
-            </tfoot>
+            </tfoot> -->
             <tbody>
                 <tr *ngFor="let usuario of usuarios; let i = index"
                   class="cursor"
@@ -85,7 +88,17 @@
                   <td class="align-middle text-center">
                     {{i+1}}
                   </td>
-                  <td class="align-middle text-center">
+                  <td class="align-middle text-center borrar">
+                    <a
+                      class="cursor iconHover"
+                      data-toggle="tooltip"
+                      data-original-title="Borrar"
+                      (click)="eliminarUsuarios(usuario)"
+                    >
+                      <i class="mdi mdi-delete-circle text-danger"></i>
+                    </a>
+                  </td>
+                  <td class="align-middle text-center fotoPadding">
                     <img
                         [src]="usuario.img! | imagen: 'usuarios'"
                         alt=""
@@ -94,7 +107,9 @@
                     >
                   </td>
                   <td class="align-middle text-center" [routerLink]="['/dashboard/usuario', usuario.uid]">{{usuario.nombre}}</td>
-                  <td class="align-middle text-center" [routerLink]="['/dashboard/usuario', usuario.uid]">{{usuario.email}}</td>
+                  <td class="align-middle text-center w100" [routerLink]="['/dashboard/usuario', usuario.uid]">
+                    {{usuario.email | slice:0:15}}{{(usuario.email.length > 15) ? '..' : '' }}
+                  </td>
                   <td class="align-middle text-center">
                     <select class="w100 text-center custom-select form-control"
                       [(ngModel)]="usuario.role"
@@ -114,15 +129,8 @@
                   </td>
                   <td class="text-nowrap align-middle text-center">
                       <a [routerLink]="['/dashboard/usuario', usuario.uid]"
-                          class="cursor" data-toggle="tooltip" data-original-title="Editar">
-                          <i class="fa fa-pencil text-inverse m-r-10"></i>
-                      </a>
-                      <a data-toggle="tooltip"
-                        data-original-title="Borrar"
-                        (click)="eliminarUsuarios(usuario)"
-                        class="cursor"
-                      >
-                        <i class="fa fa-close text-danger"></i>
+                          class="cursor iconHover" data-toggle="tooltip" data-original-title="Editar">
+                          <i class="mdi mdi-tooltip-edit text-inverse"></i>
                       </a>
                   </td>
                 </tr>

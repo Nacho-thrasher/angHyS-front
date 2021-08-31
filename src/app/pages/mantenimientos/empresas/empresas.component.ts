@@ -41,7 +41,11 @@ export class EmpresasComponent implements OnInit, OnDestroy {
       pagingType: 'simple_numbers',
       responsive: true,
       info: false,
-      language: { url: '//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json' }
+      language: { url: '//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json' },
+      columnDefs: [
+        { orderable: false, targets: 1 },
+        { orderable: false, targets: 2 }
+      ]
     };
     //cargas
     this.cargarEmpresas();

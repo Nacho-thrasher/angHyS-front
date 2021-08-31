@@ -18,10 +18,10 @@
             <h4 class="card-title">Todas las empresas ({{empresas?.length}})</h4>
             <h6 class="card-subtitle"></h6>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 justify-content-center text-center">
             <div class="text-right">
               <a routerLink="/dashboard/empresa/nuevo"
-              class="text-white btn waves-effect waves-light btn-info">
+              class="btnResp text-white btn waves-effect waves-light btn-info">
                 <i class="">Crear Empresa</i>
               </a>
             </div>
@@ -35,7 +35,7 @@
           <table
             datatable
             [dtOptions]="dtOptions"
-            class="display nowrap table animated fadeIn table-hover"
+            class="onMobile text-capitalize display nowrap table animated fadeIn table-hover"
             cellspacing="0"
             width="100%"
             role="grid"
@@ -43,14 +43,17 @@
             <thead>
               <tr>
                 <th class="sorting text-center w5">#Nro</th>
-                <th class="w100 text-center">Foto</th>
+                <th class="text-center no-sort borrar2">
+                  Borrar
+                </th>
+                <th class="text-center no-sort fotoPadding2">Foto</th>
                 <th class="sorting text-center">Nombre</th>
                 <th class="sorting text-center">Direccion</th>
                 <th class="sorting text-center">Localidad</th>
-                <th class="w100 sorting text-center text-nowrap">Accion</th>
+                <th class="sorting text-center text-nowrap">Accion</th>
               </tr>
             </thead>
-            <tfoot>
+            <!-- <tfoot>
               <tr>
                 <th class="sorting text-center" rowspan="1" colspan="1">
                   #Nro
@@ -71,7 +74,7 @@
                   Accion
                 </th>
               </tr>
-            </tfoot>
+            </tfoot> -->
             <tbody>
               <tr *ngFor="let empresa of empresas; let i = index"
                 class="cursor"
@@ -79,7 +82,17 @@
                 <td class="align-middle text-center">
                   {{i+1}}
                 </td>
-                <td class="align-middle text-center">
+                <td class="align-middle text-center borrar">
+                  <a
+                    (click)="eliminarEmpresa(empresa)"
+                    data-toggle="tooltip"
+                    class="cursor iconHover"
+                    data-original-title="Borrar"
+                  >
+                  <i class="mdi mdi-delete-circle text-danger"></i>
+                  </a>
+                </td>
+                <td class="align-middle text-center fotoPadding">
                   <img
                     [src]="empresa.img! | imagen: 'empresas'"
                     alt=""
@@ -97,20 +110,11 @@
                 <td class="text-nowrap align-middle text-center">
                   <a
                     [routerLink]="['/dashboard/empresa', empresa._id]"
-                    class="cursor"
+                    class="cursor iconHover"
                     data-toggle="tooltip"
                     data-original-title="Editar"
                   >
-                    <i class="fa fa-pencil text-inverse m-r-10"></i>
-                  </a>
-
-                  <a
-                    (click)="eliminarEmpresa(empresa)"
-                    data-toggle="tooltip"
-                    class="cursor"
-                    data-original-title="Borrar"
-                  >
-                    <i class="fa fa-close text-danger"></i>
+                  <i class="mdi mdi-tooltip-edit text-inverse"></i>
                   </a>
                 </td>
               </tr>

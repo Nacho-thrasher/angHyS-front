@@ -26,7 +26,7 @@
           <table
             datatable
             [dtOptions]="dtOptions"
-            class="display nowrap table animated fadeIn table-hover"
+            class="onMobile text-capitalize display nowrap table animated fadeIn table-hover"
             cellspacing="0"
             width="100%"
             role="grid"
@@ -34,15 +34,15 @@
             <thead>
               <tr>
                 <th class="sorting text-center w5">#Nro</th>
-                <th class="sorting text-center w100">Foto</th>
-                <th class="sorting text-center w100">Nro Serie</th>
+                <th class="text-center no-sort fotoPadding2">Foto</th>
+                <th class="sorting text-center">Nro Serie</th>
                 <th class="sorting text-center">Marca</th>
                 <th class="sorting text-center w100">Agente extintor</th>
                 <th class="sorting text-center">Capacidad</th>
                 <th class="sorting text-center">Empresa</th>
               </tr>
             </thead>
-            <tfoot>
+            <!-- <tfoot>
               <tr>
                 <th class="sorting text-center" rowspan="1" colspan="1">
                   #Nro
@@ -66,14 +66,14 @@
                   empresa
                 </th>
               </tr>
-            </tfoot>
+            </tfoot> -->
             <tbody>
               <tr *ngFor="let extintor of extintores; let i = index"
               class="animated cursor fadeIn fast">
                 <td class="align-middle text-center">
                   {{i+1}}
                 </td>
-                <td class="align-middle text-center" [routerLink]="['/dashboard/vista-extintor', extintor.numeroSerie]">
+                <td class="align-middle text-center fotoPadding" [routerLink]="['/dashboard/vista-extintor', extintor.numeroSerie]">
                   <img [src]="extintor.img! | imagen:'extintores'"
                     alt="" class="avatar2 cursor"
                   >

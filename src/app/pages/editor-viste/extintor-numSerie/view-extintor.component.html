@@ -56,7 +56,7 @@
         >
           <div class="card-body">
             <div class="row">
-              <div class="col-md-4 col-xs-6 b-r">
+              <div class="text-center col-md-4 col-xs-6 b-r">
                 <strong>Fotos</strong>
                 <br />
                 <div class="avatar-vista">
@@ -418,7 +418,7 @@
                               </div>
                             </span>
                           </div>
-                          <div class="col-md-2">
+                          <div class="col-md-3">
                             <span>
                               <strong>
                                 Soporte:
@@ -904,7 +904,7 @@
                       <div *ngIf="!cargandoImg" class="avatar-preview">
                         <div
                           id="imagePreview"
-                          style="background-image: url(http://localhost:4200/api/upload/extintores/{{imgViene}});"
+                          style="background-image: url({{rutaStart}}/upload/extintores/{{imgViene}});"
                         ></div>
                       </div>
                       <div
@@ -941,7 +941,7 @@
                       <div class="avatar-preview">
                         <div
                           id="imagePreview2"
-                          style="background-image: url(http://localhost:4200/api/upload/extintores/{{imgViene2}});"
+                          style="background-image: url({{rutaStart}}/upload/extintores/{{imgViene2}});"
                         ></div>
                       </div>
                     </div>

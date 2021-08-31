@@ -10,8 +10,6 @@ import { Extintor } from 'src/app/models/extintor.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
-import { map } from 'rxjs/operators';
-
 @Component({
   selector: 'app-extintores-excel',
   templateUrl: './extintores-excel.component.html',
@@ -20,16 +18,20 @@ import { map } from 'rxjs/operators';
 })
 export class ExtintoresExcelComponent implements OnInit {
 
+  public dtOptions: DataTables.Settings = {};
   public empresas: Empresa[] = [];
   public empresaSeleccionados?: Empresa;
   public extintorForm!: FormGroup;
   public extintorSeleccionados?: Extintor;
   public empresaSel!: string;
   public cantExt!: number;
+  public extintores: Extintor[] = [];
+  public cargandoTable: boolean = false;
   // for tables
   public arrayBuffer: any;
   public file!: File;
   public str!: any;
+  public noRepeatObject:any;
   public JSONObject = {
     object: {},
     string: ''
@@ -47,10 +49,16 @@ export class ExtintoresExcelComponent implements OnInit {
     private activatedRouter: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.cargarEmpresas();
 
     this.extintorForm = this.fb.group({
       empresa: ['', Validators.required],
+    })
+    this.cargarEmpresas();
+    this.extintorForm.get('empresa')?.valueChanges
+    .subscribe(empresaId =>{
+      this.empresaSeleccionados = this.empresas
+      .find( h => h._id === empresaId);
+      //console.log(this.empresaSeleccionados)
     })
 
   }
@@ -65,12 +73,10 @@ export class ExtintoresExcelComponent implements OnInit {
   }
 
   //* other methods efective ===================================
-  // incomingfile(event:any) {
-  // }
   upload(event:any) {
+    this.cargandoTable = false;
 
     this.file = event.target.files[0];
-
     if (event.target.files.length > 1) {
       this.inputFile.nativeElement.value = '';
     }
@@ -88,52 +94,75 @@ export class ExtintoresExcelComponent implements OnInit {
 
       this.JSONObject.object = JSON_Object; //Data in JSON Format
       this.str = JSON_Object;
-
       // para tablas
       this.keys = Object.keys(this.str[0]);
       this.dataSheet.next(this.str);
+      this.comprobarNroSerie();
       // console log y output text
       this.JSONObject.string = JSON.stringify(this.str); //Data in String Format
-      console.log(`JSON object cant:${this.str.length}`, this.str);
+      //console.log(`JSON object cant:${this.str.length}`, this.str);
 
     };
     fileReader.readAsArrayBuffer(this.file);
+    this.cargandoTable = true;
+  }
 
+  comprobarNroSerie(){
+    for(let index = 0; index < this.str.length; index++){
+      this.extintorService.cargarExtintoresByNumSerie(this.str[index].numeroSerie)
+      .subscribe((resp:any)=>{
+        if (resp.extintor !== undefined) {
+          this.str[index].existe = ('si');
+        }
+      })
+    }
   }
 
   guardarExtintor(){
     //*Crear
     try {
+      let i = 0; let repetidos = 0;
       const { empresa } = this.extintorForm.value;
       for(let index = 0; index < this.str.length; index++){
-        // pushear empresa
-        this.str[index].empresa = (`${empresa}`);
-        //creando
-        this.extintorService.crearExtintorXlsx(this.str[index])
-        .subscribe( (resp:any) => {
-          //preload aqui?
+        if (this.str[index].existe === undefined || this.str[index].existe != 'si') {
+          // pushear empresa
+          this.str[index].empresa = (`${empresa}`);
+          //creando
+          this.extintorService.crearExtintorXlsx(this.str[index])
+          .subscribe( (resp:any) => {
+            //preload aqui?
+          })
+          i++;
+        }
+        else{ repetidos++; }
+      }
+      if( repetidos === this.str.length){
+        Swal.fire('Error', `Los (${repetidos}) Extintores ya existen.`, 'error')
+      }
+      else{
+        // si empresa no tiene extintores
+        if (this.empresaSeleccionados?.nroExtintores === undefined) {
+          this.cantExt = +i;
+        }
+        else {
+          this.cantExt = +this.empresaSeleccionados?.nroExtintores! + i
+        }
+        const data = {
+          nombre: this.empresaSeleccionados?.nombre,
+          nroExtintores: this.cantExt.toString(),
+          _id: this.empresaSeleccionados?._id
+        }
+        this.empresaService.actualizarNroExtEmpresa(data)
+        .subscribe(resp =>{
+
         })
+        //todo
+        Swal.fire('Creado', `(${i}) Extintores creados`, 'success')
+        setTimeout(() => {
+          this.router.navigateByUrl(`/dashboard/extintores`)
+        }
+        , 500);
       }
-      if (this.empresaSeleccionados?.nroExtintores === undefined) {
-        this.cantExt = +this.str.length;
-      }
-      else {
-        this.cantExt = +this.empresaSeleccionados?.nroExtintores! + this.str.length
-      }
-      const data = {
-        nombre: this.empresaSeleccionados?.nombre,
-        nroExtintores: this.cantExt.toString(),
-        _id: this.empresaSeleccionados?._id
-      }
-      this.empresaService.actualizarNroExtEmpresa(data)
-      .subscribe(resp =>{
-
-      })
-      //todo aqui insertar en empresas numero + sumar extintores creados
-      Swal.fire('Creado', `(${this.str.length}) Extintores creados`, 'success')
-      this.router.navigateByUrl(`/dashboard/extintores`)
-      //? aqui actualizar nro extintor
-
     } catch (error) {
       console.log(error)
       Swal.fire('Error', `error`, 'error')
@@ -142,6 +171,7 @@ export class ExtintoresExcelComponent implements OnInit {
   }
 
   removeData() {
+    this.cargandoTable = false;
     this.inputFile.nativeElement.value = '';
     this.dataSheet.next(null);
     this.keys = [];

@@ -10,8 +10,11 @@ import { ExtintorService } from 'src/app/services/extintor.service';
 import { FileUploadService } from 'src/app/services/file-upload.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
+import { environment } from '../../../../environments/environment';
 
 declare var $: any;
+
+const base_url = environment.base_url;
 
 @Component({
   selector: 'app-view-extintor',
@@ -45,6 +48,7 @@ export class ViewExtintorComponent implements OnInit {
   public dtOptions: DataTables.Settings = {};
   //? variables par aguardar al cargar
   public isUser!:boolean;
+  public rutaStart!:string;
 
   constructor(private fb: FormBuilder,
     private empresaService: EmpresaService,
@@ -113,6 +117,9 @@ export class ViewExtintorComponent implements OnInit {
       else{
         this.imgViene2 = this.extintor.img2;
       }
+      //?===
+      this.rutaStart = base_url;
+      //?===
       this.extintorSeleccionados = resp.extintor;
       this.cargando = false;
       //? cargando imputs
@@ -210,14 +217,14 @@ export class ViewExtintorComponent implements OnInit {
   removeDataImg1() {
     this.imagenSubir = this.imagenRem;
     $('#imagePreview')
-    .css('background-image', `url(http://localhost:4200/api/upload/extintores/${this.extintor.img})`);
+    .css('background-image', `url(${this.rutaStart}/upload/extintores/${this.extintor.img})`);
     $('#imagePreview').hide();
     $('#imagePreview').fadeIn(650);
   }
   removeDataImg2() {
     this.imagenSubir2 = this.imagenRem;
     $('#imagePreview2')
-    .css('background-image', `url(http://localhost:4200/api/upload/extintores/${this.extintor.img2})`);
+    .css('background-image', `url(${this.rutaStart}/upload/extintores/${this.extintor.img2})`);
     $('#imagePreview2').hide();
     $('#imagePreview2').fadeIn(650);
   }
@@ -276,7 +283,7 @@ export class ViewExtintorComponent implements OnInit {
   //? guardar extintor
   guardarExtintor() {
     if (this.usuarioService.role === 'USER_ROLE') {
-      Swal.fire('No autorizado', ``, 'error');
+      Swal.fire('No autorizado', 'error', 'error');
       return;
     }
     else{
@@ -308,7 +315,7 @@ export class ViewExtintorComponent implements OnInit {
           // Swal.fire('Guardado', 'Imagen de usuario actualizada', 'success');
           this.router.navigateByUrl(`/dashboard/vista-empresas`)
         }).catch( err => {
-          console.log(err);
+          //console.log(err);
           Swal.fire('Error', 'No se pudo subir la imagen 2', 'error');
         })
       }

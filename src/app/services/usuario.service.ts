@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, NgZone } from '@angular/core';
+import { EventEmitter, Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { tap, map, catchError, delay } from 'rxjs/operators';
@@ -9,6 +9,7 @@ import { CargarUsuario } from '../interfaces/cargar_usuarios.interface';
 import { LoginFormInt } from '../interfaces/loginForm.interface';
 import { RegisterForm } from '../interfaces/registerForm.interface';
 import { Usuario } from '../models/usuario.model';
+import { SidebarService } from './sidebar.service';
 
 const base_url = environment.base_url;
 declare const gapi: any;
@@ -19,13 +20,16 @@ declare const gapi: any;
 })
 export class UsuarioService {
 
+  public nuevaImagen: EventEmitter<string> = new EventEmitter<string>();
+
   public auth2: any;
   public usuario!: Usuario;
 
 
   constructor(private http: HttpClient,
     private router: Router,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private sidebarService: SidebarService
   ){
 
       this.googleInit();
@@ -119,7 +123,7 @@ export class UsuarioService {
 
   }
 
-  actualizarPerfil(data: {email: string, nombre: string, role?: string}){
+  actualizarPerfil(data: {email: string, nombre: string, role?: string, password?: string}){
 
     data = {
       ...data,

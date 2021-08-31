@@ -71,7 +71,7 @@ export class ModalImgComponent implements OnInit {
         this.modalImgService.nuevaImagen.emit(img);
         this.cerrarModal();
       }).catch( err => {
-        console.log(err);
+        //console.log(err);
         Swal.fire('Error', 'No se pudo subir la imagen', 'error');
       })
 

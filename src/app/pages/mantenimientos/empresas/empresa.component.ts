@@ -25,6 +25,7 @@ export class EmpresaComponent implements OnInit {
     private router: Router,
     private activatedRouter: ActivatedRoute) { }
 
+
   ngOnInit(): void {
     this.activatedRouter.params.subscribe(({id}) =>{
       this.cargarEmpresa(id);
@@ -51,7 +52,7 @@ export class EmpresaComponent implements OnInit {
             localidad,
             direccion
             } = empresa;
-      console.log(empresa);
+      //console.log(empresa);
       this.empresaSeleccionados = empresa;
       this.empresaForm.setValue({
         nombre,

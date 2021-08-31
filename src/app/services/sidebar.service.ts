@@ -1,9 +1,11 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SidebarService {
+
+  public nuevaImagen: EventEmitter<string> = new EventEmitter<string>();
 
   public menu:any[] = [];
 

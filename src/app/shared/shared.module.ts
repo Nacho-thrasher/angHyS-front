@@ -6,7 +6,7 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-
+import { PipesModule } from '../pipes/pipes.module';
 
 
 @NgModule({
@@ -23,7 +23,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    PipesModule
   ]
 })
 export class SharedModule { }
