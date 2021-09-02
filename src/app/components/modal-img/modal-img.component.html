@@ -27,7 +27,7 @@
                     />
                     <label class="label-img" for="imageUpload"></label>
                     <a
-                      *ngIf="imagenSubir != undefined"
+                      *ngIf="imagenSubir !== undefined"
                       (click)="removeDataImg1()"
                       class="lbl-remove"
                     ></a>
@@ -43,7 +43,7 @@
             </div>
             <div class="modal-footer">
                 <button (click)="cerrarModal()" type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                <button (click)="subirImagen()" type="button" class="btn btn-primary">Cambiar Imagen</button>
+                <button [disabled]="noImagen()" (click)="subirImagen()" type="button" class="btn btn-primary">Cambiar Imagen</button>
             </div>
         </div>
     </div>

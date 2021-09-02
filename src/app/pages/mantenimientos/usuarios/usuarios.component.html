@@ -14,10 +14,10 @@
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-        <div class="row">
+        <div class="row animated fadeIn pt-2">
 
           <div class="col-md-6">
-            <h4 class="card-title">Usuarios registrados ({{usuarios.length}})</h4>
+            <h4 class="card-title sm-text-center">Usuarios registrados ({{usuarios.length}})</h4>
             <h6 class="card-subtitle"></h6>
           </div>
           <div class="col-md-6">
@@ -56,31 +56,7 @@
                   <th class="sorting text-center text-nowrap">Accion</th>
                 </tr>
             </thead>
-            <!-- <tfoot>
-              <tr>
-                <th class="sorting text-center" rowspan="1" colspan="1">
-                  #Nro
-                </th>
-                <th class="sorting text-center" rowspan="1" colspan="1">
-                  Imagen
-                </th>
-                <th class="sorting text-center" rowspan="1" colspan="1">
-                  Correo
-                </th>
-                <th class="sorting text-center" rowspan="1" colspan="1">
-                  Nombre
-                </th>
-                <th class="sorting text-center" rowspan="1" colspan="1">
-                  Role
-                </th>
-                <th class="sorting text-center" rowspan="1" colspan="1">
-                  Registrado por
-                </th>
-                <th class="sorting text-center" rowspan="1" colspan="1">
-                  Accion
-                </th>
-              </tr>
-            </tfoot> -->
+            
             <tbody>
                 <tr *ngFor="let usuario of usuarios; let i = index"
                   class="cursor"

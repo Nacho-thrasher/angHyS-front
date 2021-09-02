@@ -33,7 +33,7 @@ export class ModalImgService {
       this.img = img;
     }
     else{
-      this.img = `${base_url}/upload/${tipo}/${img}`;
+      this.img = `${base_url}/cloudinary/${tipo}/no-image`;
     }
     //console.log(this.img)
   }

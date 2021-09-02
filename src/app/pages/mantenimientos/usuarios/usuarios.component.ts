@@ -50,6 +50,7 @@ export class UsuariosComponent implements OnInit, OnDestroy {
     .pipe(
       delay(400)
     ).subscribe(img => {
+      //setTimeout(()=> this.cargarUsuarios(), 400);
       this.cargarUsuarios()
     });
   }
@@ -59,8 +60,8 @@ export class UsuariosComponent implements OnInit, OnDestroy {
     this.usuarioService.cargarAllUsuarios()
     .subscribe( usuario =>{
       //console.log(resp);
-      this.cargando = false;
       this.usuarios = usuario;
+      this.cargando = false;
     })
   }
   //? pagination manual

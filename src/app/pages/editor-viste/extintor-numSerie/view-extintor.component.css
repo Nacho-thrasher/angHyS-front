@@ -6,10 +6,8 @@
   text-align: center;
   display: block;
   font-size: 15px;
-  /* padding-top: 8px; */
   color: gray;
 }
-
 .avatar-upload {
   position: relative;
   max-width: 205px;
@@ -56,7 +54,6 @@
   display: flex;
   width: 34px;
   height: 34px;
-  /* margin-top: 50px; */
   margin-bottom: 0;
   border-radius: 100%;
   background: #ffffff;
@@ -81,7 +78,6 @@
   text-align: center;
   margin: auto;
 }
-
 .avatar-upload .avatar-preview {
   width: 192px;
   height: 192px;
@@ -96,9 +92,7 @@
   background-repeat: no-repeat;
   background-position: center;
 }
-
 .avatar-vista {
-  /* position: relative; */
   max-width: 205px;
   margin: 10px auto;
 }
@@ -106,13 +100,11 @@
   width: 215px;
   height: 150px;
   position: relative;
-  /* border: 6px solid #f8f8f8; */
   box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.1);
 }
 /* mob */
 @media screen and (max-width: 870px) {
   .avatar-vista {
-    /* position: relative; */
     max-width: 205px;
     margin: 10px auto;
   }
@@ -120,15 +112,12 @@
     width: 200px;
     height: 140px;
     position: relative;
-    /* border: 6px solid #f8f8f8; */
     box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.1);
   }
 }
-
 /* mob */
 @media screen and (max-width: 795px) {
   .avatar-vista {
-    /* position: relative; */
     max-width: 205px;
     margin: 2% auto;
     padding: 5px;
@@ -138,22 +127,18 @@
     width: 190px;
     height: 130px;
     position: relative;
-    /* border: 6px solid #f8f8f8; */
     box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.1);
   }
 }
-
 /* mob */
 @media screen and (max-width: 765px) {
   /* imgs */
   .avatar-vista {
-    /* position: relative; */
     max-width: 205px;
     margin: 2% auto;
     padding: 5px;
     display: inline-flex;
   }
-
   /* info */
   .centeredMobile{
     text-align: center !important;
@@ -166,7 +151,6 @@
 @media screen and (max-width: 472px) {
   /* imgs */
   .avatar-vista {
-    /* position: relative; */
     max-width: 205px;
     margin: 1% auto;
     padding: 5px;
@@ -176,7 +160,6 @@
     width: 175px;
     height: 115px;
     position: relative;
-    /* border: 6px solid #f8f8f8; */
     box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.1);
   }
   /* info */
@@ -191,7 +174,6 @@
 @media screen and (max-width: 440px) {
   /* imgs */
   .avatar-vista {
-    /* position: relative; */
     max-width: 205px;
     margin: 1% auto;
     padding: 5px;
@@ -262,7 +244,6 @@
     width: 135px !important;
     height: 100px !important;
     position: relative;
-    /* border: 6px solid #f8f8f8; */
     box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.1);
   }
   /* info */

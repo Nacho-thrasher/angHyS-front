@@ -27,6 +27,9 @@
       <li *ngIf="numS !== undefined" class="breadcrumb-item active">
         &nbsp;{{numS}}
       </li>
+      <li *ngIf="numS === undefined && titulo === 'Extintores'" class="breadcrumb-item active">
+        &nbsp;<a routerLink="vista-empresas">Empresas</a>
+      </li>
       <li *ngIf="numS === undefined" class="breadcrumb-item active">
         &nbsp;{{titulo}}
       </li>

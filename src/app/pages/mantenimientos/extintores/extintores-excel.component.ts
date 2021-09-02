@@ -164,7 +164,7 @@ export class ExtintoresExcelComponent implements OnInit {
         , 500);
       }
     } catch (error) {
-      console.log(error)
+      //console.log(error)
       Swal.fire('Error', `error`, 'error')
     }
 

@@ -14,10 +14,6 @@
   justify-content:center;
   text-align: center;
 }
-/* .img-avatar{
-  height:200px;
-  width:200px;
-} */
 .w100{
   width: 100px;
 }
@@ -62,27 +58,19 @@
   text-shadow: 1px 0px 1px #CCCCCC, 0px 1px 1px #EEEEEE, 2px 1px 1px #CCCCCC, 1px 2px 1px #EEEEEE, 3px 2px 1px #CCCCCC, 2px 3px 1px #EEEEEE, 4px 3px 1px #CCCCCC, 3px 4px 1px #EEEEEE, 5px 4px 1px #CCCCCC, 4px 5px 1px #EEEEEE, 6px 5px 1px #CCCCCC, 5px 6px 1px #EEEEEE, 7px 6px 1px #CCCCCC;
 }
 .font2{
-  /* color: rgb(46, 46, 46); */
-  /* color:rgb(80, 80, 80); */
-  /* text-decoration: underline; */
   font-family: "Tenor Sans", sans-serif;
   font-weight: bold;
   text-align: center;
   color: rgb(80, 80, 80);
-  /* background-color: rgb(255, 255, 255); */
-  /* text-shadow: rgba(0, 0, 0, 0.28) 1px 1px 1px; */
-}
+  }
 /* todo hover */
 .hov:hover {
   color: rgb(247, 41, 41) !important; }
 
 /*todo hover card */
 .card-shadow{
-  /* border-radius: 4px; */
-  /* background: #fff; */
   box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
   transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
-  /* padding: 14px 80px 18px 36px; */
   cursor: pointer;
 }
 .card-shadow:hover{
@@ -202,7 +190,6 @@ a:link, a:visited, a:active {
   .borrar2{
     padding-left: 0px !important;
     padding-right: 0px !important;
-    /* padding: 0px !important; */
   }
   .borrar{
     padding-left: 0px !important;
@@ -223,7 +210,10 @@ a:link, a:visited, a:active {
   .col-md-6 .text-right{
     text-align: center !important;
   }
-
+  .sm-text-center{
+    text-align: center !important;
+    padding: 2px 0px 7px 0px;
+  }
 
 }
 /*todo others */

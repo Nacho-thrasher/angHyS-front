@@ -18,7 +18,7 @@ export class FileUploadService {
   ){
     try {
 
-      const url = `${base_url}/upload/${tipo}/${id}`;
+      const url = `${base_url}/cloudinary/${tipo}/${id}`;
       const formData = new FormData();
       formData.append('img', archivo);
       //* se puede seguir agregando items
@@ -54,7 +54,7 @@ export class FileUploadService {
   ){
     try {
 
-      const url = `${base_url}/upload2/${tipo}/${id}`;
+      const url = `${base_url}/cloudinary2/${tipo}/${id}`;
       const formData = new FormData();
       formData.append('img2', archivo);
       //* se puede seguir agregando items

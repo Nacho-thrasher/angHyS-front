@@ -505,51 +505,53 @@
         >
           <div class="card-body">
             <div class="row">
-              <div class="col-md-3 col-xs-6 b-r">
-                <strong>Full Name</strong>
-                <br />
-                <p class="text-muted">Johnathan Deo</p>
+              <div class="text-center col-md-4 b-r">
+                <div class="avatar-vista">
+                  <a
+                    class="image-popup-no-margins"
+                    [href]="extintor?.empresa?.img! | imagen: 'empresas'"
+                  >
+                    <img
+                      [src]="extintor?.empresa?.img! | imagen: 'empresas'"
+                      class="rounded avatar-vista-preview img-responsive"
+                    />
+                  </a>
+                  <!-- <hr> -->
+                </div>
               </div>
-              <div class="col-md-3 col-xs-6 b-r">
-                <strong>Mobile</strong>
-                <br />
-                <p class="text-muted">(123) 456 7890</p>
-              </div>
-              <div class="col-md-3 col-xs-6 b-r">
-                <strong>Email</strong>
-                <br />
-                <p class="text-muted">johnathan@admin.com</p>
-              </div>
-              <div class="col-md-3 col-xs-6">
-                <strong>Location</strong>
-                <br />
-                <p class="text-muted">London</p>
+              <div class="col-md-8 sm-text-center">
+                <div class="row">
+                  <div class="col-md-6 b-r">
+                    <strong>Nombre:</strong>
+                    <br />
+                    <p class="text-muted">{{extintor.empresa.nombre }}</p>
+                  </div>
+                  <div class="col-md-6 ">
+                    <strong>Localidad:</strong>
+                    <br />
+                    <p class="text-muted">{{extintor.empresa.localidad}}</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 b-r">
+                    <strong>Direccion:</strong>
+                    <br />
+                    <p class="text-muted">{{extintor.empresa.direccion}}</p>
+                  </div>
+                  <div class="col-md-6">
+                    <strong>Extintores:</strong>
+                    <br />
+                    <p class="text-muted">({{extintor.empresa.nroExtintores}})</p>
+                  </div>
+                </div>
               </div>
             </div>
-            <hr />
+            <!-- <hr /> -->
             <p class="m-t-30">
-              Donec pede justo, fringilla vel, aliquet nec, vulputate eget,
-              arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae,
-              justo. Nullam dictum felis eu pede mollis pretium. Integer
-              tincidunt.Cras dapibus. Vivamus elementum semper nisi. Aenean
-              vulputate eleifend tellus. Aenean leo ligula, porttitor eu,
-              consequat vitae, eleifend ac, enim.
+              <!-- info empresa -->
             </p>
-            <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries
-            </p>
-            <p>
-              It was popularised in the 1960s with the release of Letraset
-              sheets containing Lorem Ipsum passages, and more recently with
-              desktop publishing software like Aldus PageMaker including
-              versions of Lorem Ipsum.
-            </p>
-            <h4 class="font-medium m-t-30">Skill Set</h4>
-            <hr />
+            <!-- <h4 class="font-medium m-t-30">Skill Set</h4> -->
+
           </div>
         </div>
         <!--todo forms  planila chequeo -->
@@ -904,7 +906,7 @@
                       <div *ngIf="!cargandoImg" class="avatar-preview">
                         <div
                           id="imagePreview"
-                          style="background-image: url({{rutaStart}}/upload/extintores/{{imgViene}});"
+                          style="background-image: url({{imgViene}});"
                         ></div>
                       </div>
                       <div
@@ -941,7 +943,7 @@
                       <div class="avatar-preview">
                         <div
                           id="imagePreview2"
-                          style="background-image: url({{rutaStart}}/upload/extintores/{{imgViene2}});"
+                          style="background-image: url({{imgViene2}});"
                         ></div>
                       </div>
                     </div>

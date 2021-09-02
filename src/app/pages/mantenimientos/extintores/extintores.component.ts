@@ -56,6 +56,8 @@ export class ExtintoresComponent implements OnInit, OnDestroy {
     ).subscribe(img => {
       this.cargarExtintores()
     });
+    // setTimeout(()=>this.showContent=true, 1000);
+
   }
 
   //funcion
@@ -68,6 +70,7 @@ export class ExtintoresComponent implements OnInit, OnDestroy {
       //console.log(this.extintores)
     })
   }
+
   //abrirModal
   abrirModal(extintor: Extintor){
     //console.log(extintor)

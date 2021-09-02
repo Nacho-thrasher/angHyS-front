@@ -39,7 +39,7 @@ export class PerfilComponent implements OnInit {
 
   ngOnInit(): void {
       this.usuario = this.usuarioService.usuario;
-      console.log(this.usuario)
+      //console.log(this.usuario)
       this.imgPreCargada = this.usuario.img;
       this.perfilForm = this.fb.group({
         nombre: [this.usuario.nombre, Validators.required],
@@ -94,7 +94,7 @@ export class PerfilComponent implements OnInit {
     }
     else{
       $('#imagePreview')
-      .css('background-image', `url(${this.rutaStart}/upload/usuarios/${this.usuario.img})`);
+      .css('background-image', `url(${this.usuario.img})`);
       $('#imagePreview').hide();
       $('#imagePreview').fadeIn(650);
     }

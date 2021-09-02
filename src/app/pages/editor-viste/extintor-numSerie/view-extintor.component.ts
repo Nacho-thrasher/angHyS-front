@@ -106,13 +106,13 @@ export class ViewExtintorComponent implements OnInit {
       //? asignando para mostrar y preload
       this.extintor = resp.extintor;
       if (this.extintor.img === undefined) {
-        this.imgViene = 'no_imagen.png';
+        this.imgViene = `${ base_url }/cloudinary/extintor/no-image`;
       }
       else{
         this.imgViene = this.extintor.img;
       }
       if (this.extintor.img2 === undefined) {
-        this.imgViene2 = 'no_imagen.png';
+        this.imgViene2 = `${ base_url }/cloudinary/extintor/no-image`;
       }
       else{
         this.imgViene2 = this.extintor.img2;
@@ -139,7 +139,7 @@ export class ViewExtintorComponent implements OnInit {
         empresa: {_id, nombre},
         numeroSerie
       } = resp.extintor;
-      //console.log(nombre);
+      //console.log(this.extintor.empresa);
       //? si es la primera ves pregunto
       if (zona === undefined) {
         zona = ''
@@ -215,16 +215,28 @@ export class ViewExtintorComponent implements OnInit {
     })
   }
   removeDataImg1() {
+    if (this.extintor.img === undefined) {
+      this.imgViene = `${ base_url }/cloudinary/extintor/no-image`;
+    }
+    else{
+      this.imgViene = this.extintor.img;
+    }
     this.imagenSubir = this.imagenRem;
     $('#imagePreview')
-    .css('background-image', `url(${this.rutaStart}/upload/extintores/${this.extintor.img})`);
+    .css('background-image', `url(${this.imgViene})`);
     $('#imagePreview').hide();
     $('#imagePreview').fadeIn(650);
   }
   removeDataImg2() {
+    if (this.extintor.img2 === undefined) {
+      this.imgViene2 = `${ base_url }/cloudinary/extintor/no-image`;
+    }
+    else{
+      this.imgViene2 = this.extintor.img2;
+    }
     this.imagenSubir2 = this.imagenRem;
     $('#imagePreview2')
-    .css('background-image', `url(${this.rutaStart}/upload/extintores/${this.extintor.img2})`);
+    .css('background-image', `url(${this.imgViene2})`);
     $('#imagePreview2').hide();
     $('#imagePreview2').fadeIn(650);
   }
@@ -270,7 +282,6 @@ export class ViewExtintorComponent implements OnInit {
     }
 
   }
-  //? end cargar forms, y extintor
   //? Si es usuario o admin
   isUFunc(){
     if (this.usuarioService.role === 'USER_ROLE') {
@@ -282,11 +293,13 @@ export class ViewExtintorComponent implements OnInit {
   }
   //? guardar extintor
   guardarExtintor() {
+    //*1 ES USUARIO ADMIN O COMUN
     if (this.usuarioService.role === 'USER_ROLE') {
       Swal.fire('No autorizado', 'error', 'error');
       return;
     }
     else{
+      //*2 CAPTURAR DATOS EXTINTOR
       if (this.extintorSeleccionados) {
         //todo update
         const id = this.extintorSeleccionados._id;
@@ -298,26 +311,48 @@ export class ViewExtintorComponent implements OnInit {
         }
         this.extintorService.actualizarExtintor(data)
         .subscribe(resp =>{
-          // Swal.fire('Actualizado', `Se actualizo correctamente la planilla.`, 'success')
+          //*3 SE ACTUALIZA FORM DE EXTINTOR
         })
         //todo act img
-        this.fileUploadService
-        .actualizarFoto( this.imagenSubir, tipo, id )
-        .then( img => {
-          Swal.fire('Actualizado', `Se actualizo correctamente la planilla.`, 'success')
-        }).catch( err => {
-          console.log(err);
-          Swal.fire('Error', 'No se pudo subir la imagen 1', 'error');
-        })
-        this.fileUploadService
-        .actualizarFoto2( this.imagenSubir2, tipo, id )
-        .then( img => {
-          // Swal.fire('Guardado', 'Imagen de usuario actualizada', 'success');
-          this.router.navigateByUrl(`/dashboard/vista-empresas`)
-        }).catch( err => {
-          //console.log(err);
-          Swal.fire('Error', 'No se pudo subir la imagen 2', 'error');
-        })
+        if (this.imagenSubir !== this.imagenRem) {
+          Swal.fire({
+            title: "Subiendo Imagenes",
+            text: "Por favor espere",
+            imageUrl: "https://www.epgdlaw.com/wp-content/uploads/2017/09/ajax-loader.gif",
+            showConfirmButton: false,
+            allowOutsideClick: false
+          });
+          this.fileUploadService
+          .actualizarFoto( this.imagenSubir, tipo, id )
+          .then( img => {
+            Swal.close();
+          }).catch( err => {
+            //console.log(err);
+            Swal.fire('Error', 'No se pudo subir la imagen 1', 'error');
+          })
+        }
+        if (this.imagenSubir2 !== this.imagenRem) {
+          Swal.fire({
+            title: "Subiendo Imagenes",
+            text: "Por favor espere",
+            imageUrl: "https://www.epgdlaw.com/wp-content/uploads/2017/09/ajax-loader.gif",
+            showConfirmButton: false,
+            allowOutsideClick: false
+          });
+          this.fileUploadService
+          .actualizarFoto2( this.imagenSubir2, tipo, id )
+          .then( img => {
+            Swal.close();
+          }).catch( err => {
+            //console.log(err);
+            Swal.fire('Error', 'No se pudo subir la imagen 2', 'error');
+          })
+        }
+        setTimeout(() => {
+          this.router.navigateByUrl(`/dashboard/vista-empresas`);
+          Swal.fire('Actualizado', `Se actualizo correctamente la planilla.`, 'success');
+        }
+        , 1000);
       }
       else{
         console.log('error')

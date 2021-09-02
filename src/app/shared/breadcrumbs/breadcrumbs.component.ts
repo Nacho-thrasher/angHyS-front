@@ -34,7 +34,7 @@ export class BreadcrumbsComponent implements OnDestroy{
       }
     )
     this.pathSub$ = this.getPathRuta().subscribe(
-      ({numSerie}) =>{
+      ({numSerie, }) =>{
         this.numS = numSerie
         //console.log(this.numS)
         if (this.titulo === 'Vista Extintor') {
@@ -42,6 +42,7 @@ export class BreadcrumbsComponent implements OnDestroy{
         }
       }
     )
+
   }
 
   ngOnDestroy(): void {
