@@ -93,6 +93,7 @@ export class ModalImgComponent implements OnInit {
           this.imagenSubir = this.imagenRem;
           this.cerrarModal();
         }
+        
         , 900);
     }).catch( err => {
       //console.log(err);

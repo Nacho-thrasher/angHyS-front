@@ -39,8 +39,13 @@ export class PerfilComponent implements OnInit {
 
   ngOnInit(): void {
       this.usuario = this.usuarioService.usuario;
-      //console.log(this.usuario)
-      this.imgPreCargada = this.usuario.img;
+      console.log(this.usuario.img)
+      if (this.usuario.img === undefined || this.usuario.img === '') {
+        this.imgPreCargada = `${ base_url }/cloudinary/usuarios/no-image`;
+      }
+      else{
+        this.imgPreCargada = this.usuario.img;
+      }
       this.perfilForm = this.fb.group({
         nombre: [this.usuario.nombre, Validators.required],
         email: [this.usuario.email, [Validators.required, Validators.email]],
@@ -88,13 +93,13 @@ export class PerfilComponent implements OnInit {
     this.imagenSubir = this.imagenRem;
     if (this.usuario.google === true) {
       $('#imagePreview')
-      .css('background-image', `url(${this.usuario.img})`);
+      .css('background-image', `url(${this.imgPreCargada})`);
       $('#imagePreview').hide();
       $('#imagePreview').fadeIn(650);
     }
     else{
       $('#imagePreview')
-      .css('background-image', `url(${this.usuario.img})`);
+      .css('background-image', `url(${this.imgPreCargada})`);
       $('#imagePreview').hide();
       $('#imagePreview').fadeIn(650);
     }
@@ -103,6 +108,7 @@ export class PerfilComponent implements OnInit {
     this.fileUploadService.actualizarFoto( this.imagenSubir, 'usuarios', this.usuario.uid )
     .then( img => {
       //console.log(img);
+      this.imgPreCargada = img;
       this.usuario.img = img;
       Swal.fire('Guardado', 'Imagen de usuario actualizada', 'success');
       //this.router.navigateByUrl(`/dashboard/perfil`)
@@ -114,6 +120,7 @@ export class PerfilComponent implements OnInit {
     this.sidebarService.nuevaImagen.emit(this.usuario.img);
     this.usuarioService.nuevaImagen.emit(this.usuario.img)
 
+    this.imagenSubir = this.imagenRem;
   }
 
 

@@ -24,7 +24,6 @@ export class LoginComponent implements OnInit {
     remember: [false]
   } as AbstractControlOptions);
 
-
   constructor(private router:Router,
               private fb:FormBuilder,
               private usuarioService: UsuarioService,
@@ -36,7 +35,19 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    //this.router.navigateByUrl('/');
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timerProgressBar: true,
+      //timer: 3000,
+    })
+    Toast.fire({
+      icon: 'success',
+      title: 'Iniciando Sesion',
+      width: 270,
+      //padding: '3em',
+    })
     this.usuarioService.loginUsuario(this.loginForm.value).subscribe( resp =>{
       if(this.loginForm.get('remember')?.value){
         localStorage.setItem('email', this.loginForm.get('email')?.value);
@@ -45,11 +56,13 @@ export class LoginComponent implements OnInit {
         localStorage.removeItem('email');
       }
       this.router.navigateByUrl('/');
-
+      setTimeout(() => {
+        Toast.close();
+      }
+      , 400);
     }, (err) =>{
       Swal.fire('Error', err.error.msg, 'error')
     });
-
   }
 
   // var id_token = googleUser.getAuthResponse().id_token;
@@ -65,23 +78,25 @@ export class LoginComponent implements OnInit {
     this.startApp();
   }
   async startApp() {
-
     await this.usuarioService.googleInit();
     this.auth2 = this.usuarioService.auth2;
     this.attachSignin(document.getElementById('my-signin2'));
   };
 
   attachSignin(element: HTMLElement | null) {
+
     //console.log(element?.id);
     this.auth2.attachClickHandler(element, {},
         (googleUser: { getAuthResponse: () => { (): any; new(): any; id_token: any; }; })=> {
 
           const id_token = googleUser.getAuthResponse().id_token;
           this.usuarioService.loginGoogle(id_token).subscribe(resp => {
+            
             //todo redireccion y que es ngzone est
             this.ngZone.run( ()=>{
 
               this.router.navigateByUrl('/');
+
             })
           });
 
