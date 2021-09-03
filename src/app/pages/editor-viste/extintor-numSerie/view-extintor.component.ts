@@ -49,6 +49,8 @@ export class ViewExtintorComponent implements OnInit {
   //? variables par aguardar al cargar
   public isUser!:boolean;
   public rutaStart!:string;
+  //? no mostrar
+  public noMostrar: boolean = false;
 
   constructor(private fb: FormBuilder,
     private empresaService: EmpresaService,
@@ -61,6 +63,7 @@ export class ViewExtintorComponent implements OnInit {
 
   //todo OnInit
   ngOnInit(): void {
+    this.noMostrar = false;
     //datatable options
     this.dtOptions = {
       responsive: true,

@@ -24,7 +24,7 @@
             >Extintor</a
           >
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a
             class="nav-link font-medium"
             data-toggle="tab"
@@ -33,7 +33,7 @@
             aria-expanded="false"
             >Empresa</a
           >
-        </li>
+        </li> -->
         <li class="nav-item">
           <a
             class="nav-link font-medium"
@@ -85,8 +85,21 @@
                 </div>
               </div>
               <div class="col-md-8 col-xs-6">
+                <strong></strong>
+                <br />
+                <div class="">
+                  <a
+                    class="image-popup-no-margins"
+                    [href]="extintor?.pdf! | imagen: 'extintores'"
+                  >
+                    <img
+                      [src]="extintor?.pdf! | imagen: 'extintores'"
+                      class="img-responsive"
+                    />
+                  </a>
+                </div>
                 <!--? end content -->
-                <div class="accordion" id="accordionExample">
+                <div *ngIf="noMostrar" class="accordion" id="accordionExample">
                   <!-- ?Init acordion item -->
                   <div class="accordion-item">
                     <h2 class="accordion-header" id="headingOne">

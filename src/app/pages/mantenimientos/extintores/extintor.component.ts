@@ -11,8 +11,10 @@ import Swal from 'sweetalert2';
 import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels, NgxQRCodeModule } from 'ngx-qrcode2';
 import { environment } from 'src/environments/environment';
 import { environmentQr } from '../../../../environments/enviromentQr';
+import { FileUploadService } from 'src/app/services/file-upload.service';
 
 const base_url = environmentQr.base_url;
+const base_urlImg = environment.base_url;
 
 @Component({
   selector: 'app-extintor',
@@ -32,7 +34,8 @@ export class ExtintorComponent implements OnInit {
     private empresaService: EmpresaService,
     private extintorService: ExtintorService,
     private router: Router,
-    private activatedRouter: ActivatedRoute) { }
+    private activatedRouter: ActivatedRoute,
+    private fileUploadService: FileUploadService) { }
 
     //? qr vars -
     public title!: string;
@@ -43,6 +46,11 @@ export class ExtintorComponent implements OnInit {
     public value!:string;
     public numerSer!:string;
     public cantExt!: number;
+    //? imgs wid var
+    public imgViene!: string;
+    public imagenSubir!: File; //img1
+    public imagenRem!: File;
+
     //todo oninit
     ngOnInit(): void {
     //todo Obtener ID
@@ -96,6 +104,14 @@ export class ExtintorComponent implements OnInit {
               marca,
               empresa:{_id}
       } = extintor;
+
+      //console.log(extintor);
+      if (extintor.pdf === undefined || extintor.pdf === '') {
+        this.imgViene = `${base_urlImg}/cloudinary/extintores/no-image`
+      }
+      else{
+        this.imgViene = extintor.pdf;
+      }
       //* Asignando numero a qr
       this.numerSer = extintor.numeroSerie!;
       this.cargarQr(this.numerSer);
@@ -117,6 +133,27 @@ export class ExtintorComponent implements OnInit {
       this.empresas = empresas;
     })
   }
+  //* pdfs
+  upload(e: any):any {
+    //this.cargandoImg = true;
+    const file = e.target.files[0] || e.dataTransfer.files[0]
+    if (file) {
+      this.imagenSubir = file;
+      //console.log(this.imagenSubir)
+      if (!file) {
+        return;
+      }
+      const reader = new FileReader();
+      reader.onloadend = () =>{
+        reader.result;
+      }
+      reader.readAsDataURL(file);
+      //this.cargandoImg = false;
+    }
+  }
+  removeData() {
+    this.imagenSubir = this.imagenRem;
+  }
   //* Guardar
   guardarExtintor(){
     let validacion:boolean = true;
@@ -130,8 +167,28 @@ export class ExtintorComponent implements OnInit {
         this.extintorService.actualizarExtintor(data)
         .subscribe(resp =>{
           Swal.fire('Actualizado', `Extintor: ${numeroSerie} - Marca: ${marca}.`, 'success')
-          this.router.navigateByUrl(`/dashboard/extintores`)
         })
+        if (this.imagenSubir !== this.imagenRem) {
+          Swal.fire({
+            title: "Subiendo Archivo",
+            text: "Por favor espere",
+            imageUrl: "https://www.epgdlaw.com/wp-content/uploads/2017/09/ajax-loader.gif",
+            showConfirmButton: false,
+            allowOutsideClick: false
+          });
+          this.fileUploadService
+          .actualizarPdf( this.imagenSubir, 'extintores', this.extintorSeleccionados._id )
+          .then( img => {
+            this.router.navigateByUrl(`/dashboard/extintores`)
+            setTimeout(() => {
+              Swal.close();
+            }
+            , 400);
+          }).catch( err => {
+            //console.log(err);
+            Swal.fire('Error', 'No se pudo subir la imagen 1', 'error');
+          })
+        }
     }
     else{
         //todo crear
@@ -145,6 +202,23 @@ export class ExtintorComponent implements OnInit {
           else{
             Swal.fire('Creado', `Extintor: ${numeroSerie} - Marca: ${marca}.`, 'success')
             this.router.navigateByUrl(`/dashboard/extintor/${ resp.extintor._id }`)
+          }
+          if (this.imagenSubir !== this.imagenRem) {
+            Swal.fire({
+              title: "Subiendo Imagenes",
+              text: "Por favor espere",
+              imageUrl: "https://www.epgdlaw.com/wp-content/uploads/2017/09/ajax-loader.gif",
+              showConfirmButton: false,
+              allowOutsideClick: false
+            });
+            this.fileUploadService
+            .actualizarPdf( this.imagenSubir, 'extintores', this.extintorSeleccionados?._id )
+            .then( img => {
+              Swal.close();
+            }).catch( err => {
+              //console.log(err);
+              Swal.fire('Error', 'No se pudo subir la imagen 1', 'error');
+            })
           }
           if (validacion === true) {
             //? aqui actualizar nro extintor

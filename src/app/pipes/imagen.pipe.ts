@@ -9,7 +9,7 @@ const base_url = environment.base_url;
 export class ImagenPipe implements PipeTransform {
 
   transformRes(img: string, tipo: 'usuarios'|'empresas'|'extintores'): string {
-    console.log(img)
+    //console.log(img)
     if ( !img ) {
       return `${ base_url }/upload/${tipo}/no-image`;
     } else if ( img.includes('https') ) {

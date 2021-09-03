@@ -54,7 +54,8 @@ export class Extintor {
     public sustituto?: string,
     public numeroSustituto?: string,
     public observacion?: string,
-
+    public cliente?: string,
+    public pdf?: string
 
   ){
 
