@@ -39,7 +39,7 @@ export class PerfilComponent implements OnInit {
 
   ngOnInit(): void {
       this.usuario = this.usuarioService.usuario;
-      console.log(this.usuario.img)
+      //console.log(this.usuario.img)
       if (this.usuario.img === undefined || this.usuario.img === '') {
         this.imgPreCargada = `${ base_url }/cloudinary/usuarios/no-image`;
       }

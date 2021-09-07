@@ -17,6 +17,7 @@ export class BreadcrumbsComponent implements OnDestroy{
   public tituloSub$: Subscription;
   public pathSub$: Subscription;
   public numS: string | undefined;
+  public idExt: string | undefined;
   public nombreEmpr: string | undefined;
   public nombreEmprNoSpace: string | undefined;
 
@@ -34,11 +35,11 @@ export class BreadcrumbsComponent implements OnDestroy{
       }
     )
     this.pathSub$ = this.getPathRuta().subscribe(
-      ({numSerie, }) =>{
-        this.numS = numSerie
+      ({ id }) =>{
+        this.idExt = id
         //console.log(this.numS)
         if (this.titulo === 'Vista Extintor') {
-          this.cargarExtintor(this.numS);
+          this.cargarExtintor(this.idExt);
         }
       }
     )
@@ -66,10 +67,12 @@ export class BreadcrumbsComponent implements OnDestroy{
         map((event: ActivationEnd) => event.snapshot.params)
       )
   }
-  cargarExtintor(numSerie: any){
+  cargarExtintor(id: any){
     if (this.titulo === 'Vista Extintor') {
-      this.extintorService.cargarExtintoresByNumSerie(numSerie)
+      //console.log('bread',id);
+      this.extintorService.cargarExtintorByIdExt(id)
       .subscribe( (resp:any) => {
+        //console.log(resp)
         let {
           empresa: {_id, nombre}
         } = resp.extintor;

@@ -57,7 +57,7 @@ const childRoutes: Routes = [
     data: {titulo: 'Vista Empresas', content:'Principal'}},
   { path: 'vista-empresas/:id', component: ViewExtintoresComponent,
     data: {titulo: 'Extintores', content:'Principal'}},
-  { path: 'vista-extintor/:numSerie', component: ViewExtintorComponent,
+  { path: 'vista-extintor/:id', component: ViewExtintorComponent,
     data: {titulo: 'Vista Extintor', content:'Principal'}}
 
 ]

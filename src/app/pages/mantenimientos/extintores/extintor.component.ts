@@ -79,6 +79,7 @@ export class ExtintorComponent implements OnInit {
     this.title = 'app';
     //console.log(base_url)
     this.url = `${base_url}/dashboard/vista-extintor/`;
+    //es id
     this.profile = `${numeroSerie}`;
     //console.log(this.profile);
     this.elementType = NgxQrcodeElementTypes.URL;
@@ -113,7 +114,8 @@ export class ExtintorComponent implements OnInit {
         this.imgViene = extintor.pdf;
       }
       //* Asignando numero a qr
-      this.numerSer = extintor.numeroSerie!;
+      //console.log(extintor);
+      this.numerSer = extintor._id!;
       this.cargarQr(this.numerSer);
       //* Cargando inputs de form
       this.extintorSeleccionados = extintor;

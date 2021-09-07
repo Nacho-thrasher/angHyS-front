@@ -111,7 +111,12 @@ export class ExtintoresExcelComponent implements OnInit {
     for(let index = 0; index < this.str.length; index++){
       this.extintorService.cargarExtintoresByNumSerie(this.str[index].numeroSerie)
       .subscribe((resp:any)=>{
-        if (resp.extintor !== undefined) {
+        if (
+          resp.extintor.numeroSerie == this.str[index].numeroSerie &&
+          resp.extintor.capacidad == this.str[index].capacidad &&
+          resp.extintor.agenteExtintor == this.str[index].agenteExtintor &&
+          resp.extintor.marca == this.str[index].marca
+        ) {
           this.str[index].existe = ('si');
         }
       })

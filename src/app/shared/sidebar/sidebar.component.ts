@@ -46,7 +46,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
   cargarUser(){
     this.usuario = this.usuarioService.usuario;
-    //console.log(this.usuario.img);
+    console.log(this.usuario);
   }
   cerrarSesion(){
     this.usuarioService.logout();

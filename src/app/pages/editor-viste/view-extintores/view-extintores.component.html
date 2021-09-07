@@ -42,55 +42,31 @@
                 <th class="sorting text-center">Empresa</th>
               </tr>
             </thead>
-            <!-- <tfoot>
-              <tr>
-                <th class="sorting text-center" rowspan="1" colspan="1">
-                  #Nro
-                </th>
-                <th class="sorting text-center" rowspan="1" colspan="1">
-                  Foto
-                </th>
-                <th class="sorting text-center" rowspan="1" colspan="1">
-                  Numero Serie
-                </th>
-                <th class="sorting text-center" rowspan="1" colspan="1">
-                  Marca
-                </th>
-                <th class="sorting text-center" rowspan="1" colspan="1">
-                  Agente extintor
-                </th>
-                <th class="sorting text-center" rowspan="1" colspan="1">
-                  capacidad
-                </th>
-                <th class="sorting text-center" rowspan="1" colspan="1">
-                  empresa
-                </th>
-              </tr>
-            </tfoot> -->
+
             <tbody>
               <tr *ngFor="let extintor of extintores; let i = index"
               class="animated cursor fadeIn fast">
                 <td class="align-middle text-center">
                   {{i+1}}
                 </td>
-                <td class="align-middle text-center fotoPadding" [routerLink]="['/dashboard/vista-extintor', extintor.numeroSerie]">
+                <td class="align-middle text-center fotoPadding" [routerLink]="['/dashboard/vista-extintor', extintor._id]">
                   <img [src]="extintor.img! | imagen:'extintores'"
                     alt="" class="avatar2 cursor"
                   >
                 </td>
-                <td class="align-middle text-center" [routerLink]="['/dashboard/vista-extintor', extintor.numeroSerie]">
+                <td class="align-middle text-center" [routerLink]="['/dashboard/vista-extintor', extintor._id]">
                   {{extintor.numeroSerie}}
                 </td>
-                <td class="align-middle text-center" [routerLink]="['/dashboard/vista-extintor', extintor.numeroSerie]">
+                <td class="align-middle text-center" [routerLink]="['/dashboard/vista-extintor', extintor._id]">
                   {{extintor.marca}}
                 </td>
-                <td class="align-middle text-center" [routerLink]="['/dashboard/vista-extintor', extintor.numeroSerie]">
+                <td class="align-middle text-center" [routerLink]="['/dashboard/vista-extintor', extintor._id]">
                   {{extintor.agenteExtintor}}
                 </td>
-                <td class="align-middle text-center" [routerLink]="['/dashboard/vista-extintor', extintor.numeroSerie]">
+                <td class="align-middle text-center" [routerLink]="['/dashboard/vista-extintor', extintor._id]">
                   {{extintor.capacidad}}
                 </td>
-                <td class="align-middle text-center" [routerLink]="['/dashboard/vista-extintor', extintor.numeroSerie]">
+                <td class="align-middle text-center" [routerLink]="['/dashboard/vista-extintor', extintor._id]">
                   {{extintor.empresa!.nombre}}
                 </td>
               </tr>

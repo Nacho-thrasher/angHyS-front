@@ -29,8 +29,6 @@ import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { DataTablesModule } from 'angular-datatables';
 //? datatables bt5
 
-import * as jszip from 'jszip';
-
 @NgModule({
   declarations: [
     DashboardComponent,

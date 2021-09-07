@@ -64,17 +64,16 @@ export class ViewExtintorComponent implements OnInit {
   //todo OnInit
   ngOnInit(): void {
     this.noMostrar = false;
-    //datatable options
+    //todo datatable options
     this.dtOptions = {
       responsive: true,
       info: false,
       language: { url: '//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json' }
     };
     //todo obtener parametro url
-    this.activatedRouter.params
-    .subscribe( ({numSerie}) => {
-      // console.log(numSerie);
-      this.cargarExtintor(numSerie);
+    this.activatedRouter.params.subscribe(({id}) => {
+      //console.log(id);
+      this.cargarExtintor(id);
     })
     //todo Validators form
     this.extintorForm = this.fb.group({
@@ -95,11 +94,12 @@ export class ViewExtintorComponent implements OnInit {
     })
   }
   //todo Cargar extintor
-  cargarExtintor(numSerie: string){
+  cargarExtintor(id: string){
     //? preload
     this.cargando = true;
-    //? ALservice extintor por numserie
-    this.extintorService.cargarExtintoresByNumSerie(numSerie)
+    //? ALservice extintor por numserie ? nuevo metodo
+    //this.extintorService.cargarExtintoresByNumSerie(numSerie)
+    this.extintorService.cargarExtintorByIdExt(id)
     .subscribe( (resp:any) => {
       //? si no existe extintor retorna atras
       if (resp.extintor === undefined) {

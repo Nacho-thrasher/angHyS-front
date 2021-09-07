@@ -44,13 +44,19 @@ export class ExtintorService {
     )
   }
 
+  cargarExtintorByIdExt(id:string){
+
+    const url = `${base_url}/vista-extintor/${id}`;
+    return this.http.get(url, this.headers)
+  }
+
   cargarExtintoresByEmpresa(id: string){
     const url = `${base_url}/vista-empresas/${id}`;
     return this.http.get(url, this.headers)
   }
 
   cargarExtintoresByNumSerie(numSerie: string){
-    const url = `${base_url}/vista-extintor/${numSerie}`;
+    const url = `${base_url}/ifExist/${numSerie}`;
     return this.http.get(url, this.headers)
   }
 
