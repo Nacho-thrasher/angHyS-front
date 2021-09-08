@@ -55,6 +55,7 @@ export class ExtintorComponent implements OnInit {
     ngOnInit(): void {
     //todo Obtener ID
     this.activatedRouter.params.subscribe(({id}) =>{
+      
       this.cargarExtintor(id);
     })
     //todo Validators form

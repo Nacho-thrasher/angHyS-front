@@ -20,6 +20,7 @@ import { ExtintoresExcelComponent } from './mantenimientos/extintores/extintores
 import { ViewEmpresasComponent } from './editor-viste/view-empresas.component';
 import { ViewExtintoresComponent } from './editor-viste/view-extintores/view-extintores.component';
 import { ViewExtintorComponent } from './editor-viste/extintor-numSerie/view-extintor.component';
+import { AuthGuard } from '../guard/auth.guard';
 
 const childRoutes: Routes = [
 
@@ -57,7 +58,7 @@ const childRoutes: Routes = [
     data: {titulo: 'Vista Empresas', content:'Principal'}},
   { path: 'vista-empresas/:id', component: ViewExtintoresComponent,
     data: {titulo: 'Extintores', content:'Principal'}},
-  { path: 'vista-extintor/:id', component: ViewExtintorComponent,
+  { path: 'vista-extintor/:id_ext', component: ViewExtintorComponent,
     data: {titulo: 'Vista Extintor', content:'Principal'}}
 
 ]

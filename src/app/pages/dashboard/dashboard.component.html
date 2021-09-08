@@ -1,30 +1,42 @@
-<div class="row">
-  <div class="col py-2">
-    <div routerLink="extintores_excel" class="h-100 card-shadow cursor card">
-      <div class="card-body">
-        <H3>Redirigir a Importar Excel</H3>
-        <p>- Importar Excel creara extintores</p>
+<!--todo si es admin -->
+<div *ngIf="!isUFunc()" class="">
+  <div class="row">
+    <div class="col py-2">
+      <div routerLink="extintores_excel" class="h-100 card-shadow cursor card">
+        <div class="card-body">
+          <H3>Redirigir a Importar Excel</H3>
+          <p>- Importar Excel creara extintores</p>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="col py-2">
-    <div routerLink="extintor/nuevo" class="h-100 card-shadow cursor card">
-      <div class="card-body">
-        <H3>Agregar Extintor Manualmente</H3>
-        <p>- Datos de extintor y generar QR</p>
+    <div class="col py-2">
+      <div routerLink="extintor/nuevo" class="h-100 card-shadow cursor card">
+        <div class="card-body">
+          <H3>Agregar Extintor Manualmente</H3>
+          <p>- Datos de extintor y generar QR</p>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="col py-2">
-    <div routerLink="extintores" class=" h-100 card-shadow cursor card">
-      <div class="card-body">
-        <H3>Gestionar Extintores</H3>
-        <p>- Editar, eliminar y descargar QR</p>
+    <div class="col py-2">
+      <div routerLink="extintores" class=" h-100 card-shadow cursor card">
+        <div class="card-body">
+          <H3>Gestionar Extintores</H3>
+          <p>- Editar, eliminar y descargar QR</p>
+        </div>
       </div>
     </div>
   </div>
 </div>
-
+<!-- todo Imgagen logo si es user comun o no reg -->
+<div class="">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <img class="img-responsive " src="https://res.cloudinary.com/hysmatafuegos/image/upload/h_650,w_830/v1631111142/dashbord2_dafxyn.png" alt="">
+    </div>
+    <!-- https://res.cloudinary.com/hysmatafuegos/image/upload/v1631111142/dashbord2_dafxyn.png -->
+    <!-- https://res.cloudinary.com/demo/image/upload/c_crop,h_200,w_300/sample.jpg -->
+  </div>
+</div>
 <!-- <div class="row">
   <div class="col-12 pt-2">
     <div class="card">

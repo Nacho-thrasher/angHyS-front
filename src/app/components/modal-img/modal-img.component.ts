@@ -24,6 +24,7 @@ export class ModalImgComponent implements OnInit {
   public imagenRem!: File;
   public imgViene!: string;
   public usuario!: Usuario;
+  public preload: boolean = false;
 
   constructor(public modalImgService: ModalImgService,
             public fileUploadService: FileUploadService,
@@ -80,6 +81,7 @@ export class ModalImgComponent implements OnInit {
   }
 
   subirImagen() {
+    this.preload = true;
 
     const id = this.modalImgService.id;
     const tipo = this.modalImgService.tipo;
@@ -88,13 +90,15 @@ export class ModalImgComponent implements OnInit {
     .actualizarFoto( this.imagenSubir, tipo, id )
     .then( img => {
         this.modalImgService.nuevaImagen.emit(img);
+
         setTimeout(() => {
+          this.preload = false;
           Swal.fire('Guardado', 'Imagen de usuario actualizada', 'success');
           this.imagenSubir = this.imagenRem;
           this.cerrarModal();
         }
-        
         , 900);
+        
     }).catch( err => {
       //console.log(err);
       Swal.fire('Error', 'No se pudo subir la imagen', 'error');

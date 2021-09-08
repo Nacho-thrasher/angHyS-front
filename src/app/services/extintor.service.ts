@@ -44,7 +44,7 @@ export class ExtintorService {
     )
   }
 
-  cargarExtintorByIdExt(id:string){
+  cargarExtintorByIdExt(id:any){
 
     const url = `${base_url}/vista-extintor/${id}`;
     return this.http.get(url, this.headers)

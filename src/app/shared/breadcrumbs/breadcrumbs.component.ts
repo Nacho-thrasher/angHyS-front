@@ -16,8 +16,8 @@ export class BreadcrumbsComponent implements OnDestroy{
   public content: string | undefined;
   public tituloSub$: Subscription;
   public pathSub$: Subscription;
-  public numS: string | undefined;
-  public idExt: string | undefined;
+  public numS!: string | undefined;
+  public idExt!: string;
   public nombreEmpr: string | undefined;
   public nombreEmprNoSpace: string | undefined;
 
@@ -35,12 +35,22 @@ export class BreadcrumbsComponent implements OnDestroy{
       }
     )
     this.pathSub$ = this.getPathRuta().subscribe(
-      ({ id }) =>{
-        this.idExt = id
-        //console.log(this.numS)
-        if (this.titulo === 'Vista Extintor') {
-          this.cargarExtintor(this.idExt);
+      ({ id_ext, id }) =>{
+        this.idExt = id_ext
+        if (this.idExt !== undefined) {
+          //console.log(this.idExt);
+          if (this.titulo === 'Vista Extintor') {
+            this.cargarExtintor(this.idExt);
+          }
         }
+        if (id !== undefined) {
+          if (this.titulo === 'Extintores' && this.content === 'Principal') {
+            this.nombreEmpr = id;
+            this.nombreEmprNoSpace = this.nombreEmpr!.replace(/_/g, " ");
+          }
+        }
+        this.numS = '';
+
       }
     )
 
@@ -48,6 +58,7 @@ export class BreadcrumbsComponent implements OnDestroy{
 
   ngOnDestroy(): void {
     this.tituloSub$.unsubscribe();
+    this.pathSub$.unsubscribe();
   }
   getDataRuta(){
     return this.router.events
@@ -67,18 +78,24 @@ export class BreadcrumbsComponent implements OnDestroy{
         map((event: ActivationEnd) => event.snapshot.params)
       )
   }
-  cargarExtintor(id: any){
+
+  cargarExtintor(id: string){
     if (this.titulo === 'Vista Extintor') {
       //console.log('bread',id);
       this.extintorService.cargarExtintorByIdExt(id)
       .subscribe( (resp:any) => {
         //console.log(resp)
-        let {
-          empresa: {_id, nombre}
-        } = resp.extintor;
-        this.nombreEmpr = nombre;
-        this.nombreEmprNoSpace = nombre.replace(/ /g, "_");
-        //console.log(this.nombreEmprNoSpace);
+        if (resp.extintor !== undefined) {
+          //this.router.navigateByUrl(`/dashboard/vista-empresas`);
+          let {
+            numeroSerie,
+            empresa: {_id, nombre}
+          } = resp.extintor;
+          this.numS = numeroSerie;
+          this.nombreEmpr = nombre;
+          this.nombreEmprNoSpace = nombre.replace(/ /g, "_");
+          //console.log(this.nombreEmprNoSpace);
+        }
       })
     }
   }

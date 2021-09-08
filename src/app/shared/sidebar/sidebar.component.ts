@@ -5,6 +5,7 @@ import { Usuario } from "../../models/usuario.model";
 import { Subscription } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { ModalImgService } from '../../services/modal-img.service';
+import { Router } from '@angular/router';
 
 
 declare var $: any;
@@ -25,30 +26,46 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   constructor(public sidebarService: SidebarService,
     private usuarioService: UsuarioService,
-    private modalImgService: ModalImgService) {
+    private modalImgService: ModalImgService,
+    private router: Router,) {
 
     //this.menuItems = sidebarService.menu;
     //this.usuario = usuarioService.usuario;
   }
   ngOnDestroy(): void {
-    this.imgSubs.unsubscribe();
+    if (this.usuario === undefined || this.usuario === null) {
+    }
+    else{
+      this.imgSubs.unsubscribe();
+    }
   }
 
   ngOnInit(): void {
-    this.cargarUser()
-    this.imgSubs = this.usuarioService.nuevaImagen
-    .pipe(
-      delay(300)
-    ).subscribe(img => {
-      this.cargarUser();
-    });
-
-  }
-  cargarUser(){
     this.usuario = this.usuarioService.usuario;
-    console.log(this.usuario);
+    //console.log(this.usuario);
+    if (this.usuario === undefined) {
+
+    }
+    else{
+      this.imgSubs = this.usuarioService.nuevaImagen
+      .pipe(
+        delay(300)
+      ).subscribe(img => {
+        this.usuario = this.usuarioService.usuario;
+      });
+    }
   }
+  usuarioLogeado(){
+    if (this.usuario === undefined) {
+      return false;
+    }
+    else{
+      return true;
+    }
+  }
+
   cerrarSesion(){
+    this.router.navigateByUrl('/login')
     this.usuarioService.logout();
   }
 

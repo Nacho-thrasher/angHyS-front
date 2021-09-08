@@ -653,8 +653,6 @@
                 <h3 class="box-title">
                   Num de Extintor: {{ extintor?.numeroSerie }}
                 </h3>
-                <input type="hidden" formControlName="_id" />
-                <input type="hidden" formControlName="numeroSerie" />
                 <hr />
                 <div class="row px-2">
                   <div class="col-md-6">
@@ -920,7 +918,12 @@
                         <div
                           id="imagePreview"
                           style="background-image: url({{imgViene}});"
-                        ></div>
+                        >
+                          <div *ngIf="preload" class="preloadPosition text-center font-medium text-light">
+                            Subiendo imagen
+                            <span class="throbber-loader"></span>
+                          </div>
+                        </div>
                       </div>
                       <div
                         *ngIf="cargandoImg"
@@ -957,7 +960,12 @@
                         <div
                           id="imagePreview2"
                           style="background-image: url({{imgViene2}});"
-                        ></div>
+                        >
+                        <div *ngIf="preload2" class="preloadPosition text-center font-medium text-light">
+                          Subiendo imagen
+                          <span class="throbber-loader"></span>
+                        </div>
+                        </div>
                       </div>
                     </div>
                   </div>

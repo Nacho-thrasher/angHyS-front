@@ -36,7 +36,13 @@
                     <div
                       id="imagePreview"
                       style="background-image: url({{modalImgService.img}});"
-                    ></div>
+                    >
+                      <!--  -->
+                      <div *ngIf="preload" class="preloadPosition font-medium text-light blur">
+                        Subiendo imagen
+                        <span class="throbber-loader"></span>
+                      </div>
+                    </div>
                   </div>
                 </div>
 

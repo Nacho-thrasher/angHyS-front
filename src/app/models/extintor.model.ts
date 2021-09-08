@@ -38,7 +38,7 @@ export class Extintor {
     public estampilla: string,
 
     public empresa: Empresa,
-    public _id?: string,
+    public _id: string,
     public img?: string,
     public img2?: string,
 

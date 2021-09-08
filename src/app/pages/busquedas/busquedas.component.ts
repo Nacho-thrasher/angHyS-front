@@ -37,12 +37,18 @@ export class BusquedasComponent implements OnInit {
     this.cargando = true;
     this.busquedasService.busquedaGlobal(termino)
     .subscribe( (resp:any) => {
-      if (this.usuarioService.role === 'ADMIN_ROLE') {
-        this.usuarios = resp.usuarios;
+      if (this.usuarioService.token === '' || this.usuarioService.token === undefined) {
+        this.empresas = resp.empresas;
+        this.extintores = resp.extintores;
       }
-      this.empresas = resp.empresas;
-      this.extintores = resp.extintores;
-      //console.log(resp);
+      else{
+        if (this.usuarioService.role === 'ADMIN_ROLE') {
+          this.usuarios = resp.usuarios;
+        }
+        this.empresas = resp.empresas;
+        this.extintores = resp.extintores;
+        //console.log(resp);
+      }
       this.cargando = false;
     })
   }
@@ -54,6 +60,9 @@ export class BusquedasComponent implements OnInit {
 
   //? Si es usuario o admin
   isUFunc(){
+    if (this.usuarioService.token === undefined || this.usuarioService.token === '') {
+      return true;
+    }
     if (this.usuarioService.role === 'USER_ROLE') {
       return true;
     }

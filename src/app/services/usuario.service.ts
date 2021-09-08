@@ -25,7 +25,6 @@ export class UsuarioService {
   public auth2: any;
   public usuario!: Usuario;
 
-
   constructor(private http: HttpClient,
     private router: Router,
     private ngZone: NgZone,
@@ -41,7 +40,13 @@ export class UsuarioService {
   }
 
   get role(): 'ADMIN_ROLE' | 'USER_ROLE' {
-    return this.usuario.role!;
+
+    if (this.usuario.role === undefined || this.usuario.role === null) {
+      return 'USER_ROLE';
+    }
+    else{
+      return this.usuario.role!;
+    }
   }
 
   get uid():string {

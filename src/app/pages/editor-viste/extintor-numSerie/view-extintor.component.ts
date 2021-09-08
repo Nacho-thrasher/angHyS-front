@@ -1,11 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { delay } from 'rxjs/operators';
 import { Empresa } from 'src/app/models/empresa.model';
 import { Extintor } from 'src/app/models/extintor.model';
-import { Usuario } from 'src/app/models/usuario.model';
-import { EmpresaService } from 'src/app/services/empresa.service';
 import { ExtintorService } from 'src/app/services/extintor.service';
 import { FileUploadService } from 'src/app/services/file-upload.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
@@ -40,20 +37,21 @@ export class ViewExtintorComponent implements OnInit {
   //? otras vars
   public extintorForm!: FormGroup;
   public empresas: Empresa[] = [];
-  public empresaSeleccionados?: Empresa;
+  public empresaSeleccionados!: Empresa;
   public extintor!: Extintor;
   public cargando?: boolean = true;
   public cargandoImg?: boolean = false;
-  public extintorSeleccionados?: Extintor;
+  public extintorSeleccionados!: Extintor;
   public dtOptions: DataTables.Settings = {};
   //? variables par aguardar al cargar
   public isUser!:boolean;
-  public rutaStart!:string;
   //? no mostrar
   public noMostrar: boolean = false;
+  //? preload
+  public preload: boolean = false;
+  public preload2: boolean = false;
 
   constructor(private fb: FormBuilder,
-    private empresaService: EmpresaService,
     private extintorService: ExtintorService,
     private router: Router,
     private activatedRouter: ActivatedRoute,
@@ -71,9 +69,9 @@ export class ViewExtintorComponent implements OnInit {
       language: { url: '//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json' }
     };
     //todo obtener parametro url
-    this.activatedRouter.params.subscribe(({id}) => {
+    this.activatedRouter.params.subscribe(({id_ext}) => {
       //console.log(id);
-      this.cargarExtintor(id);
+      this.cargarExtintor(id_ext);
     })
     //todo Validators form
     this.extintorForm = this.fb.group({
@@ -88,9 +86,7 @@ export class ViewExtintorComponent implements OnInit {
       retiroPorMant: ['', Validators.required],
       sustituto: ['', Validators.required],
       numeroSustituto: ['', Validators.required],
-      observacion: ['', Validators.required],
-      _id: ['', Validators.required],
-      numeroSerie: ['', Validators.required]
+      observacion: ['', Validators.required]
     })
   }
   //todo Cargar extintor
@@ -98,7 +94,6 @@ export class ViewExtintorComponent implements OnInit {
     //? preload
     this.cargando = true;
     //? ALservice extintor por numserie ? nuevo metodo
-    //this.extintorService.cargarExtintoresByNumSerie(numSerie)
     this.extintorService.cargarExtintorByIdExt(id)
     .subscribe( (resp:any) => {
       //? si no existe extintor retorna atras
@@ -106,6 +101,7 @@ export class ViewExtintorComponent implements OnInit {
         this.router.navigateByUrl(`/dashboard/vista-empresas`);
         return;
       }
+      //console.log(resp.extintor)
       //? asignando para mostrar y preload
       this.extintor = resp.extintor;
       if (this.extintor.img === undefined) {
@@ -120,8 +116,6 @@ export class ViewExtintorComponent implements OnInit {
       else{
         this.imgViene2 = this.extintor.img2;
       }
-      //?===
-      this.rutaStart = base_url;
       //?===
       this.extintorSeleccionados = resp.extintor;
       this.cargando = false;
@@ -138,9 +132,7 @@ export class ViewExtintorComponent implements OnInit {
         retiroPorMant,
         sustituto,
         numeroSustituto,
-        observacion,
-        empresa: {_id, nombre},
-        numeroSerie
+        observacion
       } = resp.extintor;
       //console.log(this.extintor.empresa);
       //? si es la primera ves pregunto
@@ -195,8 +187,6 @@ export class ViewExtintorComponent implements OnInit {
         numeroSustituto,
         observacion,
         //? otros
-        _id,
-        numeroSerie
       })
       //? set divs
       $(document).ready(function() {
@@ -287,11 +277,16 @@ export class ViewExtintorComponent implements OnInit {
   }
   //? Si es usuario o admin
   isUFunc(){
-    if (this.usuarioService.role === 'USER_ROLE') {
+    if (this.usuarioService.token === undefined || this.usuarioService.token === '') {
       return true;
     }
     else{
-      return false;
+      if (this.usuarioService.role === 'USER_ROLE') {
+        return true;
+      }
+      else{
+        return false;
+      }
     }
   }
   //? guardar extintor
@@ -309,6 +304,7 @@ export class ViewExtintorComponent implements OnInit {
         const tipo = 'extintores'
         const data = {
           ...this.extintorForm.value,
+          numeroSerie: this.extintorSeleccionados.numeroSerie,
           _id: this.extintorSeleccionados._id,
           empresa: this.extintorSeleccionados.empresa._id
         }
@@ -318,6 +314,7 @@ export class ViewExtintorComponent implements OnInit {
         })
         //todo act img
         if (this.imagenSubir !== this.imagenRem) {
+          this.preload = true;
           Swal.fire({
             title: "Subiendo Imagenes",
             text: "Por favor espere",
@@ -328,6 +325,7 @@ export class ViewExtintorComponent implements OnInit {
           this.fileUploadService
           .actualizarFoto( this.imagenSubir, tipo, id )
           .then( img => {
+            this.preload = false;
             Swal.close();
           }).catch( err => {
             //console.log(err);
@@ -335,6 +333,7 @@ export class ViewExtintorComponent implements OnInit {
           })
         }
         if (this.imagenSubir2 !== this.imagenRem) {
+          this.preload2 = true;
           Swal.fire({
             title: "Subiendo Imagenes",
             text: "Por favor espere",
@@ -345,6 +344,7 @@ export class ViewExtintorComponent implements OnInit {
           this.fileUploadService
           .actualizarFoto2( this.imagenSubir2, tipo, id )
           .then( img => {
+            this.preload2 = false;
             Swal.close();
           }).catch( err => {
             //console.log(err);
