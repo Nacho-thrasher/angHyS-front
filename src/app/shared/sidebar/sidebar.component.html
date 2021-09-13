@@ -40,7 +40,7 @@
             aria-expanded="false"
           >
           <!-- class="w-25" -->
-            <img [src]="usuario.img! | imagen: 'usuarios'" class="pb-1 roundSide img-circle" alt="user" />
+            <img [src]="imagen | imagen: 'usuarios'" class="pb-1 img-circle" alt="user" />
             <!-- cambiar tamanio de img a cuadrada -->
             <span class="inlineB hide-menu font-medium">
               {{usuario.nombre | slice:0:18}}{{(usuario.nombre.length > 18) ? '..' : '' }}

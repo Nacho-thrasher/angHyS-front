@@ -107,7 +107,7 @@ export class PerfilComponent implements OnInit {
   subirImagen() {
     this.fileUploadService.actualizarFoto( this.imagenSubir, 'usuarios', this.usuario.uid )
     .then( img => {
-      //console.log(img);
+
       this.imgPreCargada = img;
       this.usuario.img = img;
       Swal.fire('Guardado', 'Imagen de usuario actualizada', 'success');
@@ -119,7 +119,6 @@ export class PerfilComponent implements OnInit {
     this.imgPreCargada = this.usuario.img;
     this.sidebarService.nuevaImagen.emit(this.usuario.img);
     this.usuarioService.nuevaImagen.emit(this.usuario.img)
-
     this.imagenSubir = this.imagenRem;
   }
 

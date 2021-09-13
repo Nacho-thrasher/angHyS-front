@@ -20,7 +20,8 @@ const base_urlImg = environment.base_url;
   selector: 'app-extintor',
   templateUrl: './extintor.component.html',
   styles: [
-  ]
+  ],
+  styleUrls:['./extintor.css']
 })
 export class ExtintorComponent implements OnInit {
 
@@ -28,7 +29,20 @@ export class ExtintorComponent implements OnInit {
   public empresas: Empresa[] = [];
   public empresaSeleccionados?: Empresa;
   public extintorSeleccionados?: Extintor;
-
+  //? qr vars -
+  public title!: string;
+  public url!:string;
+  public profile!:string;
+  public elementType = NgxQrcodeElementTypes.URL;
+  public errorCorrectionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
+  public value!:string;
+  public numerSer!:string;
+  public cantExt!: number;
+  //? imgs wid var
+  public imgViene!: string;
+  public imagenSubir!: File; //img1
+  public imagenRem!: File;
+  public imgTemp: any = null;
 
   constructor(private fb: FormBuilder,
     private empresaService: EmpresaService,
@@ -37,25 +51,10 @@ export class ExtintorComponent implements OnInit {
     private activatedRouter: ActivatedRoute,
     private fileUploadService: FileUploadService) { }
 
-    //? qr vars -
-    public title!: string;
-    public url!:string;
-    public profile!:string;
-    public elementType = NgxQrcodeElementTypes.URL;
-    public errorCorrectionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
-    public value!:string;
-    public numerSer!:string;
-    public cantExt!: number;
-    //? imgs wid var
-    public imgViene!: string;
-    public imagenSubir!: File; //img1
-    public imagenRem!: File;
-
     //todo oninit
     ngOnInit(): void {
     //todo Obtener ID
     this.activatedRouter.params.subscribe(({id}) =>{
-      
       this.cargarExtintor(id);
     })
     //todo Validators form
@@ -68,7 +67,7 @@ export class ExtintorComponent implements OnInit {
     })
     //todo Cargar empresas y seleccionar si muestro
     this.cargarEmpresas();
-    this.extintorForm.get('empresa')?.valueChanges
+    this.extintorForm.get('empresa')!.valueChanges
     .subscribe(empresaId =>{
       this.empresaSeleccionados = this.empresas
       .find( h => h._id === empresaId);
@@ -78,11 +77,9 @@ export class ExtintorComponent implements OnInit {
   //todo QR
   cargarQr(numeroSerie:string){
     this.title = 'app';
-    //console.log(base_url)
     this.url = `${base_url}/dashboard/vista-extintor/`;
     //es id
     this.profile = `${numeroSerie}`;
-    //console.log(this.profile);
     this.elementType = NgxQrcodeElementTypes.URL;
     this.errorCorrectionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
     this.value = this.url + this.profile;
@@ -90,7 +87,6 @@ export class ExtintorComponent implements OnInit {
   //* Cargar Extintor
   cargarExtintor(id:string){
     if (id === 'nuevo') {  return; }
-
     this.extintorService.cargarExtintorById(id)
     .pipe(
       delay(100)
@@ -106,16 +102,12 @@ export class ExtintorComponent implements OnInit {
               marca,
               empresa:{_id}
       } = extintor;
-
       //console.log(extintor);
+      //*pdf img
       if (extintor.pdf === undefined || extintor.pdf === '') {
         this.imgViene = `${base_urlImg}/cloudinary/extintores/no-image`
-      }
-      else{
-        this.imgViene = extintor.pdf;
-      }
+      }else{ this.imgViene = extintor.pdf; }
       //* Asignando numero a qr
-      //console.log(extintor);
       this.numerSer = extintor._id!;
       this.cargarQr(this.numerSer);
       //* Cargando inputs de form
@@ -128,6 +120,47 @@ export class ExtintorComponent implements OnInit {
           empresa: _id!
       })
     });
+  }
+  //* transform img
+  transformImg(img:string):string {
+    //console.log(this.usuario.img)
+    const myArr = img.split("/");
+    let imagen = '';
+    for (let i = 0; i < myArr.length; i++) {
+      if (i + 1 === myArr.length) {
+        imagen = imagen + myArr[i]
+      }
+      else {
+        if (myArr[i] === 'upload') {
+          imagen = imagen + myArr[i] + '/c_thumb,h_300,w_400/'
+        }else {
+          imagen = imagen + myArr[i] + '/'
+        }
+      }
+    }
+   return imagen;
+  }
+  //? cambiar imgs
+  cambiarImagen(e: any):any {
+    //this.cargandoImg = true;
+    const file = e.target.files[0] || e.dataTransfer.files[0]
+    if (file) {
+
+      this.imagenSubir = file;
+      if (!file) {
+        return this.imgTemp = null;
+      }
+      const reader = new FileReader();
+      reader.onloadend = () =>{
+        $('#imagePreview')
+        .css('background-image', 'url('+reader.result +')');
+        $('#imagePreview').hide();
+        $('#imagePreview').fadeIn(650);
+        this.imgTemp = reader.result;
+      }
+      reader.readAsDataURL(file);
+      //this.cargandoImg = false;
+    }
   }
   //* Cargar Empresas
   cargarEmpresas(){
@@ -155,7 +188,17 @@ export class ExtintorComponent implements OnInit {
     }
   }
   removeData() {
+    if (this.extintorSeleccionados?.pdf === undefined) {
+      this.imgViene = `${ base_url }/cloudinary/extintor/no-image`;
+    }
+    else{
+      this.imgViene = this.extintorSeleccionados.pdf;
+    }
     this.imagenSubir = this.imagenRem;
+    $('#imagePreview')
+    .css('background-image', `url(${this.imgViene})`);
+    $('#imagePreview').hide();
+    $('#imagePreview').fadeIn(650);
   }
   //* Guardar
   guardarExtintor(){

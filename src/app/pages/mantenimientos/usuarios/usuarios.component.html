@@ -56,7 +56,7 @@
                   <th class="sorting text-center text-nowrap">Accion</th>
                 </tr>
             </thead>
-            
+
             <tbody>
                 <tr *ngFor="let usuario of usuarios; let i = index"
                   class="cursor"
@@ -76,7 +76,7 @@
                   </td>
                   <td class="align-middle text-center fotoPadding">
                     <img
-                        [src]="usuario.img! | imagen: 'usuarios'"
+                        [src]="transformImg(usuario.img!) | imagen: 'usuarios'"
                         alt=""
                         class="avatar2 cursor"
                         (click)="abrirModal(usuario)"

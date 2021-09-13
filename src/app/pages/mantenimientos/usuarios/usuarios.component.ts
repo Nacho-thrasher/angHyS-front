@@ -19,7 +19,7 @@ export class UsuariosComponent implements OnInit, OnDestroy {
   public dtOptions: DataTables.Settings = {};
   public imgSubs!: Subscription;
   public totalUsuarios: number = 0;
-  public usuarios: Usuario[] = [];
+  public usuarios!: Usuario[];
   public usuariosTemp: Usuario[] = [];
   public desde: number = 0;
   public cargando: boolean = true;
@@ -44,7 +44,7 @@ export class UsuariosComponent implements OnInit, OnDestroy {
         { orderable: false, targets: 2 }
       ]
     };
-    //cargas
+    //* esto sirveee
     this.cargarUsuarios();
     this.imgSubs = this.modalImgService.nuevaImagen
     .pipe(
@@ -59,11 +59,31 @@ export class UsuariosComponent implements OnInit, OnDestroy {
     this.cargando = true;
     this.usuarioService.cargarAllUsuarios()
     .subscribe( usuario =>{
-      //console.log(resp);
       this.usuarios = usuario;
       this.cargando = false;
     })
+
   }
+
+  transformImg(img:string):string {
+    //console.log(this.usuario.img)
+    const myArr = img.split("/");
+    let imagen = '';
+    for (let i = 0; i < myArr.length; i++) {
+      if (i + 1 === myArr.length) {
+        imagen = imagen + myArr[i]
+      }
+      else {
+        if (myArr[i] === 'upload') {
+          imagen = imagen + myArr[i] + '/c_thumb,h_200,w_200/'
+        }else {
+          imagen = imagen + myArr[i] + '/'
+        }
+      }
+    }
+   return imagen;
+  }
+
   //? pagination manual
   cambiarPagina(valor:number){
     this.desde += valor;

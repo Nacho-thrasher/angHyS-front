@@ -1,176 +1,180 @@
 <div class="row">
-  <div class="col-lg-7" >
+  <div class="col-lg-12" >
     <div class="card">
         <div class="card-body">
-            <h4 *ngIf="!extintorSeleccionados" class="card-title">Nuevo Extintor</h4>
-            <h4 *ngIf="extintorSeleccionados" class="card-title">Editando Extintor: {{extintorSeleccionados?.numeroSerie!}}</h4>
-            <hr>
-            <form [formGroup]="extintorForm"
-                  (submit)="guardarExtintor()"
-              class="form-horizontal form-material p-t-20">
-
-                <div *ngIf="extintorSeleccionados" class="form-group row">
-                  <!-- <div class="col-md-6">
-                    <label for="exampleInputuname3" class="control-label">
-                      Imagen:
-                    </label>
-                    <div class="">
-                        <div class="input-group">
-                          <img [src]="extintorSeleccionados?.img! | imagen:'extintores'"
-                              class="img-responsive w140" alt="">
-                        </div>
-                    </div>
-                  </div> -->
-                  <div class="col-md-12">
-                    <label for="exampleInputuname3" class="control-label">
-                      PDF o Imagen:
-                    </label>
-                    <div class="col-md-12">
-                        <div class="input-group">
-                          <div class="col-md-12">
-                            <div class="fileinput input-group fileinput-new" data-provides="fileinput">
-                              <div class="form-control" data-trigger="fileinput">
-                                  <i class="fa fa-file fileinput-exists"></i>
-                                  <span class="fileinput-filename"></span>
-                                </div>
-                                <span class="input-group-addon btn btn-secondary btn-file">
-                                  <span class="fileinput-new text-dark">Seleccionar</span>
-                                  <span class="fileinput-exists text-primary">Cambiar</span>
-                                  <input type="hidden" value="" name="...">
-                                  <!-- click abrira sweet alert pidiendo q llenes la empresa (change)="upload($event)"-->
-                                  <input type="file" [disabled]="extintorForm.invalid" (change)="upload($event)"
-                                  #inputFile
-                                  accept=".pdf, .png, .jpg"
-                                  name="">
-                                </span>
-                                <a (click)="removeData()" class="input-group-addon btn btn-secondary fileinput-exists text-danger" data-dismiss="fileinput">Remover</a>
-                              </div>
-                          </div>
-                          <!-- widget img -->
-                          <!-- <img [src]="extintorSeleccionados?.img! | imagen:'extintores'"
-                              class="img-responsive w140" alt=""> -->
-                        </div>
-                    </div>
-                  </div>
-                    <!--  -->
-                </div>
-                <div class="form-group row">
-                    <label for="exampleInputuname3" class="col-sm-4 control-label">Numero de Serie:</label>
-                    <div class="col-sm-8">
-                        <div class="input-group">
-                            <div class="input-group"></div>
-                            <input formControlName="numeroSerie"
-                                type="text"
-                                class="form-control" id="exampleInputuname3" placeholder="ej:12312">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="exampleInputEmail3" class="col-sm-4 control-label">Marca:</label>
-                    <div class="col-sm-8">
-                        <div class="input-group">
-                            <div class="input-group"></div>
-                            <input formControlName="marca"
-                              type="text" class="form-control" id="exampleInputEmail3" placeholder="seleccionar marca proximamente">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputPassword4" class="col-sm-4 control-label">Agente Extintor:</label>
-                    <div class="col-sm-8">
-                        <div class="input-group">
-                            <div class="input-group"></div>
-                            <input formControlName="agenteExtintor"
-                              type="text" class="form-control" id="exampleInputpwd4" placeholder="Enter pwd">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputPassword5" class="col-sm-4 control-label">Capacidad:</label>
-                    <div class="col-sm-8">
-                        <div class="input-group">
-                            <div class="input-group"></div>
-                            <input formControlName="capacidad"
-                            type="text" class="form-control" id="exampleInputpwd5" placeholder="">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                  <label for="inputPassword5" class="col-sm-4 control-label">Empresa:</label>
-                  <div class="col-sm-8">
-                      <div class="input-group">
-                        <select formControlName="empresa" class="form-control custom-select" data-placeholder="Selecciona una" tabindex="1">
-                          <option value="">Seleccione una</option>
-                          <option
-                            *ngFor="let empresa of empresas"
-                            [value]="empresa._id"
-                          >
-                            {{empresa.nombre}}
-                          </option>
-                        </select>
-                      </div>
-                  </div>
-              </div>
-
-                <div class="form-group row text-center m-b-0">
-                  <div class="offset-sm-3 col-sm-8">
-                      <button [disabled]="extintorForm.invalid"
-                          type="submit" class="btn btn-success waves-effect waves-light">Guardar Cambios</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-  </div>
-  <div *ngIf="empresaSeleccionados" class="animated fadeIn col-lg-5">
-
-    <div class="row">
-      <div class="col-12">
-        <!-- img empresa -->
-        <div class="card">
-          <div class="card-body justify-content-center">
-              <h4 class="card-title text-capitalize">Empresa : {{empresaSeleccionados!.nombre}}</h4>
+          <div class="row">
+            <div class="col-md-6 pb-4">
+              <h4 *ngIf="!extintorSeleccionados" class="card-title">Nuevo Extintor</h4>
+              <h4 *ngIf="extintorSeleccionados" class="card-title">Editando Extintor: {{extintorSeleccionados?.numeroSerie!}}</h4>
               <hr>
-              <div class="row">
-                <div class="col-md-6">
-                  <img [src]="empresaSeleccionados?.img! | imagen:'empresas'"
-                  class="img-responsive img-thumbnail" alt="">
-                </div>
-                <div class="col-md-6">
-                  <span class="text-capitalize">
-                    Locaidad: {{empresaSeleccionados!.localidad}}
-                  </span>
-                  <br>
-                  <span class="text-capitalize">
-                    Direccion: {{empresaSeleccionados!.direccion}}
-                  </span>
-                  <br>
-                  <span class="text-capitalize">
-                    Extintores: {{empresaSeleccionados!.nroExtintores}}
-                  </span>
-                </div>
-              </div>
-          </div>
-        </div>
-      </div>
-      <div *ngIf="this.extintorSeleccionados" class="col-12">
-        <!-- qr -->
-        <div class="card">
-          <div class="card-body">
-              <h4 class="card-title">Qr del extintor seleccionado:</h4>
-              <div class="text-center">
-                <ngx-qrcode
-                  [elementType]="elementType"
-                  [value]="value"
-                  qrc-class="aclass"
-                  [errorCorrectionLevel]="errorCorrectionLevel" >
-                </ngx-qrcode>
-              </div>
+              <form [formGroup]="extintorForm"
+                    (submit)="guardarExtintor()"
+                class="form-horizontal form-material">
+                  <!-- new design -->
+                  <div class="form-body">
+                    <div *ngIf="extintorSeleccionados" class="row">
+                      <div class="col-md-12 b-r">
 
+                        <div class="row">
+                          <div class="col-md-6">
+                            <label for="exampleInputuname3" class="control-label">
+                              Imagen del Pdf:
+                            </label>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="avatar-upload">
+                              <div class="avatar-edit">
+                                <input
+                                  (change)="cambiarImagen($event)"
+                                  class="input-img"
+                                  type="file"
+                                  id="imageUpload"
+                                  accept=".png, .jpg, .jpeg"
+                                />
+                                <label class="label-img" for="imageUpload"></label>
+                                <a
+                                  *ngIf="imagenSubir != undefined"
+                                  (click)="removeData()"
+                                  class="lbl-remove"
+                                ></a>
+                              </div>
+                              <div class="avatar-preview">
+                                <div
+                                  id="imagePreview"
+                                  style="background-image: url({{imgViene}});"
+                                >
+                                <!-- <div class="preloadPosition text-center font-medium text-light">
+                                  Subiendo imagen
+                                  <span class="throbber-loader"></span>
+                                </div> -->
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- end input -->
+                      </div>
+                    </div>
+                    <!--  -->
+                    <div class="row">
+                      <div class="col-md-12 b-r">
+                        <div class="form-group">
+                          <label for="exampleInputuname3" class="control-label">Numero de Serie:</label>
+                          <input formControlName="numeroSerie"
+                                  type="text"
+                                  class="form-control" id="exampleInputuname3" placeholder="">
+                        </div>
+                      </div>
+                    </div>
+                    <!--  -->
+                    <div class="row">
+                      <div class="col-md-12 b-r">
+                        <div class="form-group">
+                          <label for="exampleInputEmail3" class="control-label">Marca:</label>
+                          <input formControlName="marca"
+                                type="text" class="form-control" id="exampleInputEmail3" placeholder="">
+                        </div>
+                      </div>
+                    </div>
+                    <!--  -->
+                    <div class="row">
+                      <div class="col-md-12 b-r">
+                        <div class="form-group">
+                          <label for="inputPassword4" class="control-label">Agente Extintor:</label>
+                          <input formControlName="agenteExtintor"
+                          type="text" class="form-control" id="exampleInputpwd4" placeholder="">
+                        </div>
+                      </div>
+                    </div>
+                    <!--  -->
+                    <div class="row">
+                      <div class="col-md-12 b-r">
+                        <div class="form-group">
+                          <label for="inputPassword5" class="control-label">Capacidad:</label>
+                          <input formControlName="capacidad"
+                          type="text" class="form-control" id="exampleInputpwd5" placeholder="">
+                        </div>
+                      </div>
+                    </div>
+                    <!--  -->
+                    <div class="row">
+                      <div class="col-md-12 b-r">
+                        <div class="form-group">
+                          <label for="inputPassword5" class="control-label">Empresa:</label>
+                          <div class="input-group">
+                            <select formControlName="empresa" class="form-control custom-select" data-placeholder="Selecciona una" tabindex="1">
+                              <option value="">Seleccione una</option>
+                              <option
+                                *ngFor="let empresa of empresas"
+                                [value]="empresa._id"
+                              >
+                                {{empresa.nombre}}
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!--  -->
+                  </div>
+                  <div class="row justify-content-center pt-3">
+                    <div class="col-md-12">
+                      <div class="form-group text-center m-b-0">
+                        <button [disabled]="extintorForm.invalid"
+                        type="submit" class="btn btn-success waves-effect waves-light">Guardar Cambios</button>
+
+                      </div>
+                    </div>
+                  </div>
+                  <!-- end design -->
+
+              </form>
+            </div>
+            <div class="col-md-6">
+              <div *ngIf="empresaSeleccionados" class="row">
+                <div class="col-md-12">
+                  <h4 class="card-title text-capitalize">Empresa : {{empresaSeleccionados!.nombre}}</h4>
+                  <hr>
+                  <div class="text-center justify-content-center">
+                  </div>
+                  <div class="row sm-text-center">
+                    <div class="col-md-4 pb2">
+                      <img [src]="empresaSeleccionados?.img! | imagen:'empresas'"
+                      class="img-responsive imgMob rounded " alt="">
+                    </div>
+                    <div class="col-md-8">
+                      <span class="text-capitalize">
+                        Locaidad: {{empresaSeleccionados!.localidad}}
+                      </span>
+                      <br>
+                      <span class="text-capitalize">
+                        Direccion: {{empresaSeleccionados!.direccion}}
+                      </span>
+                      <br>
+                      <span class="text-capitalize">
+                        Extintores: {{empresaSeleccionados!.nroExtintores}}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="extintorSeleccionados" class="col-md-12 pt-5">
+                  <h4 class="card-title">Qr del extintor seleccionado</h4>
+                  <div class="text-center">
+                    <ngx-qrcode
+                      [elementType]="elementType"
+                      [value]="value"
+                      qrc-class="aclass"
+                      [errorCorrectionLevel]="errorCorrectionLevel" >
+                    </ngx-qrcode>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
     </div>
   </div>
+
 
 </div>

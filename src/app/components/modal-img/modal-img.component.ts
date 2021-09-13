@@ -82,27 +82,24 @@ export class ModalImgComponent implements OnInit {
 
   subirImagen() {
     this.preload = true;
-
     const id = this.modalImgService.id;
     const tipo = this.modalImgService.tipo;
-
-    this.fileUploadService
-    .actualizarFoto( this.imagenSubir, tipo, id )
+    this.fileUploadService.actualizarFoto( this.imagenSubir, tipo, id )
     .then( img => {
-        this.modalImgService.nuevaImagen.emit(img);
+      setTimeout(() => {
 
-        setTimeout(() => {
-          this.preload = false;
-          Swal.fire('Guardado', 'Imagen de usuario actualizada', 'success');
-          this.imagenSubir = this.imagenRem;
-          this.cerrarModal();
-        }
-        , 900);
-        
+        this.modalImgService.nuevaImagen.emit(img);
+        this.preload = false;
+        Swal.fire('Guardado', 'Imagen de usuario actualizada', 'success');
+        this.imagenSubir = this.imagenRem;
+        this.cerrarModal();
+
+      }, 800);
+
     }).catch( err => {
-      //console.log(err);
       Swal.fire('Error', 'No se pudo subir la imagen', 'error');
     })
+
   }
 
 }

@@ -23,6 +23,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
   menuItems!: any[];
   public usuario!: Usuario;
   public imgSubs!: Subscription;
+  public imgRadius!: string;
+  public imagen:string = '';
 
   constructor(public sidebarService: SidebarService,
     private usuarioService: UsuarioService,
@@ -42,19 +44,38 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.usuario = this.usuarioService.usuario;
-    //console.log(this.usuario);
+    this.transformImg(this.usuarioService.usuario.img!)
     if (this.usuario === undefined) {
-
     }
     else{
       this.imgSubs = this.usuarioService.nuevaImagen
       .pipe(
-        delay(300)
+        delay(200)
       ).subscribe(img => {
         this.usuario = this.usuarioService.usuario;
+        this.transformImg(this.usuarioService.usuario.img!);
       });
     }
   }
+
+  transformImg(img:string):string{
+    //console.log(this.usuario.img)
+    const myArr = img.split("/");
+    for (let i = 0; i < myArr.length; i++) {
+      if (i + 1 === myArr.length) {
+        this.imagen = this.imagen + myArr[i]
+      }
+      else {
+        if (myArr[i] === 'upload') {
+          this.imagen = this.imagen + myArr[i] + '/c_thumb,h_100,w_100/'
+        }else {
+          this.imagen = this.imagen + myArr[i] + '/'
+        }
+      }
+    }
+    return this.imagen;
+  }
+
   usuarioLogeado(){
     if (this.usuario === undefined) {
       return false;

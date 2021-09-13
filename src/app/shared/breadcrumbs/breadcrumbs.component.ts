@@ -32,13 +32,13 @@ export class BreadcrumbsComponent implements OnDestroy{
         document.title = `HyS - ${titulo}`;
         // instance
         this.content = content;
+        //console.log(this.content);
       }
     )
     this.pathSub$ = this.getPathRuta().subscribe(
       ({ id_ext, id }) =>{
         this.idExt = id_ext
         if (this.idExt !== undefined) {
-          //console.log(this.idExt);
           if (this.titulo === 'Vista Extintor') {
             this.cargarExtintor(this.idExt);
           }
