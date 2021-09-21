@@ -29,6 +29,7 @@ export class PerfilComponent implements OnInit {
   public rutaStart:string = base_url;
   public cargandoImg?: boolean = false;
   public imgPreCargada?:string;
+  public changePass: boolean = false;
 
   constructor(private fb: FormBuilder,
       private usuarioService: UsuarioService,
@@ -47,9 +48,8 @@ export class PerfilComponent implements OnInit {
         this.imgPreCargada = this.usuario.img;
       }
       this.perfilForm = this.fb.group({
-        nombre: [this.usuario.nombre, Validators.required],
-        email: [this.usuario.email, [Validators.required, Validators.email]],
-        password: ['', [Validators.required]]
+        nombre: [this.usuario.nombre, [Validators.required, Validators.minLength(3)]],
+        email: [this.usuario.email, [Validators.required, Validators.email]]
       })
   }
   //todo repasar
@@ -122,5 +122,132 @@ export class PerfilComponent implements OnInit {
     this.imagenSubir = this.imagenRem;
   }
 
+  //todo other functions
+  comprobar(campo: string){
+    switch (campo) {
+      case 'nombre':
+        if (this.perfilForm.get(campo)?.invalid) {
+          //? uplabel
+          $(`#fb${campo}`).removeClass("has-success");
+          $(`#fb${campo}`).addClass("has-danger");
+          //? input
+          $(`#${campo}`).removeClass("form-control-success");
+          $(`#${campo}`).addClass("form-control-danger");
+          //? feedback
+          $(`#feedback-${campo}`).html("Nombre debe contener mas de 3 caracteres.")
+        }
+        else{
+          //? uplabel
+          $(`#fb${campo}`).removeClass("has-danger");
+          $(`#fb${campo}`).addClass("has-success");
+          //? input
+          $(`#${campo}`).removeClass("form-control-danger");
+          $(`#${campo}`).addClass("form-control-success");
+          //? feedback
+          $(`#feedback-${campo}`).html("Correcto!")
+        }
+        break;
+      case 'email':
+        if (this.perfilForm.get(campo)?.invalid) {
+          //? uplabel
+          $(`#fb${campo}`).removeClass("has-success");
+          $(`#fb${campo}`).addClass("has-danger");
+          //? input
+          $(`#${campo}`).removeClass("form-control-success");
+          $(`#${campo}`).addClass("form-control-danger");
+          //? feedback
+          $(`#feedback-${campo}`).html("Email debe ser valido y/o llevar formato @gmail.")
+        }
+        else{
+          //? uplabel
+          $(`#fb${campo}`).removeClass("has-danger");
+          $(`#fb${campo}`).addClass("has-success");
+          //? input
+          $(`#${campo}`).removeClass("form-control-danger");
+          $(`#${campo}`).addClass("form-control-success");
+          //? feedback
+          $(`#feedback-${campo}`).html("Correcto!")
+        }
+        break;
+      case 'role':
+        if (this.perfilForm.get(campo)?.invalid) {
+          //? uplabel
+          $(`#fb${campo}`).removeClass("has-success");
+          $(`#fb${campo}`).addClass("has-danger");
+          //? input
+          $(`#${campo}`).removeClass("form-control-success");
+          $(`#${campo}`).addClass("form-control-danger");
+          //? feedback
+          $(`#feedback-${campo}`).html("Role debe ser seleccionado.")
+        }
+        else{
+          //? uplabel
+          $(`#fb${campo}`).removeClass("has-danger");
+          $(`#fb${campo}`).addClass("has-success");
+          //? input
+          $(`#${campo}`).removeClass("form-control-danger");
+          $(`#${campo}`).addClass("form-control-success");
+          //? feedback
+          $(`#feedback-${campo}`).html("Correcto!")
+        }
+        break;
+      case 'password':
+        if (this.perfilForm.get(campo)?.invalid) {
+          //? uplabel
+          $(`#fb${campo}`).removeClass("has-success");
+          $(`#fb${campo}`).addClass("has-danger");
+          //? input
+          $(`#${campo}`).removeClass("form-control-success");
+          $(`#${campo}`).addClass("form-control-danger");
+          //? feedback
+          $(`#feedback-${campo}`).html("Contraseña debe contener 4 caracteres minimo.")
+        }
+        else{
+          //? uplabel
+          $(`#fb${campo}`).removeClass("has-danger");
+          $(`#fb${campo}`).addClass("has-success");
+          //? input
+          $(`#${campo}`).removeClass("form-control-danger");
+          $(`#${campo}`).addClass("form-control-success");
+          //? feedback
+          $(`#feedback-${campo}`).html("Correcto!")
+        }
+        break;
+    }
+  }
+
+  //todo cambiar pass
+  changePassword(){
+    if(this.changePass === false) {
+      this.changePass = true;
+      //? icono
+      $(`#icon-btnPass`).removeClass('fa-square-o');
+      $(`#icon-btnPass`).addClass('fa-check-square-o');
+      //? validators
+      this.perfilForm = this.fb.group({
+        nombre: ['', [Validators.required, Validators.minLength(3)]],
+        email: ['', [Validators.required, Validators.minLength(3), Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(4)]]
+      })
+      let nombre = this.usuario?.nombre;
+      let email = this.usuario?.email;
+      let password = ''
+      this.perfilForm.setValue({ nombre, email, password })
+    }
+    else if(this.changePass === true) {
+      this.changePass = false;
+      //? icono
+      $(`#icon-btnPass`).removeClass('fa-check-square-o');
+      $(`#icon-btnPass`).addClass('fa-square-o');
+      //? validators
+      this.perfilForm = this.fb.group({
+        nombre: ['', [Validators.required, Validators.minLength(3)]],
+        email: ['', [Validators.required, Validators.minLength(3), Validators.email]]
+      })
+      let nombre = this.usuario?.nombre;
+      let email = this.usuario?.email;
+      this.perfilForm.setValue({ nombre, email })
+    }
+  }
 
 }

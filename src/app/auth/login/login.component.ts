@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
 
   public formSubmitted = false;
   public auth2: any;
+  public googleUser = {};
 
   public loginForm = this.fb.group({
     password: ['' , [Validators.required]],
@@ -31,7 +32,8 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.renderButton();
+    //this.renderButton();
+    this.startApp2();
   }
 
   login(){
@@ -66,14 +68,13 @@ export class LoginComponent implements OnInit {
   }
 
   // var id_token = googleUser.getAuthResponse().id_token;
-
   renderButton() {
     gapi.signin2.render('my-signin2', {
       'scope': 'profile email',
       'width': 240,
       'height': 50,
       'longtitle': true,
-      'theme': 'dark'
+      'theme': 'red'
     });
     this.startApp();
   }
@@ -85,13 +86,12 @@ export class LoginComponent implements OnInit {
 
   attachSignin(element: HTMLElement | null) {
 
-    //console.log(element?.id);
     this.auth2.attachClickHandler(element, {},
         (googleUser: { getAuthResponse: () => { (): any; new(): any; id_token: any; }; })=> {
 
           const id_token = googleUser.getAuthResponse().id_token;
           this.usuarioService.loginGoogle(id_token).subscribe(resp => {
-            
+
             //todo redireccion y que es ngzone est
             this.ngZone.run( ()=>{
 
@@ -105,5 +105,35 @@ export class LoginComponent implements OnInit {
           alert(JSON.stringify(error, undefined, 2));
         });
   }
+
+  async startApp2() {
+    await this.usuarioService.googleInit();
+    this.auth2 = this.usuarioService.auth2;
+    this.attachSignin2(document.getElementById('customBtn'));
+  };
+
+  attachSignin2(element: HTMLElement | null) {
+
+    this.auth2.attachClickHandler(element, {},
+        (googleUser: { getAuthResponse: () => { (): any; new(): any; id_token: any; }; })=> {
+
+          const id_token = googleUser.getAuthResponse().id_token;
+          this.usuarioService.loginGoogle(id_token).subscribe(resp => {
+
+            //todo redireccion y que es ngzone est
+            this.ngZone.run( ()=>{
+
+              this.router.navigateByUrl('/');
+
+            })
+          });
+
+        },
+        (error: any) => {
+          alert(JSON.stringify(error, undefined, 2));
+        });
+  }
+
+
 
 }

@@ -44,10 +44,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.usuario = this.usuarioService.usuario;
-    this.transformImg(this.usuarioService.usuario.img!)
     if (this.usuario === undefined) {
     }
     else{
+      this.transformImg(this.usuarioService.usuario.img!)
       this.imgSubs = this.usuarioService.nuevaImagen
       .pipe(
         delay(200)

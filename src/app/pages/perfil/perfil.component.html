@@ -5,47 +5,37 @@
         <div class="card-body">
             <h4 class="card-title">Puedes cambiar tu nombre</h4>
             <h6 class="card-subtitle"></h6>
-            <form class="form form-material p-t-20"
+            <form class="form form-horizontal form-material form-control-line p-t-20"
+              ngNativeValidate autocomplete="off"
               [formGroup]="perfilForm"
-              (submit)="actualizarPerfil()"
+              (ngSubmit)="actualizarPerfil()"
             >
-                <div class="form-group">
-                    <label for="exampleInputuname">Nombre</label>
-                    <div class="input-group">
-                        <div class="input-group"></div>
-                        <input type="text"
-                              class="form-control"
-                              id="exampleInputuname"
-                              placeholder="Nombre del usuario"
-                              formControlName="nombre"
-                        >
-                    </div>
+              <div id="fbnombre" class="form-group">
+                <label class="form-control-label" for="nombre">Nombre</label>
+                <input (keyup)="comprobar('nombre')" formControlName="nombre" type="text" class="form-control" id="nombre">
+                <div id="feedback-nombre" class="form-control-feedback"></div>
+              </div>
+
+              <div id="fbemail" class="form-group">
+                <label class="form-control-label" for="email">E-mail</label>
+                <input (keyup)="comprobar('email')" [readonly] = "usuario.google" formControlName="email" type="text" class="form-control" id="email">
+                <div id="feedback-email" class="form-control-feedback"></div>
+              </div>
+
+              <div class="row pb-4">
+                <div class="col-md-4 text-center">
+                  Cambiar contraseña?
+                  <button (click)="changePassword()" type="button" class="btn btn-secondary">
+                    <i id="icon-btnPass" class="fa fa-square-o"></i>
+                  </button>
                 </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Email</label>
-                    <div class="input-group">
-                        <div class="input-group"></div>
-                        <input
-                          type="email"
-                          class="form-control"
-                          id="exampleInputEmail1"
-                          placeholder="ingrese email valido"
-                          formControlName="email"
-                          [readonly] = "usuario.google"
-                        >
-                    </div>
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputPass1">Contraseña</label>
-                  <div class="input-group">
-                      <input
-                        type="password"
-                        class="form-control"
-                        id="exampleInputPass1"
-                        placeholder="Password"
-                        formControlName="password"
-                      >
+                <div *ngIf="changePass" class="col">
+                  <div id="fbpassword" class="form-group">
+                    <label class="form-control-label" for="password">Contraseña</label>
+                    <input (keyup)="comprobar('password')" formControlName="password" type="password" class="form-control" id="password">
+                    <div id="feedback-password" class="form-control-feedback"></div>
                   </div>
+                </div>
               </div>
 
                 <button type="submit" [disabled]="perfilForm.invalid" class="btn btn-block btn-success waves-effect waves-light m-r-10">Guardar datos</button>
@@ -111,7 +101,7 @@
             >
               Cambiar Img
             </button>
-       
+
         </div>
     </div>
   </div>

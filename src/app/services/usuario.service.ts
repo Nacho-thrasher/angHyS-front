@@ -128,6 +128,10 @@ export class UsuarioService {
 
   }
 
+  adminCreaUsers(data: any){
+    return this.http.post(`${base_url}/usuarios`, data)
+  }
+
   actualizarPerfil(data: {email: string, nombre: string, role?: string, password?: string}){
 
     data = {
@@ -135,6 +139,11 @@ export class UsuarioService {
       role: this.usuario.role
     }
     return this.http.put(`${base_url}/usuarios/${this.uid}`, data, this.headers)
+  }
+  //actualizarUsuario
+  actualizarUsuario(usuario:Usuario){
+
+    return this.http.put(`${base_url}/usuariosAdm/${usuario.uid}`, usuario, this.headers)
   }
 
   loginUsuario(formData: LoginFormInt){

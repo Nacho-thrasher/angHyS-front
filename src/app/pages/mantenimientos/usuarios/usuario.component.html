@@ -6,8 +6,9 @@
             <h4 *ngIf="usuarioSeleccionados" class="card-title">Editando Usuario: {{usuarioSeleccionados?.nombre!}}</h4>
             <hr>
             <h6 class="card-subtitle"></h6>
-            <form [formGroup]="usuarioForm"
-              class="form-horizontal form-material p-t-20">
+            <form [formGroup]="usuarioForm" (ngSubmit)="guardarUsuario()"
+              ngNativeValidate autocomplete="off"
+              class="form-horizontal form-material form-control-line p-t-20">
 
                 <div *ngIf="usuarioSeleccionados" class="form-group row">
                     <label for="exampleInputuname3" class="col-sm-4 control-label">Foto:</label>
@@ -18,50 +19,74 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="exampleInputuname3" class="col-sm-4 control-label">Nombre:</label>
-                    <div class="col-sm-8">
-                        <div class="input-group">
-                            <div class="input-group"></div>
-                            <input formControlName="nombre"
-                                type="text"
-                                class="form-control" id="exampleInputuname3" placeholder="">
-                        </div>
-                    </div>
+
+                <div id="fbnombre" class="form-group">
+                  <label class="form-control-label" for="nombre">Nombre</label>
+                  <input (keyup)="comprobar('nombre')" formControlName="nombre" type="text" class="form-control" id="nombre">
+                  <div id="feedback-nombre" class="form-control-feedback"></div>
                 </div>
-                <div class="form-group row">
-                    <label for="exampleInputEmail3" class="col-sm-4 control-label">E-mail:</label>
-                    <div class="col-sm-8">
-                        <div class="input-group">
-                            <div class="input-group"></div>
-                            <input formControlName="email"
-                              type="text" class="form-control" id="exampleInputEmail3" placeholder="">
-                        </div>
-                    </div>
+
+                <div id="fbemail" class="form-group">
+                  <label class="form-control-label" for="email">E-mail</label>
+                  <input (keyup)="comprobar('email')" formControlName="email" type="text" class="form-control" id="email">
+                  <div id="feedback-email" class="form-control-feedback"></div>
                 </div>
-                <div class="form-group row">
-                  <label for="inputPassword5" class="col-sm-4 control-label">Role:</label>
-                  <div class="col-sm-8">
-                      <div class="input-group">
-                        <select class="form-control"
-                          formControlName="role"
-                        >
-                          <!-- cargar role de forma dinamica -->
-                          <option value="ADMIN_ROLE">Admin</option>
-                          <option value="USER_ROLE">User</option>
-                        </select>
-                        <!-- <input formControlName="role" type="text" class="form-control" id="exampleInputEmail3" placeholder="seleccionar marca proximamente"> -->
-                      </div>
+
+                <div id="fbrole" class="form-group">
+                  <label class="form-control-label" for="role">Role</label>
+                  <select (click)="comprobar('role')" id="role" class="form-control"
+                        formControlName="role"
+                  >
+                      <!-- cargar role de forma dinamica -->
+                      <option value="ADMIN_ROLE">Admin</option>
+                      <option value="USER_ROLE">User</option>
+                  </select>
+                  <div id="feedback-role" class="form-control-feedback"></div>
+                </div>
+
+                <div *ngIf="!askNewUser" class="row pb-4">
+                  <div class="col-md-3 text-center">
+                    Cambiar contraseña?
+                    <button (click)="changePassword()" type="button" class="btn btn-secondary">
+                      <i id="icon-btnPass" class="fa fa-square-o"></i>
+                    </button>
+                  </div>
+                  <div *ngIf="changePass" class="col">
+                    <div id="fbpassword" class="form-group">
+                      <label class="form-control-label" for="password">Contraseña</label>
+                      <input (keyup)="comprobar('password')" formControlName="password" type="password" class="form-control" id="password">
+                      <div id="feedback-password" class="form-control-feedback"></div>
+                    </div>
                   </div>
                 </div>
 
-                <div class="form-group row text-center m-b-0">
-                  <div class="offset-sm-3 col-sm-8">
-                      <button [disabled]="usuarioForm.invalid"
-                          type="submit" class="btn btn-success waves-effect waves-light">Guardar Cambios</button>
+                <div *ngIf="askNewUser" id="fbpassword" class="form-group">
+                  <label class="form-control-label" for="password">Contraseña</label>
+                  <input (keyup)="comprobar('password')" formControlName="password" type="password" class="form-control" id="password">
+                  <div id="feedback-password" class="form-control-feedback"></div>
+                </div>
+
+                <!-- <div class="form-group row text-center">
+                  <label for="inputPassword5" class="col-sm-3 control-label">Repetir Contraseña:</label>
+                  <div class="col-sm-7">
+                    <div class="input-group">
+                      <input
+                        class="form-control"
+                        type="password"
+                      />
                     </div>
+                  </div>
+                </div> -->
+                <div class="form-group row text-center m-b-0">
+                  <div class="offset-sm-3 col-sm-6">
+                    <!-- [disabled]="usuarioForm.invalid" -->
+                    <button [disabled]="usuarioForm.invalid" type="submit" class="btn btn-success waves-effect waves-light">
+                          Guardar Cambios
+                    </button>
+                  </div>
                 </div>
             </form>
+
         </div>
     </div>
   </div>

@@ -21,6 +21,7 @@ import { ViewEmpresasComponent } from './editor-viste/view-empresas.component';
 import { ViewExtintoresComponent } from './editor-viste/view-extintores/view-extintores.component';
 import { ViewExtintorComponent } from './editor-viste/extintor-numSerie/view-extintor.component';
 import { AuthGuard } from '../guard/auth.guard';
+import { NosotrosComponent } from './nosotros/nosotros.component';
 
 const childRoutes: Routes = [
 
@@ -59,7 +60,11 @@ const childRoutes: Routes = [
   { path: 'vista-empresas/:id', component: ViewExtintoresComponent,
     data: {titulo: 'Extintores', content:'Principal'}},
   { path: 'vista-extintor/:id_ext', component: ViewExtintorComponent,
-    data: {titulo: 'Vista Extintor', content:'Principal'}}
+    data: {titulo: 'Vista Extintor', content:'Principal'}},
+
+  //otros para web info //! arreglar breadcrumb
+  { path: 'nosotros', component: NosotrosComponent,
+    data: {titulo: 'Nosotros'}}
 
 ]
 

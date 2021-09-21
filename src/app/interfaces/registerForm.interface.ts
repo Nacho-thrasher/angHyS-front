@@ -5,5 +5,6 @@ export interface RegisterForm{
   password2: string;
   email: string;
   terminos: boolean;
+  
 }
 

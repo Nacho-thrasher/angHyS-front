@@ -1,0 +1,26 @@
+.fsize{
+  font-size: 1.1rem;
+}
+.btn-wap{
+  background-color: #44C554 !important;
+  color: white;
+
+}
+.full{
+  width: 100vw !important;
+}
+.separador{
+  background-color: #dbdde0;
+  height: 10px;
+}
+.mapmob{
+  width: 100% !important;
+}
+@media screen and (max-width: 360px){
+  .mapmob{
+    width: 100% !important;
+  }
+}
+.w-40{
+  width: 40% !important;
+}

@@ -38,3 +38,7 @@ Login register and recover password Page
 -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75) !important;
 }
+.hoverbtn:hover{
+  -webkit-box-shadow: 0px 0px 20px 5px rgba(100,100,100,0.45);
+box-shadow: 0px 0px 20px 5px rgba(100,100,100,0.45);
+}

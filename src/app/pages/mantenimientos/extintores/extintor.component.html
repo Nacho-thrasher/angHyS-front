@@ -132,6 +132,13 @@
               </form>
             </div>
             <div class="col-md-6">
+              <div *ngIf="!empresaSeleccionados" class="">
+                <div role="alert" class="alert alert-info text-center">
+                  <h4 class="alert-heading">Cargando</h4>
+                  <i class="fa fa-spin fa-refresh fa-2x"></i>
+                  <p class="mb-0">Por favor espere</p>
+                </div>
+              </div>
               <div *ngIf="empresaSeleccionados" class="row">
                 <div class="col-md-12">
                   <h4 class="card-title text-capitalize">Empresa : {{empresaSeleccionados!.nombre}}</h4>
@@ -156,6 +163,13 @@
                         Extintores: {{empresaSeleccionados!.nroExtintores}}
                       </span>
                     </div>
+                  </div>
+                </div>
+                <div *ngIf="!extintorSeleccionados" class="">
+                  <div role="alert" class="alert alert-info text-center">
+                    <h4 class="alert-heading">Cargando</h4>
+                    <i class="fa fa-spin fa-refresh fa-2x"></i>
+                    <p class="mb-0">Por favor espere</p>
                   </div>
                 </div>
                 <div *ngIf="extintorSeleccionados" class="col-md-12 pt-5">

@@ -17,14 +17,15 @@
         <div class="row animated fadeIn pt-2">
 
           <div class="col-md-6">
-            <h4 class="card-title sm-text-center">Usuarios registrados ({{usuarios.length}})</h4>
+            <h4 class="card-title sm-text-center">Usuarios Registrados ({{usuarios.length}})</h4>
             <h6 class="card-subtitle"></h6>
           </div>
           <div class="col-md-6">
             <div class="text-right">
+
               <a routerLink="/dashboard/usuario/nuevo"
-                class="text-white mr-2 btn waves-effect waves-light btn-info">
-                <i class="">Crear Usuario</i>
+                class="btn btnHoverText waves-effect waves-light btn-outline-info">
+                Crear Usuario
               </a>
             </div>
           </div>
@@ -76,7 +77,7 @@
                   </td>
                   <td class="align-middle text-center fotoPadding">
                     <img
-                        [src]="transformImg(usuario.img!) | imagen: 'usuarios'"
+                        [src]="usuario.img! | imagen: 'usuarios'"
                         alt=""
                         class="avatar2 cursor"
                         (click)="abrirModal(usuario)"
@@ -87,7 +88,7 @@
                     {{usuario.email | slice:0:15}}{{(usuario.email.length > 15) ? '..' : '' }}
                   </td>
                   <td class="align-middle text-center">
-                    <select class="w100 text-center custom-select form-control"
+                    <select class="text-center custom-select form-control"
                       [(ngModel)]="usuario.role"
                       (change)="cambiarRole(usuario)"
                     >

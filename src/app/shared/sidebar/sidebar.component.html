@@ -40,7 +40,7 @@
             aria-expanded="false"
           >
           <!-- class="w-25" -->
-            <img [src]="imagen | imagen: 'usuarios'" class="pb-1 img-circle" alt="user" />
+            <img [src]="imagen | imagen: 'usuarios'" class="img-circle" alt="user"/>
             <!-- cambiar tamanio de img a cuadrada -->
             <span class="inlineB hide-menu font-medium">
               {{usuario.nombre | slice:0:18}}{{(usuario.nombre.length > 18) ? '..' : '' }}
@@ -81,6 +81,19 @@
             </li>
             <!-- <li><a href="index4.html">Modern</a></li> -->
           </ul>
+        </li>
+        <!-- ejemplos -->
+        <li class="">
+          <a class="waves-effect waves-dark"
+            routerLinkActive="active"
+            aria-expanded="false"
+            [routerLinkActiveOptions]="{exact:true}"
+            routerLink="nosotros">
+            <i class="mdi mdi-information-variant"></i>
+            <span class="hide-menu">
+              Nosotros
+            </span>
+          </a>
         </li>
       </ul>
     </nav>

@@ -577,66 +577,66 @@
           <!-- todo si es user comun -->
           <div *ngIf="isUFunc()" class="card-body">
             <div class="row">
-              <div class="col-md-12">
+              <div class="col-md-12 text-capitalize">
                 <h3>Numero de serie:</h3>
                 <p>{{ extintor?.numeroSerie }}</p>
-              </div>
-              <hr />
-              <div class="col-md-6">
-                <h3>zona</h3>
-                <p [innerHtml]="extintorForm.value.zona"></p>
+                <hr/>
               </div>
               <div class="col-md-6">
-                <h3>Num Interno</h3>
-                <p [innerHtml]="extintorForm.value.numInterno"></p>
+                <h3>Zona:</h3>
+                <p [innerHtml]="extintorForm.value.zona.length >= 1 ? extintorForm.value.zona : 'N/A'"></p>
               </div>
               <div class="col-md-6">
-                <h3>Acceso</h3>
-                <p [innerHtml]="extintorForm.value.acceso"></p>
+                <h3>Num Interno:</h3>
+                <p [innerHtml]="extintorForm.value.numInterno.length >= 1 ? extintorForm.value.numInterno : 'N/A'"></p>
               </div>
               <div class="col-md-6">
-                <h3>Demarcado</h3>
-                <p [innerHtml]="extintorForm.value.demarcado"></p>
+                <h3>Acceso:</h3>
+                <p [innerHtml]="extintorForm.value.acceso.length >= 1 ? extintorForm.value.acceso : 'N/A'"></p>
+              </div>
+              <div class="col-md-6">
+                <h3>Demarcado:</h3>
+                <p [innerHtml]="extintorForm.value.demarcado.length >= 1 ? extintorForm.value.demarcado : 'N/A'"></p>
               </div>
               <div class="col-md-12">
                 <h3>Estado de extintor</h3>
-              </div>
-              <hr />
-              <div class="col-md-6">
-                <h3>Manometro</h3>
-                <p [innerHtml]="extintorForm.value.estadoManometro"></p>
+                <hr/>
               </div>
               <div class="col-md-6">
-                <h3>Pintura</h3>
-                <p [innerHtml]="extintorForm.value.estadoPintura"></p>
+                <h3>Manometro:</h3>
+                <p [innerHtml]="extintorForm.value.estadoManometro.length >= 1 ? extintorForm.value.estadoManometro : 'N/A'"></p>
               </div>
               <div class="col-md-6">
-                <h3>Chapa baliza</h3>
-                <p [innerHtml]="extintorForm.value.estadoChapaBaliza"></p>
+                <h3>Pintura:</h3>
+                <p [innerHtml]="extintorForm.value.estadoPintura.length >= 1 ? extintorForm.value.estadoPintura : 'N/A'"></p>
               </div>
               <div class="col-md-6">
-                <h3>Manija</h3>
-                <p [innerHtml]="extintorForm.value.estadoManija"></p>
+                <h3>Chapa baliza:</h3>
+                <p [innerHtml]="extintorForm.value.estadoChapaBaliza.length >= 1 ? extintorForm.value.estadoChapaBaliza : 'N/A'"></p>
               </div>
               <div class="col-md-6">
-                <h3>Retiro por Mantenimiento</h3>
-                <p [innerHtml]="extintorForm.value.retiroPorMant"></p>
+                <h3>Manija:</h3>
+                <p [innerHtml]="extintorForm.value.estadoManija.length >= 1 ? extintorForm.value.estadoManija : 'N/A'"></p>
               </div>
               <div class="col-md-6">
-                <h3>Sustituto</h3>
-                <p [innerHtml]="extintorForm.value.sustituto"></p>
+                <h3>Retiro por Mantenimiento:</h3>
+                <p [innerHtml]="extintorForm.value.retiroPorMant.length >= 1 ? extintorForm.value.retiroPorMant : 'N/A'"></p>
               </div>
               <div class="col-md-6">
-                <h3>Numero de sustituto</h3>
-                <p [innerHtml]="extintorForm.value.numeroSustituto"></p>
+                <h3>Sustituto:</h3>
+                <p [innerHtml]="extintorForm.value.sustituto.length >= 1 ? extintorForm.value.sustituto : 'N/A'"></p>
               </div>
               <div class="col-md-6">
-                <h3>Observacion</h3>
+                <h3>Numero de sustituto:</h3>
+                <p [innerHtml]="extintorForm.value.numeroSustituto.length >= 1 ? extintorForm.value.numeroSustituto : 'N/A'"></p>
+              </div>
+              <div class="col-md-6">
+                <h3>Observacion:</h3>
                 <p
                   [innerHtml]="
                     extintorForm.value.observacion.length > 1
                       ? extintorForm.value.observacion
-                      : 'n/a'
+                      : 'N/A'
                   "
                 ></p>
               </div>

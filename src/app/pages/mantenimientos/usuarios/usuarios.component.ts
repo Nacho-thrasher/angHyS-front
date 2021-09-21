@@ -139,9 +139,23 @@ export class UsuariosComponent implements OnInit, OnDestroy {
   }
   //* cambio de rol
   cambiarRole(usuario: Usuario){
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top',
+      showConfirmButton: false,
+      timerProgressBar: true,
+      //timer: 3000,
+    })
+    Toast.fire({
+      icon: 'success',
+      title: 'Role Cambiado',
+      width: 270,
+      //padding: '3em',
+    })
     this.usuarioService.guardarUsuario(usuario)
     .subscribe(resp =>{
       //console.log(resp)
+      Toast.close();
     })
   }
   //* abrir modal

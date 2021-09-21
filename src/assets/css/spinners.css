@@ -8,11 +8,12 @@ Preloader
     position: fixed;
     z-index: 99999;
     background: #fff;
-    .cssload-speeding-wheel{
-        position: absolute;
-        top: calc(50% - 3.5px);
-        left: calc(50% - 3.5px);
-    }
+
+}
+.preloader .cssload-speeding-wheel{
+  position: absolute;
+  top: calc(50% - 3.5px);
+  left: calc(50% - 3.5px);
 }
 .loader,
 .loader__figure {
@@ -37,7 +38,7 @@ Preloader
   height: 0;
   width: 0;
   box-sizing: border-box;
-  border: 0 solid #1976d2;
+  border: 0 solid #BA1E22;
   border-radius: 50%;
   -webkit-animation: loader-figure 1.15s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
   -moz-animation: loader-figure 1.15s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
@@ -56,7 +57,7 @@ Preloader
   font-size: 0.875em;
   letter-spacing: 0.1em;
   line-height: 1.5em;
-  color: #1976d2;
+  color: #BA1E22;
   white-space: nowrap;
   -webkit-animation: loader-label 1.15s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
   -moz-animation: loader-label 1.15s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
@@ -67,10 +68,10 @@ Preloader
   0% {
     height: 0;
     width: 0;
-    background-color: #1976d2;
+    background-color: #BA1E22;
   }
   29% {
-    background-color: #1976d2;
+    background-color: #BA1E22;
   }
   30% {
     height: 2em;
@@ -91,10 +92,10 @@ Preloader
   0% {
     height: 0;
     width: 0;
-    background-color: #1976d2;
+    background-color: #BA1E22;
   }
   29% {
-    background-color: #1976d2;
+    background-color: #BA1E22;
   }
   30% {
     height: 2em;
@@ -115,10 +116,10 @@ Preloader
   0% {
     height: 0;
     width: 0;
-    background-color: #1976d2;
+    background-color: #BA1E22;
   }
   29% {
-    background-color: #1976d2;
+    background-color: #BA1E22;
   }
   30% {
     height: 2em;

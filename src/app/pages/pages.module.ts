@@ -27,6 +27,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { PipesModule } from '../pipes/pipes.module';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { DataTablesModule } from 'angular-datatables';
+import { NosotrosComponent } from './nosotros/nosotros.component';
 //? datatables bt5
 
 @NgModule({
@@ -48,7 +49,8 @@ import { DataTablesModule } from 'angular-datatables';
     ExtintoresExcelComponent,
     ViewEmpresasComponent,
     ViewExtintoresComponent,
-    ViewExtintorComponent
+    ViewExtintorComponent,
+    NosotrosComponent
   ],
   exports:[
     DashboardComponent,

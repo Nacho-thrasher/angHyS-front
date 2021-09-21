@@ -1031,7 +1031,9 @@ File: scss
   position: relative;
   z-index: 50; }
   .topbar .navbar-collapse {
-    padding: 0 10px; }
+    /** padding: 0 10px; aqui*/
+    padding: 0 0px;
+  }
   .topbar .top-navbar {
     min-height: 70px;
     padding: 0px; }
