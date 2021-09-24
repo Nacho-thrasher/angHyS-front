@@ -35,6 +35,11 @@ export class EmpresaService {
     //delay() , va con pipe antes de map para demorar la carga
   }
 
+  cargarIdEmpresa(empresaNombre: string){
+    const url = `${base_url}/empresaNombre/${empresaNombre}`;
+    return this.http.get(url, this.headers);
+  }
+
   cargarEmpresaById(id:string){
 
     const url = `${base_url}/empresa/${id}`;

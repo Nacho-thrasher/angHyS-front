@@ -29,6 +29,7 @@ export class ExtintorComponent implements OnInit {
   public empresas: Empresa[] = [];
   public empresaSeleccionados?: Empresa;
   public extintorSeleccionados?: Extintor;
+  public ifIsNew!: boolean;
   //? qr vars -
   public title!: string;
   public url!:string;
@@ -55,10 +56,18 @@ export class ExtintorComponent implements OnInit {
     ngOnInit(): void {
     //todo Obtener ID
     this.activatedRouter.params.subscribe(({id}) =>{
-      this.cargarExtintor(id);
+      if (id === 'nuevo') {
+        this.ifIsNew = true;
+        this.questionIsNew();
+      }
+      else{
+        this.ifIsNew = false;
+        this.cargarExtintor(id);
+      }
     })
     //todo Validators form
     this.extintorForm = this.fb.group({
+      identificadorSysExt: ['', Validators.required],
       numeroSerie: ['', Validators.required],
       marca: ['', Validators.required],
       agenteExtintor: ['', Validators.required],
@@ -74,6 +83,17 @@ export class ExtintorComponent implements OnInit {
       // console.log(this.empresaSeleccionados?.nroExtintores)
     })
   }
+  //?
+  questionIsNew(){
+    if (this.ifIsNew === true) {
+      $(`#formCreateExt`).removeClass("col-md-6");
+      $(`#formCreateExt`).addClass("col-md-12");
+    }else{
+      $(`#formCreateExt`).removeClass("col-md-12");
+      $(`#formCreateExt`).addClass("col-md-6");
+    }
+  }
+
   //todo QR
   cargarQr(numeroSerie:string){
     this.title = 'app';
@@ -86,7 +106,7 @@ export class ExtintorComponent implements OnInit {
   }
   //* Cargar Extintor
   cargarExtintor(id:string){
-    if (id === 'nuevo') {  return; }
+    if (id === 'nuevo') { this.ifIsNew = true;  return; }
     this.extintorService.cargarExtintorById(id)
     .pipe(
       delay(100)
@@ -100,7 +120,8 @@ export class ExtintorComponent implements OnInit {
               agenteExtintor,
               capacidad,
               marca,
-              empresa:{_id}
+              empresa:{_id},
+              identificadorSysExt
       } = extintor;
       //console.log(extintor);
       //*pdf img
@@ -113,6 +134,7 @@ export class ExtintorComponent implements OnInit {
       //* Cargando inputs de form
       this.extintorSeleccionados = extintor;
       this.extintorForm.setValue({
+        identificadorSysExt,
           numeroSerie,
           agenteExtintor,
           capacidad,
@@ -247,7 +269,7 @@ export class ExtintorComponent implements OnInit {
           }
           else{
             Swal.fire('Creado', `Extintor: ${numeroSerie} - Marca: ${marca}.`, 'success')
-            this.router.navigateByUrl(`/dashboard/extintor/${ resp.extintor._id }`)
+
           }
           if (this.imagenSubir !== this.imagenRem) {
             Swal.fire({
@@ -281,7 +303,7 @@ export class ExtintorComponent implements OnInit {
             }
             this.empresaService.actualizarNroExtEmpresa(data)
             .subscribe(resp =>{
-
+              this.router.navigateByUrl(`/dashboard/extintores`)
             })
           }
         })

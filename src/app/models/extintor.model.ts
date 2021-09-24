@@ -13,10 +13,16 @@ export class Extintor {
     public agenteExtintor: string,
     public capacidad: string,
     public marca: string,
+    public identificadorSysExt: string,
+
+    public fuph: string,
+    public vtoCarga: string,
+    public vtoPh: string,
+    public ff: string,
+    public sucursal: string,
 
     public fechaFabricacion: string,
     public proxRecarga: string,
-    public vtoPh: string,
     public reposiciones: string,
     public cambio: string,
     public cantidadKg: string,
@@ -56,6 +62,8 @@ export class Extintor {
     public observacion?: string,
     public cliente?: string,
     public pdf?: string
+
+    //todo id ext sigex para el qr y modificar crudd
 
   ){
 

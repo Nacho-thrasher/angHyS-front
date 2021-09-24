@@ -31,6 +31,9 @@ export class ExtintoresExcelComponent implements OnInit {
   public arrayBuffer: any;
   public file!: File;
   public str!: any;
+
+  public arreglado!:any;
+
   public noRepeatObject:any;
   public JSONObject = {
     object: {},
@@ -94,13 +97,14 @@ export class ExtintoresExcelComponent implements OnInit {
 
       this.JSONObject.object = JSON_Object; //Data in JSON Format
       this.str = JSON_Object;
-      // para tablas
+      //? para tablas /////////////////////////
       this.keys = Object.keys(this.str[0]);
       this.dataSheet.next(this.str);
+      //? comprobar nro serie /////////////////
       this.comprobarNroSerie();
-      // console log y output text
+      //? console log y output text ///////////
       this.JSONObject.string = JSON.stringify(this.str); //Data in String Format
-      //console.log(`JSON object cant:${this.str.length}`, this.str);
+      //console.log(`cabeza:${this.keys}`, this.str);
 
     };
     fileReader.readAsArrayBuffer(this.file);
@@ -108,19 +112,40 @@ export class ExtintoresExcelComponent implements OnInit {
   }
 
   comprobarNroSerie(){
-    for(let index = 0; index < this.str.length; index++){
-      this.extintorService.cargarExtintoresByNumSerie(this.str[index].numeroSerie)
+    this.arreglado = this.str.map( (item:any) => {
+      return {
+        identificadorSysExt: item.Elemento_id,
+        numeroSerie: item.Numero,
+        agenteExtintor: item.Agente_Extintor,
+        capacidad: item.Capacidad,
+        marca: item.Marca,
+        fuph: item.FUPH,
+        vtoCarga: item.Vto_Carga,
+        vtoPh: item.Vto_PH,
+        ff: item.FF,
+        sucursal: item.Sucursal
+      };
+    });
+    //console.log(arreglado);
+    for(let index = 0; index < this.arreglado.length; index++){
+
+      this.extintorService.cargarExtintoresByNumSerie(this.arreglado[index].numeroSerie)
       .subscribe((resp:any)=>{
-        if (
-          resp.extintor.numeroSerie == this.str[index].numeroSerie &&
-          resp.extintor.capacidad == this.str[index].capacidad &&
-          resp.extintor.agenteExtintor == this.str[index].agenteExtintor &&
-          resp.extintor.marca == this.str[index].marca
+
+        if (resp.extintor === undefined) {
+          // crear variable para ocultar cosas
+        }
+        else if (
+          resp.extintor.numeroSerie == this.arreglado[index].numeroSerie &&
+          resp.extintor.capacidad == this.arreglado[index].capacidad &&
+          resp.extintor.agenteExtintor == this.arreglado[index].agenteExtintor &&
+          resp.extintor.marca == this.arreglado[index].marca
         ) {
-          this.str[index].existe = ('si');
+          this.arreglado[index].existe = ('si');
         }
       })
     }
+    console.log(this.arreglado.length)
   }
 
   guardarExtintor(){
@@ -128,12 +153,12 @@ export class ExtintoresExcelComponent implements OnInit {
     try {
       let i = 0; let repetidos = 0;
       const { empresa } = this.extintorForm.value;
-      for(let index = 0; index < this.str.length; index++){
-        if (this.str[index].existe === undefined || this.str[index].existe != 'si') {
+      for(let index = 0; index < this.arreglado.length; index++){
+        if (this.arreglado[index].existe === undefined || this.arreglado[index].existe != 'si') {
           // pushear empresa
-          this.str[index].empresa = (`${empresa}`);
+          this.arreglado[index].empresa = (`${empresa}`);
           //creando
-          this.extintorService.crearExtintorXlsx(this.str[index])
+          this.extintorService.crearExtintorXlsx(this.arreglado[index])
           .subscribe( (resp:any) => {
             //preload aqui?
           })
@@ -141,7 +166,7 @@ export class ExtintoresExcelComponent implements OnInit {
         }
         else{ repetidos++; }
       }
-      if( repetidos === this.str.length){
+      if( repetidos === this.arreglado.length){
         Swal.fire('Error', `Los (${repetidos}) Extintores ya existen.`, 'error')
       }
       else{

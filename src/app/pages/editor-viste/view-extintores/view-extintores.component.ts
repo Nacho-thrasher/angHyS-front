@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Extintor } from 'src/app/models/extintor.model';
 import { ExtintorService } from 'src/app/services/extintor.service';
+import { EmpresaService } from '../../../services/empresa.service';
 
 @Component({
   selector: 'app-view-extintores',
@@ -18,12 +19,13 @@ export class ViewExtintoresComponent implements OnInit {
 
   constructor(private extintorService: ExtintorService,
     private activatedRoute: ActivatedRoute,
-    private router: Router)
+    private router: Router,
+    private empresaService: EmpresaService)
   { }
 
   //todo oninit
   ngOnInit(): void {
-    //datatable options
+    //?datatable options
     this.dtOptions = {
       pagingType: 'simple_numbers',
       responsive: true,
@@ -33,9 +35,8 @@ export class ViewExtintoresComponent implements OnInit {
         { orderable: false, targets: 1 }
       ]
     };
-    //carga
-    this.activatedRoute.params
-    .subscribe( ({id}) => {
+    //?carga
+    this.activatedRoute.params.subscribe( ({id}) => {
       this.cargarExtintoresByEmpresa(id);
     })
   }
@@ -50,7 +51,6 @@ export class ViewExtintoresComponent implements OnInit {
       }
       this.nomEmpr = resp.nom;
       this.extintores = resp.extintores;
-
     })
   }
 

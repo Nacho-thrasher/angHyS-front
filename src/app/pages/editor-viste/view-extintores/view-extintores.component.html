@@ -49,24 +49,24 @@
                 <td class="align-middle text-center">
                   {{i+1}}
                 </td>
-                <td class="align-middle text-center fotoPadding" [routerLink]="['/dashboard/vista-extintor', extintor._id]">
+                <td class="align-middle text-center fotoPadding" [routerLink]="['/dashboard/vista-extintor', extintor.identificadorSysExt]">
                   <img [src]="extintor.img! | imagen:'extintores'"
                     alt="" class="avatar2 cursor"
                   >
                 </td>
-                <td class="align-middle text-center" [routerLink]="['/dashboard/vista-extintor', extintor._id]">
+                <td class="align-middle text-center" [routerLink]="['/dashboard/vista-extintor', extintor.identificadorSysExt]">
                   {{extintor.numeroSerie}}
                 </td>
-                <td class="align-middle text-center" [routerLink]="['/dashboard/vista-extintor', extintor._id]">
+                <td class="align-middle text-center" [routerLink]="['/dashboard/vista-extintor', extintor.identificadorSysExt]">
                   {{extintor.marca}}
                 </td>
-                <td class="align-middle text-center" [routerLink]="['/dashboard/vista-extintor', extintor._id]">
+                <td class="align-middle text-center" [routerLink]="['/dashboard/vista-extintor', extintor.identificadorSysExt]">
                   {{extintor.agenteExtintor}}
                 </td>
-                <td class="align-middle text-center" [routerLink]="['/dashboard/vista-extintor', extintor._id]">
+                <td class="align-middle text-center" [routerLink]="['/dashboard/vista-extintor', extintor.identificadorSysExt]">
                   {{extintor.capacidad}}
                 </td>
-                <td class="align-middle text-center" [routerLink]="['/dashboard/vista-extintor', extintor._id]">
+                <td class="align-middle text-center" [routerLink]="['/dashboard/vista-extintor', extintor.identificadorSysExt]">
                   {{extintor.empresa!.nombre}}
                 </td>
               </tr>

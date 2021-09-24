@@ -91,6 +91,7 @@ export class ViewExtintorComponent implements OnInit {
   }
   //todo Cargar extintor
   cargarExtintor(id: string){
+    //console.log(id)
     //? preload
     this.cargando = true;
     //? ALservice extintor por numserie ? nuevo metodo

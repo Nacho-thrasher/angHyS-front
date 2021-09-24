@@ -42,6 +42,7 @@ export class ViewEmpresasComponent implements OnInit {
   navigate(nombre:any){
 
     let text1 = nombre.replace(/ /g, "_");
+    //console.log(text1);
     this.router.navigateByUrl(`/dashboard/vista-empresas/${text1}`)
 
   }

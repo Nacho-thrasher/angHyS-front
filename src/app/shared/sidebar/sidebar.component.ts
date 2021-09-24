@@ -5,7 +5,7 @@ import { Usuario } from "../../models/usuario.model";
 import { Subscription } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { ModalImgService } from '../../services/modal-img.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 declare var $: any;
@@ -25,11 +25,14 @@ export class SidebarComponent implements OnInit, OnDestroy {
   public imgSubs!: Subscription;
   public imgRadius!: string;
   public imagen:string = '';
+  //?
+  public ifActive!: boolean;
 
   constructor(public sidebarService: SidebarService,
     private usuarioService: UsuarioService,
     private modalImgService: ModalImgService,
-    private router: Router,) {
+    private router: Router,
+    private activatedRouter: ActivatedRoute) {
 
     //this.menuItems = sidebarService.menu;
     //this.usuario = usuarioService.usuario;
@@ -43,6 +46,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.switchActive()
     this.usuario = this.usuarioService.usuario;
     if (this.usuario === undefined) {
     }
@@ -88,6 +92,12 @@ export class SidebarComponent implements OnInit, OnDestroy {
   cerrarSesion(){
     this.router.navigateByUrl('/login')
     this.usuarioService.logout();
+  }
+
+  switchActive(){
+
+    
+
   }
 
 }

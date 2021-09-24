@@ -3,7 +3,7 @@
     <div class="card">
         <div class="card-body">
           <div class="row">
-            <div class="col-md-6 pb-4">
+            <div id="formCreateExt" class="col-md-6 pb-4">
               <h4 *ngIf="!extintorSeleccionados" class="card-title">Nuevo Extintor</h4>
               <h4 *ngIf="extintorSeleccionados" class="card-title">Editando Extintor: {{extintorSeleccionados?.numeroSerie!}}</h4>
               <hr>
@@ -54,6 +54,18 @@
                         </div>
 
                         <!-- end input -->
+                      </div>
+                    </div>
+                    <!--  -->
+                    <!-- id_SysExt -->
+                    <div class="row">
+                      <div class="col-md-12 b-r">
+                        <div class="form-group">
+                          <label for="exampleInputuname3" class="control-label">Id externo:</label>
+                          <input formControlName="identificadorSysExt"
+                                  type="text"
+                                  class="form-control" id="exampleInputuname3" placeholder="">
+                        </div>
                       </div>
                     </div>
                     <!--  -->
@@ -131,7 +143,7 @@
 
               </form>
             </div>
-            <div class="col-md-6">
+            <div *ngIf="!ifIsNew" class="col-md-6">
               <div *ngIf="!empresaSeleccionados" class="">
                 <div role="alert" class="alert alert-info text-center">
                   <h4 class="alert-heading">Cargando</h4>
@@ -165,22 +177,24 @@
                     </div>
                   </div>
                 </div>
-                <div *ngIf="!extintorSeleccionados" class="">
-                  <div role="alert" class="alert alert-info text-center">
-                    <h4 class="alert-heading">Cargando</h4>
-                    <i class="fa fa-spin fa-refresh fa-2x"></i>
-                    <p class="mb-0">Por favor espere</p>
+                <div>
+                  <div *ngIf="!extintorSeleccionados" class="">
+                    <div role="alert" class="alert alert-info text-center">
+                      <h4 class="alert-heading">Cargando</h4>
+                      <i class="fa fa-spin fa-refresh fa-2x"></i>
+                      <p class="mb-0">Por favor espere</p>
+                    </div>
                   </div>
-                </div>
-                <div *ngIf="extintorSeleccionados" class="col-md-12 pt-5">
-                  <h4 class="card-title">Qr del extintor seleccionado</h4>
-                  <div class="text-center">
-                    <ngx-qrcode
-                      [elementType]="elementType"
-                      [value]="value"
-                      qrc-class="aclass"
-                      [errorCorrectionLevel]="errorCorrectionLevel" >
-                    </ngx-qrcode>
+                  <div *ngIf="extintorSeleccionados" class="col-md-12 pt-5">
+                    <h4 class="card-title">Qr del extintor seleccionado</h4>
+                    <div class="text-center">
+                      <ngx-qrcode
+                        [elementType]="elementType"
+                        [value]="value"
+                        qrc-class="aclass"
+                        [errorCorrectionLevel]="errorCorrectionLevel" >
+                      </ngx-qrcode>
+                    </div>
                   </div>
                 </div>
               </div>

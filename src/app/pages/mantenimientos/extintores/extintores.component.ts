@@ -117,7 +117,9 @@ export class ExtintoresComponent implements OnInit, OnDestroy {
             `Extintor: ${extintor.numeroSerie} Marca: ${extintor.marca} fue eliminado.`,
             'success'
           ),
-          this.cargarExtintores()
+          setTimeout(() => {
+            this.cargarExtintores()
+          }, 200);
         })
       }
     })
