@@ -71,19 +71,23 @@
           No es un archivo excell
         </div>
         <!-- spinner -->
-        <div class="row animated fadeIn fast"
-          *ngIf="spinnerEnabled">
+        <div id="preload"  class="row hide animated fadeIn fast"
+          *ngIf="!preload">
           <div class="col-12">
             <div role="alert" class="alert alert-info text-center">
-              <h4 class="alert-heading">Cargando</h4>
+              <h4 class="alert-heading">Verificando extintores existentes {{indexPreload}}</h4>
               <i class="fa fa-spin fa-refresh fa-2x"></i>
-              <p class="mb-0">Por favor espere</p>
+              <p class="mb-0 text-center">Por favor espere</p>
+              <p class="mb-1 text-center">
+                {{lengthFile}} Extintores en excel, {{repetidosFile}} ya existentes.
+              </p>
             </div>
           </div>
         </div>
 
         <!-- 2 tabla -->
-        <div *ngIf="cargandoTable" class="table-responsive">
+        <div class="table-responsive">
+          <p class="text-center">{{lengthFile}} Extintores {{repetidosFile == 0 ? '' : ', '+repetidosFile+' ya existen y no se crearan'}}</p>
           <p class="text-center">
             Los extintores marcados en rojo ya existen, solo se crearan los que no existan.</p>
           <table
@@ -103,7 +107,6 @@
                   <div [ngClass]="{'text-danger': item['existe'] === 'si'}">
                     {{item[key]}}
                   </div>
-
                 </td>
               </tr>
             </tbody>

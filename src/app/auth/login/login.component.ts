@@ -50,18 +50,21 @@ export class LoginComponent implements OnInit {
       width: 270,
       //padding: '3em',
     })
-    this.usuarioService.loginUsuario(this.loginForm.value).subscribe( resp =>{
+    this.usuarioService.loginUsuario(this.loginForm.value)
+    .subscribe( resp =>{
       if(this.loginForm.get('remember')?.value){
         localStorage.setItem('email', this.loginForm.get('email')?.value);
       }
       else{
         localStorage.removeItem('email');
       }
-      this.router.navigateByUrl('/');
-      setTimeout(() => {
-        Toast.close();
+      if (resp.ok) {
+        this.router.navigateByUrl('/');
+        setTimeout(() => {
+          Toast.close();
+        }
+        , 400);
       }
-      , 400);
     }, (err) =>{
       Swal.fire('Error', err.error.msg, 'error')
     });

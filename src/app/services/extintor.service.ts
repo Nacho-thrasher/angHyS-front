@@ -45,8 +45,12 @@ export class ExtintorService {
   }
 
   cargarExtintorByIdExt(id:any){
-
     const url = `${base_url}/vista-extintor/${id}`;
+    return this.http.get(url, this.headers)
+  }
+
+  comprobarIdExterno(id:any){
+    const url = `${base_url}/verificar_repetido/${id}`;
     return this.http.get(url, this.headers)
   }
 

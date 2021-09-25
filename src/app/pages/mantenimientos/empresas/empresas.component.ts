@@ -83,11 +83,30 @@ export class EmpresasComponent implements OnInit, OnDestroy {
   }
   //delete
   eliminarEmpresa(empresa: Empresa){
-    this.empresaService.borrarEmpresa(empresa._id!)
-    .subscribe(resp => {
-      this.cargarEmpresas();
-      Swal.fire('Guardado', empresa.nombre, 'success')
+    Swal.fire({
+      title: 'Estas seguro?',
+      text: `Se borrara Empresa: ${empresa.nombre}, estas seguro?`,
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Si, Borrar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        this.empresaService.borrarEmpresa(empresa._id!)
+        .subscribe(resp => {
+        })
+        Swal.fire(
+          'Borrado!',
+          `Extintor: ${empresa.nombre} fue eliminado.`,
+          'success'
+          ),
+          setTimeout(() => {
+            this.cargarEmpresas();
+        }, 200);
+
+      }
     })
+
   }
   //modal cambiarImagen
   abrirModal(empresa:Empresa) {

@@ -33,6 +33,11 @@ export class ExtintoresExcelComponent implements OnInit {
   public str!: any;
 
   public arreglado!:any;
+  public lengthFile!:string;
+  public repetidosFile: number = 0;
+
+  public indexPreload: number = 0;
+  public preload!: boolean;
 
   public noRepeatObject:any;
   public JSONObject = {
@@ -103,8 +108,7 @@ export class ExtintoresExcelComponent implements OnInit {
       //? comprobar nro serie /////////////////
       this.comprobarNroSerie();
       //? console log y output text ///////////
-      this.JSONObject.string = JSON.stringify(this.str); //Data in String Format
-      //console.log(`cabeza:${this.keys}`, this.str);
+      //this.JSONObject.string = JSON.stringify(this.str); //Data in String Format
 
     };
     fileReader.readAsArrayBuffer(this.file);
@@ -112,6 +116,7 @@ export class ExtintoresExcelComponent implements OnInit {
   }
 
   comprobarNroSerie(){
+    $(`#preload`).removeClass("hide");
     this.arreglado = this.str.map( (item:any) => {
       return {
         identificadorSysExt: item.Elemento_id,
@@ -126,32 +131,41 @@ export class ExtintoresExcelComponent implements OnInit {
         sucursal: item.Sucursal
       };
     });
-    //console.log(arreglado);
     for(let index = 0; index < this.arreglado.length; index++){
 
-      this.extintorService.cargarExtintoresByNumSerie(this.arreglado[index].numeroSerie)
+      this.extintorService.comprobarIdExterno(this.arreglado[index].identificadorSysExt)
       .subscribe((resp:any)=>{
-
-        if (resp.extintor === undefined) {
-          // crear variable para ocultar cosas
-        }
+        //?
+        this.indexPreload = this.indexPreload + 1;
+        //?
+        if (resp.extintor === undefined) { }
         else if (
-          resp.extintor.numeroSerie == this.arreglado[index].numeroSerie &&
-          resp.extintor.capacidad == this.arreglado[index].capacidad &&
-          resp.extintor.agenteExtintor == this.arreglado[index].agenteExtintor &&
-          resp.extintor.marca == this.arreglado[index].marca
-        ) {
-          this.arreglado[index].existe = ('si');
+          resp.extintor == this.arreglado[index].identificadorSysExt) {
+            this.arreglado[index].existe = ('si');
+            this.str[index].existe = ('si');
+            this.repetidosFile = this.repetidosFile + 1;
+        }
+        if (this.indexPreload == this.arreglado.length) {
+          this.preload = true;
+          $(`#preload`).addClass("hide");
         }
       })
+
     }
-    console.log(this.arreglado.length)
+    this.lengthFile = this.arreglado.length;
   }
 
   guardarExtintor(){
     //*Crear
     try {
       let i = 0; let repetidos = 0;
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'center',
+        showConfirmButton: false,
+        timerProgressBar: true,
+        //timer: 3000,
+      })
       const { empresa } = this.extintorForm.value;
       for(let index = 0; index < this.arreglado.length; index++){
         if (this.arreglado[index].existe === undefined || this.arreglado[index].existe != 'si') {
@@ -163,6 +177,12 @@ export class ExtintoresExcelComponent implements OnInit {
             //preload aqui?
           })
           i++;
+          Toast.fire({
+            icon: 'success',
+            title: `Importando extintores ${i}`,
+            width: 270,
+            //padding: '3em',
+          })
         }
         else{ repetidos++; }
       }
@@ -187,6 +207,7 @@ export class ExtintoresExcelComponent implements OnInit {
 
         })
         //todo
+        Toast.close();
         Swal.fire('Creado', `(${i}) Extintores creados`, 'success')
         setTimeout(() => {
           this.router.navigateByUrl(`/dashboard/extintores`)

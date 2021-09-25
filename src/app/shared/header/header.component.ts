@@ -9,10 +9,11 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
+  addclass:any
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-
+    
   }
 
   buscar(termino:string){
