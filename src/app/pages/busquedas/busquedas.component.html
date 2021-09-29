@@ -121,7 +121,7 @@
               <tbody>
                 <tr *ngFor="let extintor of extintores"
                   class="cursor animated fadeIn fast"
-                  [routerLink]="['/dashboard/vista-extintor', extintor._id]"
+                  [routerLink]="['/dashboard/vista-extintor', extintor.identificadorSysExt]"
                 >
                   <td>
                     <img [src]="extintor.img! | imagen:'extintores'"
