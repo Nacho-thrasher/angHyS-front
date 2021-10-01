@@ -15,7 +15,8 @@ declare const jQuery: any;
   selector: 'app-extintores',
   templateUrl: './extintores.component.html',
   styles: [
-  ]
+  ],
+  styleUrls:['./extintor.css']
 })
 export class ExtintoresComponent implements OnInit, OnDestroy {
 
@@ -23,6 +24,7 @@ export class ExtintoresComponent implements OnInit, OnDestroy {
   public extintores: Extintor[] = [];
   public cargando: boolean = true;
   public imgSubs!: Subscription;
+  viewImageExtintor:boolean = false;
 
   constructor(private extintorService: ExtintorService,
             private modalImgService: ModalImgService,
@@ -47,7 +49,6 @@ export class ExtintoresComponent implements OnInit, OnDestroy {
         { orderable: false, targets: 2 }
       ]
     };
-
     //cargas
     this.cargarExtintores();
     this.imgSubs = this.modalImgService.nuevaImagen
@@ -58,6 +59,10 @@ export class ExtintoresComponent implements OnInit, OnDestroy {
     });
     // setTimeout(()=>this.showContent=true, 1000);
 
+  }
+
+  loaded() {
+      this.viewImageExtintor = true;
   }
 
   //funcion

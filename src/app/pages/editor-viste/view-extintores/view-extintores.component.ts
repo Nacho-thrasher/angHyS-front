@@ -8,7 +8,8 @@ import { EmpresaService } from '../../../services/empresa.service';
   selector: 'app-view-extintores',
   templateUrl: './view-extintores.component.html',
   styles: [
-  ]
+  ],
+  styleUrls: ['view-extintores.css']
 })
 
 export class ViewExtintoresComponent implements OnInit {
@@ -16,6 +17,7 @@ export class ViewExtintoresComponent implements OnInit {
   public nomEmpr:String = '';
   public extintores: Extintor[] = [];
   public dtOptions: DataTables.Settings = {};
+  viewImageExtintor:boolean = false;
 
   constructor(private extintorService: ExtintorService,
     private activatedRoute: ActivatedRoute,
@@ -27,7 +29,7 @@ export class ViewExtintoresComponent implements OnInit {
   ngOnInit(): void {
     //?datatable options
     this.dtOptions = {
-      pagingType: 'simple_numbers',
+      pagingType: 'numbers',
       responsive: true,
       info: false,
       language: { url: '//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json' },
@@ -40,6 +42,14 @@ export class ViewExtintoresComponent implements OnInit {
       this.cargarExtintoresByEmpresa(id);
     })
   }
+
+  loaded() {
+    setTimeout(() => {
+      this.viewImageExtintor = true;
+    }
+    , 400);
+  }
+
   //* function cargar
   cargarExtintoresByEmpresa(id: string){
     this.extintorService.cargarExtintoresByEmpresa(id)

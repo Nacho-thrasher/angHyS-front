@@ -1,7 +1,7 @@
 <div class="row animated fadeIn fast" *ngIf="cargando">
   <div class="col-12">
-    <div role="alert" class="alert alert-info text-center">
-      <h4 class="alert-heading">Cargando</h4>
+    <div role="alert" class="bg-light alert text-center">
+      <h4 class="alert-heading">Cargando Extintor</h4>
       <i class="fa fa-spin fa-refresh fa-2x"></i>
       <p class="mb-0">Por favor espere</p>
     </div>
@@ -59,27 +59,47 @@
               <div class="text-center col-md-4 col-xs-6 b-r">
                 <strong>Fotos</strong>
                 <br />
-                <div class="avatar-vista">
+                <div class="skeletonPre avatar-vista">
                   <a
                     class="image-popup-no-margins"
                     [href]="extintor?.img! | imagen: 'extintores'"
                   >
-                    <img
+                    <img [hidden]="!viewImageFoto1" (load)="loaded('foto1')"
                       [src]="extintor?.img! | imagen: 'extintores'"
-                      class="rounded avatar-vista-preview img-responsive"
+                      class="animated fadeIn rounded avatar-vista-preview img-responsive"
                     />
+                    <div [hidden]="viewImageFoto1" class="item avatar-vista-preview">
+                      <ngx-skeleton-loader
+                        count="1"
+                        [theme]="{
+                          'border-radius': '5px',
+                          height: '130px',
+                          border: '1px solid white'
+                        }"
+                      ></ngx-skeleton-loader>
+                    </div>
                   </a>
                   <hr>
                 </div>
-                <div class="avatar-vista">
+                <div class="skeletonPre avatar-vista">
                   <a
                     class="image-popup-no-margins"
                     [href]="extintor?.img2! | imagen: 'extintores'"
                   >
-                    <img
+                    <img [hidden]="!viewImageFoto2" (load)="loaded('foto2')"
                       [src]="extintor?.img2! | imagen: 'extintores'"
-                      class="avatar-vista-preview img-responsive"
+                      class="animated fadeIn  avatar-vista-preview img-responsive"
                     />
+                    <div [hidden]="viewImageFoto2" class="item avatar-vista-preview">
+                      <ngx-skeleton-loader
+                        count="1"
+                        [theme]="{
+                          'border-radius': '5px',
+                          height: '130px',
+                          border: '1px solid white'
+                        }"
+                      ></ngx-skeleton-loader>
+                    </div>
                   </a>
                   <hr>
                 </div>
@@ -87,15 +107,26 @@
               <div class="col-md-8 col-xs-6">
                 <strong></strong>
                 <br />
-                <div class="">
+                <div class="skeletonPre">
                   <a
                     class="image-popup-no-margins"
                     [href]="extintor?.pdf! | imagen: 'extintores'"
                   >
-                    <img
+                    <img [hidden]="!viewImagePdf" (load)="loaded('pdf')"
                       [src]="extintor?.pdf! | imagen: 'extintores'"
-                      class="img-responsive"
+                      class="animated fadeIn img-responsive"
                     />
+                    <div [hidden]="viewImagePdf" class="item">
+                      <ngx-skeleton-loader
+                        count="1"
+                        [theme]="{
+                          'border-radius': '5px',
+                          height: '400px',
+                          border: '1px solid white'
+                        }"
+                      ></ngx-skeleton-loader>
+                    </div>
+
                   </a>
                 </div>
                 <!--? end content -->
@@ -506,7 +537,7 @@
                 <!--? end  -->
               </div>
             </div>
-            <hr/>
+            <!-- <hr/> -->
           </div>
         </div>
         <!--todo second tab empresa-->

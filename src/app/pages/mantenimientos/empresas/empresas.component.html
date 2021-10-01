@@ -1,6 +1,6 @@
 <div class="row animated fadeIn fast" *ngIf="cargando">
   <div class="col-12">
-    <div role="alert" class="alert alert-info text-center">
+    <div role="alert" class="alert bg-light text-center">
       <h4 class="alert-heading">Cargando</h4>
       <i class="fa fa-spin fa-refresh fa-2x"></i>
       <p class="mb-0">Por favor espere</p>
@@ -20,7 +20,7 @@
           </div>
           <div class="col-md-6 justify-content-center text-center">
             <div class="text-right">
-              
+
               <a routerLink="/dashboard/empresa/nuevo"
                 class="btn btnHoverText waves-effect waves-light btn-outline-info">
                 Crear Empresa
@@ -33,7 +33,7 @@
         <!-- tabla 1 -->
 
         <div class="">
-          <table
+          <table id="tabla"
             datatable
             [dtOptions]="dtOptions"
             class="onMobile text-capitalize display nowrap table animated fadeIn table-hover"
@@ -54,28 +54,7 @@
                 <th class="sorting text-center text-nowrap">Accion</th>
               </tr>
             </thead>
-            <!-- <tfoot>
-              <tr>
-                <th class="sorting text-center" rowspan="1" colspan="1">
-                  #Nro
-                </th>
-                <th class="sorting text-center" rowspan="1" colspan="1">
-                  Foto
-                </th>
-                <th class="sorting text-center" rowspan="1" colspan="1">
-                  Nombre
-                </th>
-                <th class="sorting text-center" rowspan="1" colspan="1">
-                  Direccion
-                </th>
-                <th class="sorting text-center" rowspan="1" colspan="1">
-                  Localidad
-                </th>
-                <th class="sorting text-center" rowspan="1" colspan="1">
-                  Accion
-                </th>
-              </tr>
-            </tfoot> -->
+
             <tbody>
               <tr *ngFor="let empresa of empresas; let i = index"
                 class="cursor"

@@ -1,6 +1,6 @@
 <div class="row animated fadeIn fast" *ngIf="cargando">
   <div class="col-12">
-    <div role="alert" class="alert alert-info text-center">
+    <div role="alert" class="alert bg-light text-center">
       <h4 class="alert-heading">Cargando</h4>
       <i class="fa fa-spin fa-refresh fa-2x"></i>
       <p class="mb-0">Por favor espere</p>
@@ -17,6 +17,7 @@
   </div>
 </div>
 
+
 <div class="row">
   <div class="col-12 m-t-20">
     <!-- <h4 class="m-b-0">Card columns</h4> -->
@@ -29,14 +30,24 @@
       >
         <div
           (click)="navigate(empresa.nombre)"
-          class="avatar-vista card h-100 card-shadow text-capitalize animated pulse fast"
+          class="skeletonPre avatar-vista card h-100 card-shadow text-capitalize animated fadeIn"
         >
         <!-- 315 x 160 -->
-          <img
-            class="avatar-vista-preview card-img-top img-responsive img-fluid"
+          <img [hidden]="!viewImageFoto1" (load)="loaded()"
+            class="animated fadeIn avatar-vista-preview card-img-top img-responsive img-fluid"
             [src]="empresa.img! | imagen: 'empresas'"
             alt="Card image cap"
           />
+          <div [hidden]="viewImageFoto1" class="item avatar-vista-preview">
+            <ngx-skeleton-loader
+              count="1"
+              [theme]="{
+                'border-radius': '5px',
+                height: '100%',
+                border: '1px solid white'
+              }"
+            ></ngx-skeleton-loader>
+          </div>
           <div class="cardRespBody card-body">
             <h4 class="titleResp card-title">
               {{ empresa.nombre }}

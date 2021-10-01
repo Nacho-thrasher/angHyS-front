@@ -1,13 +1,41 @@
 <div class="row animated fadeIn fast"
-  *ngIf="extintores.length === 0"
+*ngIf="extintores.length === 0"
 >
-  <div class="col-12">
+<div class="col-12">
 
-    <div role="alert" class="alert alert-info text-center">
-      <h4 class="alert-heading">Cargando</h4>
-      <i class="fa fa-spin fa-refresh fa-2x"></i>
-      <p class="mb-0">Por favor espere</p>
+  <div role="alert" class="alert bg-light text-center">
+    <h4 class="alert-heading">Cargando Extintores</h4>
+    <i class="fa fa-spin fa-refresh fa-2x"></i>
+    <p class="mb-2">Por favor espere</p>
+    <div class="row">
+      <!-- <hr> -->
+      <div class="col-md-1">
+        <div class="item skeletonPre">
+          <ngx-skeleton-loader
+            count="10" appearance="circle"
+            [theme]="{
+              'border-radius': '100%',
+              height: '50px',
+              width: '50px',
+              border: '1px solid white'
+            }"
+          ></ngx-skeleton-loader>
+        </div>
+      </div>
+      <div class="col-md-11">
+        <div class="item skeletonPre">
+          <ngx-skeleton-loader
+            count="10" appearance="line"
+            [theme]="{
+              'border-radius': '5px',
+              height: '50px',
+              border: '1px solid white'
+            }"
+          ></ngx-skeleton-loader>
+        </div>
+      </div>
     </div>
+  </div>
 
   </div>
 </div>
@@ -31,7 +59,7 @@
             width="100%"
             role="grid"
           >
-            <thead>
+            <thead [hidden]='!viewImageExtintor'>
               <tr>
                 <th class="sorting text-center w5">#Nro</th>
                 <th class="text-center no-sort fotoPadding2">Foto</th>
@@ -43,14 +71,14 @@
               </tr>
             </thead>
 
-            <tbody>
+            <tbody [hidden]='!viewImageExtintor' >
               <tr *ngFor="let extintor of extintores; let i = index"
               class="animated cursor fadeIn fast">
                 <td class="align-middle text-center">
                   {{i+1}}
                 </td>
-                <td class="align-middle text-center fotoPadding" [routerLink]="['/dashboard/vista-extintor', extintor.identificadorSysExt]">
-                  <img [src]="extintor.img! | imagen:'extintores'"
+                <td class="skeletonPre align-middle text-center fotoPadding" [routerLink]="['/dashboard/vista-extintor', extintor.identificadorSysExt]">
+                  <img [hidden]='!viewImageExtintor' (load)="loaded()" [src]="extintor.img! | imagen:'extintores'"
                     alt="" class="avatar2 cursor"
                   >
                 </td>

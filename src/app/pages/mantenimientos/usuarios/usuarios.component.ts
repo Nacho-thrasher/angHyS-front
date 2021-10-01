@@ -23,6 +23,8 @@ export class UsuariosComponent implements OnInit, OnDestroy {
   public usuariosTemp: Usuario[] = [];
   public desde: number = 0;
   public cargando: boolean = true;
+  viewImageUser: boolean = false;
+
   constructor(private usuarioService: UsuarioService,
             private busquedasService: BusquedasService,
             private modalImgService: ModalImgService
@@ -63,6 +65,10 @@ export class UsuariosComponent implements OnInit, OnDestroy {
       this.cargando = false;
     })
 
+  }
+
+  loaded() {
+    this.viewImageUser = true;
   }
 
   transformImg(img:string):string {
@@ -125,13 +131,16 @@ export class UsuariosComponent implements OnInit, OnDestroy {
         if (result.isConfirmed) {
           this.usuarioService.eliminarUsuarios(usuario).
           subscribe(resp =>{
-            Swal.fire(
-              'Borrado!',
-              `El usuario ${usuario.nombre} fue eliminado.`,
-              'success'
-            )
-            this.cargarUsuarios()
+            //console.log(resp)
           })
+          Swal.fire(
+            'Borrado!',
+            `El usuario ${usuario.nombre} fue eliminado.`,
+            'success'
+          ),
+          setTimeout(() => {
+            this.cargarUsuarios()
+        }, 400);
         }
       })
     }

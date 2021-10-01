@@ -250,3 +250,8 @@ a:link, a:visited, a:active {
 .btn-circle{
   padding: 5px !important;
 }
+
+/* skeleton */
+.skeletonPre .loader{
+  position: static !important;
+}

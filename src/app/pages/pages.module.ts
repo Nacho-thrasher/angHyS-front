@@ -28,6 +28,8 @@ import { PipesModule } from '../pipes/pipes.module';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { DataTablesModule } from 'angular-datatables';
 import { NosotrosComponent } from './nosotros/nosotros.component';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+
 //? datatables bt5
 
 @NgModule({
@@ -69,9 +71,9 @@ import { NosotrosComponent } from './nosotros/nosotros.component';
     ComponentsModule,
     PipesModule,
     DataTablesModule,
-    NgxQRCodeModule
+    NgxQRCodeModule,
+    NgxSkeletonLoaderModule
   ]
 
 })
-
 export class PagesModule { }

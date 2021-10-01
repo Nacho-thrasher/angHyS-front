@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Empresa } from 'src/app/models/empresa.model';
@@ -50,17 +50,25 @@ export class ViewExtintorComponent implements OnInit {
   //? preload
   public preload: boolean = false;
   public preload2: boolean = false;
+  viewImagePdf : boolean = false;
+  viewImageFoto1 : boolean = false;
+  viewImageFoto2 : boolean = false;
+
 
   constructor(private fb: FormBuilder,
-    private extintorService: ExtintorService,
-    private router: Router,
-    private activatedRouter: ActivatedRoute,
-    private usuarioService: UsuarioService,
+      private extintorService: ExtintorService,
+      private router: Router,
+      private activatedRouter: ActivatedRoute,
+      private usuarioService: UsuarioService,
     private fileUploadService: FileUploadService
-  ) { }
+    ) {
+
+    }
+
 
   //todo OnInit
   ngOnInit(): void {
+
     this.noMostrar = false;
     //todo datatable options
     this.dtOptions = {
@@ -88,7 +96,25 @@ export class ViewExtintorComponent implements OnInit {
       numeroSustituto: ['', Validators.required],
       observacion: ['', Validators.required]
     })
+
   }
+
+  loaded(tipo:string) {
+
+    switch (tipo) {
+      case 'pdf':
+        this.viewImagePdf = true;
+      break;
+      case 'foto1':
+        this.viewImageFoto1 = true;
+      break;
+      case 'foto2':
+        this.viewImageFoto2 = true;
+      break;
+    }
+
+  }
+
   //todo Cargar extintor
   cargarExtintor(id: string){
     //console.log(id)

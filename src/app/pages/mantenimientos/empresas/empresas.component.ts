@@ -47,6 +47,7 @@ export class EmpresasComponent implements OnInit, OnDestroy {
         { orderable: false, targets: 2 }
       ]
     };
+
     //cargas
     this.cargarEmpresas();
     this.imgSubs = this.modalImgService.nuevaImagen
@@ -83,6 +84,7 @@ export class EmpresasComponent implements OnInit, OnDestroy {
   }
   //delete
   eliminarEmpresa(empresa: Empresa){
+
     Swal.fire({
       title: 'Estas seguro?',
       text: `Se borrara Empresa: ${empresa.nombre}, estas seguro?`,

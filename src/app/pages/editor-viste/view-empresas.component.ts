@@ -24,9 +24,14 @@ export class ViewEmpresasComponent implements OnInit {
   public cargando?: boolean = true;
   public extintores: Extintor[] = [];
   public cantidad!:number;
-
+  viewImageFoto1:boolean = false;
+  
   ngOnInit(): void {
     this.cargarEmpresas()
+  }
+
+  loaded() {
+    this.viewImageFoto1 = true;
   }
 
   cargarEmpresas(){

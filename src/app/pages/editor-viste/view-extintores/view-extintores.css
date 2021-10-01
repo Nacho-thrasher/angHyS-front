@@ -1,0 +1,10 @@
+@media screen and (max-width: 360px){
+  .col-md-1{
+    width: 50px !important;
+    margin-right: 15px !important;
+  }
+  .col-md-11{
+    padding-top: 6px;
+    width: 250px !important;
+  }
+}

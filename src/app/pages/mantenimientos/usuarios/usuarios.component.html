@@ -2,7 +2,7 @@
   class="row animated fadeIn fast">
   <div class="col-12">
 
-    <div role="alert" class="alert alert-info text-center">
+    <div role="alert" class="alert bg-light text-center">
       <h4 class="alert-heading">Cargando</h4>
       <i class="fa fa-spin fa-refresh fa-2x"></i>
       <p class="mb-0">Por favor espere</p>
@@ -36,6 +36,7 @@
 
         <div class="">
           <table
+          [hidden]='!viewImageUser'
             datatable
             [dtOptions]="dtOptions"
             class="onMobile text-capitalize display nowrap table animated fadeIn table-hover"
@@ -75,13 +76,19 @@
                       <i class="mdi mdi-delete-circle text-danger"></i>
                     </a>
                   </td>
-                  <td class="align-middle text-center fotoPadding">
-                    <img
+                  <td class="skeletonPre align-middle text-center fotoPadding">
+                    <img [hidden]='!viewImageUser' (load)="loaded()"
                         [src]="usuario.img! | imagen: 'usuarios'"
                         alt=""
-                        class="avatar2 cursor"
+                        class="avatar2 cursor animated fadeIn"
                         (click)="abrirModal(usuario)"
                     >
+                    <div [hidden]="viewImageUser" class="">
+                      <ngx-skeleton-loader
+                      count="1"
+                      appearance="circle"
+                    ></ngx-skeleton-loader>
+                    </div>
                   </td>
                   <td class="align-middle text-center" [routerLink]="['/dashboard/usuario', usuario.uid]">{{usuario.nombre}}</td>
                   <td class="align-middle text-center w100" [routerLink]="['/dashboard/usuario', usuario.uid]">
