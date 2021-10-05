@@ -173,7 +173,8 @@
                 <span class="cursor" (click)="sort()" *ngIf="!thirtyThree">Num Serie</span><span *ngIf="thirtyThree">N/Serie</span>
               </ng-template>
               <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
-                <a class="sm-textTable" [routerLink]="['/dashboard/extintor', row['_id']]">{{value}}</a>
+
+                <a class="sm-textTable" [routerLink]="['/dashboard/vista-extintor', row['identificadorSysExt']]">{{value}}</a>
               </ng-template>
             </ngx-datatable-column>
             <!--todo end -->

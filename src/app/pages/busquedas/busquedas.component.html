@@ -1,6 +1,6 @@
 <div class="row animated fadeIn fast" *ngIf="cargando">
   <div class="col-12">
-    <div role="alert" class="alert alert-info text-center">
+    <div role="alert" class="alert bg-white text-center">
       <h4 class="alert-heading">Cargando</h4>
       <i class="fa fa-spin fa-refresh fa-2x"></i>
       <p class="mb-0">Por favor espere</p>
@@ -111,7 +111,7 @@
         <div class="table-responsive table-hover"
           *ngIf="extintores.length != 0"
         >
-          <table class="table">
+          <!-- <table class="table">
               <thead>
                   <tr>
                       <th>Foto</th>
@@ -135,7 +135,179 @@
                   </td>
               </tr>
               </tbody>
-          </table>
+          </table> -->
+          <!--todo 2 tabla -->
+          <div *ngIf="!mobileTable">
+            <ngx-datatable
+            #myTable #tables
+            class="material expandable"
+            [columnMode]="ColumnMode.force"
+            [rows]="rows"
+            [loadingIndicator]="loadingIndicator"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            rowHeight="auto"
+            [limit]="10"
+            [reorderable]="true"
+          >
+
+            <!-- columns template -->
+            <!--  -->
+            <ngx-datatable-column name="Index" [minWidth]="80" [width]="80">
+              <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                <span>{{ rowIndex +1 }}</span>
+              </ng-template>
+            </ngx-datatable-column>
+            <!--todo end -->
+            <ngx-datatable-column name="numeroSerie" [flexGrow]="1" [minWidth]="97" [width]="130">
+              <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                <span class="cursor" (click)="sort()">Num Serie</span>
+              </ng-template>
+              <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                <a class="sm-textTable" [routerLink]="['/dashboard/extintor', row['_id']]">{{value}}</a>
+              </ng-template>
+            </ngx-datatable-column>
+            <!--todo end -->
+            <ngx-datatable-column name="marca" [width]="120" [flexGrow]="1">
+              <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                <span class="cursor mobile-hidden" (click)="sort()">Marca</span>
+              </ng-template>
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <!-- ? <i [innerHTML]="row['_id']"></i> -->
+                <span class="mobile-hidden">{{ value }}</span>
+              </ng-template>
+            </ngx-datatable-column>
+            <!--todo end -->
+            <ngx-datatable-column [sortable]='false' name="img" [flexGrow]="1" [minWidth]="80" [width]="80">
+              <ng-template let-column="column" ngx-datatable-header-template>
+                <span class="mobile-hidden">Imagen</span>
+              </ng-template>
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <!--? aqui imagen -->
+                <img
+                  [src]="row.img! | imagen: 'extintores'"
+                  alt=""
+                  class="mobile-hidden avatar2 cursor"
+                />
+              </ng-template>
+            </ngx-datatable-column>
+            <!--todo  -->
+            <ngx-datatable-column name="agenteExtintor" [flexGrow]="1">
+              <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                <span class="cursor mobile-hidden" (click)="sort()" >Ag/Extintor</span>
+                <span class="cursor" (click)="sort()" >Agente Extintor</span>
+              </ng-template>
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <span class="mobile-hidden sm-textTable">{{ value }}</span>
+              </ng-template>
+            </ngx-datatable-column>
+            <!-- todo -->
+            <ngx-datatable-column name="capacidad" [flexGrow]="1" [minWidth]="90" [width]="90">
+              <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+               <span class="cursor mobile-hidden" (click)="sort()">Capacidad</span>
+              </ng-template>
+              <ng-template let-value="value" ngx-datatable-cell-template>
+                <span class="mobile-hidden">{{ value }}</span>
+              </ng-template>
+            </ngx-datatable-column>
+            <!-- todo -->
+            <ngx-datatable-column name="empresa" [flexGrow]="1">
+              <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                <span class="cursor" (click)="sort()">Empresa </span>
+              </ng-template>
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <span class="sm-textTable">{{ row.empresa.nombre }}</span>
+              </ng-template>
+            </ngx-datatable-column>
+            <!-- todo -->
+
+          </ngx-datatable>
+          </div>
+          <!--todo table mobile -->
+          <div *ngIf="mobileTable">
+            <ngx-datatable
+            #myTable #tables
+            class="material expandable"
+            [columnMode]="ColumnMode.force"
+            [rows]="rows"
+            [loadingIndicator]="loadingIndicator"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            rowHeight="auto"
+            [limit]="10"
+          >
+            <!-- Row Detail Template -->
+            <ngx-datatable-row-detail [rowHeight]="70" #myDetailRow (toggle)="onDetailToggle($event)">
+              <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                <div style="padding-left:5px; padding-bottom: 5px; font-size:0.8em">
+                  <span class="font-medium">Marca</span> =
+                  <span>{{ row.marca }}</span>,
+                  <span class="font-medium">Ag/Extintor</span> =
+                  <span>{{ row.agenteExtintor }}</span>,
+                  <span class="font-medium">Cpacidad</span> =
+                  <span>{{ row.capacidad }}</span>
+                </div>
+              </ng-template>
+            </ngx-datatable-row-detail>
+            <!-- columns template -->
+            <!-- button responsive -->
+            <ngx-datatable-column
+              [width]="25"
+              [minWidth]="10"
+              [resizeable]="false"
+              [sortable]="false"
+              [draggable]="false"
+              [canAutoResize]="false"
+            >
+              <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                <a
+                  href="javascript:void(0)"
+                  [class.datatable-icon-right]="!expanded"
+                  [class.datatable-icon-down]="expanded"
+                  title="Expand/Collapse Row"
+                  (click)="toggleExpandRow(row)"
+                  class="cursor desktop-hidden"
+                >
+                </a>
+              </ng-template>
+            </ngx-datatable-column>
+            <!--  -->
+            <!-- <ngx-datatable-column name="Index" [width]="80">
+              <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                <strong>{{ rowIndex }}</strong>
+              </ng-template>
+            </ngx-datatable-column> -->
+            <!--todo end -->
+            <ngx-datatable-column name="numeroSerie" [flexGrow]="1" [minWidth]="97" [width]="130">
+              <ng-template let-column="column" ngx-datatable-header-template>
+                <span >N/Serie</span>
+              </ng-template>
+              <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                <a class="sm-textTable" [routerLink]="['/dashboard/extintor', row['_id']]">{{value}}</a>
+              </ng-template>
+            </ngx-datatable-column>
+            <!--todo end -->
+            <!-- <ngx-datatable-column *ngIf="!thirtyThree" name="agenteExtintor" [flexGrow]="1">
+              <ng-template let-column="column" ngx-datatable-header-template>
+                <span class="mobile-hidden" *ngIf="fourteenFour">Ag/Extintor</span>
+                <span *ngIf="!fourteenFour">Agente Extintor</span>
+              </ng-template>
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <span class="mobile-hidden sm-textTable">{{ value }}</span>
+              </ng-template>
+            </ngx-datatable-column> -->
+            <!-- todo -->
+            <ngx-datatable-column name="empresa" [flexGrow]="1">
+              <ng-template let-column="column" ngx-datatable-header-template>
+                <span>Empresa </span>
+              </ng-template>
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <span class="sm-textTable">{{ row.empresa.nombre }}</span>
+              </ng-template>
+            </ngx-datatable-column>
+            <!-- todo -->
+          </ngx-datatable>
+          </div>
       </div>
       </div>
     </div>
