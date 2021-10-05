@@ -1,4 +1,41 @@
+@import '~@swimlane/ngx-datatable/index.css';
+@import '~@swimlane/ngx-datatable/themes/material.css';
+@import '~@swimlane/ngx-datatable/assets/icons.css';
+
 @import url('https://fonts.googleapis.com/css?family=Tenor+Sans');
+
+/* @media screen and (max-width: 850px) {
+  .desktop-hidden {
+    display: initial;
+  }
+  .mobile-hidden {
+    display: none;
+  }
+} */
+@media screen and (min-width: 850px) {
+  .desktop-hidden {
+    display: none;
+  }
+  .mobile-hidden {
+    display: initial;
+  }
+}
+@media screen and (max-width: 360px) {
+  .desktop-hidden {
+    display: initial;
+  }
+  .mobile-hidden {
+    display: none;
+  }
+  .cardMobile {
+    padding: 0 !important;
+  }
+}
+
+.ngx-datatable .material{
+  box-shadow: 0 !important;
+}
+
 .fast {
   -webkit-animation-duration: 0.3s;
   animation-duration: 0.3s;
@@ -177,6 +214,12 @@ a:link, a:visited, a:active {
 .table-responsive{
   min-height:200px
 }
+@media screen and (max-width: 440px){
+  .sm-textTable{
+    font-size: 0.9em !important;
+  }
+}
+
 @media screen and (max-width: 360px){
   div .col-sm-12{
     padding: 0px !important;
@@ -215,6 +258,10 @@ a:link, a:visited, a:active {
   .sm-text-center{
     text-align: center !important;
     padding: 2px 0px 7px 0px;
+  }
+  /* text tables */
+  .sm-textTable{
+  font-size: 0.8em !important;
   }
 
 }

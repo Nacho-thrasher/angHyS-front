@@ -9,8 +9,7 @@ import { AppComponent } from './app.component';
 import { NoPageFoundComponent } from './no-page-found/no-page-found.component';
 
 import { DataTablesModule } from 'angular-datatables';
-
-
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +20,8 @@ import { DataTablesModule } from 'angular-datatables';
     AppRoutingModule,
     PagesModule,
     AuthModule,
-    DataTablesModule
+    DataTablesModule,
+    NgxDatatableModule
   ],
   exports:[
   ],

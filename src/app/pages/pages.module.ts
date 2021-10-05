@@ -29,6 +29,8 @@ import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { DataTablesModule } from 'angular-datatables';
 import { NosotrosComponent } from './nosotros/nosotros.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { NgxDatatableModule, ColumnMode } from '@swimlane/ngx-datatable';
+
 
 //? datatables bt5
 
@@ -72,7 +74,8 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
     PipesModule,
     DataTablesModule,
     NgxQRCodeModule,
-    NgxSkeletonLoaderModule
+    NgxSkeletonLoaderModule,
+    NgxDatatableModule
   ]
 
 })
