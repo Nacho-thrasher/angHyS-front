@@ -30,7 +30,7 @@ import { DataTablesModule } from 'angular-datatables';
 import { NosotrosComponent } from './nosotros/nosotros.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { NgxDatatableModule, ColumnMode } from '@swimlane/ngx-datatable';
-
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
 //? datatables bt5
 
@@ -75,7 +75,8 @@ import { NgxDatatableModule, ColumnMode } from '@swimlane/ngx-datatable';
     DataTablesModule,
     NgxQRCodeModule,
     NgxSkeletonLoaderModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    NgxUiLoaderModule
   ]
 
 })

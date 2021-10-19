@@ -59,11 +59,11 @@ export class LoginComponent implements OnInit {
         localStorage.removeItem('email');
       }
       if (resp.ok) {
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('dashboard/nosotros');
         setTimeout(() => {
           Toast.close();
         }
-        , 400);
+        , 500);
       }
     }, (err) =>{
       Swal.fire('Error', err.error.msg, 'error')
@@ -98,6 +98,7 @@ export class LoginComponent implements OnInit {
             //todo redireccion y que es ngzone est
             this.ngZone.run( ()=>{
 
+
               this.router.navigateByUrl('/');
 
             })
@@ -126,7 +127,25 @@ export class LoginComponent implements OnInit {
             //todo redireccion y que es ngzone est
             this.ngZone.run( ()=>{
 
-              this.router.navigateByUrl('/');
+              const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timerProgressBar: true,
+                //timer: 3000,
+              })
+              Toast.fire({
+                icon: 'success',
+                title: 'Iniciando Sesion',
+                width: 270,
+                //padding: '3em',
+              })
+
+              this.router.navigateByUrl('dashboard/nosotros');
+              setTimeout(() => {
+                Toast.close();
+              }
+              , 500);
 
             })
           });

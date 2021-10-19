@@ -111,7 +111,7 @@ export class ExtintoresComponent implements OnInit, OnDestroy {
   }
 
   tableMobile(){
-    if (screen.width === 360) {
+    if (screen.width <= 400) {
       this.mobileTable = true;
     }
     else{
