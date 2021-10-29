@@ -1,4 +1,4 @@
-<div *ngIf="cargando"
+<!-- <div *ngIf="cargando"
   class="row animated fadeIn fast">
   <div class="col-12">
 
@@ -9,15 +9,16 @@
     </div>
 
   </div>
-</div>
-<div *ngIf="!cargando" class="row animated fadeIn">
+</div> -->
+<div  class="row animated fadeIn">
   <div class="col-12">
     <div class="card">
       <div class="card-body">
         <div class="row animated fadeIn pt-2">
 
           <div class="col-md-6">
-            <h4 class="card-title sm-text-center">Usuarios Registrados ({{usuarios.length}})</h4>
+            <!-- usuarios.length -->
+            <h4 class="card-title sm-text-center">Usuarios Registrados ()</h4>
             <h6 class="card-subtitle"></h6>
           </div>
           <div class="col-md-6">
@@ -34,98 +35,224 @@
         <br>
         <!-- tablas aqui -->
 
-        <div class="">
-          <table
-          [hidden]='!viewImageUser'
-            datatable
-            [dtOptions]="dtOptions"
-            class="onMobile text-capitalize display nowrap table animated fadeIn table-hover"
-            cellspacing="0"
-            width="100%"
-            role="grid"
-          >
-            <thead>
-                <tr>
-                  <th class="sorting text-center w5">#Nro</th>
-                  <th class="text-center no-sort borrar2">
-                    Borrar
-                  </th>
-                  <th class="text-center no-sort fotoPadding2">Foto</th>
-                  <th class="sorting text-center">Nombre</th>
-                  <th class="sorting text-center">Correo</th>
-                  <th class="sorting text-center">Role</th>
-                  <th class="sorting text-center w100">Auth</th>
-                  <th class="sorting text-center text-nowrap">Accion</th>
-                </tr>
-            </thead>
 
-            <tbody>
-                <tr *ngFor="let usuario of usuarios; let i = index"
-                  class="cursor"
-                >
-                  <td class="align-middle text-center">
-                    {{i+1}}
-                  </td>
-                  <td class="align-middle text-center borrar">
-                    <a
-                      class="cursor iconHover"
-                      data-toggle="tooltip"
-                      data-original-title="Borrar"
-                      (click)="eliminarUsuarios(usuario)"
-                    >
-                      <i class="mdi mdi-delete-circle text-danger"></i>
-                    </a>
-                  </td>
-                  <td class="skeletonPre align-middle text-center fotoPadding">
-                    <img [hidden]='!viewImageUser' (load)="loaded()"
-                        [src]="usuario.img! | imagen: 'usuarios'"
-                        alt=""
-                        class="avatar2 cursor animated fadeIn"
-                        (click)="abrirModal(usuario)"
-                    >
-                    <div [hidden]="viewImageUser" class="">
-                      <ngx-skeleton-loader
-                      count="1"
-                      appearance="circle"
-                    ></ngx-skeleton-loader>
-                    </div>
-                  </td>
-                  <td class="align-middle text-center" [routerLink]="['/dashboard/usuario', usuario.uid]">{{usuario.nombre}}</td>
-                  <td class="align-middle text-center w100" [routerLink]="['/dashboard/usuario', usuario.uid]">
-                    {{usuario.email | slice:0:15}}{{(usuario.email.length > 15) ? '..' : '' }}
-                  </td>
-                  <td class="align-middle text-center">
-                    <select class="text-center custom-select form-control"
-                      [(ngModel)]="usuario.role"
-                      (change)="cambiarRole(usuario)"
-                    >
-                      <option class="text-center" value="ADMIN_ROLE">Admin</option>
-                      <option class="text-center" value="USER_ROLE">User</option>
-                    </select>
-                  </td>
-                  <td class="align-middle text-center" [routerLink]="['/dashboard/usuario', usuario.uid]">
-                    <span *ngIf="usuario.google" class="label label-danger">
-                      Google
-                    </span>
-                    <span *ngIf="!usuario.google" class="label label-info">
-                      Email
-                    </span>
-                  </td>
-                  <td class="text-nowrap align-middle text-center">
-                      <a [routerLink]="['/dashboard/usuario', usuario.uid]"
-                          class="cursor iconHover" data-toggle="tooltip" data-original-title="Editar">
-                          <i class="mdi mdi-tooltip-edit text-inverse"></i>
-                      </a>
-                  </td>
-                </tr>
-            </tbody>
-        </table>
+        <!--todo FILTER NEW DATATABLE -->
+        <div class="row p-2">
+          <div class="col-md-4">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Buscar Usuario..."
+              (keyup)="updateFilter($event)"
+            />
+          </div>
         </div>
-        <!-- <div *ngIf="txtTermino.value.length === 0"> -->
-          <!-- <button (click)="cambiarPagina(-5)" class="btn btn-secondary">Anterior</button>
-          &nbsp;
-          <button (click)="cambiarPagina(5)" class="btn btn-secondary">Siguiente</button> -->
-        <!-- </div> -->
+        <!-- todo TABLE DESKTOP -->
+        <div *ngIf="!mobileTable">
+          <ngx-datatable
+            #myTable #tables
+            class="material expandable"
+            [columnMode]="ColumnMode.force"
+            [rows]="rows"
+            [loadingIndicator]="loadingIndicator"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            rowHeight="auto"
+            [limit]="10"
+            [reorderable]="true"
+          >
+            <!-- Row Detail Template -->
+            <ngx-datatable-row-detail [rowHeight]="70" #myDetailRow (toggle)="onDetailToggle($event)">
+              <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                <div style="padding-left:5px; padding-bottom: 5px; font-size:0.8em">
+                  <span class="font-medium">Nombre</span> =
+                  <span>{{ row.nombre }}</span>,
+                  <span class="font-medium">Correo</span> =
+                  <span>{{ row.email }}</span>,
+                  &nbsp;
+                  <button (click)="eliminarUsuarios(row)" class="btn btn-danger btn-sm">
+                    Borrar
+                  </button>
+                </div>
+              </ng-template>
+            </ngx-datatable-row-detail>
+            <!-- columns template -->
+            <!-- button responsive -->
+            <ngx-datatable-column
+              [width]="fourteenFour ? 15 : 25"
+              [minWidth]="10"
+              [resizeable]="false"
+              [sortable]="false"
+              [draggable]="false"
+              [canAutoResize]="false"
+            >
+              <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                <a
+                  href="javascript:void(0)"
+                  [class.datatable-icon-right]="!expanded"
+                  [class.datatable-icon-down]="expanded"
+                  title="Expand/Collapse Row"
+                  (click)="toggleExpandRow(row)"
+                  class="cursor desktop-hidden"
+                >
+                </a>
+              </ng-template>
+            </ngx-datatable-column>
+            <!--  -->
+            <ngx-datatable-column name="Index" [minWidth]="30" [width]="30">
+              <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                <span>{{ rowIndex +1 }}</span>
+              </ng-template>
+            </ngx-datatable-column>
+            <!--todo end -->
+            <ngx-datatable-column name="nombre" [flexGrow]="1" [minWidth]="fourteenFiveteenfive ? 80 : 97" [width]="sixtinThree ? 80 : 130">
+              <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                <span class="cursor" (click)="sort()" *ngIf="!thirtyThree">Nombre</span><span *ngIf="thirtyThree">Nombre</span>
+              </ng-template>
+              <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                <a class="sm-textTable" [routerLink]="['/dashboard/usuario', row['uid']]">{{value}}</a>
+              </ng-template>
+            </ngx-datatable-column>
+            <!--todo end -->
+            <ngx-datatable-column *ngIf="!seventiTen" name="email" [width]="120" [flexGrow]="1">
+              <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                <span class="cursor mobile-hidden" (click)="sort()">Correo</span>
+              </ng-template>
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <!-- ? <i [innerHTML]="row['_id']"></i> -->
+                <span class="mobile-hidden">{{ value }}</span>
+              </ng-template>
+            </ngx-datatable-column>
+            <!--todo end -->
+            <ngx-datatable-column *ngIf="!fivetwentyFive" [sortable]='false' name="img" [flexGrow]="1" [minWidth]="80" [width]="80">
+              <ng-template let-column="column" ngx-datatable-header-template>
+                <span class="mobile-hidden">Imagen</span>
+              </ng-template>
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <!--? aqui imagen -->
+                <img
+                  [src]="row.img! | imagen: 'extintores'"
+                  alt=""
+                  class="mobile-hidden avatar2 cursor"
+                  (click)="abrirModal(row)"
+                />
+              </ng-template>
+            </ngx-datatable-column>
+            <!--todo  -->
+            <ngx-datatable-column *ngIf="!thirtyThree" name="role" [flexGrow]="1">
+              <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                <span class="cursor mobile-hidden" (click)="sort()" *ngIf="fourteenFour">Tipo</span>
+                <span class="cursor" (click)="sort()" *ngIf="!fourteenFour">Tipo Usuario</span>
+              </ng-template>
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <!-- <span class="mobile-hidden sm-textTable">{{ value }}</span> -->
+                <select class="text-center custom-select form-control"
+                      [(ngModel)]="row.role"
+                      (change)="cambiarRole(row)"
+                    >
+                  <option class="text-center" value="ADMIN_ROLE">Admin</option>
+                  <option class="text-center" value="USER_ROLE">User</option>
+                </select>
+              </ng-template>
+            </ngx-datatable-column>
+            <!-- todo -->
+            <ngx-datatable-column name="google" [flexGrow]="1" [minWidth]="fourteenFiveteenfive ? 80 : 97" [width]="sixtinThree ? 80 : 130">
+              <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                <span class="cursor" (click)="sort()" *ngIf="!thirtyThree">Auth</span><span *ngIf="thirtyThree">Auth</span>
+              </ng-template>
+              <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                <span *ngIf="value" class="label label-danger">
+                  Google
+                </span>
+                <span *ngIf="!value" class="label label-info">
+                  Email
+                </span>
+              </ng-template>
+            </ngx-datatable-column>
+            <!-- todo -->
+            <ngx-datatable-column *ngIf="!nineteenNine"  [width]="100" [sortable]='false' name="Borrar" [flexGrow]="1">
+              <ng-template let-column="column" ngx-datatable-header-template>
+                <span class="mobile-hidden">Borrar</span>
+              </ng-template>
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <!-- <span class="">{{ row._id }}</span> -->
+                <button (click)="eliminarUsuarios(row)" class="mobile-hidden btn btn-danger btn-sm">Borrar</button>
+              </ng-template>
+            </ngx-datatable-column>
+            <!-- todo -->
+          </ngx-datatable>
+        </div>
+        <!--todo table mobile -->
+        <div *ngIf="mobileTable">
+          <ngx-datatable
+            #myTable #tables
+            class="material expandable"
+            [columnMode]="ColumnMode.force"
+            [rows]="rows"
+            [loadingIndicator]="loadingIndicator"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            rowHeight="auto"
+            [limit]="10"
+          >
+            <!-- Row Detail Template -->
+            <ngx-datatable-row-detail [rowHeight]="70" #myDetailRow (toggle)="onDetailToggle($event)">
+              <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                <div style="padding-left:5px; padding-bottom: 5px; font-size:0.8em">
+                  <span class="font-medium">Nombre</span> =
+                  <span>{{ row.nombre }}</span>,
+                  <span class="font-medium">Correo</span> =
+                  <span>{{ row.email }}</span>,
+                  &nbsp;
+                  <button (click)="eliminarUsuarios(row)" class="btn btn-danger btn-sm">
+                    Borrar
+                  </button>
+                </div>
+              </ng-template>
+            </ngx-datatable-row-detail>
+            <!-- columns template -->
+            <!-- button responsive -->
+            <ngx-datatable-column
+              [width]="fourteenFour ? 15 : 25"
+              [minWidth]="10"
+              [resizeable]="false"
+              [sortable]="false"
+              [draggable]="false"
+              [canAutoResize]="false"
+            >
+              <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                <a
+                  href="javascript:void(0)"
+                  [class.datatable-icon-right]="!expanded"
+                  [class.datatable-icon-down]="expanded"
+                  title="Expand/Collapse Row"
+                  (click)="toggleExpandRow(row)"
+                  class="cursor desktop-hidden"
+                >
+                </a>
+              </ng-template>
+            </ngx-datatable-column>
+            <!--todo end -->
+            <ngx-datatable-column name="nombre" [flexGrow]="1" [minWidth]="fourteenFiveteenfive ? 80 : 97" [width]="sixtinThree ? 80 : 130">
+              <ng-template let-column="column" ngx-datatable-header-template>
+                <span *ngIf="!thirtyThree">Nombre</span><span *ngIf="thirtyThree">Nombre</span>
+              </ng-template>
+              <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                <a class="sm-textTable" [routerLink]="['/dashboard/usuario', row['uid']]">{{value}}</a>
+              </ng-template>
+            </ngx-datatable-column>
+            <!-- todo -->
+            <ngx-datatable-column name="email" [flexGrow]="1">
+              <ng-template let-column="column" ngx-datatable-header-template>
+                <span>Correo </span>
+              </ng-template>
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <span class="sm-textTable">{{ value }}</span>
+              </ng-template>
+            </ngx-datatable-column>
+            <!-- todo -->
+          </ngx-datatable>
+        </div>
       </div>
     </div>
   </div>

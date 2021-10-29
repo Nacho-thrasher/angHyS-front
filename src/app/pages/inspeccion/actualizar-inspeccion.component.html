@@ -1,0 +1,87 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+
+        <h4 class="card-title text-center">Actualizar Inspecciones</h4>
+
+        <div class="row justify-content-center">
+          <div class="col-6">
+            <!-- cargar empresas -->
+            <div class="form-group">
+              <label for="inputPassword5" class="control-label">Empresa</label>
+              <div class="input-group">
+                <select formControlName="empresa"
+                class="form-control custom-select"
+                data-placeholder="Selecciona una" tabindex="1">
+                  <option value="">Seleccione una</option>
+                  <option
+                    *ngFor="let empresa of empresas"
+                    [value]="empresa._id"
+                  >
+                      {{empresa.nombre}}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--  -->
+        <div class="row justify-content-center">
+          <!-- excel import -->
+          <div class="col-6">
+            <div class="">
+              <div class="fileinput input-group fileinput-new" data-provides="fileinput">
+                <div class="form-control" data-trigger="fileinput">
+                    <i class="fa fa-file fileinput-exists"></i>
+                    <span class="fileinput-filename"></span>
+                  </div>
+                  <span class="input-group-addon btn btn-secondary btn-file">
+                    <span class="fileinput-new text-dark">Seleccionar</span>
+                    <span class="fileinput-exists text-primary">Cambiar</span>
+                    <input type="hidden" value="" name="...">
+                    <!-- click abrira sweet alert pidiendo q llenes la empresa -->
+                    <input type="file" (change)="upload($event)"
+                    #inputFile
+                    accept=".xls, .xlsx"
+                    name="">
+                  </span>
+                  <a (click)="removeData()" class="input-group-addon btn btn-secondary fileinput-exists text-danger" data-dismiss="fileinput">Remover</a>
+                </div>
+            </div>
+          </div>
+        </div>
+        <!-- table -->
+        <div class="row">
+          <div class="col">
+            <div class="table-responsive">
+              <table
+              class="table-bordered onMobile text-capitalize display nowrap table animated fadeIn table-hover"
+              cellspacing="0"
+              width="100%"
+              role="grid"
+            >
+              <thead>
+                <th class="w70" *ngFor="let key of keys">
+                  {{key}}
+                </th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of dataSheet | async;">
+                  <td *ngFor="let key of keys">
+                    <div [ngClass]="{'text-danger': item['existe'] === 'si'}">
+                      {{item[key]}}
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>

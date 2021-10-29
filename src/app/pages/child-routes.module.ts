@@ -22,6 +22,9 @@ import { ViewExtintoresComponent } from './editor-viste/view-extintores/view-ext
 import { ViewExtintorComponent } from './editor-viste/extintor-numSerie/view-extintor.component';
 import { AuthGuard } from '../guard/auth.guard';
 import { NosotrosComponent } from './nosotros/nosotros.component';
+import { ActualizarInspeccionComponent } from './inspeccion/actualizar-inspeccion.component';
+import { NoEncontradoComponent } from './publicidad/no-encontrado.component';
+
 
 const childRoutes: Routes = [
 
@@ -43,6 +46,8 @@ const childRoutes: Routes = [
     data: {titulo: 'Extintor', content:'Mantenimiento'}},
   { path: 'extintores_excel', canActivate: [AdminGuard], component: ExtintoresExcelComponent,
     data: {titulo: 'Extintores-Excel', content:'Mantenimiento'}},
+  { path: 'actualizar_inspeccion', canActivate: [AdminGuard], component: ActualizarInspeccionComponent,
+    data: {titulo: 'Actualizar Inspecciones', content:'Mantenimiento'}},
 
   //rutas admin
   { path: 'usuarios', canActivate: [AdminGuard], component: UsuariosComponent,
@@ -61,6 +66,10 @@ const childRoutes: Routes = [
     data: {titulo: 'Extintores', content:'Principal'}},
   { path: 'vista-extintor/:id_ext', component: ViewExtintorComponent,
     data: {titulo: 'Vista Extintor', content:'Principal'}},
+
+  //no encontrado publicidad NoEncontradoComponent
+  { path: 'no_encontrado', component: NoEncontradoComponent,
+    data: {titulo: 'HyS Matafuegos', content:'Principal'}},
 
   //otros para web info //! arreglar breadcrumb
   { path: 'nosotros', component: NosotrosComponent,

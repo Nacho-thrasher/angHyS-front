@@ -1,4 +1,4 @@
-<div class="row animated fadeIn fast" *ngIf="cargando">
+<!-- <div class="row animated fadeIn fast" *ngIf="cargando">
   <div class="col-12">
     <div role="alert" class="alert bg-light text-center">
       <h4 class="alert-heading">Cargando</h4>
@@ -6,9 +6,9 @@
       <p class="mb-0">Por favor espere</p>
     </div>
   </div>
-</div>
+</div> -->
 
-<div class="row animated fadeIn" *ngIf="!cargando">
+<div class="row animated fadeIn" >
   <div class="col-12">
     <div class="card">
       <div class="card-body">
@@ -33,79 +33,208 @@
         <!-- tabla 1 -->
 
         <div class="">
-          <table id="tabla"
-            datatable
-            [dtOptions]="dtOptions"
-            class="onMobile text-capitalize display nowrap table animated fadeIn table-hover"
-            cellspacing="0"
-            width="100%"
-            role="grid"
-          >
-            <thead>
-              <tr>
-                <th class="sorting text-center w5">#Nro</th>
-                <th class="text-center no-sort borrar2">
-                  Borrar
-                </th>
-                <th class="text-center no-sort fotoPadding2">Foto</th>
-                <th class="sorting text-center">Nombre</th>
-                <th class="sorting text-center">Direccion</th>
-                <th class="sorting text-center">Localidad</th>
-                <th class="sorting text-center text-nowrap">Accion</th>
-              </tr>
-            </thead>
 
-            <tbody>
-              <tr *ngFor="let empresa of empresas; let i = index"
-                class="cursor"
-              >
-                <td class="align-middle text-center">
-                  {{i+1}}
-                </td>
-                <td class="align-middle text-center borrar">
-                  <a
-                    (click)="eliminarEmpresa(empresa)"
-                    data-toggle="tooltip"
-                    class="cursor iconHover"
-                    data-original-title="Borrar"
-                  >
-                  <i class="mdi mdi-delete-circle text-danger"></i>
-                  </a>
-                </td>
-                <td class="align-middle text-center fotoPadding">
-                  <img
-                    [src]="empresa.img! | imagen: 'empresas'"
-                    alt=""
-                    class="avatar2 cursor"
-                    (click)="abrirModal(empresa)"
-                  />
-                </td>
-                <td class="align-middle text-center" [routerLink]="['/dashboard/empresa', empresa._id]">
-                  {{ empresa.nombre }}
-                </td>
-                <td class="align-middle text-center" [routerLink]="['/dashboard/empresa', empresa._id]">
-                  {{ empresa.direccion }}</td>
-                <td class="align-middle text-center" [routerLink]="['/dashboard/empresa', empresa._id]">
-                  {{ empresa.localidad }}</td>
-                <td class="text-nowrap align-middle text-center">
-                  <a
-                    [routerLink]="['/dashboard/empresa', empresa._id]"
-                    class="cursor iconHover"
-                    data-toggle="tooltip"
-                    data-original-title="Editar"
-                  >
-                  <i class="mdi mdi-tooltip-edit text-inverse"></i>
-                  </a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        </div>
+        <!--todo filter -->
+        <div class="row p-2">
+          <div class="col-md-4">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Buscar Empresa..."
+              (keyup)="updateFilter($event)"
+            />
+          </div>
+        </div>
+        <!-- todo Tabla nueva desktop -->
+        <div *ngIf="!mobileTable">
+          <ngx-datatable
+            #myTable #tables
+            class="material expandable"
+            [columnMode]="ColumnMode.force"
+            [rows]="rows"
+            [loadingIndicator]="loadingIndicator"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            rowHeight="auto"
+            [limit]="10"
+            [reorderable]="true"
+          >
+            <!-- Row Detail Template -->
+            <ngx-datatable-row-detail [rowHeight]="70" #myDetailRow (toggle)="onDetailToggle($event)">
+              <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                <div style="padding-left:5px; padding-bottom: 5px; font-size:0.8em">
+                  <span class="font-medium">Nombre</span> =
+                  <span>{{ row.nombre }}</span>,
+                  <span class="font-medium">Localidad</span> =
+                  <span>{{ row.localidad }}</span>,
+                  <span class="font-medium">Direccion</span> =
+                  <span>{{ row.direccion }}</span>,
+                  &nbsp;
+                  <button (click)="eliminarEmpresa(row)" class="btn btn-danger btn-sm">
+                    Borrar
+                  </button>
+                </div>
+              </ng-template>
+            </ngx-datatable-row-detail>
+            <!-- columns template -->
+            <!-- button responsive -->
+            <ngx-datatable-column
+              [width]="fourteenFour ? 15 : 25"
+              [minWidth]="10"
+              [resizeable]="false"
+              [sortable]="false"
+              [draggable]="false"
+              [canAutoResize]="false"
+            >
+              <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                <a
+                  href="javascript:void(0)"
+                  [class.datatable-icon-right]="!expanded"
+                  [class.datatable-icon-down]="expanded"
+                  title="Expand/Collapse Row"
+                  (click)="toggleExpandRow(row)"
+                  class="cursor desktop-hidden"
+                >
+                </a>
+              </ng-template>
+            </ngx-datatable-column>
+            <!--  -->
+            <ngx-datatable-column name="Index" [minWidth]="80" [width]="80">
+              <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                <span>{{ rowIndex +1 }}</span>
+              </ng-template>
+            </ngx-datatable-column>
+            <!--todo end -->
+            <ngx-datatable-column name="nombre" [flexGrow]="1" [minWidth]="fourteenFiveteenfive ? 80 : 97" [width]="sixtinThree ? 80 : 130">
+              <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                <span class="cursor" (click)="sort()" *ngIf="!thirtyThree">Nombre</span><span *ngIf="thirtyThree">Nombre</span>
+              </ng-template>
+              <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                <a class="sm-textTable" [routerLink]="['/dashboard/empresa', row['_id']]">{{value}}</a>
+              </ng-template>
+            </ngx-datatable-column>
+            <!--todo end -->
+            <ngx-datatable-column *ngIf="!seventiTen" name="direccion" [width]="120" [flexGrow]="1">
+              <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                <span class="cursor mobile-hidden" (click)="sort()">Direccion</span>
+              </ng-template>
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <!-- ? <i [innerHTML]="row['_id']"></i> -->
+                <span class="mobile-hidden">{{ value }}</span>
+              </ng-template>
+            </ngx-datatable-column>
+            <!--todo end -->
+            <ngx-datatable-column *ngIf="!fivetwentyFive" [sortable]='false' name="img" [flexGrow]="1" [minWidth]="80" [width]="80">
+              <ng-template let-column="column" ngx-datatable-header-template>
+                <span class="mobile-hidden">Imagen</span>
+              </ng-template>
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <!--? aqui imagen -->
+                <img
+                  [src]="row.img! | imagen: 'extintores'"
+                  alt=""
+                  class="mobile-hidden avatar2 cursor"
+                  (click)="abrirModal(row)"
+                />
+              </ng-template>
+            </ngx-datatable-column>
+            <!--todo  -->
+            <ngx-datatable-column *ngIf="!thirtyThree" name="localidad" [flexGrow]="1">
+              <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                <span class="cursor mobile-hidden" (click)="sort()" *ngIf="fourteenFour">Localidad</span>
+                <span class="cursor" (click)="sort()" *ngIf="!fourteenFour">Localidad</span>
+              </ng-template>
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <span class="mobile-hidden sm-textTable">{{ value }}</span>
+              </ng-template>
+            </ngx-datatable-column>
+            <!-- todo -->
+            <ngx-datatable-column *ngIf="!nineteenNine"  [width]="100" [sortable]='false' name="Borrar" [flexGrow]="1">
+              <ng-template let-column="column" ngx-datatable-header-template>
+                <span class="mobile-hidden">Borrar</span>
+              </ng-template>
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <!-- <span class="">{{ row._id }}</span> -->
+                <button (click)="eliminarEmpresa(row)" class="mobile-hidden btn btn-danger btn-sm">Borrar</button>
+              </ng-template>
+            </ngx-datatable-column>
+            <!-- todo -->
+
+          </ngx-datatable>
+        </div>
+        <!--todo table mobile -->
+        <div *ngIf="mobileTable">
+          <ngx-datatable
+            #myTable #tables
+            class="material expandable"
+            [columnMode]="ColumnMode.force"
+            [rows]="rows"
+            [loadingIndicator]="loadingIndicator"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            rowHeight="auto"
+            [limit]="10"
+          >
+            <!-- Row Detail Template -->
+            <ngx-datatable-row-detail [rowHeight]="70" #myDetailRow (toggle)="onDetailToggle($event)">
+              <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+                <div style="padding-left:5px; padding-bottom: 5px; font-size:0.8em">
+                  <span class="font-medium">Localidad</span> =
+                  <span>{{ row.localidad }}</span>,
+                  <span class="font-medium">Direccion</span> =
+                  <span>{{ row.direccion }}</span>,
+                  &nbsp;
+                  <button (click)="eliminarEmpresa(row)" class="btn btn-danger btn-sm">
+                    Borrar
+                  </button>
+                </div>
+              </ng-template>
+            </ngx-datatable-row-detail>
+            <!-- columns template -->
+            <!-- button responsive -->
+            <ngx-datatable-column
+              [width]="fourteenFour ? 15 : 25"
+              [minWidth]="10"
+              [resizeable]="false"
+              [sortable]="false"
+              [draggable]="false"
+              [canAutoResize]="false"
+            >
+              <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                <a
+                  href="javascript:void(0)"
+                  [class.datatable-icon-right]="!expanded"
+                  [class.datatable-icon-down]="expanded"
+                  title="Expand/Collapse Row"
+                  (click)="toggleExpandRow(row)"
+                  class="cursor desktop-hidden"
+                >
+                </a>
+              </ng-template>
+            </ngx-datatable-column>
+            <!--todo end -->
+            <ngx-datatable-column name="nombre" [flexGrow]="1" [minWidth]="fourteenFiveteenfive ? 80 : 97" [width]="sixtinThree ? 80 : 130">
+              <ng-template let-column="column" ngx-datatable-header-template>
+                <span *ngIf="!thirtyThree">Nombre</span><span *ngIf="thirtyThree">Nombre</span>
+              </ng-template>
+              <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                <a class="sm-textTable" [routerLink]="['/dashboard/empresa', row['_id']]">{{value}}</a>
+              </ng-template>
+            </ngx-datatable-column>
+            <!--todo end -->
+            <ngx-datatable-column name="localidad" [flexGrow]="1">
+              <ng-template let-column="column" ngx-datatable-header-template>
+                <span>Localidad</span>
+              </ng-template>
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <span class="sm-textTable">{{ value }}</span>
+              </ng-template>
+            </ngx-datatable-column>
+            <!-- todo -->
+          </ngx-datatable>
         </div>
 
-        <!-- end table 2 -->
-        <!-- <button class="btn btn-secondary">Anterior</button>
-        &nbsp;
-        <button class="btn btn-secondary">Siguiente</button> -->
       </div>
     </div>
   </div>

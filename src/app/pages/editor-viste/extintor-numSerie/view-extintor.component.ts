@@ -125,7 +125,7 @@ export class ViewExtintorComponent implements OnInit {
     .subscribe( (resp:any) => {
       //? si no existe extintor retorna atras
       if (resp.extintor === undefined) {
-        this.router.navigateByUrl(`/dashboard/vista-empresas`);
+        this.router.navigateByUrl(`/dashboard/nosotros`);
         return;
       }
       //console.log(resp.extintor)

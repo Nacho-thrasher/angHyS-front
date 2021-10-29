@@ -31,6 +31,8 @@ import { NosotrosComponent } from './nosotros/nosotros.component';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { NgxDatatableModule, ColumnMode } from '@swimlane/ngx-datatable';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
+import { ActualizarInspeccionComponent } from './inspeccion/actualizar-inspeccion.component';
+import { NoEncontradoComponent } from './publicidad/no-encontrado.component';
 
 //? datatables bt5
 
@@ -54,7 +56,9 @@ import { NgxUiLoaderModule } from 'ngx-ui-loader';
     ViewEmpresasComponent,
     ViewExtintoresComponent,
     ViewExtintorComponent,
-    NosotrosComponent
+    NosotrosComponent,
+    ActualizarInspeccionComponent,
+    NoEncontradoComponent
   ],
   exports:[
     DashboardComponent,
