@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Extintor } from 'src/app/models/extintor.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-extintores-excel',
@@ -18,7 +19,6 @@ import Swal from 'sweetalert2';
 })
 export class ExtintoresExcelComponent implements OnInit {
 
-  public dtOptions: DataTables.Settings = {};
   public empresas: Empresa[] = [];
   public empresaSeleccionados?: Empresa;
   public extintorForm!: FormGroup;
@@ -49,6 +49,8 @@ export class ExtintoresExcelComponent implements OnInit {
   isExcelFile!: boolean;
   spinnerEnabled = false;
   dataSheet:any = new Subject();
+
+  public mostrar:boolean = false;
 
   constructor(private fb: FormBuilder,
     private empresaService: EmpresaService,
@@ -94,17 +96,24 @@ export class ExtintoresExcelComponent implements OnInit {
       const data = new Uint8Array(this.arrayBuffer);
       const arr = new Array();
       for (let i = 0; i !== data.length; ++i) { arr[i] = String.fromCharCode(data[i]); }
+
       const bstr = arr.join('');
-      const workbook = XLSX.read(bstr, { type: 'binary' });
+      const workbook = XLSX.read(bstr, { type: 'binary', cellDates: true, dateNF: 'm/d/yy' });
+
       const first_sheet_name = workbook.SheetNames[0];
       const worksheet = workbook.Sheets[first_sheet_name];
-      const JSON_Object:any = XLSX.utils.sheet_to_json(worksheet, { raw: true });
+      const JSON_Object:any = XLSX.utils.sheet_to_json(worksheet, { raw: false });
 
       this.JSONObject.object = JSON_Object; //Data in JSON Format
       this.str = JSON_Object;
+
       //? para tablas /////////////////////////
       this.keys = Object.keys(this.str[0]);
       this.dataSheet.next(this.str);
+
+      //? ngx datatable
+
+
       //? comprobar nro serie /////////////////
       this.comprobarNroSerie();
       //? console log y output text ///////////
@@ -114,6 +123,11 @@ export class ExtintoresExcelComponent implements OnInit {
     fileReader.readAsArrayBuffer(this.file);
     this.cargandoTable = true;
   }
+  //*************************************************
+  //*************************************************
+  //* REFACTOR EXCEL ********************************
+  //*************************************************
+  //*************************************************
 
   comprobarNroSerie(){
     $(`#preload`).removeClass("hide");
@@ -190,7 +204,7 @@ export class ExtintoresExcelComponent implements OnInit {
         Swal.fire('Error', `Los (${repetidos}) Extintores ya existen.`, 'error')
       }
       else{
-        // si empresa no tiene extintores
+        //? si empresa no tiene extintores
         if (this.empresaSeleccionados?.nroExtintores === undefined) {
           this.cantExt = +i;
         }

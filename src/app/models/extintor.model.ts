@@ -61,7 +61,19 @@ export class Extintor {
     public numeroSustituto?: string,
     public observacion?: string,
     public cliente?: string,
-    public pdf?: string
+    public pdf?: string,
+
+    public carro_defectuoso?: string,
+    public equipo_usado?: string,
+    public equipo_despresurizado?: string,
+    public altura?: string,
+    public senializacion_chapa?: string,
+    public senializacion_altura?: string,
+    public falta_tarjeta?: string,
+    public precinto?: string,
+    public ruptura?: string,
+
+    public fecha?: string
 
     //todo id ext sigex para el qr y modificar crudd
 

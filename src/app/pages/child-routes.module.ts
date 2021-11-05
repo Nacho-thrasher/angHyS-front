@@ -60,9 +60,9 @@ const childRoutes: Routes = [
     data: {titulo: 'Busquedas', content:'Principal'}},
 
   //principal any users
-  { path: 'vista-empresas', component: ViewEmpresasComponent,
+  { path: 'vista-empresas', canActivate: [AdminGuard], component: ViewEmpresasComponent,
     data: {titulo: 'Vista Empresas', content:'Principal'}},
-  { path: 'vista-empresas/:id', component: ViewExtintoresComponent,
+  { path: 'vista-empresas/:id', canActivate: [AdminGuard], component: ViewExtintoresComponent,
     data: {titulo: 'Extintores', content:'Principal'}},
   { path: 'vista-extintor/:id_ext', component: ViewExtintorComponent,
     data: {titulo: 'Vista Extintor', content:'Principal'}},

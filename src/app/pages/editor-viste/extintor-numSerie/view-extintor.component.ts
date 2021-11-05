@@ -8,6 +8,7 @@ import { FileUploadService } from 'src/app/services/file-upload.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
 import { environment } from '../../../../environments/environment';
+import { ModalImgService } from '../../../services/modal-img.service';
 
 declare var $: any;
 
@@ -34,6 +35,10 @@ export class ViewExtintorComponent implements OnInit {
   public imagenSubir2!: File; //img2
   public imgTemp2: any = null;
   public imgViene2!: string;
+  //? IMG 3
+  public imagenSubir3!: File; //img2
+  public imgTemp3: any = null;
+  public imgViene3!: string;
   //? otras vars
   public extintorForm!: FormGroup;
   public empresas: Empresa[] = [];
@@ -50,6 +55,7 @@ export class ViewExtintorComponent implements OnInit {
   //? preload
   public preload: boolean = false;
   public preload2: boolean = false;
+  public preload3: boolean = false;
   viewImagePdf : boolean = false;
   viewImageFoto1 : boolean = false;
   viewImageFoto2 : boolean = false;
@@ -60,7 +66,8 @@ export class ViewExtintorComponent implements OnInit {
       private router: Router,
       private activatedRouter: ActivatedRoute,
       private usuarioService: UsuarioService,
-    private fileUploadService: FileUploadService
+      private fileUploadService: FileUploadService,
+      private modalImgService: ModalImgService
     ) {
 
     }
@@ -128,7 +135,7 @@ export class ViewExtintorComponent implements OnInit {
         this.router.navigateByUrl(`/dashboard/nosotros`);
         return;
       }
-      //console.log(resp.extintor)
+      console.log(resp.extintor)
       //? asignando para mostrar y preload
       this.extintor = resp.extintor;
       if (this.extintor.img === undefined) {
@@ -142,6 +149,12 @@ export class ViewExtintorComponent implements OnInit {
       }
       else{
         this.imgViene2 = this.extintor.img2;
+      }
+      if (this.extintor.pdf === undefined) {
+        this.imgViene3 = `${ base_url }/cloudinary/extintor/no-image`;
+      }
+      else{
+        this.imgViene3 = this.extintor.pdf;
       }
       //?===
       this.extintorSeleccionados = resp.extintor;
@@ -260,6 +273,19 @@ export class ViewExtintorComponent implements OnInit {
     $('#imagePreview2').hide();
     $('#imagePreview2').fadeIn(650);
   }
+  removeDataImg3() {
+    if (this.extintor.pdf === undefined) {
+      this.imgViene3 = `${ base_url }/cloudinary/extintor/no-image`;
+    }
+    else{
+      this.imgViene3 = this.extintor.pdf;
+    }
+    this.imagenSubir3 = this.imagenRem;
+    $('#imagePreview3')
+    .css('background-image', `url(${this.imgViene3})`);
+    $('#imagePreview3').hide();
+    $('#imagePreview3').fadeIn(650);
+  }
   //? cambiar imgs
   cambiarImagen(e: any):any {
     this.cargandoImg = true;
@@ -302,6 +328,26 @@ export class ViewExtintorComponent implements OnInit {
     }
 
   }
+  cambiarImagen3(e: any):any {
+
+    const file = e.target.files[0] || e.dataTransfer.files[0]
+    if (file) {
+      this.imagenSubir3 = file;
+      if (!file) {
+        return this.imgTemp3 = null;
+      }
+      const reader = new FileReader();
+      reader.onloadend = () =>{
+        $('#imagePreview3')
+        .css('background-image', 'url('+reader.result +')');
+        $('#imagePreview3').hide();
+        $('#imagePreview3').fadeIn(650);
+        this.imgTemp3 = reader.result;
+      }
+      reader.readAsDataURL(file);
+    }
+
+  }
   //? Si es usuario o admin
   isUFunc(){
     if (this.usuarioService.token === undefined || this.usuarioService.token === '') {
@@ -316,6 +362,7 @@ export class ViewExtintorComponent implements OnInit {
       }
     }
   }
+
   //? guardar extintor
   guardarExtintor() {
     //*1 ES USUARIO ADMIN O COMUN
@@ -378,9 +425,28 @@ export class ViewExtintorComponent implements OnInit {
             Swal.fire('Error', 'No se pudo subir la imagen 2', 'error');
           })
         }
+        if (this.imagenSubir3 !== this.imagenRem) {
+          this.preload3 = true;
+          Swal.fire({
+            title: "Subiendo Imagenes",
+            text: "Por favor espere",
+            imageUrl: "https://www.epgdlaw.com/wp-content/uploads/2017/09/ajax-loader.gif",
+            showConfirmButton: false,
+            allowOutsideClick: false
+          });
+          this.fileUploadService
+          .actualizarPdf( this.imagenSubir3, tipo, id )
+          .then( img => {
+            this.preload3 = false;
+            Swal.close();
+          }).catch( err => {
+            //console.log(err);
+            Swal.fire('Error', 'No se pudo subir la imagen 3', 'error');
+          })
+        }
         setTimeout(() => {
           this.router.navigateByUrl(`/dashboard/vista-empresas`);
-          Swal.fire('Actualizado', `Se actualizo correctamente la planilla.`, 'success');
+          Swal.fire('Actualizado', `Se actualizo correctamente.`, 'success');
         }
         , 1000);
       }

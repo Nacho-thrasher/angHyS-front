@@ -58,7 +58,6 @@ export class ModalImgComponent implements OnInit {
         this.imgTemp = reader.result;
       }
       reader.readAsDataURL(file);
-      //console.log(this.modalImgService.tipo);
     }
 
   }

@@ -13,6 +13,45 @@
   max-width: 205px;
   margin: 10px auto;
 }
+/* ? */
+.avatar-vista .modal-edit {
+  position: absolute;
+  right: 12px;
+  z-index: 1;
+  top: 10px;
+}
+.avatar-vista .modal-edit .input-img {
+  display: none;
+}
+.avatar-vista .modal-edit .input-img{
+  display: inline-block;
+  width: 34px;
+  height: 34px;
+  margin-bottom: 0;
+  border-radius: 100%;
+  background: #ffffff;
+  border: 1px solid transparent;
+  box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.12);
+  cursor: pointer;
+  font-weight: normal;
+  transition: all 0.2s ease-in-out;
+}
+.avatar-vista .modal-edit .input-img:hover {
+  background: #f1f1f1;
+  border-color: #d6d6d6;
+}
+.avatar-vista .modal-edit .input-img:after {
+  content: "\f040";
+  font-family: "FontAwesome";
+  color: #757575;
+  position: absolute;
+  top: 5px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  margin: auto;
+}
+/* ? */
 .avatar-upload .avatar-edit {
   position: absolute;
   right: 12px;

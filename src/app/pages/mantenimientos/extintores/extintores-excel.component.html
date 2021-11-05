@@ -72,7 +72,7 @@
         </div>
         <!-- spinner -->
         <div id="preload"  class="row hide animated fadeIn fast"
-          *ngIf="!preload">
+        *ngIf="!preload">
           <div class="col-12">
             <div role="alert" class="alert alert-info text-center">
               <h4 class="alert-heading">Verificando extintores existentes {{indexPreload}}</h4>
@@ -89,7 +89,9 @@
         <div class="table-responsive">
           <p class="text-center">{{lengthFile}} Extintores {{repetidosFile == 0 ? '' : ', '+repetidosFile+' ya existen y no se crearan'}}</p>
           <p class="text-center">
-            Los extintores marcados en rojo ya existen, solo se crearan los que no existan.</p>
+            Los extintores marcados en rojo ya existen, solo se crearan los que no existan.
+          </p>
+          <!-- ? table -->
           <table
             class="table-bordered onMobile text-capitalize display nowrap table animated fadeIn table-hover"
             cellspacing="0"
@@ -111,6 +113,7 @@
               </tr>
             </tbody>
           </table>
+          <!--? end table -->
         </div>
 
 

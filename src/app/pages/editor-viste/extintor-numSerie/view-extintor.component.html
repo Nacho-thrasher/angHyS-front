@@ -24,26 +24,38 @@
             >Extintor</a
           >
         </li>
-        <!-- <li class="nav-item">
+        <li class="nav-item">
           <a
             class="nav-link font-medium"
             data-toggle="tab"
             href="#profile"
             role="tab"
             aria-expanded="false"
-            >Empresa</a
+            >Inspeccion</a
           >
-        </li> -->
-        <li class="nav-item">
+        </li>
+        <li *ngIf="!isUFunc()" class="nav-item">
           <a
             class="nav-link font-medium"
             data-toggle="tab"
             href="#settings"
             role="tab"
             aria-expanded="false"
-            >Planilla Chequeo
+          >
+            Carga de Imagenes
+            <!-- Planilla Chequeo -->
           </a>
         </li>
+        <!-- <li class="nav-item">
+          <a
+            class="nav-link font-medium"
+            data-toggle="tab"
+            href="#imgs"
+            role="tab"
+            aria-expanded="false"
+            >Cargar Imagenes
+          </a>
+        </li> -->
       </ul>
       <!-- Tab panes -->
       <div class="tab-content">
@@ -59,6 +71,7 @@
               <div class="text-center col-md-4 col-xs-6 b-r">
                 <strong>Fotos</strong>
                 <br />
+                <!--? FOTO1 -->
                 <div class="skeletonPre avatar-vista">
                   <a
                     class="image-popup-no-margins"
@@ -81,6 +94,7 @@
                   </a>
                   <hr>
                 </div>
+                <!--? FOTO2 -->
                 <div class="skeletonPre avatar-vista">
                   <a
                     class="image-popup-no-margins"
@@ -130,6 +144,7 @@
                   </a>
                 </div>
                 <!--? end content -->
+                <!-- ! *ngIf="noMostrar" == no mostrar-->
                 <div *ngIf="noMostrar" class="accordion" id="accordionExample">
                   <!-- ?Init acordion item -->
                   <div class="accordion-item">
@@ -540,7 +555,7 @@
             <!-- <hr/> -->
           </div>
         </div>
-        <!--todo second tab empresa-->
+        <!--todo second tab empresa o iNspeccion-->
         <div
           class="tab-pane"
           id="profile"
@@ -549,7 +564,7 @@
         >
           <div class="card-body">
             <div class="row">
-              <div class="text-center col-md-4 b-r">
+              <!-- <div class="text-center col-md-4 b-r">
                 <div class="avatar-vista">
                   <a
                     class="image-popup-no-margins"
@@ -560,10 +575,10 @@
                       class="rounded avatar-vista-preview img-responsive"
                     />
                   </a>
-                  <!-- <hr> -->
                 </div>
-              </div>
-              <div class="col-md-8 sm-text-center">
+              </div> -->
+              <!-- <div class="col-md-8 sm-text-center">
+
                 <div class="row">
                   <div class="col-md-6 b-r">
                     <strong>Nombre:</strong>
@@ -588,18 +603,86 @@
                     <p class="text-muted">({{extintor.empresa.nroExtintores}})</p>
                   </div>
                 </div>
+              </div> -->
+
+              <div class="col-md-12 sm-text-center">
+                <h3 class="box-title">
+                  Fecha de control: {{extintor?.fecha}}
+                </h3>
+                <hr>
+              </div>
+              <div class="col-md-12">
+                <strong>Extintor:</strong>
+                {{extintor?.numeroSerie}},
+                <strong>Ag extintor:</strong>
+                {{extintor?.agenteExtintor}},
+                <strong>Capacidad:</strong>
+                {{extintor?.capacidad}},
+                <strong>Marca:</strong>
+                {{extintor?.marca}}
+              </div>
+              <!-- <hr> -->
+              <div class="col-md-12 pt-3">
+                <strong>FF:</strong>
+                {{extintor?.ff}},
+                <strong>Vto Carga:</strong>
+                {{extintor?.vtoCarga}},
+                <strong>Vto Ph:</strong>
+                {{extintor?.vtoPh}}
+              </div>
+              <div class="col-md-12 pt-3">
+                <hr>
+                <strong>Incidencias</strong><br><br>
+                <span>Carro defectuoso: </span>
+                <span [innerHtml]="extintor?.carro_defectuoso == 'true' ? 'Si' : 'no' "></span>
+                <br>
+                <span>Equipo Usado: </span>
+                <span [innerHtml]="extintor?.equipo_usado == 'true' ? 'Si' : 'no' "></span>
+                <br>
+                <span>Equipo Despintado: </span>
+                <span [innerHtml]="extintor?.pintura == 'true' ? 'Si' : 'no' "></span>
+                <br>
+                <span>Equipo despresurizado: </span>
+                <span [innerHtml]="extintor?.equipo_despresurizado == 'true' ? 'Si' : 'no' "></span>
+                <br>
+                <span>Altura Incorrecta: </span>
+                <span [innerHtml]="extintor?.altura == 'true' ? 'Si' : 'no' "></span>
+                <br>
+                <span>Falta señalizacion en chapa: </span>
+                <span [innerHtml]="extintor?.senializacion_chapa == 'true' ? 'Si' : 'no' "></span>
+                <br>
+                <span>Falta señalizacion en Altura: </span>
+                <span [innerHtml]="extintor?.senializacion_altura == 'true' ? 'Si' : 'no' "></span>
+                <br>
+                <span>Falta Tarjeta: </span>
+                <span [innerHtml]="extintor?.falta_tarjeta == 'true' ? 'Si' : 'no' "></span>
+                <br>
+                <span>Falta precinto: </span>
+                <span [innerHtml]="extintor?.precinto == 'true' ? 'Si' : 'no' "></span>
+                <br>
+                <span>Soporte defectuoso: </span>
+                <span [innerHtml]="extintor?.soporte == 'true' ? 'Si' : 'no' "></span>
+                <br>
+                <span>Medio Ruptura Ausente: </span>
+                <span [innerHtml]="extintor?.ruptura == 'true' ? 'Si' : 'no' "></span>
+                <br>
+                <span>Manguera Rota: </span>
+                <span [innerHtml]="extintor?.manguera == 'true' ? 'Si' : 'no' "></span>
+                <br>
+                <span>Observaciones: </span>
+                <span [innerHtml]="extintor?.observacion"></span>
+                <br>
+
+
               </div>
             </div>
-            <!-- <hr /> -->
-            <p class="m-t-30">
-              <!-- info empresa -->
-            </p>
             <!-- <h4 class="font-medium m-t-30">Skill Set</h4> -->
 
           </div>
         </div>
         <!--todo forms  planila chequeo -->
         <div
+          *ngIf="!isUFunc()"
           class="tab-pane"
           id="settings"
           role="tabpanel"
@@ -681,11 +764,11 @@
               (submit)="guardarExtintor()"
             >
               <div class="form-body pt-2 px-2">
-                <h3 class="box-title">
+                <!-- <h3 class="box-title">
                   Num de Extintor: {{ extintor?.numeroSerie }}
                 </h3>
-                <hr />
-                <div class="row px-2">
+                <hr /> -->
+                <!-- <div class="row px-2">
                   <div class="col-md-6">
                     <div class="form-group">
                       <label class="control-label">Zona:</label>
@@ -697,7 +780,6 @@
                       />
                     </div>
                   </div>
-                  <!--/span-->
                   <div class="col-md-6">
                     <div class="form-group has-danger">
                       <label class="control-label">Num Interno:</label>
@@ -710,7 +792,6 @@
                       />
                     </div>
                   </div>
-                  <!--/span-->
                 </div>
                 <div class="row px-2">
                   <div class="col-md-6">
@@ -724,7 +805,6 @@
                       />
                     </div>
                   </div>
-                  <!--/span-->
                   <div class="col-md-6">
                     <div class="form-group has-danger">
                       <label class="control-label">Demarcado:</label>
@@ -758,7 +838,6 @@
                       </div>
                     </div>
                   </div>
-                  <!--/span-->
                 </div>
                 <h3 class="box-title m-t-10">Estado del Extintor:</h3>
                 <hr />
@@ -776,7 +855,6 @@
                       </select>
                     </div>
                   </div>
-                  <!--/span-->
                   <div class="col-md-6">
                     <div class="form-group has-danger">
                       <label class="control-label">Pintura:</label>
@@ -790,7 +868,6 @@
                       </select>
                     </div>
                   </div>
-                  <!--/span-->
                 </div>
                 <div class="row px-2">
                   <div class="col-md-6">
@@ -806,7 +883,6 @@
                       </select>
                     </div>
                   </div>
-                  <!--/span-->
                   <div class="col-md-6">
                     <div class="form-group has-danger">
                       <label class="control-label">Manija:</label>
@@ -820,7 +896,6 @@
                       </select>
                     </div>
                   </div>
-                  <!--/span-->
                 </div>
                 <div class="row px-2">
                   <div class="col-md-6">
@@ -858,7 +933,6 @@
                       </div>
                     </div>
                   </div>
-                  <!--/span-->
                   <div class="col-md-6">
                     <div class="form-group">
                       <label class="control-label"
@@ -894,7 +968,6 @@
                       </div>
                     </div>
                   </div>
-                  <!--/span-->
                 </div>
                 <div class="row px-2">
                   <div class="col-md-6">
@@ -909,7 +982,6 @@
                       />
                     </div>
                   </div>
-                  <!--/span-->
                   <div class="col-md-6">
                     <div class="form-group has-danger">
                       <label class="control-label">Observacion:</label>
@@ -920,13 +992,14 @@
                       ></textarea>
                     </div>
                   </div>
-                  <!--/span-->
-                </div>
-                <h3 class="box-title">Imagenes:</h3>
-                <hr />
+                </div> -->
+                <!-- <h3 class="box-title">Imagenes:</h3>
+                <hr /> -->
                 <!--  -->
                 <div class="row pb-5 px-2">
-                  <div class="col-md-6">
+                  <!-- ? -->
+                  <div class="text-center col-md-4 col-xs-6 b-r">
+                    <!--? foto1 -->
                     <small class="small-img">- Foto 1 -</small>
                     <div class="avatar-upload">
                       <div class="avatar-edit">
@@ -967,9 +1040,7 @@
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <!--/span-->
-                  <div class="col-md-6">
+                    <!--? foto2-->
                     <small class="small-img">- Foto 2 -</small>
                     <div class="avatar-upload">
                       <div class="avatar-edit">
@@ -989,8 +1060,8 @@
                       </div>
                       <div class="avatar-preview">
                         <div
-                          id="imagePreview2"
-                          style="background-image: url({{imgViene2}});"
+                        id="imagePreview2"
+                        style="background-image: url({{imgViene2}});"
                         >
                         <div *ngIf="preload2" class="preloadPosition text-center font-medium text-light">
                           Subiendo imagen
@@ -1000,7 +1071,38 @@
                       </div>
                     </div>
                   </div>
-                  <!--/span-->
+                  <div class="col-md-8 col-xs-6">
+                    <small class="small-img">- Imagen certificado -</small>
+                    <div class="avatar-upload">
+                      <div class="avatar-edit">
+                        <input
+                          (change)="cambiarImagen3($event)"
+                          class="input-img"
+                          type="file"
+                          id="imageUpload3"
+                          accept=".png, .jpg, .jpeg"
+                        />
+                        <label class="label-img" for="imageUpload3"></label>
+                        <a
+                          *ngIf="imagenSubir3 != undefined"
+                          (click)="removeDataImg3()"
+                          class="lbl-remove"
+                        ></a>
+                      </div>
+                      <div class="avatar-preview">
+                        <div
+                        id="imagePreview3"
+                        style="background-image: url({{imgViene3}});"
+                        >
+                        <div *ngIf="preload3" class="preloadPosition text-center font-medium text-light">
+                          Subiendo imagen
+                          <span class="throbber-loader"></span>
+                        </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- ? -->
                 </div>
 
                 <!--  -->
@@ -1009,9 +1111,9 @@
               <!-- TODO NUMSERIE -->
               <div *ngIf="!isUFunc()" class="form-group">
                 <div class="col-sm-12 centeredMobile">
+                  <!-- [disabled]="extintorForm.invalid" -->
                   <button
                     type="submit"
-                    [disabled]="extintorForm.invalid"
                     class="btn btn-success"
                   >
                     Guardar Cambios
@@ -1022,6 +1124,8 @@
             </form>
           </div>
         </div>
+        <!-- todo CARGAR IMAGENES -->
+
       </div>
     </div>
   </div>

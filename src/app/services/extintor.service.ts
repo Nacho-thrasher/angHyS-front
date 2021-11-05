@@ -123,5 +123,9 @@ export class ExtintorService {
     //delay() , va con pipe antes de map para demorar la carga
   }
 
+  actualizarInspeccion(data: any){
+    const url = `${base_url}/actualizar_inspeccion/${data.nroSerie}`;
+    return this.http.put(url, data, this.headers)
+  }
 
 }

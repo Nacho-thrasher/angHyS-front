@@ -16,7 +16,7 @@ export class AdminGuard implements CanActivate {
     state: RouterStateSnapshot): boolean {
 
     if (this.usuarioService.token === undefined || this.usuarioService.token === '') {
-      this.router.navigateByUrl('/dashboard');
+      this.router.navigateByUrl('/dashboard/nosotros');
       return false;
     }
     else{
@@ -24,7 +24,7 @@ export class AdminGuard implements CanActivate {
         return true;
       }
       else{
-        this.router.navigateByUrl('/dashboard');
+        this.router.navigateByUrl('/dashboard/nosotros');
         return false;
       }
     }
