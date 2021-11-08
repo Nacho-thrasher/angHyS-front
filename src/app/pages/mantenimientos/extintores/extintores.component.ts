@@ -222,6 +222,7 @@ export class ExtintoresComponent implements OnInit, OnDestroy {
       setTimeout(() => {
         this.temp = [...extintor];
         this.rows = extintor;
+        console.log(extintor);
         this.filteredData = [...extintor];
         this.columnsWithSearch = Object.keys(this.rows[0]);
         this.loadingIndicator = false;

@@ -106,7 +106,8 @@
             <tbody>
               <tr *ngFor="let item of dataSheet | async;">
                 <td *ngFor="let key of keys">
-                  <div [ngClass]="{'text-danger': item['existe'] === 'si'}">
+                  <!-- [ngClass]="{'text-danger': item['existe'] === 'si'}" -->
+                  <div >
                     {{item[key]}}
                   </div>
                 </td>
@@ -114,6 +115,7 @@
             </tbody>
           </table>
           <!--? end table -->
+
         </div>
 
 

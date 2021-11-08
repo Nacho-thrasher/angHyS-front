@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 //other imports
-import { Subject } from 'rxjs';
+import { from, of, Subject } from 'rxjs';
 import { Empresa } from 'src/app/models/empresa.model';
 import { EmpresaService } from 'src/app/services/empresa.service';
 import * as XLSX from 'xlsx';
@@ -9,7 +9,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Extintor } from 'src/app/models/extintor.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { delay } from 'rxjs/operators';
+import { concatMap, delay } from 'rxjs/operators';
+import { ColumnMode, DatatableComponent } from '@swimlane/ngx-datatable';
 
 @Component({
   selector: 'app-extintores-excel',
@@ -113,7 +114,6 @@ export class ExtintoresExcelComponent implements OnInit {
 
       //? ngx datatable
 
-
       //? comprobar nro serie /////////////////
       this.comprobarNroSerie();
       //? console log y output text ///////////
@@ -147,23 +147,28 @@ export class ExtintoresExcelComponent implements OnInit {
     });
     for(let index = 0; index < this.arreglado.length; index++){
 
-      this.extintorService.comprobarIdExterno(this.arreglado[index].identificadorSysExt)
-      .subscribe((resp:any)=>{
-        //?
-        this.indexPreload = this.indexPreload + 1;
-        //?
-        if (resp.extintor === undefined) { }
-        else if (
-          resp.extintor == this.arreglado[index].identificadorSysExt) {
-            this.arreglado[index].existe = ('si');
-            this.str[index].existe = ('si');
-            this.repetidosFile = this.repetidosFile + 1;
-        }
-        if (this.indexPreload == this.arreglado.length) {
-          this.preload = true;
-          $(`#preload`).addClass("hide");
-        }
-      })
+
+      from(this.extintorService.comprobarIdExterno(this.arreglado[index].identificadorSysExt))
+      .pipe(
+        concatMap( item => of(item).pipe( delay( 1000 ) ))
+      ).subscribe((resp:any)=>{
+            //?
+            this.indexPreload = this.indexPreload + 1;
+            //?
+            if (resp.extintor === undefined) { }
+            else if (
+              resp.extintor == this.arreglado[index].identificadorSysExt) {
+                this.arreglado[index].existe = ('si');
+                //this.str[index].existe = ('si');
+                this.repetidosFile = this.repetidosFile + 1;
+            }
+            if (this.indexPreload == this.arreglado.length) {
+              this.preload = true;
+              $(`#preload`).addClass("hide");
+            }
+
+      });
+
 
     }
     this.lengthFile = this.arreglado.length;

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { delay, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Extintor } from '../models/extintor.model';
 
@@ -52,6 +52,10 @@ export class ExtintorService {
   comprobarIdExterno(id:any){
     const url = `${base_url}/verificar_repetido/${id}`;
     return this.http.get(url, this.headers)
+    .pipe(
+      delay(1000)
+    )
+    //delay() , va con pipe antes de map para demorar la carga
   }
 
   cargarExtintoresByEmpresa(id: string){
