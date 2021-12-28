@@ -169,7 +169,6 @@ export class ExtintoresExcelComponent implements OnInit {
 
       });
 
-
     }
     this.lengthFile = this.arreglado.length;
   }
