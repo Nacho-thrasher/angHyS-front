@@ -39,7 +39,6 @@ export class EmpresaService {
     const url = `${base_url}/empresaNombre/${empresaNombre}`;
     return this.http.get(url, this.headers);
   }
-
   cargarEmpresaById(id:string){
 
     const url = `${base_url}/empresa/${id}`;
